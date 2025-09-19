@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="src/output.css" rel="stylesheet" />
+
+    <title>Document</title>
+  </head>
+  <body>
+    <ul
+      class="flex flex-col h-auto grow overflow-y-auto border-y border-dashed border-gray-500/50"
+    ></ul>
+
+    <script>
+        fetch("https://dummyjson.com/carts/2")
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+
+        data.products.forEach(e => {
+        //    elem.products.forEach(e=>{
+            document.querySelector('ul').innerHTML+=`
+                    <li class="flex items-center justify-between transition-colors py-2 hover:bg-gray-400/30">
+                      <div class="flex gap-3">
+                        <span class="p-2 rounded-full bg-[var(--bg-color)]/50">
+                          <img width="35" height="35" src="${e.thumbnail}" alt="">
+                        </span>
+                        <div class="flex flex-col ">
+                          <a href="#" class="text-sm">${e.title}</a>
+                          <span>${e.price}</span>
+                        </div>
+                      </div>
+                      <div class="flex items-center gap-2">
+                        <button type="button" class="size-7 centered cursor-pointer rounded-full border border-gray-500/50">+</button>
+                        <span class="">${e.quantity}</span>
+                        <button type="button" class="size-7 centered cursor-pointer rounded-full border border-gray-500/50">-</button>
+                      </div>
+                      <span class="font-bold ">${e.price * e.quantity}</span>
+                      <button type="button" class=" rounded-full cursor-pointer size-7 centered text-red-600 text-sm"><i class="fa-solid fa-xmark"></i></button>
+                  </li>
+            `
+        //    })
+        }
+          )
+
+        });
+    //   });
+    </script>
+  </body>
+</html>
