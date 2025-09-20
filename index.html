@@ -335,8 +335,8 @@
       </div>
     </nav>
     <main class="flex ">
-      <aside class="lg:w-60 h-screen overflow-x-hidden bg-[var(--box-color)] transition-all duration-500  ">
-        <ul class="shrink-0 min-w-60 flex flex-col gap-2 pt-8">
+      <aside class="md:w-[58px] h-screen overflow-x-hidden bg-black/30 md:bg-transparent transition-all duration-500 fixed md:static top-0 right-0 w-0 ">
+        <ul class="shrink-0 w-50 xs:w-55 sm:w-60 h-full flex flex-col gap-2 pt-8 bg-[var(--box-color)]">
           <li>
             <a href="#" class="flex gap-5 items-center py-2 px-4 hover:text-[var(--active-color)]">
               <span class="text-lg"><i class="fa-solid fa-house"></i></span>
@@ -381,12 +381,66 @@
           </li>
         </ul>
       </aside>
-      <section class="p-5 grow transition-all duration-500 bg-[var(--bg-color)]">
-        <div class="flex justify-between">
-          <p class="text-xl" >خوش آمدید، <span id="user-name" class="font-[dana-bold]">امیر</span>!</p>
-          <div class="flex items-center gap-5 font-[dana-num]">
-            <p class="flex gap-1 items-center"> <span id="time"></span><i class="fa-solid fa-clock"></i></p>
-            <p class="flex gap-1 items-center"> <span id="date"></span><i class="fa-solid fa-calendar"></i></p>
+      <section class="px-6 py-4 grow transition-all duration-500 bg-[var(--bg-color)]">
+        <div class="flex justify-between flex-col-reverse gap-2 lg:flex-row">
+          <div class="flex flex-col">
+            <p class="text-xl" >خوش آمدید، <span id="user-name" class="font-[dana-bold] text-[var(--active-color)]">امیر!</span></p>
+            <p class="text-sm">این چیزی است که امروز در فروشگاه شما اتفاق می افتد.</p>
+          </div>
+          <div class="flex items-center justify-end gap-8 md:gap-3 font-[dana-num]">
+            <p class="flex gap-1 items-stretch"> <span id="time"></span><i class="fa-solid fa-clock"></i></p>
+            <p class="flex gap-1 items-stretch"> <span id="date"></span><i class="fa-solid fa-calendar"></i></p>
+            <a href="#" class="flex items-center gap-1 font-[dana-regular] px-3 py-2 rounded bg-[#0ca593]/50 hover:bg-[#0ca593] hover:text-white text-[#0ca593] text-sm transition-colors">
+              <span class="text-[9px] size-4 border rounded-full centered"><i class="fa-solid fa-plus"></i></span>
+              افزودن محصول
+            </a>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 lg:gap-3 lg:grid-cols-4 xl:gap-5 my-5">
+
+          <div class="flex flex-col gap-3 rounded-lg p-3  bg-[var(--box-color)] transition-transform duration-400 hover:-translate-y-1">
+            <div class="flex justify-between items-center ">
+              <span>کل درآمد</span>
+              <span class="text-[#0ca593] flex items-center gap-1 font-[dana-num]">16.24%+<span class="text-xs"><i class="fa-solid fa-arrow-up rotate-45"></i></span></span>
+            </div>
+            <span class="font-[dana-num] font-extrabold text-xl xl:text-2xl mt-2">$559.25k</span>
+            <div class="flex justify-between items-end">
+              <a href="" class="text-sm underline">مشاهده جزییات</a>
+              <span class="size-12 bg-[#0ca593]/20 rounded  centered"><i class="fa-solid fa-dollar-sign  border-2 rounded-full text-[#0ca593]"></i></span>
+            </div>
+          </div>
+          <div class="flex flex-col gap-3 rounded-lg p-3  bg-[var(--box-color)] transition-transform duration-400 hover:-translate-y-1">
+            <div class="flex justify-between items-center ">
+              <span>سفارشات</span>
+              <span class="text-red-600 flex items-center gap-1 font-[dana-num]">3.57%-<span class="text-xs"><i class="fa-solid fa-arrow-up rotate-135"></i></span></span>
+            </div>
+            <span class="font-[dana-num] font-extrabold text-xl xl:text-2xl mt-2">6,894</span>
+            <div class="flex justify-between items-end">
+              <a href="" class="text-sm underline">مشاهده سفارشات</a>
+              <span class="size-12 bg-sky-500/20 rounded  centered"><i class="fa-solid fa-bag-shopping text-lg text-sky-500"></i></span>
+            </div>
+          </div>
+             <div class="flex flex-col gap-3 rounded-lg p-3  bg-[var(--box-color)] transition-transform duration-400 hover:-translate-y-1">
+            <div class="flex justify-between items-center ">
+              <span>مشتریان</span>
+              <span class="text-[#0ca593] flex items-center gap-1 font-[dana-num]">29.24%+<span class="text-xs"><i class="fa-solid fa-arrow-up rotate-45"></i></span></span>
+            </div>
+            <span class="font-[dana-num] font-extrabold text-xl xl:text-2xl mt-2">6.4میلیون</span>
+            <div class="flex justify-between items-end">
+              <a href="" class="text-sm underline">مشاهده مشتریان</a>
+              <span class="size-12 bg-amber-500/20 rounded  centered"><i class="fa-regular fa-circle-user text-xl  text-amber-400"></i></span>
+            </div>
+          </div>
+             <div class="flex flex-col gap-3 rounded-lg p-3  bg-[var(--box-color)] transition-transform duration-400 hover:-translate-y-1">
+            <div class="flex justify-between items-center ">
+              <span>کیف پول</span>
+              <span class="text-[var(--text-color)] font-[dana-num]">0.00%+</span>
+            </div>
+            <span class="font-[dana-num] font-extrabold text-xl xl:text-2xl mt-2">$1500</span>
+            <div class="flex justify-between items-end">
+              <a href="" class="text-sm underline">برداشت پول</a>
+              <span class="size-12 bg-blue-800/20 rounded centered"><i class="fa-solid fa-wallet text-xl  text-blue-900"></i></span>
+            </div>
           </div>
         </div>
       </section>

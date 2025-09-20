@@ -8,44 +8,101 @@
     <title>Document</title>
   </head>
   <body>
-    <ul
-      class="flex flex-col h-auto grow overflow-y-auto border-y border-dashed border-gray-500/50"
-    ></ul>
+    <div class="w-[50vw] mx-auto bg-gray-300 text-red-600">
+      <canvas class="" id="myChart"></canvas>
 
-    <script>
-        fetch("https://dummyjson.com/carts/2")
-      .then(res => res.json())
-      .then(data => {
-        console.log(data);
+    </div>
+    <!-- <script  src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.0/chart.min.js"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom"></script>
 
-        data.products.forEach(e => {
-        //    elem.products.forEach(e=>{
-            document.querySelector('ul').innerHTML+=`
-                    <li class="flex items-center justify-between transition-colors py-2 hover:bg-gray-400/30">
-                      <div class="flex gap-3">
-                        <span class="p-2 rounded-full bg-[var(--bg-color)]/50">
-                          <img width="35" height="35" src="${e.thumbnail}" alt="">
-                        </span>
-                        <div class="flex flex-col ">
-                          <a href="#" class="text-sm">${e.title}</a>
-                          <span>${e.price}</span>
-                        </div>
-                      </div>
-                      <div class="flex items-center gap-2">
-                        <button type="button" class="size-7 centered cursor-pointer rounded-full border border-gray-500/50">+</button>
-                        <span class="">${e.quantity}</span>
-                        <button type="button" class="size-7 centered cursor-pointer rounded-full border border-gray-500/50">-</button>
-                      </div>
-                      <span class="font-bold ">${e.price * e.quantity}</span>
-                      <button type="button" class=" rounded-full cursor-pointer size-7 centered text-red-600 text-sm"><i class="fa-solid fa-xmark"></i></button>
-                  </li>
-            `
-        //    })
-        }
-          )
+<script>
+  const ctx = document.getElementById("myChart").getContext("2d");
 
-        });
-    //   });
-    </script>
+  const myChart = new Chart(ctx, {
+    type: "bar",
+    data: {
+     labels:  ["Far","Ord","Kho","Tir","Mor","Sha","Meh","Aba","Azr","Dey","Bah","Esf"],
+
+      datasets: [
+        {
+          label: "درآمد(میلیون)",
+          data: [5, 10, 5, 8,8, 14,20 , 22 ,15 , 18,22,30],
+          backgroundColor: "#0ca593",
+          barPercentage: 0.6,    
+          categoryPercentage: 0.6, 
+          maxBarThickness: 50  ,
+          yAxisID:'saleY',
+        },
+        {
+          label: "هزینه(میلیون)",
+          data: [8, 15, 7, 5, 10, 15,18 , 15 ,10 , 14,18,15],
+          backgroundColor: "#FF6384",
+          barPercentage: 0.6,    
+          categoryPercentage: 0.6, 
+          maxBarThickness: 50,
+          yAxisID:'saleY',  
+        },
+        {
+          type: 'line',
+          label: "مشتری اضافه شده(هزار نفر)",
+          legend:'test',
+          data: [2, 4, 5, 3, 7, 8,10 , 10 ,6 , 9,10,8],
+          // backgroundColor: "blue",
+          borderColor: 'blue',
+          // fill:true,
+          borderWidth:'2',
+          borderStyle:'dashed',
+           pointRadius: 0,  // ⚡ اینجا نقطه‌ها حذف میشن
+          tension: 0.3,
+          borderDash: [10,5],
+          yAxisID:'userY',
+        },
+      ]
+    },
+    options: {
+      responsive: true,
+      interaction: {
+      mode: 'index', 
+      intersect: false 
+    },
+    scales:{
+      saleY:{
+      position:'left',
+      min:'1',
+      max:'20'
+      },
+      userY:{
+      position:'right',
+      min:'1',
+      max:'50'
+      }
+    },
+      plugins: {
+        zoom: {
+          zoom: {
+            wheel: { enabled: true }, // زوم با اسکرول موس
+            pinch: { enabled: true }, // زوم با دو انگشت (تاچ)
+            mode: "x", // زوم روی محور X (می‌تونی بذاری "y" یا "xy")
+          },
+        },
+            legend: {
+        display: true,
+        position: 'bottom'  // ⚡ اینجا پایین نمودار
+      }
+      }
+    }
+  });
+
+  // دکمه ریست برای برگشت به حالت اولیه
+  function resetZoom() {
+    myChart.resetZoom();
+  }
+</script>
+
+<button onclick="resetZoom()">ریست زوم</button>
+
+
+
   </body>
 </html>

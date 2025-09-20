@@ -121,10 +121,13 @@ function updateShoppingCardLength(){
     length = getToLocal('shoppingCardItems') ? getToLocal('shoppingCardItems').length : 0 
     document.querySelector('#shopping-card-length').textContent=`${length}مورد`
 }
+let sidebar = document.querySelector('aside')
+sidebar.addEventListener('click' , e=>{
+if(e.target==sidebar) sidebar.classList.remove('sidebar-show')
+})
 function toggleSidebar(){
-  let sidebar = document.querySelector('aside')
-  if(sidebar.getBoundingClientRect().width>70) sidebar.style.width='58px'
-  else sidebar.style.width=''
+  sidebar.classList.toggle('sidebar-show')
+  
 }
 
 

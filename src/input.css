@@ -56,7 +56,9 @@ html::selection{
 .centered{
     @apply flex justify-center items-center
 }
-
+.sidebar-show{ 
+  @apply w-screen md:w-60
+}
 .show{
   @apply opacity-100 visible
 }
