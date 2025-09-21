@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="src/output.css" rel="stylesheet" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jvectormap-next/jquery-jvectormap.css">
 
     <title>Document</title>
   </head>
@@ -13,31 +12,12 @@
       <div id="map" style="height: 400px;"></div>
 
     </div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jvectormap-next/jquery-jvectormap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jvectormap-content/world-mill.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom"></script>
 <script>
   
-  $('#map').vectorMap({
-    map: 'world_mill',
-    backgroundColor: '#1b2431',
-    zoomOnScroll: false,  
-    zoomButtons: false, 
-    regionStyle: {
-      initial: { fill: '#2c3e50' }
-    },
-      markers: [
-      { latLng: [32.4279, 53.6880], name: 'Iran' },
-      { latLng: [37.0902, -95.7129], name: 'USA' },
-      { latLng: [35.8617, 104.1954], name: 'China' },
-      { latLng: [46.6034, 1.8883], name: 'France' }
-    ],
-    markerStyle: {
-      initial: { fill: '#00e5ff', stroke: '#fff', r: 7 }
-    }
-  });
+//  fetch('https://dummyjson.com/products?sortBy=rating&order=desc')
+ fetch('https://dummyjson.com/products?sortBy=rating&order=desc&limit=10&skip=10&select=title,price,rating')
+.then(res => res.json())
+.then(console.log);
 </script>
 
   </body>

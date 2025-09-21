@@ -398,6 +398,7 @@
             </a>
           </div>
         </div>
+
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 lg:gap-3 lg:grid-cols-4 xl:gap-5 my-5">
 
           <div class="flex flex-col gap-3 rounded-lg p-3  bg-[var(--box-color)] transition-transform duration-400 hover:-translate-y-1">
@@ -445,7 +446,9 @@
             </div>
           </div>
         </div>
+               
         <div class="grid grid-cols-12 gap-4">
+          <!-- start total chart section  -->
           <div class="col-span-12 lg:col-span-8 bg-[var(--box-color)] flex flex-col py-5 rounded-lg ">
             <div class="flex justify-between px-3 sm:px-5 pb-5">
               <span>بازه زمانی</span>
@@ -478,6 +481,8 @@
               <canvas id="totalChart" class="min-w-full h-auto cursor-zoom-in"></canvas>
             </div>
           </div>
+           <!-- finish total chart section  -->
+           <!-- start world map section  -->
           <div class="col-span-12 lg:col-span-4 bg-[var(--box-color)] py-5 rounded-lg">
             <div class="flex justify-between px-3 pb-4  border-b border-gray-500/30">
               <span>فروش بر اساس مکان</span>
@@ -506,11 +511,51 @@
             </div>
           </div>
         </div>
+                <!-- finish world map section  -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 my-5">
+                   <!-- start top product section  -->
+           <div class="bg-[var(--box-color)] rounded-lg ">
+            <span class="p-4 block"> محبوب ترین محصولات</span>  
+            <div>
+              <table class="w-full text-xs ">
+                <thead class="w-full block px-3 py-3">
+                  <tr class="w-full flex justify-between ">
+                    <th class="w-2/6 ms-12"><div class="flex items-center gap-1 cursor-pointer"> نام <i class="fa-solid fa-angle-down"></i></div></th>
+                    <th><div class="flex items-center gap-1 cursor-pointer"> قیمت <i class="fa-solid fa-angle-down"></i></div></th>
+                    <th><div class="flex items-center gap-1 cursor-pointer"> تعداد <i class="fa-solid fa-angle-down"></i></div></th>
+                    <th><div class="flex items-center gap-1 cursor-pointer"> سفارشات <i class="fa-solid fa-angle-down"></i></div></th>
+                    <th><div class="flex items-center gap-1 cursor-pointer"> امتیاز <i class="fa-solid fa-angle-down"></i></div></th>
+                  </tr>
+                </thead>
+                <tbody class="font-[dana-num] divide-y border-y divide-gray-500/50 border-gray-500/50 flex flex-col">
+                  <tr class="transition-colors hover:bg-gray-500/50 p-3 px-5 flex justify-between items-center">
+                    <td class="w-2/6">
+                      <div class="flex items-center gap-1.5">
+                        <span class="size-12 p-2 rounded-lg bg-gray-500/20"><img src="profile.png" class="object-cover" alt=""></span>
+                        <span>تیشرت</span>
+                      </div>
+                    </td>
+                    <td>$13</td>
+                    <td>500</td>
+                    <td>137</td>
+                    <td>4.5</td>
+                  </tr>
+               
+                </tbody>
+              </table>
+
+            </div>
+           </div>
+           <div class="bg-red-300">sdf</div>
+                  <!-- finish top product section  -->
+           <!-- <div></div> -->
+         </div>
+
 
       </section>
     </main>
 
-
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 
 
