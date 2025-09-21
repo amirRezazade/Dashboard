@@ -4,105 +4,41 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="src/output.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jvectormap-next/jquery-jvectormap.css">
 
     <title>Document</title>
   </head>
   <body>
-    <div class="w-[50vw] mx-auto bg-gray-300 text-red-600">
-      <canvas class="" id="myChart"></canvas>
+    <div class="w-[50vw] mx-auto ">
+      <div id="map" style="height: 400px;"></div>
 
     </div>
-    <!-- <script  src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.0/chart.min.js"></script> -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom"></script>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jvectormap-next/jquery-jvectormap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jvectormap-content/world-mill.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom"></script>
 <script>
-  const ctx = document.getElementById("myChart").getContext("2d");
-
-  const myChart = new Chart(ctx, {
-    type: "bar",
-    data: {
-     labels:  ["Far","Ord","Kho","Tir","Mor","Sha","Meh","Aba","Azr","Dey","Bah","Esf"],
-
-      datasets: [
-        {
-          label: "درآمد(میلیون)",
-          data: [5, 10, 5, 8,8, 14,20 , 22 ,15 , 18,22,30],
-          backgroundColor: "#0ca593",
-          barPercentage: 0.6,    
-          categoryPercentage: 0.6, 
-          maxBarThickness: 50  ,
-          yAxisID:'saleY',
-        },
-        {
-          label: "هزینه(میلیون)",
-          data: [8, 15, 7, 5, 10, 15,18 , 15 ,10 , 14,18,15],
-          backgroundColor: "#FF6384",
-          barPercentage: 0.6,    
-          categoryPercentage: 0.6, 
-          maxBarThickness: 50,
-          yAxisID:'saleY',  
-        },
-        {
-          type: 'line',
-          label: "مشتری اضافه شده(هزار نفر)",
-          legend:'test',
-          data: [2, 4, 5, 3, 7, 8,10 , 10 ,6 , 9,10,8],
-          // backgroundColor: "blue",
-          borderColor: 'blue',
-          // fill:true,
-          borderWidth:'2',
-          borderStyle:'dashed',
-           pointRadius: 0,  // ⚡ اینجا نقطه‌ها حذف میشن
-          tension: 0.3,
-          borderDash: [10,5],
-          yAxisID:'userY',
-        },
-      ]
+  
+  $('#map').vectorMap({
+    map: 'world_mill',
+    backgroundColor: '#1b2431',
+    zoomOnScroll: false,  
+    zoomButtons: false, 
+    regionStyle: {
+      initial: { fill: '#2c3e50' }
     },
-    options: {
-      responsive: true,
-      interaction: {
-      mode: 'index', 
-      intersect: false 
-    },
-    scales:{
-      saleY:{
-      position:'left',
-      min:'1',
-      max:'20'
-      },
-      userY:{
-      position:'right',
-      min:'1',
-      max:'50'
-      }
-    },
-      plugins: {
-        zoom: {
-          zoom: {
-            wheel: { enabled: true }, // زوم با اسکرول موس
-            pinch: { enabled: true }, // زوم با دو انگشت (تاچ)
-            mode: "x", // زوم روی محور X (می‌تونی بذاری "y" یا "xy")
-          },
-        },
-            legend: {
-        display: true,
-        position: 'bottom'  // ⚡ اینجا پایین نمودار
-      }
-      }
+      markers: [
+      { latLng: [32.4279, 53.6880], name: 'Iran' },
+      { latLng: [37.0902, -95.7129], name: 'USA' },
+      { latLng: [35.8617, 104.1954], name: 'China' },
+      { latLng: [46.6034, 1.8883], name: 'France' }
+    ],
+    markerStyle: {
+      initial: { fill: '#00e5ff', stroke: '#fff', r: 7 }
     }
   });
-
-  // دکمه ریست برای برگشت به حالت اولیه
-  function resetZoom() {
-    myChart.resetZoom();
-  }
 </script>
-
-<button onclick="resetZoom()">ریست زوم</button>
-
-
 
   </body>
 </html>
