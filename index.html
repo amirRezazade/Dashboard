@@ -512,38 +512,35 @@
           </div>
         </div>
                 <!-- finish world map section  -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 my-5">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 my-5">
                    <!-- start top product section  -->
            <div class="bg-[var(--box-color)] rounded-lg ">
             <span class="p-4 block"> محبوب ترین محصولات</span>  
             <div>
-              <table class="w-full text-xs ">
-                <thead class="w-full block px-3 py-3">
-                  <tr class="w-full flex justify-between ">
-                    <th class="w-2/6 ms-12"><div class="flex items-center gap-1 cursor-pointer"> نام <i class="fa-solid fa-angle-down"></i></div></th>
-                    <th><div class="flex items-center gap-1 cursor-pointer"> قیمت <i class="fa-solid fa-angle-down"></i></div></th>
-                    <th><div class="flex items-center gap-1 cursor-pointer"> تعداد <i class="fa-solid fa-angle-down"></i></div></th>
-                    <th><div class="flex items-center gap-1 cursor-pointer"> سفارشات <i class="fa-solid fa-angle-down"></i></div></th>
-                    <th><div class="flex items-center gap-1 cursor-pointer"> امتیاز <i class="fa-solid fa-angle-down"></i></div></th>
+              <table class="w-full  ">
+                <thead id="top-products-sorting-methods" class="w-full block px-3 py-3">
+                  <tr class="w-full flex justify-between text-[10px] sm:text-xs xl:text-sm select-none">
+                    <th class="w-2/6 flex justify-center"><button class="flex items-center gap-1 cursor-pointer title"> نام <i class="fa-solid fa-angle-down pointer-events-none"></i></button></th>
+                    <th class="w-1/6 flex justify-center"><button class="flex items-center gap-1 cursor-pointer price"> قیمت <i class="fa-solid fa-angle-down pointer-events-none"></i></button></th>
+                    <th class="w-1/6 flex justify-center"><button class="flex items-center gap-1 cursor-pointer stock"> تعداد <i class="fa-solid fa-angle-down pointer-events-none"></i></button></th>
+                    <th class="w-1/6 flex justify-center"><button class="flex items-center gap-1 cursor-pointer discountPercentage"> تخفیف <i class="fa-solid fa-angle-down pointer-events-none"></i></button></th>
+                    <th class="w-1/6 flex justify-center"><button class="flex items-center gap-1 cursor-pointer rating"> امتیاز <i class="fa-solid fa-angle-down pointer-events-none"></i></button></th>
                   </tr>
                 </thead>
-                <tbody class="font-[dana-num] divide-y border-y divide-gray-500/50 border-gray-500/50 flex flex-col">
-                  <tr class="transition-colors hover:bg-gray-500/50 p-3 px-5 flex justify-between items-center">
-                    <td class="w-2/6">
-                      <div class="flex items-center gap-1.5">
-                        <span class="size-12 p-2 rounded-lg bg-gray-500/20"><img src="profile.png" class="object-cover" alt=""></span>
-                        <span>تیشرت</span>
-                      </div>
-                    </td>
-                    <td>$13</td>
-                    <td>500</td>
-                    <td>137</td>
-                    <td>4.5</td>
-                  </tr>
-               
+                <tbody id="top-product-container" class="font-[dana-num] text-xs xl:text-sm divide-y border-y divide-gray-500/50 border-gray-500/50 flex flex-col">
+                  <!-- data loaded from JS  -->
                 </tbody>
               </table>
-
+              <div class="flex justify-between font-[dana-num] text-sm p-4">
+                <span>صفحه بندی</span>
+                <div id="top-product-pagination" class="flex items-center gap-1.5 text-xs">
+                  <button disabled type="button" class="prev size-7 centered rounded border border-gray-500/20 hover:bg-gray-500/30 cursor-pointer"><i class="fa-solid fa-arrow-up pointer-events-none rotate-90"></i></button>
+                  <button type="button" class="one size-7 active-page centered rounded border border-gray-500/20 hover:bg-gray-500/30 cursor-pointer">1</button>
+                  <button type="button" class="two size-7 centered rounded border border-gray-500/20 hover:bg-gray-500/30 cursor-pointer">2</button>
+                  <button type="button" class="three size-7 centered rounded border  border-gray-500/20 hover:bg-gray-500/30 cursor-pointer">3</button>
+                  <button type="button" class="next size-7 centered rounded border border-gray-500/20 hover:bg-gray-500/30 cursor-pointer"><i class="fa-solid fa-arrow-up pointer-events-none -rotate-90"></i></button>
+                </div>
+              </div>
             </div>
            </div>
            <div class="bg-red-300">sdf</div>

@@ -15,7 +15,8 @@
 <script>
   
 //  fetch('https://dummyjson.com/products?sortBy=rating&order=desc')
- fetch('https://dummyjson.com/products?sortBy=rating&order=desc&limit=10&skip=10&select=title,price,rating')
+//  fetch('https://dummyjson.com/products?sortBy=rating&order=desc&limit=30&skip=30')
+ fetch('https://dummyjson.com/products?sortBy=rating&order=desc&limit=30&skip=30&select=title,price,rating,thumbnail,stock,id,discountPercentage')
 .then(res => res.json())
 .then(console.log);
 </script>

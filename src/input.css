@@ -62,4 +62,7 @@ html::selection{
 .show{
   @apply opacity-100 visible
 }
+.active-page{
+  @apply bg-[var(--active-color)] text-white
+}
 
