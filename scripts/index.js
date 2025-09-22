@@ -1,6 +1,7 @@
 let dateElem = document.querySelector("#date");
 let timeElem = document.querySelector("#time");
 const totalChart = document.getElementById("totalChart").getContext("2d");
+const categoryChart = document.getElementById("top-category")
 
 window.addEventListener("DOMContentLoaded", () => {
   if (!getToLocal("top-products")) getTopProducts().then(addTopProducts());
@@ -16,7 +17,8 @@ setInterval(() => {
   timeElem.textContent = time.getHours() + ":" + time.getSeconds();
 }, 1000);
 
-const myChart = new Chart(totalChart, {
+// start total chart section 
+const myTotalChart = new Chart(totalChart, {
   type: "bar",
   data: {
     labels: [
@@ -125,6 +127,62 @@ const myChart = new Chart(totalChart, {
     },
   },
 });
+// finish total chart section 
+// start category chart section 
+ const myCategoryChart = new Chart(categoryChart , {
+      type: "doughnut",
+    data: {
+      labels: [
+        "زیبایی",
+        "گوشی‌های هوشمند",
+        "عطرها",
+        "سایر",
+      ],
+      datasets: [{
+        label: 'هزار سفارش',
+        data: [200, 180, 130, 300],
+        backgroundColor: [
+          "#FF6384", // زیبایی
+          "#36A2EB", // گوشی‌های هوشمند
+          "#FFCE56", // عطرها
+          "#9966FF", // سایر
+        ],
+        // hoverOffset:5
+      }]
+    },
+    options: {
+      responsive: true,
+    maintainAspectRatio: false,
+       cutout: "10%",
+      plugins: {
+        legend: {
+          position: "bottom", 
+          labels: {
+            // color: "#6a7282",  
+            padding: 20  , 
+             font: {
+            size: 14,        // می‌تونی سایز رو هم تغییر بدی
+          }
+          }
+        },
+           datalabels: {
+          color: "white",   // رنگ متن داخل دایره
+          font: {
+            // weight: "bold",
+            size: 14
+          },
+         formatter: (value, myCategoryChart) => {
+  let sum = myCategoryChart.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+  let percentage = (value * 100 / sum).toFixed(1) + "%";
+  return percentage;
+}
+          }
+      }
+    },
+    plugins: [ChartDataLabels]
+ })
+// finish category chart section 
+
 
 //   start world map
 $("#map").vectorMap({
@@ -201,7 +259,9 @@ function addTopProducts(page = 1) {
             topProductPagination.querySelector('.one').classList.add('active-page')
             topProductPagination.querySelector('.two').textContent=2
             topProductPagination.querySelector('.three').textContent=3
+            return 'break'
         }
+       
   if (e.target.nodeName == "BUTTON") {
       topProductPagination.querySelectorAll("button").forEach((elem) => elem.classList.remove("active-page"));
     if (e.target.classList.contains("prev") && page != 1) {
@@ -253,49 +313,24 @@ function addTopProducts(page = 1) {
 let isDescending = false
 
 document.querySelector('#top-products-sorting-methods').addEventListener('click' , e=>{
-  let products = [...getToLocal('top-products')]
-  
-  if(e.target.nodeName=='BUTTON'){
-   if (isDescending) {
-  if (e.target.classList.contains('title')) {
-    products = products.sort((a, b) => a.title.localeCompare(b.title));
-  }
-  if (e.target.classList.contains('price')) {
-    products = products.sort((a, b) => a.price - b.price);
-  }
-  if (e.target.classList.contains('stock')) {
-    products = products.sort((a, b) => a.stock - b.stock);
-  }
-  if (e.target.classList.contains('rating')) {
-    products = products.sort((a, b) => a.rating - b.rating);
-  }
-  if (e.target.classList.contains('discountPercentage')) {
-    products = products.sort((a, b) => a.discountPercentage - b.discountPercentage);
-  }
-} else {
-  if (e.target.classList.contains('title')) {
-    products = products.sort((a, b) => b.title.localeCompare(a.title));
-  }
-  if (e.target.classList.contains('price')) {
-    products = products.sort((a, b) => b.price - a.price);
-  }
-  if (e.target.classList.contains('stock')) {
-    products = products.sort((a, b) => b.stock - a.stock);
-  }
-  if (e.target.classList.contains('rating')) {
-    products = products.sort((a, b) => b.rating - a.rating);
-  }
-  if (e.target.classList.contains('discountPercentage')) {
-    products = products.sort((a, b) => b.discountPercentage - a.discountPercentage);
-  }
-}
-        
 
-    addToLocal('top-products' ,products)
+  let products = [...getToLocal('top-products')]
+  if(e.target.nodeName=='BUTTON'){
+    
+  products.sort((a, b) => {
+       if (e.target.dataset.sort=='title') {
+       return isDescending 
+        ? b.title.localeCompare(a.title) 
+        : a.title.localeCompare(b.title);
+      }
+     return isDescending 
+      ? b[e.target.dataset.sort] - a[e.target.dataset.sort] 
+      : a[e.target.dataset.sort] - b[e.target.dataset.sort];
+   });
+        addToLocal('top-products' ,products)
     isDescending = !isDescending
     addTopProducts(1)
     ProductPagination(1)
   }
 })
-// addTopProducts()
-// getTopProducts()
+

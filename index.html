@@ -512,19 +512,19 @@
           </div>
         </div>
                 <!-- finish world map section  -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 my-5">
+        <div class="grid grid-cols-12  gap-3 my-5">
                    <!-- start top product section  -->
-           <div class="bg-[var(--box-color)] rounded-lg ">
+           <div class="bg-[var(--box-color)] rounded-lg col-span-12  xl:col-span-8">
             <span class="p-4 block"> محبوب ترین محصولات</span>  
             <div>
               <table class="w-full  ">
                 <thead id="top-products-sorting-methods" class="w-full block px-3 py-3">
                   <tr class="w-full flex justify-between text-[10px] sm:text-xs xl:text-sm select-none">
-                    <th class="w-2/6 flex justify-center"><button class="flex items-center gap-1 cursor-pointer title"> نام <i class="fa-solid fa-angle-down pointer-events-none"></i></button></th>
-                    <th class="w-1/6 flex justify-center"><button class="flex items-center gap-1 cursor-pointer price"> قیمت <i class="fa-solid fa-angle-down pointer-events-none"></i></button></th>
-                    <th class="w-1/6 flex justify-center"><button class="flex items-center gap-1 cursor-pointer stock"> تعداد <i class="fa-solid fa-angle-down pointer-events-none"></i></button></th>
-                    <th class="w-1/6 flex justify-center"><button class="flex items-center gap-1 cursor-pointer discountPercentage"> تخفیف <i class="fa-solid fa-angle-down pointer-events-none"></i></button></th>
-                    <th class="w-1/6 flex justify-center"><button class="flex items-center gap-1 cursor-pointer rating"> امتیاز <i class="fa-solid fa-angle-down pointer-events-none"></i></button></th>
+                    <th class="w-2/6 flex justify-center"><button class="flex items-center gap-1 cursor-pointer" data-sort="title"> نام <i class="fa-solid fa-angle-down pointer-events-none"></i></button></th>
+                    <th class="w-1/6 flex justify-center"><button class="flex items-center gap-1 cursor-pointer" data-sort="price"> قیمت <i class="fa-solid fa-angle-down pointer-events-none"></i></button></th>
+                    <th class="w-1/6 flex justify-center"><button class="flex items-center gap-1 cursor-pointer" data-sort="stock"> تعداد <i class="fa-solid fa-angle-down pointer-events-none"></i></button></th>
+                    <th class="w-1/6 flex justify-center"><button class="flex items-center gap-1 cursor-pointer" data-sort="discountPercentage"> تخفیف <i class="fa-solid fa-angle-down pointer-events-none"></i></button></th>
+                    <th class="w-1/6 flex justify-center"><button class="flex items-center gap-1 cursor-pointer" data-sort="rating"> امتیاز <i class="fa-solid fa-angle-down pointer-events-none"></i></button></th>
                   </tr>
                 </thead>
                 <tbody id="top-product-container" class="font-[dana-num] text-xs xl:text-sm divide-y border-y divide-gray-500/50 border-gray-500/50 flex flex-col">
@@ -543,9 +543,15 @@
               </div>
             </div>
            </div>
-           <div class="bg-red-300">sdf</div>
-                  <!-- finish top product section  -->
-           <!-- <div></div> -->
+           <!-- finish top product section  -->
+                <!-- start top category section -->
+           <div class="bg-[var(--box-color)] col-span-12 md:col-span-6 xl:col-span-4 flex flex-col rounded-lg p-4 ">
+            <span class=" mb-4">محبوب ترین دسته ها</span>
+            <div class="text-gray-500 grow 2xl:p-4">
+              <canvas id="top-category" class="w-full h-full"></canvas>
+            </div>
+           </div>
+                <!-- finish top category section -->
          </div>
 
 
@@ -555,12 +561,12 @@
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jvectormap-next/jquery-jvectormap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jvectormap-content/world-mill.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jvectormap-next/jquery-jvectormap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jvectormap-content/world-mill.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
     <script src="scripts/shared.js"></script>
     <script src="scripts/index.js"></script>
   </body>
