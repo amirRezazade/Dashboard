@@ -2,10 +2,12 @@ let dateElem = document.querySelector("#date");
 let timeElem = document.querySelector("#time");
 const totalChart = document.getElementById("totalChart").getContext("2d");
 const categoryChart = document.getElementById("top-category")
+ // اینجا آرایه 30 تایی رو داری
 
 window.addEventListener("DOMContentLoaded", () => {
   if (!getToLocal("top-products")) getTopProducts().then(addTopProducts());
   else addTopProducts();
+  getAndAddOrders()
 });
 let date = new Date();
 dateElem.textContent = `${date.getFullYear()}/${
@@ -218,6 +220,28 @@ async function getTopProducts() {
   let products = response.products;
   localStorage.setItem("top-products", JSON.stringify(products));
 }
+async function  getAndAddOrders(page=1) {
+  let res = await fetch('orders.json')
+  let response = await res.json()
+  let container = document.querySelector('#resent-orders-container')
+   container.innerHTML=''
+  response.splice(page*5-1 , 5).forEach(order=>{
+    container.innerHTML+=`
+           <tr class="transition-colors hover:bg-gray-500/20 h-12 sm:h-15  flex justify-between items-center">
+                    <td class="w-1/6 text-center">${order.orderId}</td>
+                    <td class="w-1/6 text-center">${order.date}</td>
+                    <td class="w-1/6 text-center">${order.customerName}</td>
+                    <td class="w-1/6 text-center">${order.phone}</td>
+                    <td class="w-1/6 text-center">${order.address}</td>
+                    <td class="w-1/6 text-center">${order.paymentType}</td>
+                    <td class="w-1/6 flex items-center justify-center gap-1 sm:gap-2.5"><span class="size-2.5 rounded-full ${order.status=='تکمیل شد'?'inline-block':'hidden' } bg-green-500 animate-pulse"></span>
+                    <span class="size-2.5 rounded-full ${order.status=='لغو شد'?'inline-block':'hidden' } bg-red-500 animate-pulse"></span>
+                    <span class="size-2.5 rounded-full ${order.status=='در حال پردازش'?'inline-block':'hidden' } bg-amber-500 animate-pulse"></span>${order.status}</td>
+                  </tr>
+    `
+  })
+  
+}
 
 
 function addTopProducts(page = 1) {
@@ -228,7 +252,7 @@ function addTopProducts(page = 1) {
   let filterProducts = [...products]
   filterProducts.splice(page*5-1 , 5).forEach(product => {
     container.innerHTML += `
-        <tr class="transition-colors hover:bg-gray-500/20 p-3 flex justify-between items-center">
+        <tr class="transition-colors hover:bg-gray-500/20 p-1.5 xs:p-3 flex justify-between items-center">
           <td class="w-2/6">
             <div class="flex items-center gap-1.5">
               <span class="size-12 rounded-lg shrink-0 bg-gray-500/20"><img src="${product.thumbnail}" class="object-cover" alt="product"></span>
@@ -248,22 +272,24 @@ function addTopProducts(page = 1) {
  let page=1
               
       let topProductPagination = document.querySelector("#top-product-pagination");
-      topProductPagination.addEventListener("click", (e) => {ProductPagination(e)});
+      let resentOrdersPagination = document.querySelector("#resent-orders-pagination");
+      topProductPagination.addEventListener("click", (e) => {pagination(e , topProductPagination) ,  addTopProducts(page)});
+      resentOrdersPagination.addEventListener("click", (e) => {pagination(e , resentOrdersPagination) ,  getAndAddOrders(page)});
 
-      function ProductPagination (e){
+      function pagination(e , elem ){
         if(e==1) {
-            topProductPagination.querySelectorAll("button").forEach((elem) => elem.classList.remove("active-page"));
-            topProductPagination.querySelector('.prev').disabled = true
-            topProductPagination.querySelector('.next').disabled = false
-            topProductPagination.querySelector('.one').textContent=1
-            topProductPagination.querySelector('.one').classList.add('active-page')
-            topProductPagination.querySelector('.two').textContent=2
-            topProductPagination.querySelector('.three').textContent=3
-            return 'break'
+            elem.querySelectorAll("button").forEach((elem) => elem.classList.remove("active-page"));
+            elem.querySelector('.prev').disabled = true
+            elem.querySelector('.next').disabled = false
+            elem.querySelector('.one').textContent=1
+            elem.querySelector('.one').classList.add('active-page')
+            elem.querySelector('.two').textContent=2
+            elem.querySelector('.three').textContent=3
+            return ''
         }
        
   if (e.target.nodeName == "BUTTON") {
-      topProductPagination.querySelectorAll("button").forEach((elem) => elem.classList.remove("active-page"));
+      elem.querySelectorAll("button").forEach((elem) => elem.classList.remove("active-page"));
     if (e.target.classList.contains("prev") && page != 1) {
       page--;
     }
@@ -282,30 +308,30 @@ function addTopProducts(page = 1) {
     
     
     if(page==1){
-       topProductPagination.querySelector('.prev').disabled = true
-       topProductPagination.querySelector('.next').disabled = false
-       topProductPagination.querySelector('.one').textContent=page
-       topProductPagination.querySelector('.one').classList.add('active-page')
-       topProductPagination.querySelector('.two').textContent=page+1
-       topProductPagination.querySelector('.three').textContent=page+2
+       elem.querySelector('.prev').disabled = true
+       elem.querySelector('.next').disabled = false
+       elem.querySelector('.one').textContent=page
+       elem.querySelector('.one').classList.add('active-page')
+       elem.querySelector('.two').textContent=page+1
+       elem.querySelector('.three').textContent=page+2
     }
     else if(page==5){
-       topProductPagination.querySelector('.prev').disabled = false
-       topProductPagination.querySelector('.next').disabled = true
-       topProductPagination.querySelector('.three').textContent=page
-       topProductPagination.querySelector('.three').classList.add('active-page')
-       topProductPagination.querySelector('.two').textContent=page-1
-       topProductPagination.querySelector('.one').textContent=page-2
+       elem.querySelector('.prev').disabled = false
+       elem.querySelector('.next').disabled = true
+       elem.querySelector('.three').textContent=page
+       elem.querySelector('.three').classList.add('active-page')
+       elem.querySelector('.two').textContent=page-1
+       elem.querySelector('.one').textContent=page-2
     }
     else{
-       topProductPagination.querySelector('.prev').disabled = false
-       topProductPagination.querySelector('.next').disabled = false
-       topProductPagination.querySelector('.two').textContent=page
-       topProductPagination.querySelector('.two').classList.add('active-page')
-       topProductPagination.querySelector('.one').textContent=page-1
-       topProductPagination.querySelector('.three').textContent=page+1
+       elem.querySelector('.prev').disabled = false
+       elem.querySelector('.next').disabled = false
+       elem.querySelector('.two').textContent=page
+       elem.querySelector('.two').classList.add('active-page')
+       elem.querySelector('.one').textContent=page-1
+       elem.querySelector('.three').textContent=page+1
     }     
-     addTopProducts(page)
+    
   }
 }
       
@@ -330,7 +356,7 @@ document.querySelector('#top-products-sorting-methods').addEventListener('click'
         addToLocal('top-products' ,products)
     isDescending = !isDescending
     addTopProducts(1)
-    ProductPagination(1)
+    pagination(1 , topProductPagination)
   }
 })
 
