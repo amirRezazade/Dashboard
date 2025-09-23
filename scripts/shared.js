@@ -123,10 +123,12 @@ function updateShoppingCardLength(){
 }
 let sidebar = document.querySelector('aside')
 sidebar.addEventListener('click' , e=>{
-if(e.target==sidebar) sidebar.classList.remove('sidebar-show')
+if(e.target==sidebar) sidebar.classList.remove('sidebar-toggle')
 })
 function toggleSidebar(){
-  sidebar.classList.toggle('sidebar-show')
+  console.log(3);
+  
+  sidebar.classList.toggle('sidebar-toggle')
   
 }
 
