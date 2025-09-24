@@ -2,23 +2,36 @@ import { addToLocal, getToLocal } from "./funcs.js";
 
 const paginationElem = document.querySelector('#products-pagination')
 const productsContainer = document.querySelector('#products-container')
+const priceSlider = document.getElementById('price-range-slider');
+const maxPrice = document.getElementById('max-price');
+const minPrice = document.getElementById('min-price');
+const DiscountSlider = document.getElementById('Discount-range-slider');
+const maxDiscount = document.getElementById('max-Discount');
+const minDiscount = document.getElementById('min-Discount');
+const pointSlider = document.getElementById('point-range-slider');
+const maxPoint = document.getElementById('max-point');
+const minPoint = document.getElementById('min-point');
+
 let page=1
+let allProduct;
 let totalItem;
 async function getProduct(page=1){
-    productsContainer.innerHTML=''
-    let res = await fetch(`https://dummyjson.com/products?limit=10&skip=${(page*10)-10}`)
-    let response = await res.json()
-    let products = response.products
+  let res = await fetch(`https://dummyjson.com/products?limit=50`)
+  let response = await res.json()
+    allProduct = response.products
     totalItem = response.total
     document.querySelector('#total-products-count').textContent=totalItem
-    addProduct(products)
+    addProduct(allProduct)
     console.log(response);
+    // allProduct.forEach(elem=> console.log(elem.category))
     
-}
-getProduct()
+  }
+// getProduct()
 
 
 function addProduct(list){
+  list = list.sort((a,b)=> a.price - b.price)
+  productsContainer.innerHTML=''
   list.forEach(item => {
      productsContainer.innerHTML+=`
      <tr class="transition-colors hover:bg-gray-500/20 min-w-full flex items-center justify-between gap- p-1.5 md:p-3 ">
@@ -100,3 +113,81 @@ paginationElem.addEventListener('click' , e=>{
     getProduct(page)
     }
 })
+
+ 
+  noUiSlider.create(DiscountSlider, {
+    start: [0, 99],
+    connect: true,
+    step: 1,
+    direction: "ltr",
+    range: {
+    min: 0,
+    max: 99,
+  },
+  format: {
+    to: (value) => Math.round(value), // اعداد انگلیسی
+    from: (value) => Number(value),
+  },
+  });
+DiscountSlider.noUiSlider.on("update", (values, handle) => {
+  if (handle === 0) minDiscount.textContent = '%'+ values[0];
+  else maxDiscount.textContent = '%' + values[1];
+});
+
+  noUiSlider.create(priceSlider, {
+    start: [0, 15000],
+    connect: true,
+    step: 1,
+    direction: "ltr",
+    range: {
+    min: 0,
+    max: 15000,
+  },
+  format: {
+    to: (value) => Math.round(value), // اعداد انگلیسی
+    from: (value) => Number(value),
+  },
+  });
+priceSlider.noUiSlider.on("update", (values, handle) => {
+  if (handle === 0) minPrice.textContent = '$'+ values[0];
+  else maxPrice.textContent = '$' + values[1];
+});
+  noUiSlider.create(pointSlider, {
+    start: [0, 5],
+    connect: true,
+    step: 0.1,
+    direction: "ltr",
+    range: {
+    min: 0,
+    max: 5,
+  },
+  });
+pointSlider.noUiSlider.on("update", (values, handle) => {
+  if (handle === 0) minPoint.textContent =  values.innerText = parseFloat(values[0]).toFixed(1);
+  else maxPoint.textContent =   values.innerText = parseFloat(values[1]).toFixed(1);
+});
+
+pointSlider.noUiSlider.on('change' , values => console.log(values)
+)
+
+DiscountSlider.noUiSlider.on('change' , values => console.log(values)
+)
+priceSlider.noUiSlider.on('change' , values => console.log(values)
+)
+
+
+//  beauty
+//  fragrances
+//  furniture
+//   groceries
+//  home-decoration
+//   kitchen-accessories
+//  laptops
+//  mens-shirts
+//  mens-shoes
+//  mens-watches
+//   mobile-accessories
+//  motorcycle
+//  skin-care
+//   smartphones
+//   sports-accessories

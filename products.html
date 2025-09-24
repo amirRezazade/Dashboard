@@ -6,8 +6,43 @@
     <meta name="author" content="amirRezazade" />
     <link rel="icon" type="image/x-icon" href="favicon.png">
     <link href="src/output.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/nouislider@15.7.0/dist/nouislider.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"/>
     <title>Dashboard</title>
+
+    <style>
+      .noUi-target {
+    background: #111;
+    border: none;
+    height: 3px; /* ← ارتفاع نوار اسلایدر */
+    border-radius: 3px;
+    border: none;
+  }
+  .noUi-base{
+    background-color: var(--text-color);
+    border-radius: 15px;
+    cursor: pointer;
+  }
+   .noUi-connect {  
+    background-color: var(--active-color) !important;
+  }
+
+   .noUi-handle {
+    background-color: var(--active-color) !important;
+    border: 1px solid var(--text-color) !important;
+    width: 16px !important;
+    height: 16px !important;
+    border-radius: 0;
+    transform: rotate(45deg); 
+    cursor: grab;
+    box-shadow: none;
+  }
+
+   .noUi-handle::before,
+   .noUi-handle::after {
+    display: none;
+  }
+    </style>
   </head>
   <body class="font-[dana-regular] overflow-x-hidden bg-[var(--bg-color)] text-[var(--text-color)] text-color">
     <nav class="bg-[var(--box-color)] flex items-center justify-between sticky top-0 z-50">
@@ -376,7 +411,52 @@
         </ul>
     </aside>
       <main class="px-3 xs:px-6 py-4 grow transition-all duration-500 bg-[var(--bg-color)] md:ms-60">
-        
+           <!-- start filtering section  -->
+        <div class=" grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-11 items-center gap-4 xs:gap-7 sm:gap-y-7 lg:gap-x-8 xl:gap-x-3 bg-[var(--box-color)] rounded-lg p-3 sm:p-5 mb-4  text-xs md:text-sm">
+          <div class="xl:col-span-2 px-13 sm:px-0">
+            <select id="category" class="text-xs sm:text-sm  border border-gray-500/50  outline-0 cursor-pointer w-full bg-[var(--bg-color)] p-2 md:p-3 rounded-lg   ">
+               <option selected value="all">همه</option>
+               <option value="beauty">زیبایی</option>
+               <option value="fragrances">عطرها</option>
+               <option value="furniture">مبلمان</option>
+               <option value="groceries">مواد غذایی</option>
+               <option value="home-decoration">دکوراسیون منزل</option>
+               <option value="kitchen-accessories">لوازم آشپزخانه</option>
+               <option value="laptops">لپ‌تاپ‌ها</option>
+               <option value="mens-shirts">پیراهن مردانه</option>
+               <option value="mens-shoes">کفش مردانه</option>
+               <option value="mens-watches">ساعت مردانه</option>
+               <option value="mobile-accessories">لوازم جانبی موبایل</option>
+               <option value="motorcycle">موتورسیکلت</option>
+               <option value="skin-care">مراقبت پوست</option>
+               <option value="smartphones">گوشی‌های هوشمند</option>
+               <option value="sports-accessories">لوازم ورزشی</option>
+           </select>
+          </div>
+          <div class="xl:col-span-3 flex flex-wrap  items-center font-[dana-num]">
+            <div class="w-full text-center">قیمت</div>
+            <span id="max-price" class="w-1/8 text-center"></span>
+            <div id="price-range-slider" class="grow mr-3 ml-7"></div>
+              <span id="min-price" class="w-1/8"></span>
+          </div>
+          <div class="xl:col-span-3 flex flex-wrap  items-center font-[dana-num]">
+            <div class="w-full text-center">تخفیف</div>
+            <span id="max-Discount" class="w-1/8 text-center"></span>
+            <div id="Discount-range-slider" class="grow ml-7"></div>
+              <span id="min-Discount" class="w-1/8"></span>
+          </div>
+          <div class="xl:col-span-3 flex flex-wrap  items-center font-[dana-num]">
+            <div class="w-full text-center">امتیاز</div>
+            <span id="max-point" class="w-1/8 text-center"></span>
+            <div id="point-range-slider" class="grow ml-7"></div>
+              <span id="min-point" class="w-1/8"></span>
+          </div>
+          <div class="px-13 sm:col-span-2 sm:px-20 md:col-span-1 md:px-0  xl:col-span-4 xl:col-start-4  rounded-lg">
+            <input id="search-input" type="text" placeholder="جستجوی محصول" class="bg-[var(--bg-color)] border rounded-lg border-gray-500/50 focus:border-[var(--active-color)] outline-0 w-full p-3">
+          </div>
+
+        </div>
+                   <!-- finish filtering section  -->
         <!-- start product list section  -->
         <div class="bg-[var(--box-color)] rounded-lg p-1.5 sm:p-3 overflow-x-auto">
             <table class=" text-xs md:text-sm w-full min-w-[600px] ">
@@ -409,7 +489,7 @@
         <!-- finish product list section  -->
         
       </main>
-
+   <script src="https://cdn.jsdelivr.net/npm/nouislider@15.7.0/dist/nouislider.min.js"></script>
     <script src="scripts/shared.js"></script>
     <script type="module" src="scripts/products.js"></script>
   </body>
