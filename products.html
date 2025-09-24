@@ -376,8 +376,38 @@
         </ul>
     </aside>
       <main class="px-3 xs:px-6 py-4 grow transition-all duration-500 bg-[var(--bg-color)] md:ms-60">
-
-
+        
+        <!-- start product list section  -->
+        <div class="bg-[var(--box-color)] rounded-lg p-1.5 sm:p-3 overflow-x-auto">
+            <table class=" text-xs md:text-sm w-full min-w-[600px] ">
+                <thead class="">
+                    <tr class="flex p-1.5 md:p-3">
+                        <td class="text-center w-4/15">محصول</td>
+                        <td class="text-center w-2/15">دسته بندی</td>
+                        <td class="text-center w-2/15">قیمت</td>
+                        <td class="text-center w-2/15">تخفیف</td>
+                        <td class="text-center w-1/15">تعداد</td>
+                        <td class="text-center w-2/15">امتیاز</td>
+                        <td class="text-center w-2/15">عملیات</td>
+                    </tr>
+                </thead>
+                <tbody id="products-container" class="font-[dana-num] divide-y-1 divide-gray-500/50 border-y border-gray-500/50 flex flex-col w-full">
+                      <!-- data loaded from js  -->
+                </tbody>
+            </table>
+            <div class="flex justify-between font-[dana-num] text-sm p-4 lg:pt-6">
+                <span><span id="total-products-count" class="font-[dana-num]"></span> محصول </span>
+                <div id="products-pagination" class="flex items-center gap-1.5 text-xs">
+                  <button disabled="" type="button" class="prev size-7 centered rounded border border-gray-500/20 hover:bg-gray-500/30 cursor-pointer"><i class="fa-solid fa-arrow-up pointer-events-none rotate-90"></i></button>
+                  <button type="button" class="one size-7 active-page centered rounded border border-gray-500/20 hover:bg-gray-500/30 cursor-pointer">1</button>
+                  <button type="button" class="two size-7 centered rounded border border-gray-500/20 hover:bg-gray-500/30 cursor-pointer">2</button>
+                  <button type="button" class="three size-7 centered rounded border  border-gray-500/20 hover:bg-gray-500/30 cursor-pointer">3</button>
+                  <button type="button" class="next size-7 centered rounded border border-gray-500/20 hover:bg-gray-500/30 cursor-pointer"><i class="fa-solid fa-arrow-up pointer-events-none -rotate-90"></i></button>
+                </div>
+              </div>
+        </div>
+        <!-- finish product list section  -->
+        
       </main>
 
     <script src="scripts/shared.js"></script>
