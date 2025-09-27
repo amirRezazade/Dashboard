@@ -413,8 +413,9 @@
       <main class="px-3 xs:px-6 py-4 grow transition-all duration-500 bg-[var(--bg-color)] md:ms-60">
            <!-- start filtering section  -->
         <div class=" grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-11 items-center gap-4 xs:gap-7 sm:gap-y-7 lg:gap-x-8 xl:gap-x-3 bg-[var(--box-color)] rounded-lg p-3 sm:p-5 mb-4  text-xs md:text-sm">
+                <!-- start category select box section -->
           <div class="xl:col-span-2 px-13 sm:px-0">
-            <select id="category" class="text-xs sm:text-sm  border border-gray-500/50  outline-0 cursor-pointer w-full bg-[var(--bg-color)] p-2 md:p-3 rounded-lg   ">
+            <select id="category-select-box" class="text-xs sm:text-sm  border border-gray-500/50  outline-0 cursor-pointer w-full bg-[var(--bg-color)] p-2 md:p-3 rounded-lg   ">
                <option selected value="all">همه</option>
                <option value="beauty">زیبایی</option>
                <option value="fragrances">عطرها</option>
@@ -433,27 +434,38 @@
                <option value="sports-accessories">لوازم ورزشی</option>
            </select>
           </div>
+                 <!-- finish category select box section -->
+                 <!-- start price range slider section  -->
           <div class="xl:col-span-3 flex flex-wrap  items-center font-[dana-num]">
             <div class="w-full text-center">قیمت</div>
-            <span id="max-price" class="w-1/8 text-center"></span>
+             <span class="w-1/8 text-center text-nowrap">$ <span id="max-price" ></span></span>
             <div id="price-range-slider" class="grow mr-3 ml-7"></div>
-              <span id="min-price" class="w-1/8"></span>
+             <span class="w-1/8 text-nowrap">$ <span id="min-price" ></span></span>
           </div>
+                 <!-- finish price range slider section  -->
+                 <!-- start Discount range slider section  -->
           <div class="xl:col-span-3 flex flex-wrap  items-center font-[dana-num]">
             <div class="w-full text-center">تخفیف</div>
-            <span id="max-Discount" class="w-1/8 text-center"></span>
+            <span class="w-1/8 text-center">%<span id="max-Discount" ></span></span>
             <div id="Discount-range-slider" class="grow ml-7"></div>
-              <span id="min-Discount" class="w-1/8"></span>
+              <span class="w-1/8">%<span id="min-Discount" ></span></span>
           </div>
+                 <!-- finish Discount range slider section  -->
+                 <!-- start rating range slider section  -->
           <div class="xl:col-span-3 flex flex-wrap  items-center font-[dana-num]">
             <div class="w-full text-center">امتیاز</div>
             <span id="max-point" class="w-1/8 text-center"></span>
             <div id="point-range-slider" class="grow ml-7"></div>
               <span id="min-point" class="w-1/8"></span>
           </div>
-          <div class="px-13 sm:col-span-2 sm:px-20 md:col-span-1 md:px-0  xl:col-span-4 xl:col-start-4  rounded-lg">
-            <input id="search-input" type="text" placeholder="جستجوی محصول" class="bg-[var(--bg-color)] border rounded-lg border-gray-500/50 focus:border-[var(--active-color)] outline-0 w-full p-3">
+                 <!-- finish rating range slider section  -->
+                 <!-- start search input section  -->
+          <div class="px-10  sm:col-span-1 sm:px-0 md:col-span-1 md:px-0 flex items-center gap-2  xl:col-span-4  rounded-lg">
+            <span class=" hidden xs:inline">جستجوی محصول:</span>
+            <input id="search-input" type="text" placeholder="جستجو..." class="bg-[var(--bg-color)] border rounded-lg border-gray-500/50 focus:border-[var(--active-color)] outline-0 grow p-3">
           </div>
+                 <!-- start search input section  -->
+
 
         </div>
                    <!-- finish filtering section  -->

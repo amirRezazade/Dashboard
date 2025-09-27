@@ -1,39 +1,52 @@
 import { addToLocal, getToLocal } from "./funcs.js";
 
-const paginationElem = document.querySelector('#products-pagination')
-const productsContainer = document.querySelector('#products-container')
-const priceSlider = document.getElementById('price-range-slider');
-const maxPrice = document.getElementById('max-price');
-const minPrice = document.getElementById('min-price');
-const DiscountSlider = document.getElementById('Discount-range-slider');
-const maxDiscount = document.getElementById('max-Discount');
-const minDiscount = document.getElementById('min-Discount');
-const pointSlider = document.getElementById('point-range-slider');
-const maxPoint = document.getElementById('max-point');
-const minPoint = document.getElementById('min-point');
+const paginationElem = document.querySelector("#products-pagination");
+const productsContainer = document.querySelector("#products-container");
+const categorySelectBox = document.querySelector("#category-select-box");
+const priceSlider = document.getElementById("price-range-slider");
+const maxPrice = document.getElementById("max-price");
+const minPrice = document.getElementById("min-price");
+const DiscountSlider = document.getElementById("Discount-range-slider");
+const maxDiscount = document.getElementById("max-Discount");
+const minDiscount = document.getElementById("min-Discount");
+const pointSlider = document.getElementById("point-range-slider");
+const maxPoint = document.getElementById("max-point");
+const minPoint = document.getElementById("min-point");
+const searchInputElem = document.getElementById("search-input");
 
-let page=1
+let page = 1;
 let allProduct;
-let totalItem;
-async function getProduct(page=1){
-  let res = await fetch(`https://dummyjson.com/products?limit=50`)
-  let response = await res.json()
-    allProduct = response.products
-    totalItem = response.total
-    document.querySelector('#total-products-count').textContent=totalItem
-    addProduct(allProduct)
-    console.log(response);
-    // allProduct.forEach(elem=> console.log(elem.category))
-    
-  }
-// getProduct()
+let filteredProduct;
+let itemCount;
 
+window.addEventListener("DOMContentLoaded", () => {
+  getProduct()
 
-function addProduct(list){
-  list = list.sort((a,b)=> a.price - b.price)
-  productsContainer.innerHTML=''
-  list.forEach(item => {
-     productsContainer.innerHTML+=`
+});
+async function getProduct() {
+  let res = await fetch(`https://dummyjson.com/products?limit=200`);
+  let response = await res.json();
+  allProduct = response.products;
+  getFilterParams();
+}
+ async function searchProduct(key) {
+    let res = await fetch(`https://dummyjson.com/products/search?q=${key}`);
+  let response = await res.json();
+  console.log(response);
+  
+  allProduct = response.products;
+  getFilterParams();
+
+ }
+
+function addProduct(list , page=1) {  
+  console.log(list);
+  if(list.length<=10) paginationElem.style.display='none'
+  else paginationElem.style.display='flex'
+  document.querySelector("#total-products-count").textContent = list.length;
+  productsContainer.innerHTML = "";
+  [...list].splice(page*10-10 , 10).forEach((item) => {
+    productsContainer.innerHTML += `
      <tr class="transition-colors hover:bg-gray-500/20 min-w-full flex items-center justify-between gap- p-1.5 md:p-3 ">
          <td class="text-center w-4/15">
              <a href="product.html?id=${item.id}" class="flex items-center gap-1.5  ">
@@ -54,17 +67,38 @@ function addProduct(list){
              <button type="button" class="cursor-pointer text-base"><i class="fa fa-trash text-red-500"></i></button>
          </td>
      </tr>
-     `
+     `;
   });
-
-    
+  
 }
 
+paginationElem.addEventListener("click", (e) => {
+  if (e.target.nodeName === "BUTTON") {
+   pagination(e)
+   
+  }
+});
 
-paginationElem.addEventListener('click' , e=>{
-    if(e.target.nodeName==='BUTTON'){
-       paginationElem.querySelectorAll('button').forEach(elem=>elem.classList.remove('active-page'))
- 
+function pagination(e){
+  if(e===1){
+    page=1
+       paginationElem
+      .querySelectorAll("button")
+      .forEach((elem) => elem.classList.remove("active-page"));
+
+      paginationElem.querySelector(".prev").disabled = true;
+      paginationElem.querySelector(".next").disabled = false;
+      paginationElem.querySelector(".one").textContent = page;
+      paginationElem.querySelector(".one").classList.add("active-page");
+      paginationElem.querySelector(".one").disabled = true;
+      paginationElem.querySelector(".two").textContent = page + 1;
+      paginationElem.querySelector(".three").textContent = page + 2;
+      return ''
+  }
+   paginationElem
+      .querySelectorAll("button")
+      .forEach((elem) => elem.classList.remove("active-page"));
+
     if (e.target.classList.contains("prev") && page != 1) {
       page--;
     }
@@ -77,19 +111,19 @@ paginationElem.addEventListener('click' , e=>{
     if (e.target.classList.contains("three")) {
       page = Number(e.target.textContent);
     }
-    if (e.target.classList.contains("next") ) {
+    if (e.target.classList.contains("next")) {
       page++;
     }
 
-     if (page == 1 ) {
+    if (page == 1) {
       paginationElem.querySelector(".prev").disabled = true;
       paginationElem.querySelector(".next").disabled = false;
       paginationElem.querySelector(".one").textContent = page;
       paginationElem.querySelector(".one").classList.add("active-page");
-      paginationElem.querySelector(".one").disabled = true
+      paginationElem.querySelector(".one").disabled = true;
       paginationElem.querySelector(".two").textContent = page + 1;
       paginationElem.querySelector(".three").textContent = page + 2;
-    } else if (page == Math.ceil(totalItem/10)) {
+    } else if (page == Math.ceil(itemCount / 10)) {
       paginationElem.querySelector(".prev").disabled = false;
       paginationElem.querySelector(".next").disabled = true;
       paginationElem.querySelector(".three").textContent = page;
@@ -105,22 +139,19 @@ paginationElem.addEventListener('click' , e=>{
       paginationElem.querySelector(".one").textContent = page - 1;
       paginationElem.querySelector(".three").textContent = page + 1;
     }
-    if(Math.ceil(totalItem/10) ==2 ){
-    //   paginationElem.querySelector(".three").disabled = true;
-
+    if (Math.ceil(itemCount / 10) == 2) {
+      //   paginationElem.querySelector(".three").disabled = true;
     }
 
-    getProduct(page)
-    }
-})
+   addProduct(filteredProduct , page);
+}
 
- 
-  noUiSlider.create(DiscountSlider, {
-    start: [0, 99],
-    connect: true,
-    step: 1,
-    direction: "ltr",
-    range: {
+noUiSlider.create(DiscountSlider, {
+  start: [0, 99],
+  connect: true,
+  step: 1,
+  direction: "ltr",
+  range: {
     min: 0,
     max: 99,
   },
@@ -128,18 +159,18 @@ paginationElem.addEventListener('click' , e=>{
     to: (value) => Math.round(value), // اعداد انگلیسی
     from: (value) => Number(value),
   },
-  });
+});
 DiscountSlider.noUiSlider.on("update", (values, handle) => {
-  if (handle === 0) minDiscount.textContent = '%'+ values[0];
-  else maxDiscount.textContent = '%' + values[1];
+  if (handle === 0) minDiscount.textContent = values[0];
+  else maxDiscount.textContent =  values[1];
 });
 
-  noUiSlider.create(priceSlider, {
-    start: [0, 15000],
-    connect: true,
-    step: 1,
-    direction: "ltr",
-    range: {
+noUiSlider.create(priceSlider, {
+  start: [0, 15000],
+  connect: true,
+  step: 1,
+  direction: "ltr",
+  range: {
     min: 0,
     max: 15000,
   },
@@ -147,47 +178,54 @@ DiscountSlider.noUiSlider.on("update", (values, handle) => {
     to: (value) => Math.round(value), // اعداد انگلیسی
     from: (value) => Number(value),
   },
-  });
-priceSlider.noUiSlider.on("update", (values, handle) => {
-  if (handle === 0) minPrice.textContent = '$'+ values[0];
-  else maxPrice.textContent = '$' + values[1];
 });
-  noUiSlider.create(pointSlider, {
-    start: [0, 5],
-    connect: true,
-    step: 0.1,
-    direction: "ltr",
-    range: {
+priceSlider.noUiSlider.on("update", (values, handle) => {
+  if (handle === 0) minPrice.textContent = values[0];
+  else maxPrice.textContent = values[1];
+});
+noUiSlider.create(pointSlider, {
+  start: [0, 5],
+  connect: true,
+  step: 0.1,
+  direction: "ltr",
+  range: {
     min: 0,
     max: 5,
   },
-  });
+});
 pointSlider.noUiSlider.on("update", (values, handle) => {
-  if (handle === 0) minPoint.textContent =  values.innerText = parseFloat(values[0]).toFixed(1);
-  else maxPoint.textContent =   values.innerText = parseFloat(values[1]).toFixed(1);
+  if (handle === 0)
+    minPoint.textContent = values.innerText = parseFloat(values[0]).toFixed(1);
+  else
+    maxPoint.textContent = values.innerText = parseFloat(values[1]).toFixed(1);
 });
 
-pointSlider.noUiSlider.on('change' , values => console.log(values)
-)
+pointSlider.noUiSlider.on("change", () => getFilterParams());
+DiscountSlider.noUiSlider.on("change", () => getFilterParams());
+priceSlider.noUiSlider.on("change", () => getFilterParams());
+categorySelectBox.addEventListener('change' , ()=> getFilterParams())
+searchInputElem.addEventListener('input' , (e)=> {
+  let value = searchInputElem.value.trim()
+  searchInputElem.value= value
+  if(value.length>2) searchProduct(value)  
+  else if(value.length <=1) getProduct() 
+})
 
-DiscountSlider.noUiSlider.on('change' , values => console.log(values)
-)
-priceSlider.noUiSlider.on('change' , values => console.log(values)
-)
-
-
-//  beauty
-//  fragrances
-//  furniture
-//   groceries
-//  home-decoration
-//   kitchen-accessories
-//  laptops
-//  mens-shirts
-//  mens-shoes
-//  mens-watches
-//   mobile-accessories
-//  motorcycle
-//  skin-care
-//   smartphones
-//   sports-accessories
+function getFilterParams() {
+ 
+   filteredProduct = allProduct.filter(
+    (p) =>
+      p.price > Number(minPrice.textContent) &&
+      p.price < Number(maxPrice.textContent) &&
+      p.rating > Number(minPoint.textContent) &&
+      p.rating < Number(maxPoint.textContent) &&
+      p.discountPercentage > Number(minDiscount.textContent) &&
+      p.discountPercentage < Number(maxDiscount.textContent) 
+  );
+  if(categorySelectBox.value!=='all'){    
+    filteredProduct = filteredProduct.filter(p => p.category == categorySelectBox.value)
+  }
+  itemCount = filteredProduct.length;
+  addProduct(filteredProduct);
+  pagination(1)
+}
