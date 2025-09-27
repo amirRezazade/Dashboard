@@ -13,6 +13,8 @@ const pointSlider = document.getElementById("point-range-slider");
 const maxPoint = document.getElementById("max-point");
 const minPoint = document.getElementById("min-point");
 const searchInputElem = document.getElementById("search-input");
+const sortingSelectBox = document.getElementById("sort-select-box");
+const sortingType = document.getElementById("sorting-type");
 
 let page = 1;
 let allProduct;
@@ -210,6 +212,8 @@ searchInputElem.addEventListener('input' , (e)=> {
   if(value.length>2) searchProduct(value)  
   else if(value.length <=1) getProduct() 
 })
+sortingSelectBox.addEventListener('change' , ()=> getFilterParams())
+sortingType.addEventListener('change' , ()=> getFilterParams())
 
 function getFilterParams() {
  
@@ -225,6 +229,24 @@ function getFilterParams() {
   if(categorySelectBox.value!=='all'){    
     filteredProduct = filteredProduct.filter(p => p.category == categorySelectBox.value)
   }
+  if(sortingSelectBox.value==='title'){
+    if(sortingType.value==='asc'){
+        filteredProduct = filteredProduct.sort((a , b) => a.title.localeCompare(b.title) )
+     
+    } else{
+        filteredProduct = filteredProduct.sort((a , b) => b.title.localeCompare(a.title) )
+      }
+  }
+  else{    
+    if(sortingType.value==='asc'){
+      filteredProduct = filteredProduct.sort((a , b) => a[sortingSelectBox.value] - b[sortingSelectBox.value] )
+    }else{      
+      filteredProduct = filteredProduct.sort((a , b) => b[sortingSelectBox.value] - a[sortingSelectBox.value] )
+    }
+
+  }
+    
+  
   itemCount = filteredProduct.length;
   addProduct(filteredProduct);
   pagination(1)
