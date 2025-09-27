@@ -15,7 +15,68 @@ const minPoint = document.getElementById("min-point");
 const searchInputElem = document.getElementById("search-input");
 const sortingSelectBox = document.getElementById("sort-select-box");
 const sortingType = document.getElementById("sorting-type");
-
+const animatePulse = `
+<div class="flex items-center justify-between animate-pulse py-5 px-15">
+    <div class="w-4/15 h-3 rounded  flex items-center gap-1.5">
+      <div class="size-10 rounded-full bg-gray-500/50"></div>
+      <div class="h-3 w-25 rounded bg-gray-500/50"></div>
+    </div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+  </div>
+  <div class="flex items-center justify-between animate-pulse py-5 px-15">
+    <div class="w-4/15 h-3 rounded  flex items-center gap-1.5">
+      <div class="size-10 rounded-full bg-gray-500/50"></div>
+      <div class="h-3 w-25 rounded bg-gray-500/50"></div>
+    </div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+  </div>
+  <div class="flex items-center justify-between animate-pulse py-5 px-15">
+    <div class="w-4/15 h-3 rounded  flex items-center gap-1.5">
+      <div class="size-10 rounded-full bg-gray-500/50"></div>
+      <div class="h-3 w-25 rounded bg-gray-500/50"></div>
+    </div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+  </div>
+  <div class="flex items-center justify-between animate-pulse py-5 px-15">
+    <div class="w-4/15 h-3 rounded  flex items-center gap-1.5">
+      <div class="size-10 rounded-full bg-gray-500/50"></div>
+      <div class="h-3 w-25 rounded bg-gray-500/50"></div>
+    </div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+  </div>
+  <div class="flex items-center justify-between animate-pulse py-5 px-15">
+    <div class="w-4/15 h-3 rounded  flex items-center gap-1.5">
+      <div class="size-10 rounded-full bg-gray-500/50"></div>
+      <div class="h-3 w-25 rounded bg-gray-500/50"></div>
+    </div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+  </div>
+  `
 let page = 1;
 let allProduct;
 let filteredProduct;
@@ -26,16 +87,16 @@ window.addEventListener("DOMContentLoaded", () => {
 
 });
 async function getProduct() {
+  productsContainer.innerHTML = animatePulse ;
   let res = await fetch(`https://dummyjson.com/products?limit=200`);
   let response = await res.json();
   allProduct = response.products;
   getFilterParams();
 }
  async function searchProduct(key) {
+    productsContainer.innerHTML = animatePulse ;
     let res = await fetch(`https://dummyjson.com/products/search?q=${key}`);
   let response = await res.json();
-  console.log(response);
-  
   allProduct = response.products;
   getFilterParams();
 
@@ -43,10 +104,11 @@ async function getProduct() {
 
 function addProduct(list , page=1) {  
   console.log(list);
+  productsContainer.innerHTML = "";
+  if(list.length==0) productsContainer.innerHTML = `          <div class=" my-5 block h-[150px] md:h-[300px]  bg-[url('../images/product-not-found.png')]  bg-contain bg-center bg-no-repeat "></div>`;
   if(list.length<=10) paginationElem.style.display='none'
   else paginationElem.style.display='flex'
   document.querySelector("#total-products-count").textContent = list.length;
-  productsContainer.innerHTML = "";
   [...list].splice(page*10-10 , 10).forEach((item) => {
     productsContainer.innerHTML += `
      <tr class="transition-colors hover:bg-gray-500/20 min-w-full flex items-center justify-between gap- p-1.5 md:p-3 ">
@@ -216,7 +278,7 @@ sortingSelectBox.addEventListener('change' , ()=> getFilterParams())
 sortingType.addEventListener('change' , ()=> getFilterParams())
 
 function getFilterParams() {
- 
+  productsContainer.innerHTML = animatePulse ;
    filteredProduct = allProduct.filter(
     (p) =>
       p.price > Number(minPrice.textContent) &&
@@ -245,8 +307,6 @@ function getFilterParams() {
     }
 
   }
-    
-  
   itemCount = filteredProduct.length;
   addProduct(filteredProduct);
   pagination(1)
