@@ -102,7 +102,6 @@ async function searchProduct(key) {
 }
 
 function addProduct(list, page = 1) {
-  console.log(list);
   productsContainer.innerHTML = "";
   if (list.length == 0)
     productsContainer.innerHTML = `          <div class=" my-5 block h-[150px] md:h-[300px]  bg-[url('../images/product-not-found.png')]  bg-contain bg-center bg-no-repeat "></div>`;
@@ -112,7 +111,7 @@ function addProduct(list, page = 1) {
   [...list].splice(page * 10 - 10, 10).forEach((item) => {
     productsContainer.innerHTML += `
      <tr class="transition-colors hover:bg-gray-500/20 min-w-full flex items-center justify-between gap- p-1.5 md:p-3 ">
-         <td class="text-center w-4/15">
+         <td class="text-center w-4/15 max-w-4/15">
              <a href="product.html?id=${item.id}" class="flex items-center gap-1.5  ">
                 <span class="size-12 shrink-0 bg-gray-500/20 rounded-lg ">
                 <img class="object-cover" src="${item.thumbnail}" alt="item-photo">
@@ -122,10 +121,10 @@ function addProduct(list, page = 1) {
              
          </td>
          <td class="text-center w-2/15 truncate" dir="ltr">${item.category}</td>
-         <td class="text-center w-2/15"> ${item.price} <span class="">$</span></td>
-         <td class="text-center w-2/15"><span class="">%</span>${item.discountPercentage} </td>
+         <td class="text-center w-2/15"> ${Math.floor(item.price * 10) / 10} <span class="">$</span></td>
+         <td class="text-center w-2/15"><span class="">%</span>${Math.floor(item.discountPercentage * 10) / 10} </td>
          <td class="text-center w-1/15">${item.stock}</td>
-         <td class="text-center w-2/15"> <i class="fa fa-star text-yellow-300 mx-1.5"> </i>${item.rating}</td>
+         <td class="text-center w-2/15"> <i class="fa fa-star text-yellow-300 mx-1.5"> </i>${Math.floor(item.rating * 10) / 10}</td>
          <td class="text-center w-2/15 centered gap-2">
              <button onclick="editProduct(${item.id})" type="button" class="cursor-pointer text-base"><i class="fa fa-edit text-blue-500"></i></button>
              <button onclick="removeProduct(${item.id})" type="button" class="cursor-pointer text-base"><i class="fa fa-trash text-red-500"></i></button>
@@ -318,7 +317,7 @@ function getFilterParams() {
 }
 function removeProduct(id) {
   showSwal(
-    " مطمعن هستید؟",
+    " مطمئن هستید؟",
     "آیا میخواهید این محصول را حذف کنید؟",
     "warning",
     true,
@@ -350,6 +349,7 @@ function showSwal(title, text, icon, cancel, confirmText) {
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
     confirmButtonText: `${confirmText}`,
+    cancelButtonText: "انصراف",
   });
 }
 
@@ -466,8 +466,8 @@ function editProduct(id) {
       const stock = +document.getElementById("edit-stock").value;
       const category = document.getElementById("edit-category").value;
 
-      if (!name || name.length < 3 || name.length > 30) {
-        Swal.showValidationMessage("نام محصول باید بین 3 تا 30 کارکتر باشد!");
+      if (!name || name.length < 3 ) {
+        Swal.showValidationMessage("نام محصول باید بیشتر از 3 کارکتر باشد!");
         return false;
       }
       if (!price || price <= 0 || price >= 15000) {
@@ -483,7 +483,10 @@ function editProduct(id) {
     },
   }).then((result) => {
     if (result.isConfirmed) {
-      fetch(`https://dummyjson.com/products/${id}`, {
+      showSwal('مطمئن هستید؟', 'آیا میخواهید اطلاعات این محصول را تغییر دهید؟', 'warning', true, 'بله')
+      .then(res =>{
+        if(res.isConfirmed){
+     fetch(`https://dummyjson.com/products/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -491,7 +494,7 @@ function editProduct(id) {
           title: result.value.name,
           price: result.value.price,
           discountPercentage: result.value.discount,
-          stock: Math.floor(result.value.stock),
+          stock:Math.floor(result.value.stock),
         }),
       })
         .then((res) => res.json())
@@ -503,6 +506,9 @@ function editProduct(id) {
         .catch(() =>
           showTost("error", "مشکلی پیش آمد دوباره امتحان کنید!")
         );
+        }
+      })
+      
     }
   });
 }
