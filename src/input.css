@@ -75,6 +75,11 @@ html::selection{
   background-color: var(--box-color) !important;
   color: var(--text-color) !important;
 }
+.swal2-validation-message{
+  background-color: var(--bg-color) !important;
+  color: var(--text-color) !important;
+
+}
 .my-toast{
   background-color: var(--box-color) !important;
   color: var(--text-color) !important;

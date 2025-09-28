@@ -1,5 +1,6 @@
 import { addToLocal, getToLocal } from "./funcs.js";
-window.removeItem = removeItem;
+window.removeProduct = removeProduct;
+window.editProduct = editProduct;
 const paginationElem = document.querySelector("#products-pagination");
 const productsContainer = document.querySelector("#products-container");
 const categorySelectBox = document.querySelector("#category-select-box");
@@ -126,8 +127,8 @@ function addProduct(list, page = 1) {
          <td class="text-center w-1/15">${item.stock}</td>
          <td class="text-center w-2/15"> <i class="fa fa-star text-yellow-300 mx-1.5"> </i>${item.rating}</td>
          <td class="text-center w-2/15 centered gap-2">
-             <button type="button" class="cursor-pointer text-base"><i class="fa fa-edit text-blue-500"></i></button>
-             <button onclick="removeItem(${item.id})" type="button" class="cursor-pointer text-base"><i class="fa fa-trash text-red-500"></i></button>
+             <button onclick="editProduct(${item.id})" type="button" class="cursor-pointer text-base"><i class="fa fa-edit text-blue-500"></i></button>
+             <button onclick="removeProduct(${item.id})" type="button" class="cursor-pointer text-base"><i class="fa fa-trash text-red-500"></i></button>
          </td>
      </tr>
      `;
@@ -315,28 +316,30 @@ function getFilterParams() {
   addProduct(filteredProduct);
   pagination(1);
 }
-function removeItem(id) {
-  showSwal(" مطمعن هستید؟","آیا میخواهید این محصول را حذف کنید؟","warning",true,"بله")
-  .then((result) => {
+function removeProduct(id) {
+  showSwal(
+    " مطمعن هستید؟",
+    "آیا میخواهید این محصول را حذف کنید؟",
+    "warning",
+    true,
+    "بله"
+  ).then((result) => {
     if (result.isConfirmed) {
       fetch(`https://dummyjson.com/products/${id}`, {
-        method: "DELETE",})
+        method: "DELETE",
+      })
         .then((res) => res.json())
-        .then(res => {
-          if(res.isDeleted === true){
-                showTost('success' , 'محصول با موفقیت حذف شد!') 
-                 let itemIndex = allProduct.findIndex((e)=> e.id==id)
-                 allProduct.splice(itemIndex , 1)
-                 getFilterParams()
-                 
-              }
-              else showTost("error"," محول حذف نشد دوباره امتحان کنید!")
-        }
-        );
-        }
-    })
-  }
-
+        .then((res) => {
+          if (res.isDeleted === true) {
+            showTost("success", "محصول با موفقیت حذف شد!");
+            let itemIndex = allProduct.findIndex((e) => e.id == id);
+            allProduct.splice(itemIndex, 1);
+            getFilterParams();
+          } else showTost("error", " محول حذف نشد دوباره امتحان کنید!");
+        });
+    }
+  });
+}
 
 function showSwal(title, text, icon, cancel, confirmText) {
   return Swal.fire({
@@ -350,93 +353,156 @@ function showSwal(title, text, icon, cancel, confirmText) {
   });
 }
 
-function showTost(icon , text){
+function showTost(icon, text) {
   Swal.fire({
-  toast: true,
-  position: 'bottom-end',
-  icon: icon,
-  title: text ,
-  showConfirmButton: false,
-  timer: 3500,
-  timerProgressBar: true,
-  didOpen: (toast) => {
-    toast.onmouseenter = Swal.stopTimer
-    toast.onmouseleave = Swal.resumeTimer
-  },
-   customClass: {
-    popup: 'my-toast'
-  }
-});
-
+    toast: true,
+    position: "bottom-end",
+    icon: icon,
+    title: text,
+    showConfirmButton: false,
+    timer: 3500,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.onmouseenter = Swal.stopTimer;
+      toast.onmouseleave = Swal.resumeTimer;
+    },
+    customClass: {
+      popup: "my-toast",
+    },
+  });
 }
 
-function editProduct(product) {
+function editProduct(id) {
+  let index = allProduct.findIndex((e) => e.id == id);
   Swal.fire({
-    title: 'ویرایش محصول',
+    title: "ویرایش محصول",
     html: `
         <form class="w-full max-w-xs mx-auto text-[var(--text-color)] text-xs flex flex-col">
-      <span class="mb-2 text-start">دسته بندی</span>
-      <select id="edit-category" class=" border border-gray-500/80 focus:border-[var(--active-color)] outline-0 cursor-pointer w-full bg-[var(--bg-color)] p-2 md:p-3 rounded-lg   " value="groceries">
-          <option value="beauty">زیبایی</option>
-          <option value="fragrances">عطرها</option>
-          <option value="furniture">مبلمان</option>
-          <option value="groceries">مواد غذایی</option>
-          <option value="home-decoration">دکوراسیون منزل</option>
-          <option value="kitchen-accessories">لوازم آشپزخانه</option>
-          <option value="laptops">لپ‌تاپ‌ها</option>
-          <option value="mens-shirts">پیراهن مردانه</option>
-          <option value="mens-shoes">کفش مردانه</option>
-          <option value="mens-watches">ساعت مردانه</option>
-          <option value="mobile-accessories">لوازم جانبی موبایل</option>
-          <option value="motorcycle">موتورسیکلت</option>
-          <option value="skin-care">مراقبت پوست</option>
-          <option value="smartphones">گوشی‌های هوشمند</option>
-          <option value="sports-accessories">لوازم ورزشی</option>
+      <span class="mb-1 sm:mb-2 text-start">دسته بندی</span>
+      <select id="edit-category" class=" border border-gray-500/80 focus:border-[var(--active-color)] outline-0 cursor-pointer w-full bg-[var(--bg-color)] p-2 md:p-3 rounded-lg ">
+          <option ${
+            allProduct[index].category == "beauty" ? "selected" : ""
+          } value="beauty">زیبایی</option>
+          <option ${
+            allProduct[index].category == "fragrances" ? "selected" : ""
+          } value="fragrances">عطرها</option>
+          <option ${
+            allProduct[index].category == "furniture" ? "selected" : ""
+          } value="furniture">مبلمان</option>
+          <option ${
+            allProduct[index].category == "groceries" ? "selected" : ""
+          } value="groceries">مواد غذایی</option>
+          <option ${
+            allProduct[index].category == "home-decoration" ? "selected" : ""
+          } value="home-decoration">دکوراسیون منزل</option>
+          <option ${
+            allProduct[index].category == "kitchen-accessories"
+              ? "selected"
+              : ""
+          } value="kitchen-accessories">لوازم آشپزخانه</option>
+          <option ${
+            allProduct[index].category == "laptops" ? "selected" : ""
+          } value="laptops">لپ‌تاپ‌ها</option>
+          <option ${
+            allProduct[index].category == "mens-shirts" ? "selected" : ""
+          } value="mens-shirts">پیراهن مردانه</option>
+          <option ${
+            allProduct[index].category == "mens-shoes" ? "selected" : ""
+          } value="mens-shoes">کفش مردانه</option>
+          <option ${
+            allProduct[index].category == "mens-watches" ? "selected" : ""
+          } value="mens-watches">ساعت مردانه</option>
+          <option ${
+            allProduct[index].category == "mobile-accessories" ? "selected" : ""
+          } value="mobile-accessories">لوازم جانبی موبایل</option>
+          <option ${
+            allProduct[index].category == "motorcycle" ? "selected" : ""
+          } value="motorcycle">موتورسیکلت</option>
+          <option ${
+            allProduct[index].category == "skin-care" ? "selected" : ""
+          } value="skin-care">مراقبت پوست</option>
+          <option ${
+            allProduct[index].category == "smartphones" ? "selected" : ""
+          } value="smartphones">گوشی‌های هوشمند</option>
+          <option ${
+            allProduct[index].category == "sports-accessories" ? "selected" : ""
+          } value="sports-accessories">لوازم ورزشی</option>
       </select>
-      <label class="mb-2 mt-4 cursor-pointer text-start" for="swal-name">اسم محصول:</label>
-      <input id="swal-name" type="text" required  class=" bg-[var(--bg-color)] p-3 outline-0 rounded-lg border border-gray-500/80 focus:border-[var(--active-color)]" >
-      <label class="mb-2 mt-4 cursor-pointer text-start" for="swal-price">قیمت:</label>
+      <label class="mb-1 sm:mb-2 mt-2 sm:mt-4 cursor-pointer text-start" for="swal-name">اسم محصول:</label>
+      <input id="edit-name" type="text" required  class=" bg-[var(--bg-color)] p-3 outline-0 rounded-lg border border-gray-500/80 focus:border-[var(--active-color)]" value="${
+        allProduct[index].title
+      }">
+      <label class="mb-1 sm:mb-2 mt-2 sm:mt-4 cursor-pointer text-start" for="swal-price">قیمت:</label>
       <div class="flex items-center border border-gray-500/80 focus-within:border-[var(--active-color)] overflow-hidden  rounded-lg bg-[var(--bg-color)]">
-        <input id="swal-price" type="number" required pattern="[1-9][0-9]*" min="0.1" class="grow p-2 outline-0  " placeholder="$ " >
+        <input id="edit-price" type="number" required pattern="[1-9][0-9]*" min="0.1" max="14999.98" class="grow p-2 outline-0  " placeholder="$ " value="${
+          allProduct[index].price
+        }">
         <span class="p-3 bg-[var(--box-color)]">$</span>
       </div>
-      <span class="mb-2 mt-4  text-start">تخفیف</span>
+      <span class="mb-1 sm:mb-2 mt-2 sm:mt-4  text-start">تخفیف</span>
       <div class="flex items-center gap-1 ">
-        <input type="range" min="0.1" step="0.1" max="99" class="grow accent-[var(--active-color)]" onInput="nextElementSibling.textContent=this.value + '%'">
-        <span class="w-2/12">11%</span>
+        <input id="edit-discount" type="range" min="0.1" step="0.1" max="98.9" class="grow accent-[var(--active-color)]" onInput="nextElementSibling.textContent=this.value + '%'" value="${allProduct[
+          index
+        ].discountPercentage.toFixed(1)}">
+        <span class="w-2/12">${allProduct[index].discountPercentage.toFixed(
+          1
+        )}%</span>
       </div>
-      <label class="mb-2 mt-4 cursor-pointer text-start" for="swal-count">تعداد:</label>
-      <input id="swal-count" type="number" required pattern="[1-9][0-9]*" min="0" class=" bg-[var(--bg-color)] p-3 outline-0 border border-gray-500/80 focus:border-[var(--active-color)] rounded-lg " placeholder="تعداد " >      
+      <label class="mb-1 sm:mb-2 mt-2 sm:mt-4 cursor-pointer text-start" for="swal-count">تعداد:</label>
+      <input id="edit-stock" type="number" required pattern="[1-9][0-9]*" min="0" class=" bg-[var(--bg-color)] p-3 outline-0 border border-gray-500/80 focus:border-[var(--active-color)] rounded-lg " placeholder="تعداد " value="${
+        allProduct[index].stock
+      }">      
     </form>
     `,
     focusConfirm: false,
     showCancelButton: true,
-    confirmButtonText: 'ذخیره',
-    cancelButtonText: 'انصراف',
-    cancelButtonColor: 'red',
+    confirmButtonText: "ذخیره",
+    cancelButtonText: "انصراف",
+    cancelButtonColor: "red",
     preConfirm: () => {
-      return {
-        name: document.getElementById('swal-name').value,
-        price: +document.getElementById('swal-price').value,
-        stock: +document.getElementById('swal-stock').value,
-        rating: +document.getElementById('swal-rating').value,
-        category: document.getElementById('swal-category').value
+      const name = document.getElementById("edit-name").value.trim();
+      const price = +document.getElementById("edit-price").value;
+      const discount = +document.getElementById("edit-discount").value;
+      const stock = +document.getElementById("edit-stock").value;
+      const category = document.getElementById("edit-category").value;
+
+      if (!name || name.length < 3 || name.length > 30) {
+        Swal.showValidationMessage("نام محصول باید بین 3 تا 30 کارکتر باشد!");
+        return false;
       }
-    }
-  }).then(result => {
+      if (!price || price <= 0 || price >= 15000) {
+        Swal.showValidationMessage("قیمت باید بین 0.1 تا 14999.9 باشد!");
+        return false;
+      }
+      if (stock < 0) {
+        Swal.showValidationMessage("تعداد نمی‌تواند منفی باشد!");
+        return false;
+      }
+
+      return { name, price, stock, discount, category };
+    },
+  }).then((result) => {
     if (result.isConfirmed) {
-      console.log("📦 داده‌های جدید محصول:", result.value);
-      Swal.fire('ذخیره شد!', 'اطلاعات محصول با موفقیت بروزرسانی شد.', 'success');
+      fetch(`https://dummyjson.com/products/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          category: result.value.category,
+          title: result.value.name,
+          price: result.value.price,
+          discountPercentage: result.value.discount,
+          stock: Math.floor(result.value.stock),
+        }),
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          allProduct[index] = res;
+          getFilterParams();
+          showTost("success", "اطلاعات محصول با موفقیت بروزرسانی شد.");
+        })
+        .catch(() =>
+          showTost("error", "مشکلی پیش آمد دوباره امتحان کنید!")
+        );
     }
   });
 }
-
-// ✅ تست
-const myProduct = { 
-  name: "موبایل سامسونگ", 
-  price: 5000000, 
-  stock: 12, 
-  rating: 4.5, 
-  category: "smartphones" 
-};
-editProduct(myProduct);
