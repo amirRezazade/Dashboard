@@ -7,15 +7,48 @@
 
     <title>Document</title>
   </head>
-  <body class="bg-[var(--bg-color)]">
-    <div class="flex justify-center my-5 h-auto"><img class="object-cover sm:max-w-xl" src="images/product-not-found.png" alt=""></div>
+  <body class="bg-[var(--bg-color)] h-screen centered">
+    <div class="bg-[var(--box-color)] w-lg  mx-auto h-auto rounded-md p-5">
+    <form class="w-full max-w-xs mx-auto text-[var(--text-color)] text-xs flex flex-col">
+      <span class="mb-2">دسته بندی</span>
+      <select id="edit-category" class=" border border-gray-500/80 focus:border-[var(--active-color)] outline-0 cursor-pointer w-full bg-[var(--bg-color)] p-2 md:p-3 rounded-lg   " value="groceries">
+          <option value="beauty">زیبایی</option>
+          <option value="fragrances">عطرها</option>
+          <option value="furniture">مبلمان</option>
+          <option value="groceries">مواد غذایی</option>
+          <option value="home-decoration">دکوراسیون منزل</option>
+          <option value="kitchen-accessories">لوازم آشپزخانه</option>
+          <option value="laptops">لپ‌تاپ‌ها</option>
+          <option value="mens-shirts">پیراهن مردانه</option>
+          <option value="mens-shoes">کفش مردانه</option>
+          <option value="mens-watches">ساعت مردانه</option>
+          <option value="mobile-accessories">لوازم جانبی موبایل</option>
+          <option value="motorcycle">موتورسیکلت</option>
+          <option value="skin-care">مراقبت پوست</option>
+          <option value="smartphones">گوشی‌های هوشمند</option>
+          <option value="sports-accessories">لوازم ورزشی</option>
+      </select>
+      <label class="mb-2 mt-4 cursor-pointer" for="swal-name">اسم محصول:</label>
+      <input id="swal-name" type="text" required  class=" bg-[var(--bg-color)] p-3 outline-0 rounded-lg border border-gray-500/80 focus:border-[var(--active-color)]" >
+      <label class="mb-2 mt-4 cursor-pointer" for="swal-price">قیمت:</label>
+      <div class="flex items-center border border-gray-500/80 focus-within:border-[var(--active-color)] overflow-hidden  rounded-lg bg-[var(--bg-color)]">
+        <input id="swal-price" type="number" required pattern="[1-9][0-9]*" min="0.1" class="grow p-2 outline-0  " placeholder="$ " >
+        <span class="p-3 bg-[var(--box-color)]">$</span>
+      </div>
+      <span class="mb-2 mt-4 ">تخفیف</span>
+      <div class="flex items-center gap-2 ">
+        <input type="range" min="1" max="99" class="grow accent-[var(--active-color)]" onInput="nextElementSibling.textContent=this.value + '%'">
+        <span class="">11%</span>
+      </div>
+      <label class="mb-2 mt-4 cursor-pointer" for="swal-count">تعداد:</label>
+      <input id="swal-count" type="number" required pattern="[1-9][0-9]*" min="0" class=" bg-[var(--bg-color)] p-3 outline-0 border border-gray-500/80 focus:border-[var(--active-color)] rounded-lg " placeholder="تعداد " >      
+    </form>
+    </div>
 <script>
   
 //  fetch('https://dummyjson.com/products?sortBy=rating&order=desc')
 //  fetch('https://dummyjson.com/products?sortBy=rating&order=desc&limit=30&skip=30')
-fetch('https://dummyjson.com/products/search?q=phone/limit=200')
-.then(res => res.json())
-.then(console.log);
+
 </script>
 
   </body>

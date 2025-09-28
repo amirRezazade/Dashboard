@@ -69,3 +69,23 @@ html::selection{
   @apply bg-[var(--active-color)] text-white
 }
 
+
+
+.swal2-popup{
+  background-color: var(--box-color) !important;
+  color: var(--text-color) !important;
+}
+.my-toast{
+  background-color: var(--box-color) !important;
+  color: var(--text-color) !important;
+  box-shadow: 0 0 3px  gray !important;
+  font-size: 14px !important;
+}
+.my-toast .swal2-success-circular-line-left ,.my-toast .swal2-success-circular-line-right , .my-toast .swal2-success-fix{
+  background-color: transparent !important;
+}
+.my-toast .swal2-timer-progress-bar{
+  background-color: rgba(205, 205, 205, 0.772) !important;
+  border-radius: 10px !important;
+
+}
