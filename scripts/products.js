@@ -1,4 +1,4 @@
-import { addToLocal, getToLocal } from "./funcs.js";
+import { addToLocal, getToLocal , showSwal , showTost } from "./funcs.js";
 window.removeProduct = removeProduct;
 window.editProduct = editProduct;
 const paginationElem = document.querySelector("#products-pagination");
@@ -340,37 +340,6 @@ function removeProduct(id) {
   });
 }
 
-function showSwal(title, text, icon, cancel, confirmText) {
-  return Swal.fire({
-    title: `${title}`,
-    text: `${text}`,
-    icon: `${icon}`,
-    showCancelButton: cancel,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
-    confirmButtonText: `${confirmText}`,
-    cancelButtonText: "انصراف",
-  });
-}
-
-function showTost(icon, text) {
-  Swal.fire({
-    toast: true,
-    position: "bottom-end",
-    icon: icon,
-    title: text,
-    showConfirmButton: false,
-    timer: 3500,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-      toast.onmouseenter = Swal.stopTimer;
-      toast.onmouseleave = Swal.resumeTimer;
-    },
-    customClass: {
-      popup: "my-toast",
-    },
-  });
-}
 
 function editProduct(id) {
   let index = allProduct.findIndex((e) => e.id == id);

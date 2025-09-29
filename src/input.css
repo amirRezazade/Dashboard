@@ -70,7 +70,7 @@ html::selection{
 }
 
 
-
+ /* start sweet alert 2 custom styles  */
 .swal2-popup{
   background-color: var(--box-color) !important;
   color: var(--text-color) !important;
@@ -94,3 +94,5 @@ html::selection{
   border-radius: 10px !important;
 
 }
+ /* finish sweet alert 2 custom styles  */
+ 
