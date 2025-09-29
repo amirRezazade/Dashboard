@@ -112,7 +112,7 @@ function addProduct(list, page = 1) {
     productsContainer.innerHTML += `
      <tr class="transition-colors hover:bg-gray-500/20 min-w-full flex items-center justify-between gap- p-1.5 md:p-3 ">
          <td class="text-center w-4/15 max-w-4/15">
-             <a href="product.html?id=${item.id}" class="flex items-center gap-1.5  ">
+             <a href="product-details.html?id=${item.id}" class="flex items-center gap-1.5  ">
                 <span class="size-12 shrink-0 bg-gray-500/20 rounded-lg ">
                 <img class="object-cover" src="${item.thumbnail}" alt="item-photo">
                 </span>
