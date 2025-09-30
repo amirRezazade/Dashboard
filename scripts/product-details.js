@@ -3,11 +3,12 @@ let product ;
 const addToShoppingCardIdsBtn = document.getElementById('add-to-shopping-card-btn')
 const urlParams = new URLSearchParams(window.location.search);
 const productId = urlParams.get("id");
+let tabContent = document.querySelector('#tab-container')
 
 async function getProduct(){
   let res = await fetch(`https://dummyjson.com/products/${productId || 115}`)
   product =await res.json()
-
+console.log(product);
   let infos= `
             <span class="text-base lg:text-lg">${product.title}</span>
           <div class="flex items-center justify-start gap-4 xs:gap-6 lg:gap-10">
@@ -23,10 +24,6 @@ async function getProduct(){
             <span>ارتفاع:</span>  <span class="font-[dana-num]">${product.dimensions.depth} سانتی متر</span>
             <span>وزن:</span>  <span class="font-[dana-num]">${product.weight} کیلو گرم</span>
           </div>
-          <div>
-          <span>توضیحات:</span>
-          <p dir="ltr" class="">${product.description}</p>
-          </div>
           <div dir="ltr" class="border-t  border-gray-500/50 pt-3 flex flex-wrap  items-center gap-y-2 justify-end gap-x-6">
             <div ><i class="fa-solid fa-tag text-xs"></i> <span>${product.sku}</span></div>
             <div ><i class="fa-solid fa-award text-xs"></i> <span>${product.warrantyInformation}</span></div>
@@ -39,8 +36,7 @@ async function getProduct(){
   `
   addPhotos(product.images)
   document.querySelector('#product-infos-container').insertAdjacentHTML('afterbegin' , infos)
-  document.querySelector('#product-tags').innerHTML+= product.tags.join(' , ')
-  
+  tabContent.textContent=product.description
 }
 getProduct()
 
@@ -93,3 +89,45 @@ function addPhotos(photos){
      }
 }
 
+const tabs = document.querySelector('#tabs')
+tabs.addEventListener('click' , e=>{
+  console.log(product.reviews);
+  
+  if(e.target.nodeName=== 'BUTTON'){
+    tabs.querySelectorAll('button').forEach(elem=> elem.style.borderColor='transparent')
+    e.target.style.borderColor='#6a7282'
+
+    if(e.target.id=='description'){
+     tabContent.textContent = product.description
+    }
+    if(e.target.id=='reviews'){
+     tabContent.innerHTML= ''
+     product.reviews.forEach(el=>{
+      tabContent.innerHTML+=`
+       <div class="inline-flex flex-col items-center p-3">
+              <div class=" flex items-center gap-6">
+                <span><img class="rounded-full" src="profile.png" width="35" height="35" alt="user-profile"></span>
+               <div class="flex flex-col text-sm">
+                 <span>${el.reviewerName}</span>
+                  <div class="flex items-center gap-0.5 text-[10px] text-amber-400">
+                    <i class="${el.rating < 1 ? 'text-gray-500' : ''} fa fa-star"></i>
+                    <i class="${el.rating < 2 ? 'text-gray-500' : ''} fa fa-star"></i>
+                    <i class="${el.rating < 3 ? 'text-gray-500' : ''} fa fa-star"></i>
+                    <i class="${el.rating < 4 ? 'text-gray-500' : ''} fa fa-star"></i>
+                    <i class="${el.rating < 5 ? 'text-gray-500' : ''} fa fa-star"></i>
+                  </div>
+               </div>
+              </div>
+              <div dir="ltr" class="w-full my-1 text-center">${el.comment}</div>
+              <span class="justify-self-end text-xs block text-left w-full">${el.date.slice(0 , 10)}</span>
+              <span class="text-xs">${el.reviewerEmail}</span>
+            </div>
+      `
+     })
+    }
+    if(e.target.id=='tags'){
+     tabContent.textContent = product.tags.join(' , ')
+    }
+  }
+  
+})

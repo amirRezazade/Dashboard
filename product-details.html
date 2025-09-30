@@ -382,7 +382,7 @@
         </ul>
     </aside>
     <main class="px-3 xs:px-6 py-4 transition-all duration-500 bg-[var(--bg-color)] md:ms-60">
-      <section class="bg-[var(--box-color)] flex flex-col gap-y-4 lg:flex-row rounded-lg p-3 lg:p-5 ">
+      <section class="bg-[var(--box-color)] flex flex-col gap-y-4 lg:flex-row flex-wrap rounded-lg p-3 lg:p-5 ">
         <div  class="lg:w-1/2 2xl:w-2/5 lg:flex lg:flex-col lg:justify-center  overflow-hidden lg:border-l border-gray-500/50">
           <div id="photos-swiper" class="relative">
              <div id="photos-swiper-wrapper" class=" swiper-wrapper  aspect-square xs:max-h-[350px] lg:max-h-[400px]">
@@ -406,9 +406,23 @@
             <button type="button" class="bg-[var(--active-color)]/70 hover:bg-[var(--active-color)] px-5 py-2 cursor-pointer text-white rounded-lg">خرید</button>
             <button id="add-to-shopping-card-btn" type="button" class="bg-[var(--active-color)]/70 hover:bg-[var(--active-color)] px-5 py-2 cursor-pointer text-white rounded-lg">افزودن به سبد خرید <i class="fa-solid fa-shopping-cart"></i></button>
           </div>
-          <div class="flex items-start gap-1">
-            <span class="text-nowrap"><i class="fa-solid fa-tags text-xs"></i> تگ ها:</span>
-            <p id="product-tags"></p>
+        </div>
+        <div class="w-full ">
+          <div class="pt-6 border-y border-gray-500/50">
+          <div id="tabs" class="flex items-center text-sm">
+            <button id="description" type="button" class="border border-b-0  border-gray-500/50 transition-colors hover:border-gray-500/50 cursor-pointer rounded-t-lg p-3">
+             <i class="fa-solid fa-quote-left text-xs pointer-events-none"></i> توضیحات
+            </button>
+            <button id="reviews" type="button" class="border border-b-0 border-transparent transition-colors hover:border-gray-500/50 cursor-pointer rounded-t-lg p-3">
+             <i class="fa-regular fa-comment  text-xs pointer-events-none"> </i> نظر ها
+            </button>
+            <button id="tags" type="button" class="border border-b-0 border-transparent transition-colors hover:border-gray-500/50 cursor-pointer rounded-t-lg p-3">
+             <i class="fas fa-tags text-xs pointer-events-none"> </i> تگ ها
+            </button>
+          </div>
+          </div>
+          <div id="tab-container" class="py-4 flex flex-wrap divide-x  divide-gray-500/50 text-center">
+               <!-- data loaded from Js  -->
           </div>
         </div>
       </section>
