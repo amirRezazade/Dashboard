@@ -382,53 +382,29 @@
         </ul>
     </aside>
     <main class="px-3 xs:px-6 py-4 transition-all duration-500 bg-[var(--bg-color)] md:ms-60">
-      <section class="bg-[var(--box-color)] flex flex-col md:flex-row rounded-lg p-3 lg:p-5 ">
-        <div id="photos-swiper" class="relative md:w-2/6 overflow-hidden md:border-l border-gray-500/50">
-           <div id="photos-swiper-wrapper" class=" swiper-wrapper max-h-[400px] ">
+      <section class="bg-[var(--box-color)] flex flex-col gap-y-4 lg:flex-row rounded-lg p-3 lg:p-5 ">
+        <div  class="lg:w-1/2 2xl:w-2/5 lg:flex lg:flex-col lg:justify-center  overflow-hidden lg:border-l border-gray-500/50">
+          <div id="photos-swiper" class="relative">
+             <div id="photos-swiper-wrapper" class=" swiper-wrapper  aspect-square xs:max-h-[350px] lg:max-h-[400px]">
              
            </div> 
-           <div id="slider-btns" class="flex absolute top-1/3 w-full  justify-between px-4">
+           <div id="slider-btns" class="hidden xs:flex absolute top-1/3 w-full  justify-between px-4">
                 <button class="photos-swiper-button-next z-99  cursor-pointer "><i class="fa-solid fa-chevron-right"></i></button>
                 <button class="photos-swiper-button-prev z-99  cursor-pointer "><i class="fa-solid fa-chevron-left"></i></button>
            </div>
           
-              <div  thumbsSlider="" class="swiper thumbsSwiper lg:h-[15vh]">
-            <div id="thumbsSwiper-wrapper" class=" swiper-wrapper w-full">
+              <div  thumbsSlider="" class="swiper thumbsSwiper ">
+            <div id="thumbsSwiper-wrapper" class=" swiper-wrapper w-full justify-center">
                 
               </div>  
             </div>
+          </div>
         </div>
-        <div id="product-infos-container" class="md:grow sm:px-3 lg:px-5 flex flex-col gap-3.5 text-xs xs:text-sm lg:text-[15px]">
-          <!-- <span>تیشرت مردانه</span>
-          <div class="flex items-center justify-start gap-4 xs:gap-6">
-            <div class="text-xs text-yellow-300">
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-            </div>
-            <div><i class="fa fa-comment text-xs"></i> <span class="font-[dana-num]">142</span> نظر</div>
-            <div><i class="fa fa-shopping-cart text-xs"></i> <span class="font-[dana-num]">122</span> سفارش</div>
-          </div>
-          <div class="xs:w-1/2 md:w-full lg:w-1/2 grid grid-cols-2  gap-y-1.5 items-center">
-            <span>دسته بندی:</span>  <span>زیبایی</span>
-            <span>برند:</span>  <span>Nail Couture</span>
-            <span>طول:</span>  <span>10 سانتی متر</span>
-            <span>عرض:</span>  <span>20 سانتی متر</span>
-            <span>ارتفاع:</span>  <span>10 سانتی متر</span>
-            <span>وزن:</span>  <span>8 کیلو گرم</span>
-          </div>
-          <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.</p>
-          <div dir="ltr" class="border-t  border-gray-500/50 pt-3 flex flex-wrap  items-center gap-y-2 justify-end gap-x-6">
-            <div ><i class="fa-solid fa-tag text-xs"></i> <span>BEA-NAI-NAI-005</span></div>
-            <div ><i class="fa-solid fa-award text-xs"></i> <span>1 month warranty</span></div>
-            <div ><i class="fa fa-truck text-xs"></i> <span>Ships overnight</span></div>
-          </div>
-          <span>تعداد: <span>15</span></span> -->
-          <div class="flex gap-3.5">
+        <div id="product-infos-container" class="lg:w-1/2 2xl:w-3/5 sm:px-3 lg:px-5 2xl:px-8 flex flex-col gap-3.5 text-xs xs:text-sm lg:text-[15px]">
+            <!-- data loaded from JS  -->
+          <div id="btns" class="flex gap-3.5">
             <button type="button" class="bg-[var(--active-color)]/70 hover:bg-[var(--active-color)] px-5 py-2 cursor-pointer text-white rounded-lg">خرید</button>
-            <button type="button" class="bg-[var(--active-color)]/70 hover:bg-[var(--active-color)] px-5 py-2 cursor-pointer text-white rounded-lg">افزودن به سبد خرید <i class="fa-solid fa-shopping-cart"></i></button>
+            <button id="add-to-shopping-card-btn" type="button" class="bg-[var(--active-color)]/70 hover:bg-[var(--active-color)] px-5 py-2 cursor-pointer text-white rounded-lg">افزودن به سبد خرید <i class="fa-solid fa-shopping-cart"></i></button>
           </div>
           <div class="flex items-start gap-1">
             <span class="text-nowrap"><i class="fa-solid fa-tags text-xs"></i> تگ ها:</span>

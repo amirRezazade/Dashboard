@@ -24,6 +24,20 @@ function getToLocal(key){
    return JSON.parse( localStorage.getItem(key))
 }
 
+async function getShoppingCardItems(){
+   let ids =  getToLocal('shoppingCardIds')  
+  const products = await Promise.all(
+    ids.map(id =>        
+      fetch(`https://dummyjson.com/products/${id}?select=title,price,id,thumbnail`).then(res => res.json())
+    )
+  );
+    const shoppingCardItems = products.map(product => ({
+    ...product,
+    quantity: 1
+  }));
+
+ addToLocal('shoppingCardItems' , shoppingCardItems )  
+}
 function addShoppingCardItems(){
    let products =  getToLocal('shoppingCardItems')
    updateShoppingCardLength()
@@ -38,11 +52,11 @@ function addShoppingCardItems(){
         `
         <li class="flex items-center justify-between transition-colors py-2 hover:bg-gray-400/30">
                       <div class="flex gap-3 w-1/2 ">
-                        <span class="p-0.5 size-12 shrink-0 rounded-full bg-[var(--bg-color)]/50">
+                        <a href="product-details.html?id=${item.id}" class="p-0.5 size-12 shrink-0 rounded-full bg-[var(--bg-color)]/50">
                           <img class="object-cover" src="${item.thumbnail}" alt="">
-                        </span>
+                        </a>
                         <div dir="ltr" class="flex flex-col truncate">
-                          <a href="#" class="text-sm ">${item.title}</a>
+                          <a href="product-details.html?id=${item.id}" class="text-sm ">${item.title}</a>
                           <span>${Math.ceil(item.price)} $ </span>
                         </div>
                       </div>
@@ -64,20 +78,7 @@ function addShoppingCardItems(){
     emptyShoppingCard()
     }
 }
-async function getShoppingCardItems(){
-   let ids =  getToLocal('shoppingCardIds')  
-  const products = await Promise.all(
-    ids.map(id =>        
-      fetch(`https://dummyjson.com/products/${id}`).then(res => res.json())
-    )
-  );
-    const shoppingCardItems = products.map(product => ({
-    ...product,
-    quantity: 1
-  }));
 
- addToLocal('shoppingCardItems' , shoppingCardItems )  
-}
 
 function removeShoppingCardItem(id){
    let card = getToLocal('shoppingCardItems')
@@ -126,10 +127,7 @@ sidebar.addEventListener('click' , e=>{
 if(e.target==sidebar) sidebar.classList.remove('sidebar-toggle')
 })
 function toggleSidebar(){
-  console.log(3);
-  
   sidebar.classList.toggle('sidebar-toggle')
-  
 }
 
 
