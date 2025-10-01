@@ -4,39 +4,44 @@ const addToShoppingCardIdsBtn = document.getElementById('add-to-shopping-card-bt
 const urlParams = new URLSearchParams(window.location.search);
 const productId = urlParams.get("id");
 let tabContent = document.querySelector('#tab-container')
+ document.querySelector('#product-edit-btn').href = `product-add.html?id=${productId||115}`
 
 async function getProduct(){
-  let res = await fetch(`https://dummyjson.com/products/${productId || 115}`)
-  product =await res.json()
-console.log(product);
-  let infos= `
-            <span class="text-base lg:text-lg">${product.title}</span>
-          <div class="flex items-center justify-start gap-4 xs:gap-6 lg:gap-10">
-            <div class=" "><i class="fa fa-star text-xs text-yellow-300"></i> <span class="font-[dana-num]">${product.rating}</span></div>
-            <div><i class="fa fa-comment text-xs"></i> <span class="font-[dana-num]">${product.reviews.length}</span> نظر</div>
-            <div><i class="fa fa-shopping-cart text-xs"></i> <span class="font-[dana-num]">${(product.reviews.length)*2+4}</span> سفارش</div>
-          </div>
-          <div class="xs:w-1/2  lg:w-full 2xl:w-1/2 grid grid-cols-2  gap-y-1.5 items-center">
-            <span>دسته بندی:</span>  <span>${product.category}</span>
-            <span>برند:</span>  <span  dir="ltr" class="text-end">${product.brand}</span>
-            <span>طول:</span>  <span class="font-[dana-num]">${product.dimensions.width} سانتی متر</span>
-            <span>عرض:</span>  <span class="font-[dana-num]">${product.dimensions.height} سانتی متر</span>
-            <span>ارتفاع:</span>  <span class="font-[dana-num]">${product.dimensions.depth} سانتی متر</span>
-            <span>وزن:</span>  <span class="font-[dana-num]">${product.weight} کیلو گرم</span>
-          </div>
-          <div dir="ltr" class="border-t  border-gray-500/50 pt-3 flex flex-wrap  items-center gap-y-2 justify-end gap-x-6">
-            <div ><i class="fa-solid fa-tag text-xs"></i> <span>${product.sku}</span></div>
-            <div ><i class="fa-solid fa-award text-xs"></i> <span>${product.warrantyInformation}</span></div>
-            <div ><i class="fa fa-truck text-xs"></i> <span>${product.shippingInformation}</span></div>
-            <div ><i class="fa fa-rotate-left text-xs"></i> <span>${product.returnPolicy}</span></div>
-          </div>
-          <span>تعداد: <span class="font-[dana-num]">${product.stock}</span></span>
-          <span>تخفیف: <span class="font-[dana-num]">${product.discountPercentage} %</span></span>
-          <span>قیمت: <span class="font-[dana-num] text-base">${product.price} $</span></span>
-  `
-  addPhotos(product.images)
-  document.querySelector('#product-infos-container').insertAdjacentHTML('afterbegin' , infos)
-  tabContent.textContent=product.description
+  try{
+    let res = await fetch(`https://dummyjson.com/products/${productId || 115}`)
+    product =await res.json()
+    let infos= `
+              <span class="text-base lg:text-lg">${product.title}</span>
+            <div class="flex items-center justify-start gap-4 xs:gap-6 lg:gap-10">
+              <div class=" "><i class="fa fa-star text-xs text-yellow-300"></i> <span class="font-[dana-num]">${product.rating}</span></div>
+              <div><i class="fa fa-comment text-xs"></i> <span class="font-[dana-num]">${product.reviews.length}</span> نظر</div>
+              <div><i class="fa fa-shopping-cart text-xs"></i> <span class="font-[dana-num]">${(product.reviews.length)*2+4}</span> سفارش</div>
+            </div>
+            <div class="xs:w-1/2  lg:w-full 2xl:w-1/2 grid grid-cols-2  gap-y-1.5 items-center">
+              <span>دسته بندی:</span>  <span>${product.category}</span>
+              <span>برند:</span>  <span  dir="ltr" class="text-end">${product.brand || '-----'}</span>
+              <span>طول:</span>  <span class="font-[dana-num]">${product.dimensions.width ||'-----'} سانتی متر</span>
+              <span>عرض:</span>  <span class="font-[dana-num]">${product.dimensions.height ||'-----'} سانتی متر</span>
+              <span>ارتفاع:</span>  <span class="font-[dana-num]">${product.dimensions.depth ||'-----'} سانتی متر</span>
+              <span>وزن:</span>  <span class="font-[dana-num]">${product.weight ||'-----'} کیلو گرم</span>
+            </div>
+            <div dir="ltr" class="border-t  border-gray-500/50 pt-3 flex flex-wrap  items-center gap-y-2 justify-end gap-x-6">
+              <div ><i class="fa-solid fa-tag text-xs"></i> <span>${product.sku}</span></div>
+              <div ><i class="fa-solid fa-award text-xs"></i> <span>${product.warrantyInformation}</span></div>
+              <div ><i class="fa fa-truck text-xs"></i> <span>${product.shippingInformation}</span></div>
+              <div ><i class="fa fa-rotate-left text-xs"></i> <span>${product.returnPolicy}</span></div>
+            </div>
+            <span>تعداد: <span class="font-[dana-num]">${product.stock}</span></span>
+            <span>تخفیف: <span class="font-[dana-num]">${product.discountPercentage} %</span></span>
+            <span>قیمت: <span class="font-[dana-num] text-base">${product.price} $</span></span>
+    `
+    addPhotos(product.images)
+    document.querySelector('#product-infos-container').insertAdjacentHTML('afterbegin' , infos)
+    tabContent.textContent=product.description
+  } 
+  catch{
+    document.querySelector('section').innerHTML=`<img class="mx-auto" width="400" height="400" src="images/product-not-found.png" alt="">`
+  }
 }
 getProduct()
 
@@ -54,7 +59,7 @@ function addPhotos(photos){
           </div>
       `;
       document.querySelector("#thumbsSwiper-wrapper").innerHTML += `
-       <div class="swiper-slide max-w-23 xs:max-w-30 aspect-square opacity-50">
+       <div class="swiper-slide max-w-23 xs:max-w-30 aspect-square opacity-50 cursor-pointer">
             <img class="w-full object-cover" src="${elem}" alt="">
        </div>
       `;
@@ -91,8 +96,6 @@ function addPhotos(photos){
 
 const tabs = document.querySelector('#tabs')
 tabs.addEventListener('click' , e=>{
-  console.log(product.reviews);
-  
   if(e.target.nodeName=== 'BUTTON'){
     tabs.querySelectorAll('button').forEach(elem=> elem.style.borderColor='transparent')
     e.target.style.borderColor='#6a7282'
