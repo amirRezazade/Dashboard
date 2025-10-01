@@ -54,7 +54,7 @@ function addPhotos(photos){
           </div>
       `;
       document.querySelector("#thumbsSwiper-wrapper").innerHTML += `
-       <div class="swiper-slide max-w-30 aspect-square opacity-50">
+       <div class="swiper-slide max-w-23 xs:max-w-30 aspect-square opacity-50">
             <img class="w-full object-cover" src="${elem}" alt="">
        </div>
       `;
@@ -104,8 +104,8 @@ tabs.addEventListener('click' , e=>{
      tabContent.innerHTML= ''
      product.reviews.forEach(el=>{
       tabContent.innerHTML+=`
-       <div class="inline-flex flex-col items-center p-3">
-              <div class=" flex items-center gap-6">
+       <div class="inline-flex flex-col items-center p-3 w-full xs:w-auto">
+              <div class=" w-full flex items-center justify-start gap-3.5">
                 <span><img class="rounded-full" src="profile.png" width="35" height="35" alt="user-profile"></span>
                <div class="flex flex-col text-sm">
                  <span>${el.reviewerName}</span>
@@ -117,10 +117,12 @@ tabs.addEventListener('click' , e=>{
                     <i class="${el.rating < 5 ? 'text-gray-500' : ''} fa fa-star"></i>
                   </div>
                </div>
+                             <span class="mr-auto text-xs text-left xs:hidden">${el.date.slice(0 , 10)}</span>
+
               </div>
-              <div dir="ltr" class="w-full my-1 text-center">${el.comment}</div>
-              <span class="justify-self-end text-xs block text-left w-full">${el.date.slice(0 , 10)}</span>
-              <span class="text-xs">${el.reviewerEmail}</span>
+              <div dir="ltr" class="w-full my-1 text-end xs:text-center">${el.comment}</div>
+              <span class="hidden  justify-self-end text-xs xs:block text-left w-full">${el.date.slice(0 , 10)}</span>
+              <span class="text-xs text-left w-full">${el.reviewerEmail}</span>
             </div>
       `
      })

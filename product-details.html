@@ -383,7 +383,8 @@
     </aside>
     <main class="px-3 xs:px-6 py-4 transition-all duration-500 bg-[var(--bg-color)] md:ms-60">
       <section class="bg-[var(--box-color)] flex flex-col gap-y-4 lg:flex-row flex-wrap rounded-lg p-3 lg:p-5 ">
-        <div  class="lg:w-1/2 2xl:w-2/5 lg:flex lg:flex-col lg:justify-center  overflow-hidden lg:border-l border-gray-500/50">
+        <!-- start product slider section  -->
+        <div  class="w-full lg:w-1/2 2xl:w-2/5 lg:flex lg:flex-col lg:justify-center  overflow-hidden lg:border-l border-gray-500/50">
           <div id="photos-swiper" class="relative">
              <div id="photos-swiper-wrapper" class=" swiper-wrapper  aspect-square xs:max-h-[350px] lg:max-h-[400px]">
              
@@ -400,6 +401,8 @@
             </div>
           </div>
         </div>
+                <!-- finish product slider section  -->
+
         <div id="product-infos-container" class="lg:w-1/2 2xl:w-3/5 sm:px-3 lg:px-5 2xl:px-8 flex flex-col gap-3.5 text-xs xs:text-sm lg:text-[15px]">
             <!-- data loaded from JS  -->
           <div id="btns" class="flex gap-3.5">
@@ -407,9 +410,10 @@
             <button id="add-to-shopping-card-btn" type="button" class="bg-[var(--active-color)]/70 hover:bg-[var(--active-color)] px-5 py-2 cursor-pointer text-white rounded-lg">افزودن به سبد خرید <i class="fa-solid fa-shopping-cart"></i></button>
           </div>
         </div>
-        <div class="w-full ">
+              <!-- start product tabs section  -->
+        <div class="w-full  ">
           <div class="pt-6 border-y border-gray-500/50">
-          <div id="tabs" class="flex items-center text-sm">
+          <div id="tabs" class="flex items-center text-xs xs:text-sm">
             <button id="description" type="button" class="border border-b-0  border-gray-500/50 transition-colors hover:border-gray-500/50 cursor-pointer rounded-t-lg p-3">
              <i class="fa-solid fa-quote-left text-xs pointer-events-none"></i> توضیحات
             </button>
@@ -421,10 +425,12 @@
             </button>
           </div>
           </div>
-          <div id="tab-container" class="py-4 flex flex-wrap divide-x  divide-gray-500/50 text-center">
+          <div id="tab-container" class="py-4 flex flex-wrap xs:divide-x divide-y xs:divide-y-0 divide-gray-500/50 text-center text-sm sm:text-base">
                <!-- data loaded from Js  -->
           </div>
         </div>
+                      <!-- start product tabs section  -->
+
       </section>
     </main>
    
