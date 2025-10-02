@@ -376,9 +376,9 @@
         </ul>
     </aside>
     <main class="px-3 xs:px-6 py-4 transition-all duration-500 bg-[var(--bg-color)] md:ms-60">
-      <h2 class="text-lg md:text-xl xl:text-2xl font-bold my-4">ویرایش محصول</h2>
+      <h2 class="text-lg md:text-xl xl:text-2xl font-bold my-2 sm:my-4">ویرایش محصول</h2>
       <form class="grid grid-cols-12 gap-3 text-xs sm:text-sm ">
-        <div class="col-span-12 lg:col-span-8 bg-[var(--box-color)] rounded-lg p-1.5 sm:p-3 lg:p-5 flex flex-col gap-2.5 ">
+        <div class="col-span-12 row-span-1 grid-rows-2 lg:col-span-8 bg-[var(--box-color)]  rounded-lg p-2.5 sm:p-3.5 lg:p-5 flex flex-col gap-2.5 ">
           <h3 class="text-sm md:text-lg xl:text-xl font-bold">اطلاعات پایه</h3>
           <div class="flex flex-col gap-2.5 sm:flex-row"> 
            <div class="sm:grow">
@@ -402,7 +402,7 @@
               <span class="text-red-700 text-xs hidden mt-2 block">توضیحات محصول نباید خالی باشد!</span>
           </div>
         </div>
-        <div class="col-span-12 lg:col-span-4 bg-[var(--box-color)] rounded-lg p-1.5 sm:p-3 lg:p-5 flex flex-col gap-2.5">
+        <div class="col-span-12 row-span-2 lg:col-span-4 bg-[var(--box-color)] rounded-lg p-2.5 sm:p-3.5 xl:p-5 flex flex-col gap-2.5">
           <h3 class="text-sm md:text-lg xl:text-xl font-bold">ویژگی ها</h3>
           <div class="">
             <label class="cursor-pointer mb-2 inline-block" for="category">دسته بندی</label>
@@ -431,10 +431,68 @@
           <div>
             <label class="cursor-pointer mb-2 inline-block" for="tags"><i class="fa-solid fa-tags text-xs"></i> برچسب ها  </label>
             <input class="w-full p-3 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 mb-1 bg-[var(--bg-color)]" type="text" id="tags" placeholder="برچسب های مرتبط وارد کنید...">
-            <div class="flex gap-1.5 items-center flex-wrap my-1" id="tags-container">
+            <div class="flex gap-1.5 items-center flex-wrap mt-2" id="tags-container">
               <div class="flex items-center  divide-x divide-gray-300 bg-[var(--active-color)] text-white  text-xs overflow-hidden rounded-r-full"><span class="p-2">زیبایی</span> <button type="button" class="p-2 cursor-pointer centered" onclick="parentElement.style.display='none'">X</button></div>
             </div>
           </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2.5 sm:gap-3.5 mt-3">
+          
+              <div class="w-full">
+              <label class="cursor-pointer mb-2 inline-block" for="width">طول</label>
+              <div class="flex w-full rounded-md overflow-hidden border border-transparent focus-within:border-[var(--active-color)] bg-[var(--bg-color)]">
+                <input class="grow lg:min-w-40 p-3 lg:py-2 xl:py-3 outline-0 mb-1 " min="0.1" type="number" id="width" placeholder="طول محصول">
+                <span class="px-3 bg-[var(--box-color)] centered">cm</span>
+              </div>
+            </div>
+            <div class="w-full">
+              <label class="cursor-pointer mb-2 inline-block" for="height">عرض</label>
+              <div class="flex w-full rounded-md overflow-hidden border border-transparent focus-within:border-[var(--active-color)] bg-[var(--bg-color)]">
+                <input class="grow lg:min-w-40 p-3 lg:py-2 xl:py-3 outline-0 mb-1 " min="0.1" type="number" id="height" placeholder="عرض محصول">
+                <span class="px-3 bg-[var(--box-color)] centered">cm</span>
+              </div>
+            </div>
+            <div class="w-full">
+              <label class="cursor-pointer mb-2 inline-block" for="depth">ارتفاع</label>
+              <div class="flex w-full rounded-md overflow-hidden border border-transparent focus-within:border-[var(--active-color)] bg-[var(--bg-color)]">
+                <input class="grow lg:min-w-40 p-3 lg:py-2 xl:py-3 outline-0 mb-1 " min="0.1" type="number" id="depth" placeholder="ارتفاع محصول">
+                <span class="px-3 bg-[var(--box-color)] centered">cm</span>
+              </div>
+            </div>
+              <div class="w-full">
+              <label class="cursor-pointer mb-2 inline-block" for="weight">وزن</label>
+              <div class="flex w-full rounded-md overflow-hidden border border-transparent focus-within:border-[var(--active-color)] bg-[var(--bg-color)]">
+                <input class="grow lg:min-w-40 p-3 lg:py-2 xl:py-3 outline-0 mb-1 " min="0.1" type="number" id="weight" placeholder="وزن محصول">
+                <span class="px-3 bg-[var(--box-color)] centered">Kg</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-span-12 row-span-1 lg:col-span-8 bg-[var(--box-color)]  rounded-lg p-2.5 sm:p-3.5 lg:p-5 flex flex-col gap-2.5 ">
+          <h3 class="text-sm md:text-lg xl:text-xl font-bold">اطلاعات فروش</h3>
+          <div class="flex flex-col gap-2.5 xs:flex-row flex-wrap items-stretch justify-between "> 
+           <div class="sm:grow xs:w-full lg:grow-0  sm:w-[30%] lg:w-[30%]" >
+             <label class="cursor-pointer" for="price">قیمت محصول</label>
+            <div class="w-ful my-1.5 overflow-hidden sm:my-3 flex items-center rounded-md border border-transparent  focus-within:border-[var(--active-color)] bg-[var(--bg-color)]">
+              <input class="grow px-1 xs:px-3 my-0 outline-0 mb-1 " required min="0.1"  type="number" id="price" placeholder="قیمت محصول را وارد کنید...">
+              <span class="p-3 centered bg-[var(--box-color)] inline-block h-full">$</span>
+            </div>
+            <span class="text-red-700 text-xs hidden">قیمت نمیتواند خالی یا صفر باشد!</span>
+           </div>
+           <div class="flex flex-col gap-2 xs:w-[50%] sm:w-[40%] lg:order-3">
+             <span>تخفیف</span>
+             <div class="flex items-center grow gap-2 mt-auto " >
+               <input class="accent-[var(--active-color)] w-full " value="0" min="0" max="98.9" step="0.1" type="range" id="discount" oninput="nextElementSibling.textContent=this.value+'%'">
+               <span class="min-w-7">0%</span>
+              </div>
+           </div>
+           <div class="xs:w-[40%] sm:w-[20%] ">
+            <label class="cursor-pointer" for="stock">تعداد</label>
+            <input class="w-full p-3 my-1.5 sm:my-3 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 mb-1 bg-[var(--bg-color)]"  type="number" step="1" min="0" id="stock" placeholder=" موجودی محصول ">
+            <span class="text-red-700 text-xs hidden">تعداد نمیتواند صفر باشد!</span>
+          </div>
+          </div>
+          <div></div>
+          
         </div>
       </form>
     </main>

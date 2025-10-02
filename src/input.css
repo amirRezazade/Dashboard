@@ -106,8 +106,9 @@ html::selection{
     border-color: #6a7282  !important;
     direction: rtl;
     text-align: right;
-    min-height: 150px;
+    min-height: 200px;
   }
+
   .ck-editor__editable:focus {
    border: 1px solid var(--active-color) !important;
   }
