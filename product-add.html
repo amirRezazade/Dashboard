@@ -376,11 +376,92 @@
         </ul>
     </aside>
     <main class="px-3 xs:px-6 py-4 transition-all duration-500 bg-[var(--bg-color)] md:ms-60">
-      
+      <h2 class="text-lg md:text-xl xl:text-2xl font-bold my-4">ویرایش محصول</h2>
+      <form class="grid grid-cols-12 gap-3 text-xs sm:text-sm ">
+        <div class="col-span-12 lg:col-span-8 bg-[var(--box-color)] rounded-lg p-1.5 sm:p-3 lg:p-5 flex flex-col gap-2.5 ">
+          <h3 class="text-sm md:text-lg xl:text-xl font-bold">اطلاعات پایه</h3>
+          <div class="flex flex-col gap-2.5 sm:flex-row"> 
+           <div class="sm:grow">
+             <label class="cursor-pointer" for="name">نام محصول</label>
+            <div class="w-full my-3  ">
+              <input class="w-full p-3 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 mb-1 bg-[var(--bg-color)]" required minlength="3" maxlength="30" type="text" id="name" placeholder="نام محصول را وارد کنید...">
+              <span class="text-red-700 text-xs hidden">نام محصول باید بین 3 تا 30 کاراکتر باشد!</span>
+            </div>
+           </div>
+           <div class="w-full sm:w-1/3 ">
+             <label class="cursor-pointer" for="sku">کد محصول</label>
+            <div class="w-full my-3 ">
+              <input class="w-full p-3 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 mb-1 bg-[var(--bg-color)]" required  type="text" id="sku" placeholder="کد محصول را وارد کنید...">
+              <span class="text-red-700 text-xs hidden">کد محصول نباید خالی باشد!</span>
+            </div>
+           </div>
+          </div>
+          <div>
+              <label class="mb-2 block" for="editor">توضیحات محصول</label>
+              <textarea name="content" id="editor"></textarea>
+              <span class="text-red-700 text-xs hidden mt-2 block">توضیحات محصول نباید خالی باشد!</span>
+          </div>
+        </div>
+        <div class="col-span-12 lg:col-span-4 bg-[var(--box-color)] rounded-lg p-1.5 sm:p-3 lg:p-5 flex flex-col gap-2.5">
+          <h3 class="text-sm md:text-lg xl:text-xl font-bold">ویژگی ها</h3>
+          <div class="">
+            <label class="cursor-pointer mb-2 inline-block" for="category">دسته بندی</label>
+             <select  id="category" class="  border border-gray-500/50 focus:border-[var(--active-color)] outline-0 cursor-pointer w-full bg-[var(--bg-color)] p-2 md:p-3 rounded-lg   ">
+               <option selected value="beauty">زیبایی</option>
+               <option value="fragrances">عطرها</option>
+               <option value="furniture">مبلمان</option>
+               <option value="groceries">مواد غذایی</option>
+               <option value="home-decoration">دکوراسیون منزل</option>
+               <option value="kitchen-accessories">لوازم آشپزخانه</option>
+               <option value="laptops">لپ‌تاپ‌ها</option>
+               <option value="mens-shirts">پیراهن مردانه</option>
+               <option value="mens-shoes">کفش مردانه</option>
+               <option value="mens-watches">ساعت مردانه</option>
+               <option value="mobile-accessories">لوازم جانبی موبایل</option>
+               <option value="motorcycle">موتورسیکلت</option>
+               <option value="skin-care">مراقبت پوست</option>
+               <option value="smartphones">گوشی‌های هوشمند</option>
+               <option value="sports-accessories">لوازم ورزشی</option>
+           </select>
+          </div>
+          <div>
+            <label class="cursor-pointer mb-2 inline-block" for="brand">برند</label>
+            <input class="w-full p-3 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 mb-1 bg-[var(--bg-color)]" type="text" id="brand" placeholder="برند محصول را وارد کنید...">
+          </div>
+          <div>
+            <label class="cursor-pointer mb-2 inline-block" for="tags"><i class="fa-solid fa-tags text-xs"></i> برچسب ها  </label>
+            <input class="w-full p-3 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 mb-1 bg-[var(--bg-color)]" type="text" id="tags" placeholder="برچسب های مرتبط وارد کنید...">
+            <div class="flex gap-1.5 items-center flex-wrap my-1" id="tags-container">
+              <div class="flex items-center  divide-x divide-gray-300 bg-[var(--active-color)] text-white  text-xs overflow-hidden rounded-r-full"><span class="p-2">زیبایی</span> <button type="button" class="p-2 cursor-pointer centered" onclick="parentElement.style.display='none'">X</button></div>
+            </div>
+          </div>
+        </div>
+      </form>
     </main>
-   
-      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="scripts/shared.js"></script>
     <script type="module" src="scripts/product-add.js"></script>
+
+      <script>
+      ClassicEditor
+  .create(document.querySelector('#editor'), {
+    language: {
+      ui: 'fa',        // زبان رابط کاربری (دکمه‌ها)
+      content: 'fa'    // زبان محتوای داخل ادیتور
+    }
+  })
+  .then(editor => {
+    editor.editing.view.change(writer => {
+      writer.setAttribute('dir', 'rtl', editor.editing.view.document.getRoot()); // متن داخل ادیتور راست‌به‌چپ
+    });
+  })
+  .catch(error => {
+    console.error(error);
+  });
+
+  </script>
   </body>
 </html>

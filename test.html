@@ -4,54 +4,65 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="src/output.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/47.0.0/ckeditor5.css" />
+
+<style>
+  /* تغییر پس‌زمینه ادیتور */
+  .ck-editor__editable {
+    background-color: var(--bg-color) !important;
+    color: var(--text-color) !important;
+  }
+  .ck-editor__editable:focus {
+   border: 1px solid var(--active-color) !important;
+  }
+  .ck.ck-toolbar {
+    background-color: var(--bg-color) !important;
+  }
+  .ck.ck-toolbar *{
+    background-color: var(--bg-color) !important;
+    color: var(--text-color) !important;
+  }
+  .ck-on{
+  border:1px solid var(--active-color) !important;
+}
+ .ck.ck-button:hover,
+.ck.ck-button:focus {
+  background: none !important; 
+  box-shadow: none !important;   
+}
+
+</style>
 
     <title>Document</title>
   </head>
   <body class="bg-[var(--bg-color)] h-screen centered">
-    <div class="bg-[var(--box-color)] w-lg  mx-auto h-auto rounded-md p-5">
-    <form class="w-full max-w-xs mx-auto text-[var(--text-color)] text-xs flex flex-col">
-      <span class="mb-2">دسته بندی</span>
-      <select id="edit-category" class=" border border-gray-500/80 focus:border-[var(--active-color)] outline-0 cursor-pointer w-full bg-[var(--bg-color)] p-2 md:p-3 rounded-lg   " value="groceries">
-          <option value="beauty">زیبایی</option>
-          <option value="fragrances">عطرها</option>
-          <option value="furniture">مبلمان</option>
-          <option value="groceries">مواد غذایی</option>
-          <option value="home-decoration">دکوراسیون منزل</option>
-          <option value="kitchen-accessories">لوازم آشپزخانه</option>
-          <option value="laptops">لپ‌تاپ‌ها</option>
-          <option value="mens-shirts">پیراهن مردانه</option>
-          <option value="mens-shoes">کفش مردانه</option>
-          <option value="mens-watches">ساعت مردانه</option>
-          <option value="mobile-accessories">لوازم جانبی موبایل</option>
-          <option value="motorcycle">موتورسیکلت</option>
-          <option value="skin-care">مراقبت پوست</option>
-          <option value="smartphones">گوشی‌های هوشمند</option>
-          <option value="sports-accessories">لوازم ورزشی</option>
-      </select>
-      <label class="mb-2 mt-4 cursor-pointer" for="swal-name">اسم محصول:</label>
-      <input id="swal-name" type="text" required  class=" bg-[var(--bg-color)] p-3 outline-0 rounded-lg border border-gray-500/80 focus:border-[var(--active-color)]" >
-      <label class="mb-2 mt-4 cursor-pointer" for="swal-price">قیمت:</label>
-      <div class="flex items-center border border-gray-500/80 focus-within:border-[var(--active-color)] overflow-hidden  rounded-lg bg-[var(--bg-color)]">
-        <input id="swal-price" type="number" required pattern="[1-9][0-9]*" min="0.1" class="grow p-2 outline-0  " placeholder="$ " >
-        <span class="p-3 bg-[var(--box-color)]">$</span>
-      </div>
-      <span class="mb-2 mt-4 ">تخفیف</span>
-      <div class="flex items-center gap-2 ">
-        <input type="range" min="1" max="99" class="grow accent-[var(--active-color)]" onInput="nextElementSibling.textContent=this.value + '%'">
-        <span class="">11%</span>
-      </div>
-      <label class="mb-2 mt-4 cursor-pointer" for="swal-count">تعداد:</label>
-      <input id="swal-count" type="number" required pattern="[1-9][0-9]*" min="0" class=" bg-[var(--bg-color)] p-3 outline-0 border border-gray-500/80 focus:border-[var(--active-color)] rounded-lg " placeholder="تعداد " >      
-    </form>
-    </div>
-<script>
-  
-fetch('https://dummyjson.com/products/1?select=title,price')
-.then(res => res.json())
-.then(console.log);
+  <textarea name="content" id="editor"></textarea>
 
 
-</script>
+  <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
+
+  <script>
+ClassicEditor
+      .create(document.querySelector('#editor'), {
+        toolbar: [
+          'heading', '|',
+          'bold', 'italic', 'underline', 'link',
+          'fontColor', 'fontBackgroundColor', '|',
+          'bulletedList', 'numberedList', '|',
+          'insertTable', 'blockQuote', 'codeBlock', '|',
+          'undo', 'redo'
+        ],
+        table: {
+          contentToolbar: [ 'tableColumn', 'tableRow', 'mergeTableCells' ]
+        }
+      })
+      .then(editor => {
+        editorInstance = editor;
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  </script>
 
   </body>
 </html>

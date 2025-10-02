@@ -35,7 +35,9 @@
 }
 @custom-variant dark (&:where(.dark, .dark *));
 
-
+*{
+  @apply placeholder:text-gray-400
+}
 :root{
     --bg-color: #ffffff;
     --box-color: #eeeef0;
@@ -97,4 +99,36 @@ html::selection{
 
 }
  /* finish sweet alert 2 custom styles  */
- 
+   /* start CKE editor custom style  */
+  .ck-editor__editable {
+    background-color: var(--bg-color) !important;
+    color: var(--text-color) !important;
+    border-color: #6a7282  !important;
+    direction: rtl;
+    text-align: right;
+    min-height: 150px;
+  }
+  .ck-editor__editable:focus {
+   border: 1px solid var(--active-color) !important;
+  }
+  .ck.ck-toolbar {
+    background-color: var(--bg-color) !important;   
+     border-color: #6a7282  !important;
+
+  }
+  .ck.ck-toolbar *{
+    background-color: var(--bg-color) !important;
+    color: var(--text-color) !important;
+  }
+  .ck-on{
+  border:1px solid var(--active-color) !important;
+}
+ .ck.ck-button:hover,
+.ck.ck-button:focus {
+  background: none !important; 
+  box-shadow: none !important;   
+}
+.ck-balloon-panel{
+  display: none !important;
+}
+   /* finish CKE editor custom style  */
