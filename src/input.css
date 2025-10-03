@@ -134,3 +134,10 @@ html::selection{
   display: none !important;
 }
    /* finish CKE editor custom style  */
+
+   .test {
+    border: 1px solid red;
+   }
+   .test + span{
+    display: inline-block;
+   }

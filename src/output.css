@@ -2340,6 +2340,12 @@ html::selection {
 .ck-balloon-panel {
   display: none !important;
 }
+.test {
+  border: 1px solid red;
+}
+.test + span {
+  display: inline-block;
+}
 @property --tw-translate-x {
   syntax: "*";
   inherits: false;

@@ -407,7 +407,8 @@
           <div class="">
             <label class="cursor-pointer mb-2 inline-block" for="category">دسته بندی</label>
              <select  id="category" class="  border border-gray-500/50 focus:border-[var(--active-color)] outline-0 cursor-pointer w-full bg-[var(--bg-color)] p-2 md:p-3 rounded-lg   ">
-               <option selected value="beauty">زیبایی</option>
+               <option selected value="all">انتخاب</option>
+               <option  value="beauty">زیبایی</option>
                <option value="fragrances">عطرها</option>
                <option value="furniture">مبلمان</option>
                <option value="groceries">مواد غذایی</option>
@@ -423,6 +424,7 @@
                <option value="smartphones">گوشی‌های هوشمند</option>
                <option value="sports-accessories">لوازم ورزشی</option>
            </select>
+             <span class="text-red-700 text-xs hidden">دسته بندی محصول را انخاب کنید!</span>
           </div>
           <div>
             <label class="cursor-pointer mb-2 inline-block" for="brand">برند</label>
@@ -431,9 +433,9 @@
           <div>
             <label class="cursor-pointer mb-2 inline-block" for="tags"><i class="fa-solid fa-tags text-xs"></i> برچسب ها  </label>
             <input class="w-full p-3 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 mb-1 bg-[var(--bg-color)]" type="text" id="tags" placeholder="برچسب های مرتبط وارد کنید...">
-            <div class="flex gap-1.5 items-center flex-wrap mt-2" id="tags-container">
-              <div class="flex items-center  divide-x divide-gray-300 bg-[var(--active-color)] text-white  text-xs overflow-hidden rounded-r-full"><span class="p-2">زیبایی</span> <button type="button" class="p-2 cursor-pointer centered" onclick="parentElement.style.display='none'">X</button></div>
+            <div class="flex gap-1.5 items-center flex-wrap my-2" id="tags-container">
             </div>
+              <span class="text-red-700 text-xs hidden">حداکثر 8 تگ میتوانید اضافه کنید!</span>
           </div>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2.5 sm:gap-3.5 mt-3">
           
@@ -481,7 +483,7 @@
            <div class="flex flex-col gap-2 xs:w-[50%] sm:w-[40%] lg:order-3">
              <span>تخفیف</span>
              <div class="flex items-center grow gap-2 mt-auto " >
-               <input class="accent-[var(--active-color)] w-full " value="0" min="0" max="98.9" step="0.1" type="range" id="discount" oninput="nextElementSibling.textContent=this.value+'%'">
+               <input class="accent-[var(--active-color)]  w-full cursor-pointer" value="0" min="0" max="98.9" step="0.1" type="range" id="discount" oninput="nextElementSibling.textContent=this.value+'%'" >
                <span class="min-w-7">0%</span>
               </div>
            </div>
@@ -496,6 +498,7 @@
             <label class="cursor-pointer mb-2 inline-block" for="shipping">ارسال</label>
              <select  id="shipping" class="  border border-gray-500/50 focus:border-[var(--active-color)] outline-0 cursor-pointer w-full bg-[var(--bg-color)] p-2 md:p-3 rounded-lg   ">
                <option selected value="all">انتخاب</option>
+               <option value="Ships overnight">ارسال شبانه</option>
                <option value="Ships in 1-2 business days">1تا 2 روز کاری</option>
                <option value="Ships in 3-5 business days">3تا 5 روز کاری</option>
                <option value="Ships in 1 week">تا 1 هفته</option>
@@ -532,6 +535,7 @@
           
         </div>
       </form>
+      <button type="submit" id="submit-btn" class="cursor-pointer">ویرایش محصول</button>
     </main>
 
 
@@ -541,21 +545,7 @@
     <script type="module" src="scripts/product-add.js"></script>
 
       <script>
-      ClassicEditor
-  .create(document.querySelector('#editor'), {
-    language: {
-      ui: 'fa',        // زبان رابط کاربری (دکمه‌ها)
-      content: 'fa'    // زبان محتوای داخل ادیتور
-    }
-  })
-  .then(editor => {
-    editor.editing.view.change(writer => {
-      writer.setAttribute('dir', 'rtl', editor.editing.view.document.getRoot()); // متن داخل ادیتور راست‌به‌چپ
-    });
-  })
-  .catch(error => {
-    console.error(error);
-  });
+
 
   </script>
   </body>
