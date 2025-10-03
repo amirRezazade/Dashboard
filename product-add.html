@@ -491,7 +491,44 @@
             <span class="text-red-700 text-xs hidden">تعداد نمیتواند صفر باشد!</span>
           </div>
           </div>
-          <div></div>
+          <div class="flex items-center flex-wrap justify-between gap-x-1.5 gap-y-3">
+            <div class="grow xs:max-w-55">
+            <label class="cursor-pointer mb-2 inline-block" for="shipping">ارسال</label>
+             <select  id="shipping" class="  border border-gray-500/50 focus:border-[var(--active-color)] outline-0 cursor-pointer w-full bg-[var(--bg-color)] p-2 md:p-3 rounded-lg   ">
+               <option selected value="all">انتخاب</option>
+               <option value="Ships in 1-2 business days">1تا 2 روز کاری</option>
+               <option value="Ships in 3-5 business days">3تا 5 روز کاری</option>
+               <option value="Ships in 1 week">تا 1 هفته</option>
+               <option value="Ships in 2 weeks">تا 2 هفته</option>
+               <option value="Ships in 1 month">تا 1 ماه</option>
+            </select>
+            <span class="text-red-700 text-xs hidden">مدت زمان ارسال بسته را انخاب کنید!</span>
+          </div>
+            <div class="grow xs:max-w-55">
+            <label class="cursor-pointer mb-2 inline-block" for="warranty">گارانتی</label>
+             <select  id="warranty" class="  border border-gray-500/50 focus:border-[var(--active-color)] outline-0 cursor-pointer w-full bg-[var(--bg-color)] p-2 md:p-3 rounded-lg   ">
+               <option selected value="No warranty">بدون گارانتی</option>
+               <option value="1 week warranty">1 هفته گارانتی</option>
+               <option value="1 month warranty">1 ماه گارانتی</option>
+               <option value="6 months warranty">6 ماه گارانتی</option>
+               <option value="1 year warranty">1 سال گارانتی </option>
+               <option value="2 year warranty">2 سال گارانتی</option>
+               <option value="3 year warranty">3 سال گارانتی</option>
+               <option value="5 year warranty">5 سال گارانتی</option>
+               <option value="Lifetime warranty">گارانتی مادام العمر</option>
+           </select>
+          </div>
+            <div class="grow xs:max-w-55">
+            <label class="cursor-pointer mb-2 inline-block" for="return">بازگشت محصول</label>
+             <select  id="return" class="  border border-gray-500/50 focus:border-[var(--active-color)] outline-0 cursor-pointer w-full bg-[var(--bg-color)] p-2 md:p-3 rounded-lg   ">
+               <option selected value="No return policy">بدون بازگشت</option>
+               <option value="7 days return policy">تا 7 روز</option>
+               <option value="30 days return policy">تا 30 روز</option>
+               <option value="60 days return policy">تا 60 روز</option>
+               <option value="90 days return policy">تا 90 روز</option>
+           </select>
+          </div>
+          </div>
           
         </div>
       </form>

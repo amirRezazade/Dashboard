@@ -10,6 +10,7 @@ async function getProduct(){
   try{
     let res = await fetch(`https://dummyjson.com/products/${productId || 115}`)
     product =await res.json()
+    
     let infos= `
               <span class="text-base lg:text-lg">${product.title}</span>
             <div class="flex items-center justify-start gap-4 xs:gap-6 lg:gap-10">
@@ -41,7 +42,7 @@ async function getProduct(){
   } 
   catch{
     document.querySelector('section').innerHTML=`<img class="mx-auto" width="400" height="400" src="images/product-not-found.png" alt="">`
-  }
+  }  
 }
 getProduct()
 

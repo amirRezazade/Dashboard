@@ -107,6 +107,7 @@ html::selection{
     direction: rtl;
     text-align: right;
     min-height: 200px;
+    max-height: 250px;
   }
 
   .ck-editor__editable:focus {
