@@ -539,15 +539,18 @@
       <div class="grid grid-cols-12 gap-3 text-xs sm:text-sm my-3">
         <div class="col-span-12 lg:col-span-8  bg-[var(--box-color)] rounded-lg p-2.5 sm:p-3.5 lg:p-5">
           <h3 class="text-sm md:text-lg xl:text-xl font-bold mb-3">گالری محصول</h3>
-          <form action="#" class="dropzone " id="product-gallery"></form>
+          <form action="#" class="dropzone flex flex-wrap justify-center items-center " id="product-gallery"></form>
         </div>
-        <div class="col-span-12 lg:col-span-4 bg-[var(--box-color)]  rounded-lg p-2.5 sm:p-3.5 lg:p-5">
+        <div class="col-span-12 lg:col-span-4 bg-[var(--box-color)] h-auto rounded-lg p-2.5 sm:p-3.5 lg:p-5">
           <h3 class="text-sm md:text-lg xl:text-xl font-bold mb-3">عکس محصول</h3>
-          <form action="#" class="dropzone " id="product-thumbnail"></form>
+          <form action="#" class="dropzone flex justify-center items-center mb-2" id="product-thumbnail"></form>
+          <span class="text-red-700 text-xs hidden">عکس محصول را وارد کنید!</span>
         </div>
       </div>
-      
-      <button type="submit" id="submit-btn" class="cursor-pointer">ویرایش محصول</button>
+      <div class="flex items-center justify-center xs:justify-start gap-5 mt-8 text-sm sm:text-base">
+        <a href="#" id="cancel-btn" class=" text-center text-white rounded-md px-3 sm:px-5 py-3 bg-red-800/80 hover:bg-red-800 transition-colors">انصراف</a>
+        <button type="submit" id="submit-btn" class="cursor-pointer  text-white rounded-md px-5 py-3 bg-[var(--active-color)]/80 hover:bg-[var(--active-color)] transition-colors">اضافه کردن  محصول</button>
+      </div>
     </main>
 
 

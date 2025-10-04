@@ -23,7 +23,9 @@ const discount = document.querySelector("#discount ");
 const shipping = document.querySelector("#shipping");
 const warranty = document.querySelector("#warranty");
 const returnElem = document.querySelector("#return");
-
+const productThumbnail = document.querySelector("#product-thumbnail");
+const submitBtn = document.querySelector('#submit-btn')
+const cancelBtn = document.querySelector('#cancel-btn')
 const requiredInputs = document.querySelectorAll('input[required]');
 
 
@@ -48,6 +50,8 @@ let editorValue;
   });
 if (productId) {
   getItem();
+  submitBtn.textContent = 'ویرایش محصول'
+  cancelBtn.textContent = 'حذف محصول'
 }
 async function getItem() {
   let res = await fetch(`https://dummyjson.com/products/${productId}`);
@@ -71,6 +75,28 @@ async function getItem() {
   returnElem.value = product.returnPolicy || "No return policy";
   editorValue.setData(`${product.description}`) || '';
   product.tags.forEach(tag => tagsContainer.innerHTML+= ` <div class="flex items-center  divide-x divide-gray-300 bg-[var(--active-color)] text-white  text-xs overflow-hidden rounded-r-full"><span class="p-2">${tag}</span> <button type="button" class="p-2 cursor-pointer centered" onclick="parentElement.remove()">X</button></div>` || '');
+ 
+  const thumbnailImage = {
+  name: 'product.jpg',
+  size: 0.7,
+  type: "image/jpeg",
+  url: product.thumbnail
+};
+thumbnail.emit("addedfile", thumbnailImage);
+thumbnail.emit("thumbnail", thumbnailImage, thumbnailImage.url);
+thumbnail.emit("complete", thumbnailImage);
+ 
+product.images.forEach(img=>{
+    const itemImage = {
+  name: 'product.jpg',
+  size: 0.7,
+  type: "image/jpeg",
+  url: img
+};
+gallery.emit("addedfile", itemImage);
+gallery.emit("thumbnail", itemImage, itemImage.url);
+gallery.emit("complete", itemImage);
+})
 
 
 }
@@ -101,9 +127,9 @@ const gallery = new Dropzone("#product-gallery", {
   addRemoveLinks: true,
   dictRemoveFile: "حذف تصویر",
   dictFileTooBig: "حجم تصویر زیاد است (حداکثر: {{maxFilesize}}MB)",
-  thumbnailWidth: 120,
-  thumbnailHeight: 120,
+
 });
+
 Dropzone.autoDiscover = false;
 const thumbnail = new Dropzone("#product-thumbnail", {
   url: "#", 
@@ -111,19 +137,18 @@ const thumbnail = new Dropzone("#product-thumbnail", {
   maxFiles: 1,
   maxFilesize: 1,
   acceptedFiles: "image/*",
-  dictDefaultMessage: "📸 عکس  محصول را اینجا بکشید یا کلیک کنید برای انتخاب",
+  dictDefaultMessage: " عکس  محصول را اینجا بکشید یا کلیک کنید برای انتخاب",
   addRemoveLinks: true,
   dictRemoveFile: "حذف تصویر",
   dictFileTooBig: "حجم تصویر زیاد است (حداکثر: {{maxFilesize}}MB)",
-  thumbnailWidth: 120,
-  thumbnailHeight: 120,
+
 });
 
 // finish dropzone library 
 
 
 
-document.querySelector('#submit-btn').addEventListener('click' , ()=>{
+submitBtn.addEventListener('click' , ()=>{
 formValidation() 
 
 
@@ -170,4 +195,39 @@ requiredInputs.forEach(elem=>{
     document.querySelector('.ck-editor').style.border=''
     document.querySelector('#editor-alert').classList.add('hidden')
   }
+  if(thumbnail.getAcceptedFiles().length==0){
+    productThumbnail.nextElementSibling.classList.remove('hidden')
+    productThumbnail.classList.add('!border-red-700')
+  }else{
+    productThumbnail.nextElementSibling.classList.add('hidden')
+    productThumbnail.classList.remove('!border-red-700')
+  }
+  
+}
+
+cancelBtn.addEventListener('click' , ()=>{
+  if(productId) deleteProduct()
+    else{
+      showSwal('انصراف', 'آیا مطمئن هستید که می‌خواهید انصراف دهید ؟ اطلاعات ذخیره نخواهند شد.', 'warning', true, 'تایید')
+       .then(e=>{
+        if(e.isConfirmed) window.location.href='products.html'
+       })
+  }
+})
+ function deleteProduct() {
+    showSwal('حذف محصول', 'آیا مطمئن هستید که می‌خواهید این محصول را حذف کنید؟ این عمل قابل بازگشت نیست.', 'warning', true, 'تایید')
+  .then(e=>{
+    if(e.isConfirmed){
+     fetch(`https://dummyjson.com/products/${productId}`, {
+        method: 'DELETE',
+      })
+      .then(res => res.json())
+      .then(showTost('success' , 'محصول با موفقیت حذف شد!') , window.location.href = 'product-add.html');
+   }
+  }  
+  )
+}
+
+function editProduct(){
+
 }
