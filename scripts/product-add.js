@@ -24,8 +24,11 @@ const shipping = document.querySelector("#shipping");
 const warranty = document.querySelector("#warranty");
 const returnElem = document.querySelector("#return");
 
-let editorValue;
+const requiredInputs = document.querySelectorAll('input[required]');
 
+
+
+let editorValue;
       ClassicEditor
   .create(document.querySelector('#editor'), {
     language: {
@@ -86,17 +89,85 @@ tags.addEventListener('keyup' , e=>{
   
 })
 
+// start dropzone library 
+Dropzone.autoDiscover = false;
+const gallery = new Dropzone("#product-gallery", {
+  url: "#", 
+  autoProcessQueue: false,
+  maxFiles: 5,
+  maxFilesize: 1,
+  acceptedFiles: "image/*",
+  dictDefaultMessage: "📸 عکس های محصول را اینجا بکشید یا کلیک کنید برای انتخاب",
+  addRemoveLinks: true,
+  dictRemoveFile: "حذف تصویر",
+  dictFileTooBig: "حجم تصویر زیاد است (حداکثر: {{maxFilesize}}MB)",
+  thumbnailWidth: 120,
+  thumbnailHeight: 120,
+});
+Dropzone.autoDiscover = false;
+const thumbnail = new Dropzone("#product-thumbnail", {
+  url: "#", 
+  autoProcessQueue: false,
+  maxFiles: 1,
+  maxFilesize: 1,
+  acceptedFiles: "image/*",
+  dictDefaultMessage: "📸 عکس  محصول را اینجا بکشید یا کلیک کنید برای انتخاب",
+  addRemoveLinks: true,
+  dictRemoveFile: "حذف تصویر",
+  dictFileTooBig: "حجم تصویر زیاد است (حداکثر: {{maxFilesize}}MB)",
+  thumbnailWidth: 120,
+  thumbnailHeight: 120,
+});
+
+// finish dropzone library 
+
+
+
 document.querySelector('#submit-btn').addEventListener('click' , ()=>{
-    30 < name.value.trim() < 3 ?  name.classList.add('test') : name.classList.remove('test')
+formValidation() 
 
 
-// window.addEventListener('click' , ()=>{
-//     const content = editorValue.getData();
-//   console.log(content);
-    
 })
 
-name.addEventListener("input", () => {
 
+function formValidation(){
+  if(price.value.length==0 || price.value <1) {
+    price.parentElement.nextElementSibling.classList.remove('hidden')
+    price.parentElement.classList.replace('border-transparent' , 'border-red-700')
+  }
+  else{
+    price.parentElement.nextElementSibling.classList.add('hidden')
+    price.parentElement.classList.replace( 'border-red-700' , 'border-transparent')
+  }
+requiredInputs.forEach(elem=>{
+  if(!elem.checkValidity() ) {
+   if(elem.nextElementSibling) {
+     elem.nextElementSibling.classList.remove('hidden')
+     elem.classList.replace('border-transparent' , 'border-red-700')
+    }
+  }else{
+     if(elem.nextElementSibling) {
+     elem.nextElementSibling.classList.add('hidden')
+      elem.classList.replace( 'border-red-700' ,'border-transparent' )
+    }
+  }
+})
 
-});
+  document.querySelectorAll('select[required]').forEach(select=>{
+    if(select.value==='all') {
+      select.nextElementSibling.classList.remove('hidden') 
+      select.classList.add('border-red-600')
+    }else{
+      select.nextElementSibling.classList.add('hidden') 
+      select.classList.remove('border-red-600')
+
+    }
+  })
+  if(editorValue.getData()=== ''){
+    document.querySelector('.ck-editor').style.border='1px solid red'
+    document.querySelector('#editor-alert').classList.remove('hidden')
+  }else{
+    document.querySelector('.ck-editor').style.border=''
+    document.querySelector('#editor-alert').classList.add('hidden')
+  }
+}

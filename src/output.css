@@ -349,6 +349,9 @@
   .mb-2 {
     margin-bottom: calc(var(--spacing) * 2);
   }
+  .mb-3 {
+    margin-bottom: calc(var(--spacing) * 3);
+  }
   .mb-4 {
     margin-bottom: calc(var(--spacing) * 4);
   }
@@ -372,9 +375,6 @@
   }
   .inline-flex {
     display: inline-flex;
-  }
-  .table {
-    display: table;
   }
   .aspect-square {
     aspect-ratio: 1 / 1;
@@ -593,6 +593,9 @@
   .grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+  .grid-cols-10 {
+    grid-template-columns: repeat(10, minmax(0, 1fr));
+  }
   .grid-cols-12 {
     grid-template-columns: repeat(12, minmax(0, 1fr));
   }
@@ -607,6 +610,9 @@
   }
   .flex-row {
     flex-direction: row;
+  }
+  .flex-row-reverse {
+    flex-direction: row-reverse;
   }
   .flex-wrap {
     flex-wrap: wrap;
@@ -848,6 +854,12 @@
     @supports (color: color-mix(in lab, red, red)) {
       border-color: color-mix(in oklab, var(--color-gray-500) 80%, transparent);
     }
+  }
+  .border-red-600 {
+    border-color: var(--color-red-600);
+  }
+  .border-red-700 {
+    border-color: var(--color-red-700);
   }
   .border-transparent {
     border-color: transparent;
@@ -1201,9 +1213,6 @@
   }
   .text-yellow-300 {
     color: var(--color-yellow-300);
-  }
-  .italic {
-    font-style: italic;
   }
   .line-through {
     text-decoration-line: line-through;
@@ -2340,11 +2349,19 @@ html::selection {
 .ck-balloon-panel {
   display: none !important;
 }
-.test {
-  border: 1px solid red;
+.dropzone {
+  background-color: var(--bg-color) !important;
+  border: 2px dashed #9ca1ab !important;
+  color: var(--text-color) !important;
 }
-.test + span {
-  display: inline-block;
+.dropzone .dz-image-preview {
+  max-width: 50px !important;
+  max-height: 50px !important;
+  background-color: var(--bg-color) !important;
+  color: var(--text-color) !important;
+}
+.dz-progress {
+  display: none !important;
 }
 @property --tw-translate-x {
   syntax: "*";

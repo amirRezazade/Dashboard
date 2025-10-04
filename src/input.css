@@ -135,9 +135,17 @@ html::selection{
 }
    /* finish CKE editor custom style  */
 
-   .test {
-    border: 1px solid red;
+   .dropzone {
+    background-color: var(--bg-color) !important;
+    border:  2px dashed #9ca1ab !important;
+    color: var(--text-color) !important;
    }
-   .test + span{
-    display: inline-block;
+   .dropzone .dz-image-preview{
+    max-width: 50px !important;
+    max-height: 50px !important;
+    background-color: var(--bg-color) !important;
+    color: var(--text-color) !important;
+   }
+   .dz-progress{
+    display: none !important;
    }

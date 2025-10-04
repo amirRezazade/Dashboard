@@ -5,64 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="src/output.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/47.0.0/ckeditor5.css" />
+<link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" />
+
 
 <style>
-  /* تغییر پس‌زمینه ادیتور */
-  .ck-editor__editable {
-    background-color: var(--bg-color) !important;
-    color: var(--text-color) !important;
-  }
-  .ck-editor__editable:focus {
-   border: 1px solid var(--active-color) !important;
-  }
-  .ck.ck-toolbar {
-    background-color: var(--bg-color) !important;
-  }
-  .ck.ck-toolbar *{
-    background-color: var(--bg-color) !important;
-    color: var(--text-color) !important;
-  }
-  .ck-on{
-  border:1px solid var(--active-color) !important;
-}
- .ck.ck-button:hover,
-.ck.ck-button:focus {
-  background: none !important; 
-  box-shadow: none !important;   
-}
 
+.filepond--item{
+  display: inline-block;
+  width: 150px;
+  height: 150px;
+}
 </style>
 
     <title>Document</title>
   </head>
   <body class="bg-[var(--bg-color)] h-screen centered">
-  <textarea name="content" id="editor"></textarea>
+    <div class=" w-full">
+<form action="#" class="dropzone" id="productImageUpload"></form>
+
+    </div>
+
+    <div class="grid grid-cols-10"></div>
 
 
-  <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
 
-  <script>
-ClassicEditor
-      .create(document.querySelector('#editor'), {
-        toolbar: [
-          'heading', '|',
-          'bold', 'italic', 'underline', 'link',
-          'fontColor', 'fontBackgroundColor', '|',
-          'bulletedList', 'numberedList', '|',
-          'insertTable', 'blockQuote', 'codeBlock', '|',
-          'undo', 'redo'
-        ],
-        table: {
-          contentToolbar: [ 'tableColumn', 'tableRow', 'mergeTableCells' ]
-        }
-      })
-      .then(editor => {
-        editorInstance = editor;
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  </script>
+
+<script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+<!-- <script>
+Dropzone.autoDiscover = false;
+
+// ساخت Dropzone جدید
+const dropzone = new Dropzone("#productImageUpload", {
+  url: "#", // مسیر سرور (موقتاً می‌تونی بزاری "#")
+  autoProcessQueue: false,
+  maxFiles: 5,
+  maxFilesize: 3, // برحسب مگابایت
+  acceptedFiles: "image/*",
+  dictDefaultMessage: "📸 عکس محصول را اینجا بکشید یا کلیک کنید برای انتخاب",
+  addRemoveLinks: true,
+  dictRemoveFile: "حذف تصویر",
+  dictFileTooBig: "حجم تصویر زیاد است (حداکثر: {{maxFilesize}}MB)",
+  thumbnailWidth: 150,
+  thumbnailHeight: 150,
+});
+
+</script> -->
+
+ <!-- <script> 
+  document.querySelector('input').addEventListener('input' , e=>{
+    console.log(e.target.files[0].name);
+    document.querySelector('div').innerHTML+=`
+     <img class="object-cover" src="${e.target.files[0].name}" alt="">
+
+    `
+    
+  })
+ </script> -->
 
   </body>
 </html>

@@ -6,6 +6,7 @@
     <meta name="author" content="amirRezazade" />
     <link rel="icon" type="image/x-icon" href="favicon.png">
     <link href="src/output.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"/>
     <title>Dashboard</title>
   </head>
@@ -399,14 +400,14 @@
           <div>
               <label class="mb-2 block" for="editor">توضیحات محصول</label>
               <textarea name="content" id="editor"></textarea>
-              <span class="text-red-700 text-xs hidden mt-2 block">توضیحات محصول نباید خالی باشد!</span>
+              <span id="editor-alert" class="text-red-700 text-xs hidden mt-2 block">توضیحات محصول نباید خالی باشد!</span>
           </div>
         </div>
         <div class="col-span-12 row-span-2 lg:col-span-4 bg-[var(--box-color)] rounded-lg p-2.5 sm:p-3.5 xl:p-5 flex flex-col gap-2.5">
           <h3 class="text-sm md:text-lg xl:text-xl font-bold">ویژگی ها</h3>
           <div class="">
             <label class="cursor-pointer mb-2 inline-block" for="category">دسته بندی</label>
-             <select  id="category" class="  border border-gray-500/50 focus:border-[var(--active-color)] outline-0 cursor-pointer w-full bg-[var(--bg-color)] p-2 md:p-3 rounded-lg   ">
+             <select required id="category" class="  border border-gray-500/50 focus:border-[var(--active-color)] outline-0 cursor-pointer w-full bg-[var(--bg-color)] p-2 md:p-3 rounded-lg   ">
                <option selected value="all">انتخاب</option>
                <option  value="beauty">زیبایی</option>
                <option value="fragrances">عطرها</option>
@@ -474,9 +475,9 @@
           <div class="flex flex-col gap-2.5 xs:flex-row flex-wrap items-stretch justify-between "> 
            <div class="sm:grow xs:w-full lg:grow-0  sm:w-[30%] lg:w-[30%]" >
              <label class="cursor-pointer" for="price">قیمت محصول</label>
-            <div class="w-ful my-1.5 overflow-hidden sm:my-3 flex items-center rounded-md border border-transparent  focus-within:border-[var(--active-color)] bg-[var(--bg-color)]">
-              <input class="grow px-1 xs:px-3 my-0 outline-0 mb-1 " required min="0.1"  type="number" id="price" placeholder="قیمت محصول را وارد کنید...">
+            <div class="w-ful my-1.5 overflow-hidden sm:my-3 flex flex-row-reverse items-center rounded-md border border-transparent  focus-within:border-[var(--active-color)] bg-[var(--bg-color)]">
               <span class="p-3 centered bg-[var(--box-color)] inline-block h-full">$</span>
+              <input class="grow px-1 xs:px-3 my-0 outline-0 mb-1 " required min="0.1"  type="number" id="price" placeholder="قیمت محصول را وارد کنید...">
             </div>
             <span class="text-red-700 text-xs hidden">قیمت نمیتواند خالی یا صفر باشد!</span>
            </div>
@@ -489,14 +490,14 @@
            </div>
            <div class="xs:w-[40%] sm:w-[20%] ">
             <label class="cursor-pointer" for="stock">تعداد</label>
-            <input class="w-full p-3 my-1.5 sm:my-3 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 mb-1 bg-[var(--bg-color)]"  type="number" step="1" min="0" id="stock" placeholder=" موجودی محصول ">
-            <span class="text-red-700 text-xs hidden">تعداد نمیتواند صفر باشد!</span>
+            <input class="w-full p-3 my-1.5 sm:my-3 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 mb-1 bg-[var(--bg-color)]"  type="number" step="1" min="0" required id="stock" placeholder=" موجودی محصول ">
+            <span class="text-red-700 text-xs hidden">تعداد نمیتواند خالی باشد!</span>
           </div>
           </div>
           <div class="flex items-center flex-wrap justify-between gap-x-1.5 gap-y-3">
             <div class="grow xs:max-w-55">
             <label class="cursor-pointer mb-2 inline-block" for="shipping">ارسال</label>
-             <select  id="shipping" class="  border border-gray-500/50 focus:border-[var(--active-color)] outline-0 cursor-pointer w-full bg-[var(--bg-color)] p-2 md:p-3 rounded-lg   ">
+             <select required id="shipping" class="  border border-gray-500/50 focus:border-[var(--active-color)] outline-0 cursor-pointer w-full bg-[var(--bg-color)] p-2 md:p-3 rounded-lg   ">
                <option selected value="all">انتخاب</option>
                <option value="Ships overnight">ارسال شبانه</option>
                <option value="Ships in 1-2 business days">1تا 2 روز کاری</option>
@@ -535,18 +536,25 @@
           
         </div>
       </form>
+      <div class="grid grid-cols-12 gap-3 text-xs sm:text-sm my-3">
+        <div class="col-span-12 lg:col-span-8  bg-[var(--box-color)] rounded-lg p-2.5 sm:p-3.5 lg:p-5">
+          <h3 class="text-sm md:text-lg xl:text-xl font-bold mb-3">گالری محصول</h3>
+          <form action="#" class="dropzone " id="product-gallery"></form>
+        </div>
+        <div class="col-span-12 lg:col-span-4 bg-[var(--box-color)]  rounded-lg p-2.5 sm:p-3.5 lg:p-5">
+          <h3 class="text-sm md:text-lg xl:text-xl font-bold mb-3">عکس محصول</h3>
+          <form action="#" class="dropzone " id="product-thumbnail"></form>
+        </div>
+      </div>
+      
       <button type="submit" id="submit-btn" class="cursor-pointer">ویرایش محصول</button>
     </main>
 
 
+<script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="scripts/shared.js"></script>
     <script type="module" src="scripts/product-add.js"></script>
-
-      <script>
-
-
-  </script>
   </body>
 </html>
