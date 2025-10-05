@@ -140,6 +140,9 @@ html::selection {
   border: 2px dashed #9ca1ab !important;
   color: var(--text-color) !important;
 }
+.dropzone:hover{
+  border: 2px dashed var(--active-color) !important;
+}
 .dropzone .dz-image-preview {
   background-color: var(--bg-color) !important;
   color: var(--text-color) !important;
