@@ -17,8 +17,10 @@
   </head>
   <body class="bg-[var(--bg-color)] h-screen centered"></body>
   <script>
-    fetch("https://dummyjson.com/users")
+    fetch("https://dummyjson.com/users?limit=50")
       .then((res) => res.json())
-      .then(console.log);
+      .then((data) => data.users.forEach(elem=> console.log(elem)
+      ))
+      .catch((err) => console.error(err));
   </script>
 </html>

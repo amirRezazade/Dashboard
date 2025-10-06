@@ -51,7 +51,68 @@ async function addToShoppingCard(id){
   else  showTost('error' , 'محصول در سبد خرید شما وجود دارد! ')
 }
 
+const animatePulse = `
+<div class="flex items-center justify-between animate-pulse py-5 px-15">
+    <div class="w-4/15 h-3 rounded  flex items-center gap-1.5">
+      <div class="size-10 rounded-full bg-gray-500/50"></div>
+      <div class="h-3 w-25 rounded bg-gray-500/50"></div>
+    </div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+  </div>
+  <div class="flex items-center justify-between animate-pulse py-5 px-15">
+    <div class="w-4/15 h-3 rounded  flex items-center gap-1.5">
+      <div class="size-10 rounded-full bg-gray-500/50"></div>
+      <div class="h-3 w-25 rounded bg-gray-500/50"></div>
+    </div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+  </div>
+  <div class="flex items-center justify-between animate-pulse py-5 px-15">
+    <div class="w-4/15 h-3 rounded  flex items-center gap-1.5">
+      <div class="size-10 rounded-full bg-gray-500/50"></div>
+      <div class="h-3 w-25 rounded bg-gray-500/50"></div>
+    </div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+  </div>
+  <div class="flex items-center justify-between animate-pulse py-5 px-15">
+    <div class="w-4/15 h-3 rounded  flex items-center gap-1.5">
+      <div class="size-10 rounded-full bg-gray-500/50"></div>
+      <div class="h-3 w-25 rounded bg-gray-500/50"></div>
+    </div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+  </div>
+  <div class="flex items-center justify-between animate-pulse py-5 px-15">
+    <div class="w-4/15 h-3 rounded  flex items-center gap-1.5">
+      <div class="size-10 rounded-full bg-gray-500/50"></div>
+      <div class="h-3 w-25 rounded bg-gray-500/50"></div>
+    </div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
+  </div>
+  `;
 
 
-
-export{ addToLocal , getToLocal , showSwal , showTost , addToShoppingCard}
+export{ addToLocal , getToLocal , showSwal , showTost , addToShoppingCard , animatePulse}

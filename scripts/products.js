@@ -1,4 +1,4 @@
-import { addToLocal, getToLocal , showSwal , showTost } from "./funcs.js";
+import { addToLocal, getToLocal , showSwal , showTost , animatePulse } from "./funcs.js";
 window.removeProduct = removeProduct;
 window.editProduct = editProduct;
 const paginationElem = document.querySelector("#products-pagination");
@@ -16,68 +16,7 @@ const minPoint = document.getElementById("min-point");
 const searchInputElem = document.getElementById("search-input");
 const sortingSelectBox = document.getElementById("sort-select-box");
 const sortingType = document.getElementById("sorting-type");
-const animatePulse = `
-<div class="flex items-center justify-between animate-pulse py-5 px-15">
-    <div class="w-4/15 h-3 rounded  flex items-center gap-1.5">
-      <div class="size-10 rounded-full bg-gray-500/50"></div>
-      <div class="h-3 w-25 rounded bg-gray-500/50"></div>
-    </div>
-    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
-    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
-    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
-    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
-    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
-    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
-  </div>
-  <div class="flex items-center justify-between animate-pulse py-5 px-15">
-    <div class="w-4/15 h-3 rounded  flex items-center gap-1.5">
-      <div class="size-10 rounded-full bg-gray-500/50"></div>
-      <div class="h-3 w-25 rounded bg-gray-500/50"></div>
-    </div>
-    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
-    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
-    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
-    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
-    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
-    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
-  </div>
-  <div class="flex items-center justify-between animate-pulse py-5 px-15">
-    <div class="w-4/15 h-3 rounded  flex items-center gap-1.5">
-      <div class="size-10 rounded-full bg-gray-500/50"></div>
-      <div class="h-3 w-25 rounded bg-gray-500/50"></div>
-    </div>
-    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
-    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
-    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
-    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
-    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
-    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
-  </div>
-  <div class="flex items-center justify-between animate-pulse py-5 px-15">
-    <div class="w-4/15 h-3 rounded  flex items-center gap-1.5">
-      <div class="size-10 rounded-full bg-gray-500/50"></div>
-      <div class="h-3 w-25 rounded bg-gray-500/50"></div>
-    </div>
-    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
-    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
-    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
-    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
-    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
-    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
-  </div>
-  <div class="flex items-center justify-between animate-pulse py-5 px-15">
-    <div class="w-4/15 h-3 rounded  flex items-center gap-1.5">
-      <div class="size-10 rounded-full bg-gray-500/50"></div>
-      <div class="h-3 w-25 rounded bg-gray-500/50"></div>
-    </div>
-    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
-    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
-    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
-    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
-    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
-    <div class="w-15 h-3 rounded bg-gray-500/50"></div>
-  </div>
-  `;
+
 let page = 1;
 let allProduct;
 let filteredProduct;

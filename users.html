@@ -377,7 +377,47 @@
         </ul>
     </aside>
       <main class="px-3 xs:px-6 py-4  transition-all duration-500 bg-[var(--bg-color)] md:ms-60">
+       <section class="bg-[var(--box-color)] p-3 sm:p-5 mb-4"> 
+        <div class="flex justify-between items-center pb-5 border-b border-dashed border-gray-500/60">
+          <h2 class="text-lg sm:text-xl lg:text-2xl">لیست مشتریان</h2>
+          <div class="flex items-center gap-1 sm:gap-2.5 text-xs sm:text-sm ">
+            <a href="user-add.html" class="px-5 py-2 rounded-sm bg-[#0ab39c] hover:bg-[#14cdb4] transition-colors text-white ">+ افزودن مشتری</a>
+            <a href="#" class="px-5 py-2 rounded-sm bg-[#299cdb] hover:bg-[#3bb1f0] transition-colors text-white flex items-center gap-1"> <i class="fa fa-file-import text-xs"></i>وارد کردن</a>
+          </div>
+        </div>
 
+        <div class="inline-flex items-center gap-1.5 w-70 xs:w-90 text-xs my-5 px-2.5">
+            <span class=" text-nowrap">مرتب سازی:</span>
+            <select id="sort-select-box" class="text-xs  sm:text-sm  border border-gray-500/50  outline-0 cursor-pointer w-full bg-[var(--bg-color)] px-2 md:px-3 py-1 rounded-lg   ">
+                 <option selected="" value="firstName">اسم</option>
+                 <option value="gender">جنسبت</option>
+                 <option value="age">سن</option>
+                 <option value="role">نقش</option>
+                 <!-- <option value="stock">تعداد</option> -->
+            </select>
+            <select id="ordering" class="text-xs sm:text-sm w-30 border border-gray-500/50  outline-0 cursor-pointer bg-[var(--bg-color)] px-2 md:px-3 py-1 rounded-lg   ">
+              <option selected="" value="desc">نزولی</option>
+              <option value="asc">صعودی</option>
+            </select>
+        </div>
+        <table class=" text-xs md:text-sm w-full min-w-[600px] ">
+                <thead class="">
+                    <tr class="flex p-1.5 md:p-3">
+                        <td class="text-center w-3/15">مشتری</td>
+                        <td class="text-center w-1/15">جنسیت</td>
+                        <td class="text-center w-4/15">ایمیل</td>
+                        <td class="text-center w-2/15">تلفن</td>
+                        <td class="text-center w-1/15">سن</td>
+                        <td class="text-center w-2/15">نام کاربری</td>
+                        <td class="text-start w-1/15">نقش</td>
+                        <td class="text-center w-1/15">عملیات</td>
+                    </tr>
+                </thead>
+                <tbody id="users-container" class="font-[dana-num] divide-y-1 divide-gray-500/50 border-y border-gray-500/50 flex flex-col w-full">
+                    <!-- data loaded from JS  -->
+                </tbody>
+        </table>
+       </section>
  
       </main>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
