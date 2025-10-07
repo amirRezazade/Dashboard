@@ -134,13 +134,13 @@ function pagination(e) {
   } else {
     paginationElem.querySelector(".prev").disabled = false;
     paginationElem.querySelector(".next").disabled = false;
+    paginationElem.querySelector(".one").disabled = false;
+    paginationElem.querySelector(".two").disabled = false;
+    paginationElem.querySelector(".three").disabled = false;
     paginationElem.querySelector(".two").textContent = page;
     paginationElem.querySelector(".two").classList.add("active-page");
     paginationElem.querySelector(".one").textContent = page - 1;
     paginationElem.querySelector(".three").textContent = page + 1;
-  }
-  if (Math.ceil(itemCount / 10) == 2) {
-    //   paginationElem.querySelector(".three").disabled = true;
   }
 
   addProduct(filteredProduct, page);
@@ -336,11 +336,11 @@ function editProduct(id) {
             allProduct[index].category == "sports-accessories" ? "selected" : ""
           } value="sports-accessories">لوازم ورزشی</option>
       </select>
-      <label class="mb-1 sm:mb-2 mt-2 sm:mt-4 cursor-pointer text-start" for="swal-name">اسم محصول:</label>
+      <label class="mb-1 sm:mb-2 mt-2 sm:mt-4 cursor-pointer text-start" for="edit-name">اسم محصول:</label>
       <input id="edit-name" type="text" required  class=" bg-[var(--bg-color)] p-3 outline-0 rounded-lg border border-gray-500/80 focus:border-[var(--active-color)]" value="${
         allProduct[index].title
       }">
-      <label class="mb-1 sm:mb-2 mt-2 sm:mt-4 cursor-pointer text-start" for="swal-price">قیمت:</label>
+      <label class="mb-1 sm:mb-2 mt-2 sm:mt-4 cursor-pointer text-start" for="edit-price">قیمت:</label>
       <div class="flex items-center border border-gray-500/80 focus-within:border-[var(--active-color)] overflow-hidden  rounded-lg bg-[var(--bg-color)]">
         <input id="edit-price" type="number" required pattern="[1-9][0-9]*" min="0.1" max="14999.98" class="grow p-2 outline-0  " placeholder="$ " value="${
           allProduct[index].price
@@ -356,7 +356,7 @@ function editProduct(id) {
           1
         )}%</span>
       </div>
-      <label class="mb-1 sm:mb-2 mt-2 sm:mt-4 cursor-pointer text-start" for="swal-count">تعداد:</label>
+      <label class="mb-1 sm:mb-2 mt-2 sm:mt-4 cursor-pointer text-start" for="edit-stock">تعداد:</label>
       <input id="edit-stock" type="number" required pattern="[1-9][0-9]*" min="0" class=" bg-[var(--bg-color)] p-3 outline-0 border border-gray-500/80 focus:border-[var(--active-color)] rounded-lg " placeholder="تعداد " value="${
         allProduct[index].stock
       }">      
@@ -366,7 +366,7 @@ function editProduct(id) {
     showCancelButton: true,
     confirmButtonText: "ذخیره",
     cancelButtonText: "انصراف",
-    cancelButtonColor: "red",
+    cancelButtonColor: "#dd3333",
     preConfirm: () => {
       const name = document.getElementById("edit-name").value.trim();
       const price = +document.getElementById("edit-price").value;

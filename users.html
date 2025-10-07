@@ -377,7 +377,7 @@
         </ul>
     </aside>
       <main class="px-3 xs:px-6 py-4  transition-all duration-500 bg-[var(--bg-color)] md:ms-60">
-       <section class="bg-[var(--box-color)] p-3 sm:p-5 mb-4"> 
+       <section class="bg-[var(--box-color)] p-3 sm:p-5 mb-4 overflow-x-hidden"> 
         <div class="flex justify-between items-center pb-5 border-b border-dashed border-gray-500/60">
           <h2 class="text-lg sm:text-xl lg:text-2xl">لیست مشتریان</h2>
           <div class="flex items-center gap-1 sm:gap-2.5 text-xs sm:text-sm ">
@@ -385,22 +385,28 @@
             <a href="#" class="px-5 py-2 rounded-sm bg-[#299cdb] hover:bg-[#3bb1f0] transition-colors text-white flex items-center gap-1"> <i class="fa fa-file-import text-xs"></i>وارد کردن</a>
           </div>
         </div>
-
-        <div class="inline-flex items-center gap-1.5 w-70 xs:w-90 text-xs my-5 px-2.5">
+        
+        <div class="flex flex-wrap xs:inline-flex xs:w-3/4 sm:flex-nowrap sm:w-full md:flex-wrap items-center gap-3 text-xs my-5 px-2.5">
+          <div class=" flex items-center gap-2 rounded-lg w-full md:w-auto">
+            <span class=" text-nowrap">جستجوی مشتری:</span>
+            <input id="search-input" type="text" placeholder="جستجو..." class="bg-[var(--bg-color)] grow border rounded-lg border-gray-500/50 focus:border-[var(--active-color)] outline-0 lg:min-w-50 p-2 xl:p-3">
+         </div>
+          <div class=" flex items-center gap-2 rounded-lg w-full md:w-auto">
             <span class=" text-nowrap">مرتب سازی:</span>
-            <select id="sort-select-box" class="text-xs  sm:text-sm  border border-gray-500/50  outline-0 cursor-pointer w-full bg-[var(--bg-color)] px-2 md:px-3 py-1 rounded-lg   ">
+            <select id="sort-select-box" class="text-xs  sm:text-sm grow border border-gray-500/50 lg:min-w-35 outline-0 cursor-pointer w-full bg-[var(--bg-color)] focus:border-[var(--active-color)] px-2 md:px-3 py-1 rounded-lg   ">
                  <option selected="" value="firstName">اسم</option>
                  <option value="gender">جنسبت</option>
                  <option value="age">سن</option>
                  <option value="role">نقش</option>
-                 <!-- <option value="stock">تعداد</option> -->
             </select>
-            <select id="ordering" class="text-xs sm:text-sm w-30 border border-gray-500/50  outline-0 cursor-pointer bg-[var(--bg-color)] px-2 md:px-3 py-1 rounded-lg   ">
+            <select id="ordering" class="text-xs sm:text-sm w-30 border  border-gray-500/50  outline-0 cursor-pointer bg-[var(--bg-color)] px-2 md:px-3 py-1 rounded-lg  focus:border-[var(--active-color)] ">
               <option selected="" value="desc">نزولی</option>
               <option value="asc">صعودی</option>
             </select>
+          </div>
         </div>
-        <table class=" text-xs md:text-sm w-full min-w-[600px] ">
+        <div class="overflow-x-auto">
+            <table class=" text-xs xl:text-sm w-full min-w-[800px] overflow-x-auto ">
                 <thead class="">
                     <tr class="flex p-1.5 md:p-3">
                         <td class="text-center w-3/15">مشتری</td>
@@ -416,8 +422,21 @@
                 <tbody id="users-container" class="font-[dana-num] divide-y-1 divide-gray-500/50 border-y border-gray-500/50 flex flex-col w-full">
                     <!-- data loaded from JS  -->
                 </tbody>
-        </table>
+             </table>
+        </div>
+        <div class="flex justify-between font-[dana-num] text-sm p-4 lg:pt-6">
+                <span><span id="total-users-count" class="font-[dana-num]">0</span> مشتری </span>
+                <div id="users-pagination" class="flex items-center gap-1.5 text-xs" style="display: flex;">
+                  <button disabled="" type="button" class="prev size-7 centered rounded border border-gray-500/20 hover:bg-gray-500/30 cursor-pointer"><i class="fa-solid fa-arrow-up pointer-events-none rotate-90"></i></button>
+                  <button type="button" class="one size-7 centered rounded border border-gray-500/20 hover:bg-gray-500/30 cursor-pointer active-page" disabled="">1</button>
+                  <button type="button" class="two size-7 centered rounded border border-gray-500/20 hover:bg-gray-500/30 cursor-pointer">2</button>
+                  <button type="button" class="three size-7 centered rounded border border-gray-500/20 hover:bg-gray-500/30 cursor-pointer">3</button>
+                  <button type="button" class="next size-7 centered rounded border border-gray-500/20 hover:bg-gray-500/30 cursor-pointer"><i class="fa-solid fa-arrow-up pointer-events-none -rotate-90"></i></button>
+                </div>
+              </div>
+      
        </section>
+     <input type="tel"  min="" name="" id="">
  
       </main>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
