@@ -16,11 +16,15 @@
     <title>Document</title>
   </head>
   <body class="bg-[var(--bg-color)] h-screen centered"></body>
+
+
   <script>
-    fetch("https://dummyjson.com/users?limit=50")
-      .then((res) => res.json())
-      .then((data) => data.users.forEach(elem=> console.log(elem)
-      ))
-      .catch((err) => console.error(err));
+    fetch('https://dummyjson.com/users/1')
+.then(res => res.json())
+.then(console.log);
+
+fetch('https://dummyjson.com/users/11/carts')
+.then(res => res.json())
+.then(console.log);
   </script>
 </html>
