@@ -378,7 +378,7 @@
     </aside>
     <main class="px-3 xs:px-6 py-4 transition-all duration-500 bg-[var(--bg-color)] md:ms-60">
       <section class="grid grid-cols-12 gap-3  p-3 lg:p-5 text-sm">
-        <div class="col-span-4 bg-[var(--box-color)] rounded-lg p-3 relative flex flex-col gap-5">
+        <div class="col-span-12 sm:col-span-8 sm:col-start-3 lg:col-start-0 lg:col-span-4 bg-[var(--box-color)] rounded-lg p-3 relative flex flex-col gap-5">
           <div class="flex items-center gap-2 absolute top-4 left-5">
            <a id="product-edit-btn" class=" " href="product-add.html?id=115"><i class="fas fa-edit text-blue-400"></i></a>
            <a id="product-delet-btn" href="#"><i class="fas fa-trash text-red-600"></i></a>
@@ -409,48 +409,52 @@
             <span dir="ltr" id="user-birthDate" class="font-[dana-num] text-right">10/10/1992</span>
           </div>
         </div>
-        <div class="col-span-8 bg-[var(--box-color)] rounded-lg p-3">
+        <div class="col-span-12 lg:col-span-8 bg-[var(--box-color)] rounded-lg p-3 flex flex-col">
             <div class="border-b border-gray-500/50">
-                <button id="info" type="button" class="py-2 px-3 font-bold transition-colors hover:text-[var(--active-color)] cursor-pointer border-b-2 border-[var(--active-color)] text-[var(--active-color)]">مشخصات</button>
+                <button id="info" type="button" class="py-2 px-3 font-bold transition-colors hover:text-[var(--active-color)] cursor-pointer active-tab">مشخصات</button>
                 <button id="cart" type="button" class="py-2 px-3 font-bold transition-colors hover:text-[var(--active-color)] cursor-pointer">سبد خرید</button>
             </div>
-            <div id="box-container">
-                <div class="flex flex-col gap-3 mt-7">
-                    <span class="text-base font-bold">نشانی ها</span>
-                    <div class="flex items-center lg:w-2/3">
-                        <div class="grow flex flex-col gap-2.5">
-                            <span class=" font-bold my-3 block">محل اقامت</span>
-                            <div class="flex items-center gap-1"><span>کشور:</span> <span>Iran</span></div>
-                            <div class="flex items-center gap-1"><span>شهر:</span> <span>tabriz</span></div>
-                            <div class="flex items-center gap-1"><span>آدرس:</span> <span>"626 Main Street"</span></div>
-                            <div class="flex items-center gap-1"><span>کد پستی:</span> <span class="font-[dana-num]">291123</span></div>
-                        </div>
-                        <div class="grow flex flex-col gap-2.5">
-                            <span class=" font-bold my-3 block">محل کار</span>
-                            <div class="flex items-center gap-1"><span>کشور:</span> <span>Iran</span></div>
-                            <div class="flex items-center gap-1"><span>شهر:</span> <span>tabriz</span></div>
-                            <div class="flex items-center gap-1"><span>آدرس:</span> <span>"626 Main Street"</span></div>
-                            <div class="flex items-center gap-1"><span>کد پستی:</span> <span class="font-[dana-num]">291123</span></div>
-                        </div>
+            <div class="grow">
+                 <div id="info-container hidden"></div>
+                <div id="card-container" class="overflow-auto flex flex-col h-full text-xs lg:text-sm ">
+                  <ul class="grow my-6 min-w-100 overflow-auto max-h-[370px]">
+                    <div class="flex justify-between items-center border-b border-gray-500/50 p-2 ">
+                      <span class="w-3/7 text-center">اسم</span>
+                      <span class="w-1/7 text-center">تخفیف</span>
+                      <span class="w-1/7 text-center">تعداد</span>
+                      <span class="w-1/7 text-center">قیمت</span>
+                      <span class="w-1/7 text-center">کل</span>
+                    </div>
+                    <li class="flex justify-between items-center transition-colors hover:bg-gray-500/20 p-1.5 md:px-2 rounded-lg">
+                      <a href="product-details.html?id=1" class="flex items-center gap-2.5 w-3/7">
+                        <span class="size-11 md:size-13 p-1 bg-[var(--bg-color)]  rounded-full"><img class="object-cover  rounded-full " src="https://velzon.mkhezerlou.ir/demos/assets/images/products/img-8.png" alt=""></span>
+                        <span>NoiseFit Endure Noise</span>
+                      </a>
+                      <span class="w-1/7 text-center">13.4%</span>
+                      <span class="w-1/7 text-center">5</span>
+                      <span class="w-1/7 text-center">10$</span>
+                      <span class="w-1/7 text-center">45$</span>
+                    </li>
+                  </ul>
+                  <div class="flex justify-between flex-wrap gap-2 p-3 bg-[var(--bg-color)]/80 rounded-lg font-[dana-num]">
+                    <div>
+                      <span>انواع محصول:</span>
+                      <span >4</span>
                     </div>
                     <div>
-                        <div class="">
-                            <span class="text-base font-bold my-4 block">کارت های بانکی</span>
-                            <div class="flex items-center gap-4 px-3 my-3">
-                                <img alt="visa" src="images/visa-img.png">
-                                <div>
-                                    <div class="flex items-center mb-1.5">
-                                        <div class="font-semibold">Amir rezazadeh</div>
-                                        <div class=" rounded-md border-0 mx-2">
-                                            <span class="bg-[var(--active-color)]/20 text-[var(--active-color)] text-xs py-1 px-2 rounded-md "> اصلی </span>
-                                        </div>
-                                    </div>
-                                    <span>منقضی شده Dec 2025</span>
-                                </div>
-                            </div>
-                            
-                        </div>
+                      <span>تعداد محصول:</span>
+                      <span >10</span>
                     </div>
+                    <div>
+                      <span>تخفیف خورده:</span>
+                      <span >110$</span>
+                    </div>
+                    <div>
+                      <span>مجموع:</span>
+                      <span >110$</span>
+                    </div>
+                  </div>
+
                 </div>
             </div>
         </div>
