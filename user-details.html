@@ -9,11 +9,6 @@
     <link rel="stylesheet"href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"/>
     <title>Dashboard</title>
-   <style>
-    .swiper-slide-thumb-active{
-      opacity: 100;
-    }
-   </style>
   </head>
   <body class="font-[dana-regular] overflow-x-hidden bg-[var(--bg-color)] text-[var(--text-color)] text-color">
     <nav class="bg-[var(--box-color)] flex items-center justify-between sticky top-0 z-50">
@@ -382,8 +377,83 @@
         </ul>
     </aside>
     <main class="px-3 xs:px-6 py-4 transition-all duration-500 bg-[var(--bg-color)] md:ms-60">
-      <section class="relative bg-[var(--box-color)] flex flex-col gap-y-4 lg:flex-row flex-wrap rounded-lg p-3 lg:p-5 ">
-       
+      <section class="grid grid-cols-12 gap-3  p-3 lg:p-5 text-sm">
+        <div class="col-span-4 bg-[var(--box-color)] rounded-lg p-3 relative flex flex-col gap-5">
+          <div class="flex items-center gap-2 absolute top-4 left-5">
+           <a id="product-edit-btn" class=" " href="product-add.html?id=115"><i class="fas fa-edit text-blue-400"></i></a>
+           <a id="product-delet-btn" href="#"><i class="fas fa-trash text-red-600"></i></a>
+
+          </div>
+          <div class="flex flex-col gap-2 items-center overflow-hidden mx-auto mt-6 text-center">
+            <img class="object-cover rounded-full size-23" src="https://dummyjson.com/icon/aaliyahh/128" alt="">
+            <span class="font-bold text-base">amir rezazade</span>
+          </div>
+          <div class="flex flex-col gap-1">
+            <span>جنسیت:</span>
+            <span id="user-gender">زن</span>
+          </div>
+          <div class="flex flex-col gap-1">
+            <span>ایمیل:</span>
+            <span id="user-email">carolyn_h@hotmail.com</span>
+          </div>
+          <div class="flex flex-col gap-1">
+            <span>تلفن:</span>
+            <span id="user-phone" class="font-[dana-num]">09052334</span>
+          </div>
+          <div class="flex flex-col gap-1">
+            <span>نام کاربری:</span>
+            <span id="user-username">emily</span>
+          </div>
+          <div class="flex flex-col gap-1">
+            <span>تاریخ تولد:</span>
+            <span dir="ltr" id="user-birthDate" class="font-[dana-num] text-right">10/10/1992</span>
+          </div>
+        </div>
+        <div class="col-span-8 bg-[var(--box-color)] rounded-lg p-3">
+            <div class="border-b border-gray-500/50">
+                <button id="info" type="button" class="py-2 px-3 font-bold transition-colors hover:text-[var(--active-color)] cursor-pointer border-b-2 border-[var(--active-color)] text-[var(--active-color)]">مشخصات</button>
+                <button id="cart" type="button" class="py-2 px-3 font-bold transition-colors hover:text-[var(--active-color)] cursor-pointer">سبد خرید</button>
+            </div>
+            <div id="box-container">
+                <div class="flex flex-col gap-3 mt-7">
+                    <span class="text-base font-bold">نشانی ها</span>
+                    <div class="flex items-center lg:w-2/3">
+                        <div class="grow flex flex-col gap-2.5">
+                            <span class=" font-bold my-3 block">محل اقامت</span>
+                            <div class="flex items-center gap-1"><span>کشور:</span> <span>Iran</span></div>
+                            <div class="flex items-center gap-1"><span>شهر:</span> <span>tabriz</span></div>
+                            <div class="flex items-center gap-1"><span>آدرس:</span> <span>"626 Main Street"</span></div>
+                            <div class="flex items-center gap-1"><span>کد پستی:</span> <span class="font-[dana-num]">291123</span></div>
+                        </div>
+                        <div class="grow flex flex-col gap-2.5">
+                            <span class=" font-bold my-3 block">محل کار</span>
+                            <div class="flex items-center gap-1"><span>کشور:</span> <span>Iran</span></div>
+                            <div class="flex items-center gap-1"><span>شهر:</span> <span>tabriz</span></div>
+                            <div class="flex items-center gap-1"><span>آدرس:</span> <span>"626 Main Street"</span></div>
+                            <div class="flex items-center gap-1"><span>کد پستی:</span> <span class="font-[dana-num]">291123</span></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="">
+                            <span class="text-base font-bold my-4 block">کارت های بانکی</span>
+                            <div class="flex items-center gap-4 px-3 my-3">
+                                <img alt="visa" src="images/visa-img.png">
+                                <div>
+                                    <div class="flex items-center mb-1.5">
+                                        <div class="font-semibold">Amir rezazadeh</div>
+                                        <div class=" rounded-md border-0 mx-2">
+                                            <span class="bg-[var(--active-color)]/20 text-[var(--active-color)] text-xs py-1 px-2 rounded-md "> اصلی </span>
+                                        </div>
+                                    </div>
+                                    <span>منقضی شده Dec 2025</span>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
       </section>
     </main>
    
