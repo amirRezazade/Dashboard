@@ -22,13 +22,6 @@ let users = [];
 getUsers();
 async function getUsers(key) {
   usersContainer.innerHTML = animatePulse;
-  console.log(
-    `https://dummyjson.com/users${key ? `/search?q=${key}` : ""}${
-      key
-        ? ""
-        : "?limit=150&select=id,image,firstName,lastName,gender,email,phone,age,username,role"
-    }`
-  );
   let res = await fetch(
     `https://dummyjson.com/users${key ? `/search?q=${key}` : ""}${
       key
@@ -39,7 +32,6 @@ async function getUsers(key) {
   let response = await res.json();
   users = response.users;
   filtering();
-  console.log(response);
 }
 
 function addUsers(list, page = 1) {
@@ -60,7 +52,7 @@ function addUsers(list, page = 1) {
           <div class="size-10 shrink0 rounded-full overflow-hidden"><img class="object-cover rounded-full" src="${
             user.image
           }" alt=""></div>
-            <span>${user.firstName} ${user.lastName}</span>
+            <span class="truncate">${user.firstName} ${user.lastName}</span>
         </a>
       </td>
       <td class=" centered w-1/15">${user.gender === "male" ? "مرد" : "زن"}</td>
@@ -69,7 +61,7 @@ function addUsers(list, page = 1) {
         user.phone
       }</td>
       <td class=" centered w-1/15">${user.age}</td>
-      <td class=" centered w-2/15">${user.username}</td>
+      <td dir="ltr" class=" centered w-2/15 "><span class="truncate">${user.username} </span></td>
       <td class=" flex items-center w-1/15">${
         user.role === "admin" ? "ادمین" : ""
       } ${user.role === "user" ? "مشتری" : ""} ${
@@ -88,35 +80,49 @@ function addUsers(list, page = 1) {
   });
 }
 
+const roleParams = document.querySelectorAll('#role-checkbox input')
+roleParams.forEach(elem=> elem.addEventListener('change' , filtering))
+
+let copyUsers;
+let user  = document.querySelector('#user')
+let admin  = document.querySelector('#admin')
+let moderator  = document.querySelector('#moderator')
 function filtering() {
   let parameter = sortingElem.value;
-  let newUsers;
+  let roleFiltering = [...users].filter(elem => {
+  return (
+    (user.checked && elem.role === 'user') ||
+    (admin.checked && elem.role === 'admin') ||
+    (moderator.checked && elem.role === 'moderator')
+  );
+});
   if (orderingElem.value === "desc") {
-    if (parameter === "age") {
-      newUsers = [...users].sort((a, b) => a[parameter] - b[parameter]);
+     if (parameter === "age") {
+      copyUsers = [...roleFiltering].sort((a, b) => a[parameter] - b[parameter]);
     } else {
-      newUsers = [...users].sort((a, b) =>
+      copyUsers = [...roleFiltering].sort((a, b) =>
         a[parameter].localeCompare(b[parameter])
       );
     }
+    
   } else {
-    if (parameter === "age") {
-      newUsers = [...users].sort((a, b) => b[parameter] - a[parameter]);
+      if (parameter === "age") {
+      copyUsers = [...roleFiltering].sort((a, b) => b[parameter] - a[parameter]);
     } else {
-      newUsers = [...users].sort((a, b) =>
+      copyUsers = [...roleFiltering].sort((a, b) =>
         b[parameter].localeCompare(a[parameter])
       );
     }
   }
 
-  userCount = newUsers.length;
-  addUsers(newUsers);
+  userCount = copyUsers.length;
+  addUsers(copyUsers);
   pagination(1);
 }
 
 sortingElem.addEventListener("change", filtering);
 orderingElem.addEventListener("change", filtering);
-searchInput.addEventListener("input", (e) => {
+searchInput.addEventListener("input", () => {
   let value = searchInput.value.trim();
   searchInput.value = value;
   if (value.length > 2) getUsers(value);
@@ -165,10 +171,6 @@ function editUser(id) {
       <input id="lastName" type="text" required  class=" bg-[var(--bg-color)] p-3 outline-0 rounded-lg border border-gray-500/80 focus:border-[var(--active-color)]" value="${
         users[index].lastName
       }">
-      <label class="mb-1 sm:mb-2 mt-2 sm:mt-4 cursor-pointer text-start" for="phone">تلفن:</label>
-      <input pattern="^09\d{9}$" maxlength="11" id="phone" type="tel" required  class="text-end bg-[var(--bg-color)] p-3 outline-0 rounded-lg border border-gray-500/80 focus:border-[var(--active-color)]" value="${
-        users[index].phone
-      }">
       <label class="mb-1 sm:mb-2 mt-2 sm:mt-4 cursor-pointer text-start" for="username">نام کاربری:</label>
       <input id="username" type="text" required  class=" bg-[var(--bg-color)] p-3 outline-0 rounded-lg border border-gray-500/80 focus:border-[var(--active-color)]" value="${
         users[index].username
@@ -209,10 +211,10 @@ function editUser(id) {
     preConfirm: () => {
       const firstName = document.getElementById("firstName").value.trim();
       const lastName = document.getElementById("lastName").value.trim();
-      const phone = document.getElementById("phone").value
       const username = document.getElementById("username").value.trim()
-      const age = document.getElementById("age").value;
+      const age = +document.getElementById("age").value;
       const role = document.getElementById("role").value;
+      const gender = document.getElementById("male");
 
       if (firstName.length <2) {
         Swal.showValidationMessage("نام باید حداقل 2 کاراکتر باشد!");
@@ -222,41 +224,37 @@ function editUser(id) {
         Swal.showValidationMessage("نام خانوادگی باید حداقل 2 کاراکتر باشد!");
         return false;
       }
-      if (username.length <2) {
-        Swal.showValidationMessage("نام کاربری باید حداقل 2 کاراکتر باشد!");
+      if (username.length <4) {
+        Swal.showValidationMessage("نام کاربری باید حداقل 4 کاراکتر باشد!");
         return false;
       }
-      if (phone.length < 11) {
-        Swal.showValidationMessage("شماره تلفن معتبر وارد کنید!");
-        return false;
-      }
-      if ( 18 <= age  ||  age <=100) {
+      if ( 100 < age  ||  age < 18) {
         Swal.showValidationMessage("سن باید بین 18 تا 100 باشد!");
         return false;
       }
-
-      return { firstName, lastName, username, phone, age , role };
+      return { firstName, lastName, username, age , role , gender  };
     },
   }).then((result) => {
     if (result.isConfirmed) {
       showSwal('ویرایش اطلاعات', 'آیا میخواهید اطلاعات این کاربر را تغییر دهید؟', 'warning', true, 'بله')
       .then(res =>{
-        if(res.isConfirmed){
+        if(res.isConfirmed){     
      fetch(`https://dummyjson.com/users/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          category: result.value.category,
-          title: result.value.name,
-          price: result.value.price,
-          discountPercentage: result.value.discount,
-          stock:Math.floor(result.value.stock),
+          firstName: result.value.firstName,
+          lastName: result.value.lastName,
+          username: result.value.username,
+          age: result.value.age,
+          gender: result.value.gender.checked==true ? 'male' : 'female'
         }),
       })
         .then((res) => res.json())
         .then((res) => {
           users[index] = res;
-          getFilterParams();
+          users[index].role= result.value.role
+          filtering();
           showTost("success", "اطلاعات کاربر با موفقیت بروزرسانی شد.");
         })
         .catch(() =>
@@ -268,7 +266,6 @@ function editUser(id) {
     }
   });
 }
-
 
 function pagination(e) {
   if (e === 1) {
@@ -334,5 +331,5 @@ function pagination(e) {
     paginationElem.querySelector(".three").textContent = page + 1;
   }
 
-  addUsers(users, page);
+  addUsers(copyUsers, page);
 }

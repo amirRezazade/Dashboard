@@ -386,27 +386,44 @@
           </div>
         </div>
         
-        <div class="flex flex-wrap xs:inline-flex xs:w-3/4 sm:flex-nowrap sm:w-full md:flex-wrap items-center gap-3 text-xs my-5 px-2.5">
+        <div class="flex flex-wrap xs:inline-flex xs:w-3/4 sm:justify-between sm:flex-wrap sm:w-full md:justify-start xl:flex-nowrap items-center gap-3 text-xs my-5 px-2.5">
           <div class=" flex items-center gap-2 rounded-lg w-full md:w-auto">
             <span class=" text-nowrap">جستجوی مشتری:</span>
             <input id="search-input" type="text" placeholder="جستجو..." class="bg-[var(--bg-color)] grow border rounded-lg border-gray-500/50 focus:border-[var(--active-color)] outline-0 lg:min-w-50 p-2 xl:p-3">
          </div>
-          <div class=" flex items-center gap-2 rounded-lg w-full md:w-auto">
+          <div class=" flex items-center gap-2 rounded-lg w-full sm:max-w-1/2 sm:grow md:w-auto md:max-w-[300px]">
             <span class=" text-nowrap">مرتب سازی:</span>
             <select id="sort-select-box" class="text-xs  sm:text-sm grow border border-gray-500/50 lg:min-w-35 outline-0 cursor-pointer w-full bg-[var(--bg-color)] focus:border-[var(--active-color)] px-2 md:px-3 py-1 rounded-lg   ">
                  <option selected="" value="firstName">اسم</option>
                  <option value="gender">جنسبت</option>
                  <option value="age">سن</option>
-                 <option value="role">نقش</option>
+                 <option value="username">نام کاربری</option>
             </select>
             <select id="ordering" class="text-xs sm:text-sm w-30 border  border-gray-500/50  outline-0 cursor-pointer bg-[var(--bg-color)] px-2 md:px-3 py-1 rounded-lg  focus:border-[var(--active-color)] ">
               <option selected="" value="desc">نزولی</option>
               <option value="asc">صعودی</option>
             </select>
           </div>
+          <div class="flex items-center gap-2 w-full sm:max-w-[45%] sm:grow  md:max-w-[300px]">
+            <span class="text-nowrap" >نقش ها:</span>
+            <div id="role-checkbox" class="grow grid grid-cols-3 items-center bg-[var(--bg-color)] rounded-lg overflow-hidden border border-[var(--active-color)]/60  divide-x divide-[var(--active-color)]/60">
+            <div class="">
+              <input checked class="hidden peer" type="checkbox"  id="moderator" >
+              <label class="px-3 py-1.5 md:py-2 text-center  block peer-checked:bg-[var(--active-color)] peer-checked:text-white" for="moderator">مدیر</label>
+            </div>
+            <div class="">
+              <input checked class="hidden peer" type="checkbox"  id="admin" >
+              <label class="px-3 py-1.5 md:py-2 text-center  block peer-checked:bg-[var(--active-color)] peer-checked:text-white" for="admin">ادمین</label>
+            </div>
+            <div class="">
+              <input checked class="hidden peer" type="checkbox"  id="user" >
+              <label class="px-3 py-1.5 md:py-2 text-center  block peer-checked:bg-[var(--active-color)] peer-checked:text-white" for="user">مشتری</label>
+            </div>
+          </div>
+          </div>
         </div>
         <div class="overflow-x-auto">
-            <table class=" text-xs xl:text-sm w-full min-w-[800px] overflow-x-auto ">
+            <table class=" text-xs xl:text-sm w-full min-w-[800px] max-w-7xl overflow-x-auto ">
                 <thead class="">
                     <tr class="flex p-1.5 md:p-3">
                         <td class="text-center w-3/15">مشتری</td>
