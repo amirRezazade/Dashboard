@@ -17,7 +17,7 @@ const userDeletBtn = document.querySelector('#user-delet-btn')
 
 let isHaveCart = false
 
-document.querySelector('#user-edit-btn').href=`user-edit.html?id=${userId}`
+document.querySelector('#user-edit-btn').href=`user-add.html?id=${userId}`
 window.addEventListener("DOMContentLoaded", getUser);
 
 

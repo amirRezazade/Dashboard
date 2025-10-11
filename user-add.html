@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="amirRezazade" />
+    <link rel="icon" type="image/x-icon" href="favicon.png">
+    <link href="src/output.css" rel="stylesheet" />
+    <link rel="stylesheet"href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"/>
+    <title>Dashboard</title>
+  </head>
+  <body class="font-[dana-regular] overflow-x-hidden bg-[var(--bg-color)] text-[var(--text-color)] text-color">
+    <nav class="bg-[var(--box-color)] flex items-center justify-between sticky top-0 z-50">
+      <div
+        class="flex items-center gap-0 xs:gap-3 md:gap-14 bg-[var(--active-color)] py-2 xs:py-3 md:py-5 px-2 xs:px-3 lg:w-60"
+      >
+        <a href="index.html" class="">
+          <img class="hidden xs:inline-block" src="images/logo/logo-light.png" alt="logo" />
+        </a>
+        <button
+          type="button" 
+          onclick="toggleSidebar()"
+          class="p-2 rounded-full cursor-pointer transition-colors duration-300 bg-[var(--bg-color)]/30 hover:bg-[var(--bg-color)]/50"
+        >
+          <svg
+            class="fill-white size-4 sm:size-5"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g
+              id="SVGRepo_tracerCarrier"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></g>
+            <g id="SVGRepo_iconCarrier">
+              <path
+                opacity="0.34"
+                d="M5 10H7C9 10 10 9 10 7V5C10 3 9 2 7 2H5C3 2 2 3 2 5V7C2 9 3 10 5 10Z"
+                stroke="none"
+                stroke-width="1.5"
+                stroke-miterlimit="10"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></path>
+              <path
+                d="M17 10H19C21 10 22 9 22 7V5C22 3 21 2 19 2H17C15 2 14 3 14 5V7C14 9 15 10 17 10Z"
+                stroke="none"
+                stroke-width="1.5"
+                stroke-miterlimit="10"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></path>
+              <path
+                opacity="0.34"
+                d="M17 22H19C21 22 22 21 22 19V17C22 15 21 14 19 14H17C15 14 14 15 14 17V19C14 21 15 22 17 22Z"
+                stroke="none"
+                stroke-width="1.5"
+                stroke-miterlimit="10"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></path>
+              <path
+                d="M5 22H7C9 22 10 21 10 19V17C10 15 9 14 7 14H5C3 14 2 15 2 17V19C2 21 3 22 5 22Z"
+                stroke="none"
+                stroke-width="1.5"
+                stroke-miterlimit="10"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></path>
+            </g>
+          </svg>
+        </button>
+      </div>
+
+      <div
+        class="grow flex justify-end lg:justify-between items-center gap-3 px-4"
+      >
+        <!--start nav input  -->
+        <div
+          class="nav-item lg:grow relative lg:static flex items-center justify-center lg:justify-between md:gap-2 size-7 sm:size-9 lg:max-w-2/5 md:px-4 lg:py-5 border border-gray-500 rounded-full"
+        >
+        <div class="nav-item-content transition-opacity opacity-0 invisible flex items-stretch rounded-b bg-[var(--box-color)] fixed w-screen p-5 left-0 top-12 xs:w-[70vw] xs:top-16 xs:left-1/2 xs:-translate-x-1/2 sm:w-[50vw] md:top-20 lg:static lg:w-full lg:translate-x-0 lg:bg-transparent lg:p-0 lg:inline-block lg:opacity-100 lg:visible">
+
+          <input
+          class=" grow rounded-r border border-gray-500/50 lg:bg-transparent focus:border-[var(--active-color)]/70  bg-[var(--bg-color)]   outline-0 px-2 lg:w-full lg:border-0
+          type="text"
+          placeholder="جسجو..."
+          />
+          <span class="lg:hidden p-3 text-sm rounded-l flex justify-center items-center text-[var(--text-color)] bg-[var(--active-color)]"><i class="fa-solid fa-magnifying-glass text-[var(--text-color)]"></i></span>
+        </div>
+          <button
+            id="nav-search-icon"
+            class="cursor-pointer text-sm md:text-base centered"
+          >
+            <i
+              class="fa-solid fa-magnifying-glass text-[var(--text-color)]"
+            ></i>
+          </button>
+        </div>
+        <!--finish nav input  -->
+        <!-- start nav items -->
+        <div
+          class="flex items-center justify-center gap-2.5 xs:gap-3.5 sm:gap-2 xl:gap-5"
+        >
+          <div class="flex items-center gap-2 relative cursor-pointer nav-item">
+            <img
+              width="20"
+              height="20"
+              src="images/language/iran-32.png"
+              alt=""
+            />
+            <span class="hidden sm:inline-block">فارسی</span>
+            <div
+              class="nav-item-content opacity-0 invisible transition-opacity absolute top-2/1 left-0 -translate-x-1/2 sm:-translate-x-0 border border-gray-500/50 rounded-2xl overflow-hidden w-32 max-h-100 bg-[var(--box-color)]"
+            >
+              <ul class="w-full flex flex-col divide-y-1 divide-gray-500/50">
+                <li class="transition-colors hover:bg-gray-400/30">
+                  <a
+                    href="#"
+                    class="w-auto flex flex-row items-center px-4 py-3 gap-3.5"
+                    ><img
+                      width="25"
+                      height="25"
+                      src="images/language/iran-32.png"
+                      alt=""
+                    />فارسی</a
+                  >
+                </li>
+                <li class="transition-colors hover:bg-gray-400/30">
+                  <a
+                    href="#"
+                    class="w-auto flex flex-row items-center px-4 py-3 gap-3.5"
+                    ><img
+                      width="25"
+                      height="25"
+                      src="images/language/united states-32.png"
+                      alt=""
+                    />انگلیسی</a
+                  >
+                </li>
+                <li class="transition-colors hover:bg-gray-400/30">
+                  <a
+                    href="#"
+                    class="w-auto flex flex-row items-center px-4 py-3 gap-3.5"
+                    ><img
+                      width="25"
+                      height="25"
+                      src="images/language/china-32.png"
+                      alt=""
+                    />چینی</a
+                  >
+                </li>
+                <li class="transition-colors hover:bg-gray-400/30">
+                  <a
+                    href="#"
+                    class="w-auto flex flex-row items-center px-4 py-3 gap-3.5"
+                    ><img
+                      width="25"
+                      height="25"
+                      src="images/language/united arab emirates-32.png"
+                      alt=""
+                    />عربی</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div
+            class="size-7 sm:size-9 md:size-10 bg-[var(--bg-color)] centered border border-gray-500 cursor-pointer rounded-full text-sm md:text-base"
+            onclick="toggleDarkMode()"
+          >
+            <i class="fa-regular fa-moon"></i>
+          </div>
+          <div
+          onclick=" addShoppingCardItems()"
+            class="nav-item size-7 sm:size-9 md:size-10 relative bg-[var(--bg-color)] centered border border-gray-500 cursor-pointer rounded-full text-sm md:text-base"
+          >
+            <i class="fa-solid fa-cart-shopping"></i>
+            <div
+              class="nav-item-content font-[dana-num] opacity-0 invisible transition-opacity cursor-auto flex flex-col absolute top-[150%]  left-[-470%] sm:-left-1/2 px-1 border border-gray-500/50 rounded-2xl overflow-hidden w-80 xs:w-90 sm:w-100 max-h-100 h-auto bg-[var(--box-color)]"
+            >
+              <div class="flex justify-between items-center py-3 px-4">
+                <span class="font-extrabold">سبد خرید من</span>
+                <span
+                  id="shopping-card-length"
+                  class="px-1 rounded-md bg-[var(--active-color)]/30 text-[var(--active-color)] font-bold text-sm"
+                ></span>
+              </div>
+              <ul
+                id="shopping-card-container"
+                class="flex flex-col h-auto grow overflow-y-auto border-y border-dashed border-gray-500/50"
+              >
+                <!-- data loaded form js  -->
+              </ul>
+              <div class="flex justify-between flex-wrap py-3 px-4">
+                <span class="text-[var(--text-color)]/70 font-bold"
+                  >مجموع:</span
+                >
+                <span
+                  id="shopping-card-total-price"
+                  class="font-bold text-lg"
+                ></span>
+                <a
+                  href="#"
+                  class="w-full py-1.5 rounded mt-2 text-white font-bold bg-[var(--active-color)] text-center"
+                  >تسویه حساب</a
+                >
+              </div>
+              <div
+                id="empty-shopping-card"
+                class="grow hidden flex-col items-center gap-3 py-8"
+              >
+                <div
+                  class="size-20 centered text-3xl bg-[var(--active-color)]/20 rounded-full"
+                >
+                  <i class="fa-solid fa-cart-shopping"></i>
+                </div>
+                <span>سبد خرید شما خالی است!</span>
+                <a
+                  href="#"
+                  class="py-1.5 px-10 rounded text-white font-bold bg-[var(--active-color)] text-center"
+                  >اکنون خرید کنید</a
+                >
+              </div>
+            </div>
+          </div>
+          <div
+          onclick="toggleFullscreen()"
+            class="size-7 sm:size-9 md:size-10 bg-[var(--bg-color)] centered border border-gray-500 cursor-pointer rounded-full text-sm md:text-base"
+          >
+            <i class="fa-solid fa-expand"></i>
+          </div>
+          <div
+            class="nav-item relative size-7 sm:size-9 md:size-10 bg-[var(--bg-color)] centered border border-gray-500 cursor-pointer rounded-full text-sm md:text-base"
+          >
+            <i class="fa-solid fa-clipboard-list"></i>
+            <div
+              class="nav-item-content opacity-0 invisible transition-opacity cursor-auto flex flex-col absolute top-[150%] left-[-140%] md:left-0 sm:-translate-x-0 px-1 border border-gray-500/50 rounded-2xl overflow-hidden w-80 sm:w-100 max-h-100 h-auto bg-[var(--box-color)]">
+              <div class="flex justify-between items-center py-3 px-4">
+                <span class="font-extrabold">لیست کارها</span>
+              </div>
+              <ul id="nav-todo-list-container"
+                class="flex flex-col h-auto grow overflow-y-auto border-y border-dashed border-gray-500/50"
+              >
+             <!-- data loaded from js  -->
+              </ul>
+              <div class="py-3 px-4 flex justify-center">
+                <a
+                  href="#"
+                  class="w-full py-1.5 rounded mt-2 text-white font-bold bg-[var(--active-color)] text-center"
+                  >مشاهده همه
+                </a>
+              </div>
+            </div>
+          </div>
+          <div
+            class="font-[dana-num] h-7 md:h-10 px-3 bg-[var(--active-color)] text-white font-bold hidden md:flex justify-center items-center cursor-auto  gap-1 border border-gray-500 rounded-full lg:text-lg"
+          >
+            <i class="fa-solid fa-cloud-rain text-xs"></i>
+            15°
+          </div>
+          <div class="nav-item relative flex items-center gap-2">
+              <div
+              class="size-9 md:size-10 bg-[#f39159] centered border border-gray-500 cursor-pointer rounded-full text-sm md:text-base"
+            >
+              <img
+                width="25"
+                height="25"
+                src="images/profile (1).png"
+                alt="profile-photo"
+              />
+              </div>
+              <div class="font-bold max-w-20 truncate hidden md:inline-block">
+              <span>امیر</span><br />
+              <span>
+                مدیر
+                <i class="fa-solid fa-angle-down text-sm"></i>
+              </span>
+              </div>
+              <div class="nav-item-content opacity-0 invisible transition-opacity cursor-auto  absolute top-[125%] xs:top-[130%] left-0  border border-gray-500/50 rounded-2xl overflow-hidden w-60 max-h-100 h-auto bg-[var(--box-color)] ">
+                <div class="flex items-center gap-2 p-2">
+                  <div class="p-1 bg-[var(--bg-color)] size-10 rounded-full overflow-hidden">
+                    <img class="object-cover" src="images/profile (1).png" alt="user-profile">
+                  </div>
+                  <div class="flex flex-col text-sm">
+                    <span>امیر رضازاده</span>
+                    <span>admin@gmail.com</span>
+                  </div>
+              </div>
+              <ul class="flex flex-col text-sm border-t border-gray-500/50 border-dashed">
+
+                <li>
+                  <a href="#" class="flex gap-2 px-5 py-3 transition-colors hover:bg-gray-400/30">
+                    <span><i class="fa-solid fa-user"></i></span>
+                    پروفایل
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="flex gap-2 px-5 py-3 transition-colors hover:bg-gray-400/30">
+                    <span><i class="fa-solid fa-envelope"></i></span>
+                    پیام ها
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="flex gap-2 px-5 py-3 transition-colors hover:bg-gray-400/30">
+                    <span><i class="fa-solid fa-list-check"></i></span>
+                   لیست وظایف
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="flex gap-2 px-5 py-3 transition-colors hover:bg-gray-400/30 hover:text-red-500/80">
+                    <span><i class="fa-solid fa-right-from-bracket"></i></i></span>
+                  خروج
+                  </a>
+                </li>
+              </ul>
+              <div id="active-color-options" class="flex justify-evenly border-t border-gray-500/50 py-3">
+                <button data-color="#0ca593" type="button" class="size-8 cursor-pointer rounded bg-[#0ca593]"></button>
+                <button data-color="#2a5fc1" type="button" class="size-8 cursor-pointer rounded bg-[#2a5fc1]"></button>
+                <button data-color="#5147a3" type="button" class="size-8 cursor-pointer rounded bg-[#5147a3]"></button>
+                <button data-color="#085e9e" type="button" class="size-8 cursor-pointer rounded bg-[#085e9e]"></button>
+                <button data-color="#7d4535" type="button" class="size-8 cursor-pointer rounded bg-[#7d4535]"></button>
+              </div>
+              </div>
+          </div>
+        </div>
+        <!-- finish nav items -->
+      </div>
+    </nav>
+    <aside class=" h-screen w-screen  md:max-w-60 overflow-x-hidden bg-black/30 md:bg-transparent translate-x-1/1 md:translate-x-0 fixed top-0 right-0 md:top-20 z-90 transition-all duration-500">
+        <ul class="shrink-0 w-50 xs:w-55 sm:w-60 h-full flex flex-col gap-2 pt-2 bg-[var(--box-color)]">
+          <li>
+            <a href="#" class="flex gap-5 items-center py-2 px-4 hover:text-[var(--active-color)]">
+              <span class="text-lg"><i class="fa-solid fa-house"></i></span>
+              <span>صفحه اصلی</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class=" flex gap-5 items-center py-2 px-4 bg-[var(--active-color)] text-white">
+              <span class="text-lg"><i class="fa-solid fa-tags"></i></span>
+              <span>محصولات</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="flex gap-5 items-center py-2 px-4 hover:text-[var(--active-color)]">
+              <span class="text-lg"><i class="fa-solid fa-users"></i></span>
+              <span>مشتریان</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="flex gap-5 items-center py-2 px-4 hover:text-[var(--active-color)]">
+              <span class="text-lg"><i class="fa-solid fa-clipboard-list"></i></span>
+              <span>لیست وظایف</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="flex gap-5 items-center py-2 px-4 hover:text-[var(--active-color)]">
+              <span class="text-lg"><i class="fa-solid fa-cart-shopping"></i></span>
+              <span>سبد خرید</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="flex gap-5 items-center py-2 px-4 hover:text-[var(--active-color)]">
+              <span class="text-lg"><i class="fa-solid fa-message"></i></span>
+              <span>چت</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="flex gap-5 items-center py-2 px-4 hover:text-[var(--active-color)]">
+              <span class="text-lg"><i class="fa-solid fa-user"></i></span>
+              <span>پروفایل</span>
+            </a>
+          </li>
+        </ul>
+    </aside>
+    <main class="px-3 xs:px-6 py-4 transition-all duration-500 bg-[var(--bg-color)] md:ms-60">
+      <h2 id="page-title" class="text-lg sm:text-xl lg:text-2xl my-3 font-extrabold ">ویرایش  کاربر</h2>
+      <section class="grid grid-cols-12 gap-3 p-3 lg:p-5 text-sm ">
+        <div class="col-span-8 bg-[var(--box-color)] rounded-lg p-1.5 lg:p-3">
+            <div class="flex flex-col gap-4">
+                <h3  class="md:text-lg font-bold">نمای کلی</h3>
+                <div class="flex items-center justify-between gap-3">
+                  <div class="sm:grow">
+                    <label class="cursor-pointer" for="first-name">نام کاربر</label>
+                    <div class="w-full my-3  ">
+                      <input class="w-full p-3 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 mb-1 bg-[var(--bg-color)]" required="" minlength="3" maxlength="30" type="text" id="first-name" placeholder="نام محصول را وارد کنید...">
+                      <span class="text-red-700 text-xs hidden">نام محصول باید بین 3 تا 30 کاراکتر باشد!</span>
+                    </div>
+                  </div>
+                  <div class="sm:grow">
+                    <label class="cursor-pointer" for="last-name">نام خانوادگی کاربر</label>
+                    <div class="w-full my-3  ">
+                      <input class="w-full p-3 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 mb-1 bg-[var(--bg-color)]" required="" minlength="3" maxlength="30" type="text" id="last-name" placeholder="نام محصول را وارد کنید...">
+                      <span class="text-red-700 text-xs hidden">نام محصول باید بین 3 تا 30 کاراکتر باشد!</span>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div></div>
+        </div>
+
+        <div class="col-span-4 bg-[var(--box-color)] rounded-lg p-1.5 lg:p-3">ds</div>
+      </section>
+    </main>
+   
+    <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="scripts/shared.js"></script>
+    <script type="module" src="scripts/user-details.js"></script>
+  </body>
+</html>
