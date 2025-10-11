@@ -13,16 +13,24 @@ const infoWrapper = document.querySelector("#info-container");
 const cardWrapper = document.querySelector("#card-container");
 let infoBtn = document.querySelector("#info");
 let cardBtn = document.querySelector("#cart");
+const userDeletBtn = document.querySelector('#user-delet-btn')
 
 let isHaveCart = false
 
-
-// window.addEventListener("DOMContentLoaded", getUser);
+document.querySelector('#user-edit-btn').href=`user-edit.html?id=${userId}`
+window.addEventListener("DOMContentLoaded", getUser);
 
 
 async function getUser() {
   let res = await fetch(`https://dummyjson.com/users/${userId || 1}`);
   let data = await res.json();
+  document.querySelector('#user-img').src=data.image
+  document.querySelector('#user-name').textContent=data.firstName + data.lastName
+  document.querySelector('#user-gender').textContent = data.gender=='male' ? 'مرد'  : 'زن'
+  document.querySelector('#user-email').textContent = data.email
+  document.querySelector('#user-phone').textContent = data.phone
+  document.querySelector('#user-username').textContent = data.username
+  document.querySelector('#user-birthDate').textContent = data.birthDate
   addInfos(data);
 }
 
@@ -30,7 +38,7 @@ function addInfos(data) {
   infoWrapper.innerHTML = `
                   <div class="flex flex-col gap-4 mt-7">
                     <span class="text-base font-bold">نشانی ها</span>
-                    <div class="flex items-center lg:w-2/3">
+                    <div class="flex flex-col xs:flex-row items-start gap-y-3 xl:w-2/3">
                         <div class="grow flex flex-col gap-3">
                             <span class=" font-bold my-3 block">محل اقامت</span>
                             <div class="flex items-center gap-1"><span>کشور:</span> <span>${
@@ -65,11 +73,11 @@ function addInfos(data) {
                     <div>
                       <span class="text-base font-bold my-4 block">کارت های بانکی</span>
                         <div class="flex flex-col divide-y divide-gray-500/50">
-                            <div class="flex items-center gap-4 p-3 ">
+                            <div class="flex items-center gap-1 xs:gap-4 p-3 ">
                                 <img alt="visa" src="images/visa-img.png">
                                 <div>
-                                    <div class="flex items-center mb-1.5">
-                                        <div class="font-semibold">${
+                                    <div class="flex items-center mb-1.5 text-xs sm:text-sm">
+                                        <div class="font-semibold ">${
                                           data.firstName
                                         }${
     data.lastName
@@ -95,60 +103,63 @@ async function addCard() {
   let cart = data.carts[0];
   let products = data.carts[0].products;
   isHaveCart = true
-  cardWrapper.innerHTML = `
-                <ul class="grow my-6 min-w-100 overflow-auto max-h-[370px]">
-                    <div class="flex justify-between items-center border-b border-gray-500/50 p-2 ">
-                      <span class="w-3/7 text-center">اسم</span>
-                      <span class="w-1/7 text-center">تخفیف</span>
-                      <span class="w-1/7 text-center">تعداد</span>
-                      <span class="w-1/7 text-center">قیمت</span>
-                      <span class="w-1/7 text-center">کل</span>
+  if(products.length){
+    cardWrapper.innerHTML = `
+                  <ul class="grow my-6 min-w-100 overflow-auto max-h-[370px]">
+                      <div class="flex justify-between items-center border-b border-gray-500/50 p-2 ">
+                        <span class="w-3/7 text-center">اسم</span>
+                        <span class="w-1/7 text-center">تخفیف</span>
+                        <span class="w-1/7 text-center">تعداد</span>
+                        <span class="w-1/7 text-center">قیمت</span>
+                        <span class="w-1/7 text-center">کل</span>
+                      </div>
+                     ${products
+                       .map((elem) => {
+                         return `
+                        <li class="flex justify-between items-center transition-colors hover:bg-gray-500/20 p-1.5 md:px-2 rounded-lg">
+                        <span class="flex items-center gap-2.5 w-3/7">
+                          <a href="product-details.html?id=${elem.id}" class="size-11 md:size-13 p-1 bg-[var(--bg-color)]  rounded-full"><img class="object-cover  rounded-full " src="${
+                            elem.thumbnail
+                          }" alt="${elem.title}"></a>
+                          <a href="product-details.html?id=${elem.id}">${elem.title}</a>
+                        </span>
+                        <span class="w-1/7 text-center">${
+                          elem.discountPercentage
+                        } %</span>
+                        <span class="w-1/7 text-center">${elem.quantity}</span>
+                        <span class="w-1/7 text-center">${elem.price} $</span>
+                        <span class="w-1/7 text-center">${elem.total.toFixed(
+                          2
+                        )} $</span>
+                      </li>
+                       `;
+                       })
+                       .join("")}
+                    </ul>
+                    <div class="flex justify-between flex-wrap gap-2 p-3 bg-[var(--bg-color)]/80 rounded-lg font-[dana-num]">
+                      <div>
+                        <span>انواع محصول:</span>
+                        <span >${cart.totalProducts}</span>
+                      </div>
+                      <div>
+                        <span>تعداد محصول:</span>
+                        <span >${cart.totalQuantity}</span>
+                      </div>
+                      <div>
+                        <span>تخفیف خورده:</span>
+                        <span >${cart.discountedTotal} $</span>
+                      </div>
+                      <div>
+                        <span>مجموع:</span>
+                        <span >${cart.total} $</span>
+                      </div>
                     </div>
-                   ${products
-                     .map((elem) => {
-                       return `
-                      <li class="flex justify-between items-center transition-colors hover:bg-gray-500/20 p-1.5 md:px-2 rounded-lg">
-                      <a href="product-details.html?id=1" class="flex items-center gap-2.5 w-3/7">
-                        <span class="size-11 md:size-13 p-1 bg-[var(--bg-color)]  rounded-full"><img class="object-cover  rounded-full " src="${
-                          elem.thumbnail
-                        }" alt="${elem.title}"></span>
-                        <span>${elem.title}</span>
-                      </a>
-                      <span class="w-1/7 text-center">${
-                        elem.discountPercentage
-                      } %</span>
-                      <span class="w-1/7 text-center">${elem.quantity}</span>
-                      <span class="w-1/7 text-center">${elem.price} $</span>
-                      <span class="w-1/7 text-center">${elem.total.toFixed(
-                        2
-                      )} $</span>
-                    </li>
-                     `;
-                     })
-                     .join("")}
-                  </ul>
-                  <div class="flex justify-between flex-wrap gap-2 p-3 bg-[var(--bg-color)]/80 rounded-lg font-[dana-num]">
-                    <div>
-                      <span>انواع محصول:</span>
-                      <span >${cart.totalProducts}</span>
-                    </div>
-                    <div>
-                      <span>تعداد محصول:</span>
-                      <span >${cart.totalQuantity}</span>
-                    </div>
-                    <div>
-                      <span>تخفیف خورده:</span>
-                      <span >${cart.discountedTotal} $</span>
-                    </div>
-                    <div>
-                      <span>مجموع:</span>
-                      <span >${cart.total} $</span>
-                    </div>
-                  </div>
-  `;
+    `;
+  }else{
+    cardWrapper.innerHTML = `<div class=" my-5 block h-[150px] md:h-[300px]  bg-[url('../images/product-not-found.png')]  bg-contain bg-center bg-no-repeat "></div>`
+  }
+  
 }
-
-
 cardBtn.addEventListener("click", () => {
   isHaveCart ? '' : addCard()
   infoBtn.classList.remove("active-tab");
@@ -162,3 +173,27 @@ infoBtn.addEventListener("click", () => {
   cardWrapper.classList.add("hidden");
   infoWrapper.classList.remove("hidden");
 });
+
+userDeletBtn.addEventListener('click' , ()=>{
+  showSwal(
+    "حذف کاربر",
+    "آیا میخواهید این کاربر را حذف کنید؟",
+    "warning",
+    true,
+    "حذف"
+  ).then((data) => {
+    if (data.isConfirmed) {
+      fetch(`https://dummyjson.com/users/${userId}`, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then(()=>{
+          setTimeout(() => {
+            window.location.href = 'index.html'
+          }, 3000);
+          showTost('success' , 'کاربر با موفقیت حذف شد!')
+        })
+        .catch(()=> showTost('error' , 'مشکلی پیش آمد. دوباره امتحان کنید!'))
+    }
+  });
+})
