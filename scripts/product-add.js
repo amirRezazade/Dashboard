@@ -287,7 +287,7 @@ function submitProduct() {
       })
         .then((res) => res.json())
         .then(
-          showTost('success' , productId? "مشخصات محصول آپدیت شد!" : "محصول اضافه شد!" )
+          showTost('success' , productId? "مشخصات محصول آپدیت شد!" :  "محصول اضافه شد!" )
         )
         .catch((error) => {
           console.log(error);

@@ -24,11 +24,8 @@ const cartNumber = document.getElementById('cart-number')
 const cartYear = document.getElementById('cart-year')
 const cartMount = document.getElementById('cart-month')
 const requiredInputs = document.querySelectorAll("input[required]");
-
 const cancelBtn = document.getElementById('cancel-btn')
 const submitBtn = document.getElementById('submit-btn')
-
-
 if (userId) {
   getUser();
   submitBtn.textContent = "ویرایش محصول";
@@ -38,8 +35,6 @@ if (userId) {
 async function getUser() {
   let res = await fetch(`https://dummyjson.com/users/${userId||1}`)
   let response = await res.json()
-  console.log(response);
-
 firstName.value = response.firstName
 lastName.value = response.lastName
 email.value = response.email
@@ -67,7 +62,6 @@ iban.value =  response.bank.iban
   profile.emit("complete", userImage);
   profile.files.push(userImage);
 }
-
 
 Dropzone.autoDiscover = false;
 const profile = new Dropzone("#user-photo", {
@@ -112,7 +106,6 @@ function formValidation() {
   return isValid;
 }
 
-
 async function submitUser() {
   showSwal(
       userId ? "ویرایش اطلاعات کاربر" : "اضافه کردن کاربر",
@@ -150,8 +143,7 @@ async function submitUser() {
             }),
           })
             .then((res) => res.json())
-            .then(res=>
-              console.log(res),
+            .then(
               showTost('success' , userId ? "مشخصات کاربر آپدیت شد!" : "کاربر اضافه شد!" )
             )
             .catch((error) => {
