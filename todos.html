@@ -404,7 +404,7 @@
             <table class=" text-xs xl:text-sm w-full min-w-[800px] max-w-7xl overflow-x-auto ">
                 <thead class="">
                     <tr class="flex p-1.5 md:p-3">
-                        <td class="text-center w-1/10"><input class="accent-[var(--active-color)] cursor-pointer md:size-4 " type="checkbox"></td>
+                        <td class="text-center w-1/10"><input id="check-all" class="accent-[var(--active-color)] cursor-pointer md:size-4 " type="checkbox"></td>
                         <td class="text-center w-4/10">وظیفه</td>
                         <td class="text-center w-2/10">اختصاص داده شده به</td>
                         <td class="text-center w-2/10">وضعیت</td>
@@ -412,32 +412,26 @@
                     </tr>
                 </thead>
                 <tbody id="users-container" class=" divide-y-1 divide-gray-500/50 border-y border-gray-500/50 flex flex-col w-full">
-                   <!-- <tr class="p-1.5 md:p-3 flex transition-colors hover:bg-gray-500/20">
-                         <td class=" centered w-1/10"><input class="accent-[var(--active-color)] cursor-pointer md:size-4 " type="checkbox"></td>
-                         <td class=" centered w-3/10">Create a compost pile</td>
-                         <td class=" centered w-2/10">
-                            <div class="flex flex-nowrap">
-                                <a href="javascript: void(0);" class="relative group -mr-2.5 bg-[var(--bg-color)] rounded-full border border-[var(--bg-color)] transition-transform duration-500 hover:-translate-y-2 " data-img="../../assets/images/users/avatar-3.jpg">           
-                                  <img src="profile.png" alt="" class="rounded-full size-7"> 
-                                  <span class="py-1 px-2 bg-[var(--active-color)] text-white rounded absolute !z-10 left-1/2 -top-1/1 -translate-1/2 after:contetn-[''] after:absolute after:top-1/1 after:left-1/2 after:-translate-1/2 after:size-3 after:rotate-45 after:bg-[var(--active-color)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-300 text-xs text-nowrap">Abigail Rivera</span>       
-                                </a>
-                                <a href="javascript: void(0);" class="relative group -mr-2.5 bg-[var(--bg-color)] rounded-full border border-[var(--bg-color)] transition-transform duration-500 hover:-translate-y-2 " data-img="../../assets/images/users/avatar-3.jpg">           
-                                  <img src="profile.png" alt="" class="rounded-full size-7"> 
-                                  <span class="py-1 px-2 bg-[var(--active-color)] text-white rounded absolute !z-10 left-1/2 -top-1/1 -translate-1/2 after:contetn-[''] after:absolute after:top-1/1 after:left-1/2 after:-translate-1/2 after:size-3 after:rotate-45 after:bg-[var(--active-color)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-300 text-xs text-nowrap">Sofia Mitchell</span>       
-                                </a>
-                                <a href="javascript: void(0);" class="relative group -mr-2.5 bg-[var(--bg-color)] rounded-full border border-[var(--bg-color)] transition-transform duration-500 hover:-translate-y-2 " data-img="../../assets/images/users/avatar-3.jpg">           
-                                  <img src="profile.png" alt="" class="rounded-full size-7"> 
-                                  <span class="py-1 px-2 bg-[var(--active-color)] text-white rounded absolute !z-10 left-1/2 -top-1/1 -translate-1/2 after:contetn-[''] after:absolute after:top-1/1 after:left-1/2 after:-translate-1/2 after:size-3 after:rotate-45 after:bg-[var(--active-color)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-300 text-xs text-nowrap">James Davis</span>       
-                                </a>
-                              
-                            </div>
-                         </td>
-                         <td class=" centered w-2/10 truncate">تکمیل شده</td>
-                         <td class=" centered w-1/10 "><button type="button" class="p-1 rounded-sm cursor-pointer text-blue-500" onclick="editTodo(84)"><i class="fa fa-edit"></i></button></td>
-                         <td class=" centered w-1/10 "><button type="button" class="p-1 rounded-sm cursor-pointer text-red-500" onclick="removetodo(84)"><i class="fa fa-trash"></i></button></td>
-                   </tr> -->
+                  <li class="flex justify-between items-center gap-5 animate-pulse px-1.5 md:px-2 h-14 rounded-lg">
+                      <span class="w-1/10 h-3 centered"><span class="size-4 bg-gray-500/50 rounded block"></span></span>
+                      <span class="w-4/10 h-3 centered"><span class="w-50 h-full bg-gray-500/50 rounded-lg block"></span></span>
+                      <span class="w-2/10 h-3 centered"><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span> </span>
+                      <span class="w-2/10 h-3 centered"><span class="w-15 h-full bg-gray-500/50 rounded block"></span></span>
+                      <span class="w-1/10 h-3 centered gap-2"><span class="size-4 bg-gray-500/50 rounded block"></span><span class="size-4 bg-gray-500/50 rounded block"></span></span>
+                  </li>
                 </tbody>
+               
             </table>
+            <div class="flex justify-between font-[dana-num] text-sm p-4 lg:pt-6">
+                <span><span id="total-todos-count" class="font-[dana-num]">0</span> کار </span>
+                <div id="todos-pagination" class="flex items-center gap-1.5 text-xs">
+                  <button disabled="" type="button" class="prev size-7 centered rounded border border-gray-500/20 hover:bg-gray-500/30 cursor-pointer"><i class="fa-solid fa-arrow-up pointer-events-none rotate-90"></i></button>
+                  <button type="button" class="one size-7 centered rounded border border-gray-500/20 hover:bg-gray-500/30 cursor-pointer active-page" disabled="">1</button>
+                  <button type="button" class="two size-7 centered rounded border border-gray-500/20 hover:bg-gray-500/30 cursor-pointer">2</button>
+                  <button type="button" class="three size-7 centered rounded border border-gray-500/20 hover:bg-gray-500/30 cursor-pointer">3</button>
+                  <button type="button" class="next size-7 centered rounded border border-gray-500/20 hover:bg-gray-500/30 cursor-pointer"><i class="fa-solid fa-arrow-up pointer-events-none -rotate-90"></i></button>
+                </div>
+              </div>
         </div>
 
         <!-- finish totdos list section  -->

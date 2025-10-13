@@ -12,7 +12,10 @@ const sortingElem = document.querySelector("#sort-select-box");
 const orderingElem = document.querySelector("#ordering");
 const searchInput = document.querySelector("#search-input");
 const paginationElem = document.querySelector("#users-pagination");
-
+let user  = document.querySelector('#user')
+let admin  = document.querySelector('#admin')
+let moderator  = document.querySelector('#moderator')
+let copyUsers;
 let page = 1;
 let userCount;
 window.removeUser = removeUser;
@@ -83,10 +86,7 @@ function addUsers(list, page = 1) {
 const roleParams = document.querySelectorAll('#role-checkbox input')
 roleParams.forEach(elem=> elem.addEventListener('change' , filtering))
 
-let copyUsers;
-let user  = document.querySelector('#user')
-let admin  = document.querySelector('#admin')
-let moderator  = document.querySelector('#moderator')
+
 function filtering() {
   let parameter = sortingElem.value;
   let roleFiltering = [...users].filter(elem => {
