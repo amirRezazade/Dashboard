@@ -6,36 +6,28 @@ import {
   addToShoppingCard,
 } from "./funcs.js";
 
-window.removeTodo = removeTodo
+window.removeTodo = removeTodo;
+window.changeDeletTodosBtn = changeDeletTodosBtn;
 
 const todosWrapper = document.querySelector("tbody");
 const checkAll = document.querySelector("#check-all");
 const paginationElem = document.querySelector("#todos-pagination");
+const deletTodosBtn = document.querySelector("#remove-todos");
 let todos = [];
 let page = 1;
 let todosCount;
+let checkboxInputs;
 
 getTodos();
 async function getTodos() {
-  todosWrapper.innerHTML+=`
-   <tr class="w-full flex justify-between items-center gap-5 animate-pulse px-1.5 md:px-2 h-14 rounded-lg">
-                      <span class="w-1/10 h-3 centered"><span class="size-4 bg-gray-500/50 rounded block"></span></span>
-                      <span class="w-4/10 h-3 centered"><span class="w-50 h-full bg-gray-500/50 rounded-lg block"></span></span>
-                      <span class="w-2/10 h-3 centered"><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span> </span>
-                      <span class="w-2/10 h-3 centered"><span class="w-15 h-full bg-gray-500/50 rounded block"></span></span>
-                      <span class="w-1/10 h-3 centered gap-2"><span class="size-4 bg-gray-500/50 rounded block"></span><span class="size-4 bg-gray-500/50 rounded block"></span></span>
-                  </tr>
-  `
   let res = await fetch(`https://dummyjson.com/todos?limit=100`);
   let response = await res.json();
   todos = response.todos;
-  todosCount = todos.length
-  // addTodos(todos);
+  todosCount = todos.length;
+  addTodos(todos);
 }
 
-function addTodos(list, page = 1) {
-  console.log(555);
-  
+function addTodos(list, page = 1) {  
   todosWrapper.innerHTML = "";
   if (list.length == 0)
     todosWrapper.innerHTML = `<div class=" my-5 block h-[150px] md:h-[300px]  bg-[url('../images/product-not-found.png')]  bg-contain bg-center bg-no-repeat "></div>`;
@@ -44,8 +36,8 @@ function addTodos(list, page = 1) {
   document.querySelector("#total-todos-count").textContent = list.length;
   [...list].splice(page * 10 - 10, 10).forEach((todo) => {
     todosWrapper.innerHTML += `
-           <tr class="px-1.5 md:px-3 h-14 flex transition-opacity duration-500 hover:bg-gray-500/20">
-                         <td class=" centered w-1/10"><input class="accent-[var(--active-color)] cursor-pointer md:size-4 " type="checkbox"></td>
+           <tr class="px-1.5 md:px-3 h-14 flex transition-opacity duration-500 hover:bg-gray-500/20" data-id="${todo.id}">
+                         <td class=" centered w-1/10"><input class="accent-[var(--active-color)] cursor-pointer md:size-4 " type="checkbox" oninput="changeDeletTodosBtn()"></td>
                          <td class=" centered w-4/10 text-center ${
                            todo.completed ? "line-through" : ""
                          }">${todo.todo}</td>
@@ -72,12 +64,13 @@ function addTodos(list, page = 1) {
                              : ""
                          } ${todo.completed ? "تکمیل شده" : "تکمیل نشده"} </td>
                          <td class=" centered w-1/10 flex items-center gap-1.5">
-                         <button type="button" class="p-1 rounded-sm cursor-pointer text-blue-500" data-id="${todo.id}" onclick="editTodo(this)"><i class="fa fa-edit"></i></button>
-                         <button type="button" class="p-1 rounded-sm cursor-pointer text-red-500" data-id="${todo.id}" onclick="removeTodo(this)"><i class="fa fa-trash"></i></button>
+                         <button type="button" class="p-1 rounded-sm cursor-pointer text-blue-500" onclick="editTodo(this)"><i class="fa fa-edit"></i></button>
+                         <button type="button" class="p-1 rounded-sm cursor-pointer text-red-500" onclick="removeTodo(this)"><i class="fa fa-trash"></i></button>
                          </td>
                    </tr>
         `;
   });
+  checkboxInputs = document.querySelectorAll("tbody input");
 }
 
 paginationElem.addEventListener("click", (e) => {
@@ -85,6 +78,87 @@ paginationElem.addEventListener("click", (e) => {
     pagination(e);
   }
 });
+
+
+checkAll.addEventListener("click", () => {
+  if (checkAll.checked === true) {
+    checkboxInputs.forEach((elem) => (elem.checked = true));
+    changeDeletTodosBtn()
+  } else {
+    checkboxInputs.forEach((elem) => (elem.checked = false));
+    changeDeletTodosBtn()
+  }
+});
+
+
+function removeTodo(elem) {
+  let li = elem.closest("tr");
+  let id = li.dataset.id;  
+  showSwal(
+    "حذف کار",
+    "آیا میخواهید این کار را حذف کنید؟",
+    "warning",
+    true,
+    "حذف"
+  ).then((data) => {
+    if (data.isConfirmed) {
+      fetch(`https://dummyjson.com/todos/${id}`, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then(() => {
+          showTost("success", "کار با موفقیت حذف شد!");
+          let itemIndex = todos.findIndex((e) => e.id == id);
+          todos.splice(itemIndex, 1);
+          li.classList.add("opacity-0");
+          setTimeout(() => li.remove(), 500);
+          document.querySelector("#total-todos-count").textContent =todos.length;
+        })
+        .catch(() => showTost("error", "مشکلی پیش آمد. دوباره امتحان کنید!"));
+    }
+  });
+}
+
+deletTodosBtn.addEventListener('click' , ()=>{
+  showSwal(
+    "حذف کارها",
+    "آیا میخواهید این کارها را حذف کنید؟",
+    "warning",
+    true,
+    "حذف"
+  ).then((data) => {
+    if (data.isConfirmed) {
+      checkboxInputs.forEach(elem=>{
+        if(elem.checked===true){
+          let li = elem.closest("tr")
+          let id = li.dataset.id
+          let itemIndex = todos.findIndex((e) => e.id == id);
+          todos.splice(itemIndex, 1);
+          pagination(1)
+          changeDeletTodosBtn()
+          checkAll.checked = false
+        }
+      })
+      showTost("success", "کارها با موفقیت حذف شدند!");
+    }
+  }
+
+  )
+})
+
+function changeDeletTodosBtn(){
+   let isOneChecked = [...checkboxInputs].some(
+        (elem) => elem.checked === true
+      );
+      if (isOneChecked) deletTodosBtn.classList.remove("opacity-0", "invisible");
+      else {        
+        deletTodosBtn.classList.add("opacity-0", "invisible");
+        checkAll.checked = false
+      }
+        checkboxInputs = document.querySelectorAll("tbody input");
+
+}
+
 function pagination(e) {
   if (e === 1) {
     page = 1;
@@ -99,8 +173,8 @@ function pagination(e) {
     paginationElem.querySelector(".one").disabled = true;
     paginationElem.querySelector(".two").textContent = page + 1;
     paginationElem.querySelector(".three").textContent = page + 2;
-    addTodos(todos , 1)
-    
+    addTodos(todos, 1);
+
     return "";
   }
   paginationElem
@@ -149,46 +223,6 @@ function pagination(e) {
     paginationElem.querySelector(".two").classList.add("active-page");
     paginationElem.querySelector(".one").textContent = page - 1;
     paginationElem.querySelector(".three").textContent = page + 1;
-  }  
-  addTodos(todos, page);
-}
-
-checkAll.addEventListener("click", () => {
-  if (checkAll.checked == true) {
-    document
-      .querySelectorAll("input[type=checkbox]")
-      .forEach((elem) => (elem.checked = true));
-  } else {
-    document
-      .querySelectorAll("input[type=checkbox]")
-      .forEach((elem) => (elem.checked = false));
   }
-});
-
-function removeTodo(elem) {
-  let li = elem.closest('tr')
-  let id = elem.dataset.id
-  showSwal(
-    "حذف کار",
-    "آیا میخواهید این کار را حذف کنید؟",
-    "warning",
-    true,
-    "حذف"
-  ).then((data) => {
-    if (data.isConfirmed) {
-      fetch(`https://dummyjson.com/todos/${id}`, {
-        method: "DELETE",
-      })
-        .then((res) => res.json())
-        .then(()=>{ 
-          showTost('success' , 'کار با موفقیت حذف شد!')
-          let itemIndex = todos.findIndex((e) => e.id == id);
-          todos.splice(itemIndex, 1);
-           li.classList.add("opacity-0");
-           setTimeout(() => li.remove(), 500);
-           document.querySelector("#total-todos-count").textContent = todos.length;
-        })
-        .catch(()=> showTost('error' , 'مشکلی پیش آمد. دوباره امتحان کنید!'))
-    }
-  });
+  addTodos(todos, page);
 }

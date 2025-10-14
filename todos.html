@@ -401,6 +401,10 @@
         
         <!-- start totdos list section  -->
         <div class="bg-[var(--box-color)] rounded-lg p-1.5 lg:p-3 col-span-12 md:col-span-9">
+            <div class="flex justify-end items-center gap-2">
+              <button id="remove-todos" class="opacity-0 invisible px-5 py-1.5 text-xs sm:text-sm text-white rounded-sm bg-red-500/70 transition-colors hover:bg-red-500/90 cursor-pointer">حذف کارها <i class="fas fa-trash text-xs"></i></button>
+              <button id="add-todo" class="px-8 py-1.5 text-xs sm:text-sm text-white rounded-sm bg-[var(--active-color)]/80 transition-colors hover:bg-[var(--active-color)] cursor-pointer">افزودن کار <i class="fas fa-add text-xs"></i></button>
+            </div>
             <table class=" text-xs xl:text-sm w-full min-w-[800px] max-w-7xl overflow-x-auto ">
                 <thead class="">
                     <tr class="flex p-1.5 md:p-3">
@@ -411,14 +415,44 @@
                         <td class="text-center w-1/10">عملیات</td>
                     </tr>
                 </thead>
-                <tbody id="users-container" class=" divide-y-1 divide-gray-500/50 border-y border-gray-500/50 flex flex-col w-full">
-                  <li class="flex justify-between items-center gap-5 animate-pulse px-1.5 md:px-2 h-14 rounded-lg">
-                      <span class="w-1/10 h-3 centered"><span class="size-4 bg-gray-500/50 rounded block"></span></span>
-                      <span class="w-4/10 h-3 centered"><span class="w-50 h-full bg-gray-500/50 rounded-lg block"></span></span>
-                      <span class="w-2/10 h-3 centered"><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span> </span>
-                      <span class="w-2/10 h-3 centered"><span class="w-15 h-full bg-gray-500/50 rounded block"></span></span>
-                      <span class="w-1/10 h-3 centered gap-2"><span class="size-4 bg-gray-500/50 rounded block"></span><span class="size-4 bg-gray-500/50 rounded block"></span></span>
-                  </li>
+                <tbody  id="users-container" class=" divide-y-1 divide-gray-500/50 border-y border-gray-500/50 flex flex-col w-full">
+                    <tr class="flex justify-between items-center gap-5 animate-pulse px-1.5 md:px-2 h-14 rounded-lg">
+                      <td class="w-1/10 h-3 centered"><span class="size-4 bg-gray-500/50 rounded block"></span></td>
+                      <td class="w-4/10 h-3 centered"><span class="w-50 h-full bg-gray-500/50 rounded-lg block"></span></td>
+                      <td class="w-2/10 h-3 centered"><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span> </td>
+                      <td class="w-2/10 h-3 centered"><span class="w-15 h-full bg-gray-500/50 rounded block"></span></td>
+                      <td class="w-1/10 h-3 centered gap-2"><span class="size-4 bg-gray-500/50 rounded block"></span><span class="size-4 bg-gray-500/50 rounded block"></span></td>
+                    </tr>
+                    <tr class="flex justify-between items-center gap-5 animate-pulse px-1.5 md:px-2 h-14 rounded-lg">
+                      <td class="w-1/10 h-3 centered"><span class="size-4 bg-gray-500/50 rounded block"></span></td>
+                      <td class="w-4/10 h-3 centered"><span class="w-50 h-full bg-gray-500/50 rounded-lg block"></span></td>
+                      <td class="w-2/10 h-3 centered"><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span> </td>
+                      <td class="w-2/10 h-3 centered"><span class="w-15 h-full bg-gray-500/50 rounded block"></span></td>
+                      <td class="w-1/10 h-3 centered gap-2"><span class="size-4 bg-gray-500/50 rounded block"></span><span class="size-4 bg-gray-500/50 rounded block"></span></td>
+                    </tr>
+                    <tr class="flex justify-between items-center gap-5 animate-pulse px-1.5 md:px-2 h-14 rounded-lg">
+                      <td class="w-1/10 h-3 centered"><span class="size-4 bg-gray-500/50 rounded block"></span></td>
+                      <td class="w-4/10 h-3 centered"><span class="w-50 h-full bg-gray-500/50 rounded-lg block"></span></td>
+                      <td class="w-2/10 h-3 centered"><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span> </td>
+                      <td class="w-2/10 h-3 centered"><span class="w-15 h-full bg-gray-500/50 rounded block"></span></td>
+                      <td class="w-1/10 h-3 centered gap-2"><span class="size-4 bg-gray-500/50 rounded block"></span><span class="size-4 bg-gray-500/50 rounded block"></span></td>
+                    </tr>
+                    <tr class="flex justify-between items-center gap-5 animate-pulse px-1.5 md:px-2 h-14 rounded-lg">
+                      <td class="w-1/10 h-3 centered"><span class="size-4 bg-gray-500/50 rounded block"></span></td>
+                      <td class="w-4/10 h-3 centered"><span class="w-50 h-full bg-gray-500/50 rounded-lg block"></span></td>
+                      <td class="w-2/10 h-3 centered"><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span> </td>
+                      <td class="w-2/10 h-3 centered"><span class="w-15 h-full bg-gray-500/50 rounded block"></span></td>
+                      <td class="w-1/10 h-3 centered gap-2"><span class="size-4 bg-gray-500/50 rounded block"></span><span class="size-4 bg-gray-500/50 rounded block"></span></td>
+                    </tr>
+                    <tr class="flex justify-between items-center gap-5 animate-pulse px-1.5 md:px-2 h-14 rounded-lg">
+                      <td class="w-1/10 h-3 centered"><span class="size-4 bg-gray-500/50 rounded block"></span></td>
+                      <td class="w-4/10 h-3 centered"><span class="w-50 h-full bg-gray-500/50 rounded-lg block"></span></td>
+                      <td class="w-2/10 h-3 centered"><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span> </td>
+                      <td class="w-2/10 h-3 centered"><span class="w-15 h-full bg-gray-500/50 rounded block"></span></td>
+                      <td class="w-1/10 h-3 centered gap-2"><span class="size-4 bg-gray-500/50 rounded block"></span><span class="size-4 bg-gray-500/50 rounded block"></span></td>
+                    </tr>
+ 
+                 
                 </tbody>
                
             </table>
