@@ -7,6 +7,7 @@ import {
 } from "./funcs.js";
 
 window.removeTodo = removeTodo;
+window.editTodo = editTodo;
 window.changeDeletTodosBtn = changeDeletTodosBtn;
 
 const todosWrapper = document.querySelector("tbody");
@@ -90,6 +91,8 @@ checkAll.addEventListener("click", () => {
   }
 });
 
+deletTodosBtn.addEventListener('click' , removeTodos)
+document.querySelector('#add-todo-btn').addEventListener('click' , addTodo)
 
 function removeTodo(elem) {
   let li = elem.closest("tr");
@@ -113,14 +116,14 @@ function removeTodo(elem) {
           li.classList.add("opacity-0");
           setTimeout(() => li.remove(), 500);
           document.querySelector("#total-todos-count").textContent =todos.length;
+          todosCount = todos.length
         })
         .catch(() => showTost("error", "مشکلی پیش آمد. دوباره امتحان کنید!"));
     }
   });
 }
-
-deletTodosBtn.addEventListener('click' , ()=>{
-  showSwal(
+function removeTodos(){
+    showSwal(
     "حذف کارها",
     "آیا میخواهید این کارها را حذف کنید؟",
     "warning",
@@ -144,8 +147,114 @@ deletTodosBtn.addEventListener('click' , ()=>{
   }
 
   )
-})
+}
+function editTodo(elem) {
+  let li = elem.closest("tr");
+  let id = li.dataset.id; 
+  let index = todos.findIndex((e) => e.id == id);    
+  Swal.fire({
+    title: "ویرایش اطلاعات کار",
+    html: `
+        <form class="w-full max-w-xs mx-auto text-[var(--text-color)] text-xs flex flex-col ">     
+      <label class="mb-1 sm:mb-2 mt-2 sm:mt-4 cursor-pointer text-start" for="todo">کار:</label>
+      <input id="todo" type="text" required  class=" bg-[var(--bg-color)] p-3 outline-0 rounded-lg border border-gray-500/80 focus:border-[var(--active-color)]" value="${
+        todos[index].todo
+      }">
+          <span class="mb-1 sm:mb-2 mt-7 text-start">وضعیت</span>
+      <select id="edit-status" class=" border border-gray-500/80 focus:border-[var(--active-color)] outline-0 cursor-pointer w-full bg-[var(--bg-color)] p-2 md:p-3 rounded-lg ">
+           <option ${
+            todos[index].completed ? "selected" : ""
+          } value="true">تکمیل شده</option>
+          <option ${
+            !todos[index].completed ? "selected" : ""
+          } value="false">تکمیل نشده</option>
+      </select>    
+    </form>
+    `,
+    focusConfirm: false,
+    showCancelButton: true,
+    confirmButtonText: "ذخیره",
+    cancelButtonText: "انصراف",
+    cancelButtonColor: "#dd3333",
+    preConfirm: () => {
+      const todo = document.getElementById("todo").value.trim();
+      const completed = document.getElementById("edit-status").value.trim();
 
+      if (todo.length <5) {
+        Swal.showValidationMessage("کار باید حداقل 5 کاراکتر باشد!");
+        return false;
+      }
+      return { todo , completed };
+    },
+  }).then((result) => {
+    if (result.isConfirmed) {
+      showSwal('ویرایش کار', 'آیا میخواهید اطلاعات این کار را تغییر دهید؟', 'warning', true, 'بله')
+      .then(res =>{
+        if(res.isConfirmed){     
+          let obj = {
+            todo: result.value.todo,
+            completed: result.value.completed=='true' ? true : false,
+            id: todos[index].id
+          }               
+          todos[index] = obj;
+           pagination(1)
+          showTost("success", "اطلاعات کار با موفقیت بروزرسانی شد.");        
+        }
+      })
+    }
+  });
+}
+function addTodo() { 
+  Swal.fire({
+    title: "افزودن کار",
+    html: `
+        <form class="w-full max-w-xs mx-auto text-[var(--text-color)] text-xs flex flex-col ">     
+      <label class="mb-1 sm:mb-2 mt-2 sm:mt-4 cursor-pointer text-start" for="add-todo">کار:</label>
+      <input id="add-todo" type="text" required  class=" bg-[var(--bg-color)] p-3 outline-0 rounded-lg border border-gray-500/80 focus:border-[var(--active-color)]">
+          <span class="mb-1 sm:mb-2 mt-7 text-start">وضعیت</span>
+      <select id="add-status" class=" border border-gray-500/80 focus:border-[var(--active-color)] outline-0 cursor-pointer w-full bg-[var(--bg-color)] p-2 md:p-3 rounded-lg ">
+           <option value="true">تکمیل شده</option>
+           <option selected value="false">تکمیل نشده</option>
+      </select>    
+    </form>
+    `,
+    focusConfirm: false,
+    showCancelButton: true,
+    confirmButtonText: "ذخیره",
+    cancelButtonText: "انصراف",
+    cancelButtonColor: "#dd3333",
+    preConfirm: () => {
+      const todo = document.getElementById("add-todo").value.trim();
+      const completed = document.getElementById("add-status").value.trim();
+
+      if (todo.length <5) {
+        Swal.showValidationMessage("کار باید حداقل 5 کاراکتر باشد!");
+        return false;
+      }
+      return { todo , completed };
+    },
+  }).then((result) => {
+    if (result.isConfirmed) {
+      showSwal('افزودن کار', 'آیا میخواهید این کار را اضافه کنید؟', 'warning', true, 'بله')
+      .then(res =>{
+        if(res.isConfirmed){            
+          let obj = {
+            todo: result.value.todo,
+            completed : result.value.completed=='true' ? true : false,
+            id :todos.length+1
+          }
+          console.log(obj);
+          
+          todos.unshift(obj)
+          pagination(1)
+          showTost("success", " کار با موفقیت اضافه شد.");
+
+        }
+      })
+      
+    }
+  });
+}
 function changeDeletTodosBtn(){
    let isOneChecked = [...checkboxInputs].some(
         (elem) => elem.checked === true
@@ -224,5 +333,6 @@ function pagination(e) {
     paginationElem.querySelector(".one").textContent = page - 1;
     paginationElem.querySelector(".three").textContent = page + 1;
   }
+  todosCount = todos.length
   addTodos(todos, page);
 }
