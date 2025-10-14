@@ -14,20 +14,49 @@ const todosWrapper = document.querySelector("tbody");
 const checkAll = document.querySelector("#check-all");
 const paginationElem = document.querySelector("#todos-pagination");
 const deletTodosBtn = document.querySelector("#remove-todos");
+const statusSelectbox = document.querySelector('#status')
+const searchInput = document.querySelector('#search')
+let mainTodos = [];
 let todos = [];
 let page = 1;
 let todosCount;
 let checkboxInputs;
 
-getTodos();
+
+// start event listeners 
+window.addEventListener('DOMContentLoaded' , ()=>{
+  getTodos();
+})
+paginationElem.addEventListener("click", (e) => {
+  if (e.target.nodeName === "BUTTON") {
+    pagination(e);
+  }
+});
+checkAll.addEventListener("click", () => {
+  if (checkAll.checked === true) {
+    checkboxInputs.forEach((elem) => (elem.checked = true));
+    changeDeletTodosBtn()
+  } else {
+    checkboxInputs.forEach((elem) => (elem.checked = false));
+    changeDeletTodosBtn()
+  }
+});
+statusSelectbox.addEventListener('change' , filtering)
+deletTodosBtn.addEventListener('click' , removeTodos)
+document.querySelector('#add-todo-btn').addEventListener('click' , addTodo)
+searchInput.addEventListener("input", () => {
+  filtering();
+});
+// finish event listeners 
+
 async function getTodos() {
   let res = await fetch(`https://dummyjson.com/todos?limit=100`);
   let response = await res.json();
-  todos = response.todos;
-  todosCount = todos.length;
-  addTodos(todos);
+  mainTodos = response.todos;
+  todosCount = mainTodos.length;
+  filtering();
+  
 }
-
 function addTodos(list, page = 1) {  
   todosWrapper.innerHTML = "";
   if (list.length == 0)
@@ -43,16 +72,16 @@ function addTodos(list, page = 1) {
                            todo.completed ? "line-through" : ""
                          }">${todo.todo}</td>
                          <td class=" centered w-2/10">
-                            <div class="flex flex-nowrap">
-                                <a href="javascript: void(0);" class="relative group -mr-2.5 bg-[var(--bg-color)] rounded-full border border-[var(--bg-color)] transition-transform duration-500 hover:-translate-y-2 " data-img="../../assets/images/users/avatar-3.jpg">           
+                            <div class="flex flex-nowrap select-none">
+                                <a href="javascript: void(0);" class="relative group -mr-2.5 bg-[var(--bg-color)] rounded-full border border-[var(--bg-color)] transition-transform duration-500 hover:-translate-y-2 hover:z-10" >           
                                   <img src="profile.png" alt="" class="rounded-full size-7"> 
                                   <span class="py-1 px-2 bg-[var(--active-color)] text-white rounded absolute !z-10 left-1/2 -top-1/1 -translate-1/2 after:contetn-[''] after:absolute after:top-1/1 after:left-1/2 after:-translate-1/2 after:size-3 after:rotate-45 after:bg-[var(--active-color)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-300 text-xs text-nowrap">Abigail Rivera</span>       
                                 </a>
-                                <a href="javascript: void(0);" class="relative group -mr-2.5 bg-[var(--bg-color)] rounded-full border border-[var(--bg-color)] transition-transform duration-500 hover:-translate-y-2 " data-img="../../assets/images/users/avatar-3.jpg">           
+                                <a href="javascript: void(0);" class="relative group -mr-2.5 bg-[var(--bg-color)] rounded-full border border-[var(--bg-color)] transition-transform duration-500 hover:-translate-y-2 hover:z-10" >           
                                   <img src="profile.png" alt="" class="rounded-full size-7"> 
                                   <span class="py-1 px-2 bg-[var(--active-color)] text-white rounded absolute !z-10 left-1/2 -top-1/1 -translate-1/2 after:contetn-[''] after:absolute after:top-1/1 after:left-1/2 after:-translate-1/2 after:size-3 after:rotate-45 after:bg-[var(--active-color)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-300 text-xs text-nowrap">Sofia Mitchell</span>       
                                 </a>
-                                <a href="javascript: void(0);" class="relative group -mr-2.5 bg-[var(--bg-color)] rounded-full border border-[var(--bg-color)] transition-transform duration-500 hover:-translate-y-2 " data-img="../../assets/images/users/avatar-3.jpg">           
+                                <a href="javascript: void(0);" class="relative group -mr-2.5 bg-[var(--bg-color)] rounded-full border border-[var(--bg-color)] transition-transform duration-500 hover:-translate-y-2 hover:z-10">           
                                   <img src="profile.png" alt="" class="rounded-full size-7"> 
                                   <span class="py-1 px-2 bg-[var(--active-color)] text-white rounded absolute !z-10 left-1/2 -top-1/1 -translate-1/2 after:contetn-[''] after:absolute after:top-1/1 after:left-1/2 after:-translate-1/2 after:size-3 after:rotate-45 after:bg-[var(--active-color)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-300 text-xs text-nowrap">James Davis</span>       
                                 </a>
@@ -73,27 +102,21 @@ function addTodos(list, page = 1) {
   });
   checkboxInputs = document.querySelectorAll("tbody input");
 }
+function filtering(){
+  todos = [...mainTodos]
+  let value = searchInput.value.toLowerCase().trim()
 
-paginationElem.addEventListener("click", (e) => {
-  if (e.target.nodeName === "BUTTON") {
-    pagination(e);
+  if(statusSelectbox.value!=='all'){
+     let status = statusSelectbox.value=='true' ? true : false    
+     todos = [...mainTodos].filter(elem=> elem.completed == status)
   }
-});
-
-
-checkAll.addEventListener("click", () => {
-  if (checkAll.checked === true) {
-    checkboxInputs.forEach((elem) => (elem.checked = true));
-    changeDeletTodosBtn()
-  } else {
-    checkboxInputs.forEach((elem) => (elem.checked = false));
-    changeDeletTodosBtn()
-  }
-});
-
-deletTodosBtn.addEventListener('click' , removeTodos)
-document.querySelector('#add-todo-btn').addEventListener('click' , addTodo)
-
+    if(value.length > 1){
+    todos = [...todos].filter((t) =>
+      t.todo.toLowerCase().includes(value)
+  ); 
+}
+  pagination(1)
+}
 function removeTodo(elem) {
   let li = elem.closest("tr");
   let id = li.dataset.id;  
@@ -111,8 +134,10 @@ function removeTodo(elem) {
         .then((res) => res.json())
         .then(() => {
           showTost("success", "کار با موفقیت حذف شد!");
-          let itemIndex = todos.findIndex((e) => e.id == id);
-          todos.splice(itemIndex, 1);
+          let itemIndex = mainTodos.findIndex((e) => e.id == id);
+          let todoIndex = todos.findIndex((e) => e.id == id);
+          mainTodos.splice(itemIndex, 1);
+          todos.splice(todoIndex, 1);
           li.classList.add("opacity-0");
           setTimeout(() => li.remove(), 500);
           document.querySelector("#total-todos-count").textContent =todos.length;
@@ -135,9 +160,11 @@ function removeTodos(){
         if(elem.checked===true){
           let li = elem.closest("tr")
           let id = li.dataset.id
-          let itemIndex = todos.findIndex((e) => e.id == id);
-          todos.splice(itemIndex, 1);
-          pagination(1)
+          let itemIndex = mainTodos.findIndex((e) => e.id == id);
+          let todoIndex = todos.findIndex((e) => e.id == id);
+          mainTodos.splice(itemIndex, 1);
+          todos.splice(todoIndex, 1);
+          filtering()
           changeDeletTodosBtn()
           checkAll.checked = false
         }
@@ -151,22 +178,24 @@ function removeTodos(){
 function editTodo(elem) {
   let li = elem.closest("tr");
   let id = li.dataset.id; 
-  let index = todos.findIndex((e) => e.id == id);    
+  let itemIndex = mainTodos.findIndex((e) => e.id == id);
+  let todoIndex = todos.findIndex((e) => e.id == id);
+
   Swal.fire({
     title: "ویرایش اطلاعات کار",
     html: `
         <form class="w-full max-w-xs mx-auto text-[var(--text-color)] text-xs flex flex-col ">     
       <label class="mb-1 sm:mb-2 mt-2 sm:mt-4 cursor-pointer text-start" for="todo">کار:</label>
       <input id="todo" type="text" required  class=" bg-[var(--bg-color)] p-3 outline-0 rounded-lg border border-gray-500/80 focus:border-[var(--active-color)]" value="${
-        todos[index].todo
+        todos[todoIndex].todo
       }">
           <span class="mb-1 sm:mb-2 mt-7 text-start">وضعیت</span>
       <select id="edit-status" class=" border border-gray-500/80 focus:border-[var(--active-color)] outline-0 cursor-pointer w-full bg-[var(--bg-color)] p-2 md:p-3 rounded-lg ">
            <option ${
-            todos[index].completed ? "selected" : ""
+            todos[todoIndex].completed ? "selected" : ""
           } value="true">تکمیل شده</option>
           <option ${
-            !todos[index].completed ? "selected" : ""
+            !todos[todoIndex].completed ? "selected" : ""
           } value="false">تکمیل نشده</option>
       </select>    
     </form>
@@ -194,10 +223,11 @@ function editTodo(elem) {
           let obj = {
             todo: result.value.todo,
             completed: result.value.completed=='true' ? true : false,
-            id: todos[index].id
+            id: todos[todoIndex].id
           }               
-          todos[index] = obj;
-           pagination(1)
+          todos[todoIndex] = obj;
+          mainTodos[itemIndex] = obj;
+          filtering()
           showTost("success", "اطلاعات کار با موفقیت بروزرسانی شد.");        
         }
       })
@@ -242,11 +272,10 @@ function addTodo() {
             todo: result.value.todo,
             completed : result.value.completed=='true' ? true : false,
             id :todos.length+1
-          }
-          console.log(obj);
-          
+          }          
           todos.unshift(obj)
-          pagination(1)
+          mainTodos.unshift(obj)
+          filtering()
           showTost("success", " کار با موفقیت اضافه شد.");
 
         }
@@ -267,7 +296,6 @@ function changeDeletTodosBtn(){
         checkboxInputs = document.querySelectorAll("tbody input");
 
 }
-
 function pagination(e) {
   if (e === 1) {
     page = 1;

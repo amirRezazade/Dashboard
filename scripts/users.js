@@ -124,7 +124,6 @@ sortingElem.addEventListener("change", filtering);
 orderingElem.addEventListener("change", filtering);
 searchInput.addEventListener("input", () => {
   let value = searchInput.value.trim();
-  searchInput.value = value;
   if (value.length > 2) getUsers(value);
   else if (value.length <= 1) getUsers();
 });

@@ -377,18 +377,19 @@
         </ul>
     </aside>
     <main class="px-3 xs:px-4 py-4 transition-all duration-500 bg-[var(--bg-color)] md:ms-60">
-      <h2 id="page-title" class="text-lg sm:text-xl lg:text-2xl my-3 font-extrabold ">لیست وظایف</h2>
-       <section class="grid grid-cols-12 gap-3">
+      <h2 id="page-title" class="text-lg sm:text-xl lg:text-2xl my-2 sm:my-3 font-extrabold ">لیست وظایف</h2>
+       <section class="">
         <!-- start totdos filtering section  -->
-        <div class="bg-[var(--box-color)] rounded-lg p-1.5 lg:p-3 col-span-12 md:col-span-3">
-            <div class="flex flex-col gap-2 sm:gap-4 text-xs sm:text-sm">
-                <div class="flex flex-col gap-1 xs:gap-2">
-                    <label for="search">جستجوی وظایف</label>
-                    <input class="w-full p-2 sm:p-3 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 mb-1 bg-[var(--bg-color)]" type="text" id="search" placeholder="جستجو...">
+        <div class="bg-[var(--box-color)] rounded-lg p-2.5 lg:p-3 xl:px-10">
+          <div class="w-full flex items-end flex-wrap sm:flex-nowrap justify-between gap-y-3.5 gap-x-3">
+            <div class="w-full md:max-w-1/2 flex gap-2 sm:gap-4 md:gap-1.5 lg:gap-4 text-xs lg:text-sm">
+                <div class="flex flex-col lg:flex-row w-2/3  lg:items-center gap-2 xs:gap-2">
+                    <label for="search" class="text-nowrap">جستجوی وظایف</label>
+                    <input class="w-full py-2 mb-0 px-3 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0  bg-[var(--bg-color)]" type="text" id="search" placeholder="جستجو...">
                 </div>
-                <div class="flex flex-col gap-1 xs:gap-2">
+                <div class="flex flex-col lg:flex-row w-1/3 lg:items-center gap-2 xs:gap-2">
                     <span>وضعیت</span>
-                    <select id="status" class="w-full p-2 mb-0 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0  bg-[var(--bg-color)]">
+                    <select id="status" class="w-full py-1.5 mb-0 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0  bg-[var(--bg-color)]">
                       <option value="all" selected>همه</option>
                       <option value="true">تکمیل شده </option>
                       <option value="false">تکمیل نشده</option>
@@ -396,66 +397,68 @@
                     
                 </div>
             </div>
+            <div class="w-full md:w-auto flex justify-end items-center gap-3 lg:gap-4 text-xs lg:text-sm">
+              <button id="remove-todos" class="opacity-0 invisible transition-all text-nowrap px-3 lg:px-5 py-1.5  text-white rounded-sm bg-red-500/70 hover:bg-red-500/90 cursor-pointer">حذف کارها <i class="fas fa-trash text-xs"></i></button>
+              <button id="add-todo-btn" class=" text-nowrap px-5 lg:px-8 py-1.5 text-white rounded-sm bg-[var(--active-color)]/80 transition-colors hover:bg-[var(--active-color)] cursor-pointer">افزودن کار <i class="fas fa-add text-xs"></i></button>
+            </div>
+          </div>
         </div>
         <!-- finish totdos filtering section  -->
-        
         <!-- start totdos list section  -->
-        <div class="bg-[var(--box-color)] rounded-lg p-1.5 lg:p-3 col-span-12 md:col-span-9">
-            <div class="flex justify-end items-center gap-2">
-              <button id="remove-todos" class="opacity-0 invisible px-5 py-1.5 text-xs sm:text-sm text-white rounded-sm bg-red-500/70 transition-colors hover:bg-red-500/90 cursor-pointer">حذف کارها <i class="fas fa-trash text-xs"></i></button>
-              <button id="add-todo-btn" class="px-8 py-1.5 text-xs sm:text-sm text-white rounded-sm bg-[var(--active-color)]/80 transition-colors hover:bg-[var(--active-color)] cursor-pointer">افزودن کار <i class="fas fa-add text-xs"></i></button>
-            </div>
-            <table class=" text-xs xl:text-sm w-full min-w-[800px] max-w-7xl overflow-x-auto ">
-                <thead class="">
-                    <tr class="flex p-1.5 md:p-3">
-                        <td class="text-center w-1/10"><input id="check-all" class="accent-[var(--active-color)] cursor-pointer md:size-4 " type="checkbox"></td>
-                        <td class="text-center w-4/10">وظیفه</td>
-                        <td class="text-center w-2/10">اختصاص داده شده به</td>
-                        <td class="text-center w-2/10">وضعیت</td>
-                        <td class="text-center w-1/10">عملیات</td>
-                    </tr>
-                </thead>
-                <tbody  id="users-container" class=" divide-y-1 divide-gray-500/50 border-y border-gray-500/50 flex flex-col w-full">
-                    <tr class="flex justify-between items-center gap-5 animate-pulse px-1.5 md:px-2 h-14 rounded-lg">
-                      <td class="w-1/10 h-3 centered"><span class="size-4 bg-gray-500/50 rounded block"></span></td>
-                      <td class="w-4/10 h-3 centered"><span class="w-50 h-full bg-gray-500/50 rounded-lg block"></span></td>
-                      <td class="w-2/10 h-3 centered"><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span> </td>
-                      <td class="w-2/10 h-3 centered"><span class="w-15 h-full bg-gray-500/50 rounded block"></span></td>
-                      <td class="w-1/10 h-3 centered gap-2"><span class="size-4 bg-gray-500/50 rounded block"></span><span class="size-4 bg-gray-500/50 rounded block"></span></td>
-                    </tr>
-                    <tr class="flex justify-between items-center gap-5 animate-pulse px-1.5 md:px-2 h-14 rounded-lg">
-                      <td class="w-1/10 h-3 centered"><span class="size-4 bg-gray-500/50 rounded block"></span></td>
-                      <td class="w-4/10 h-3 centered"><span class="w-50 h-full bg-gray-500/50 rounded-lg block"></span></td>
-                      <td class="w-2/10 h-3 centered"><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span> </td>
-                      <td class="w-2/10 h-3 centered"><span class="w-15 h-full bg-gray-500/50 rounded block"></span></td>
-                      <td class="w-1/10 h-3 centered gap-2"><span class="size-4 bg-gray-500/50 rounded block"></span><span class="size-4 bg-gray-500/50 rounded block"></span></td>
-                    </tr>
-                    <tr class="flex justify-between items-center gap-5 animate-pulse px-1.5 md:px-2 h-14 rounded-lg">
-                      <td class="w-1/10 h-3 centered"><span class="size-4 bg-gray-500/50 rounded block"></span></td>
-                      <td class="w-4/10 h-3 centered"><span class="w-50 h-full bg-gray-500/50 rounded-lg block"></span></td>
-                      <td class="w-2/10 h-3 centered"><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span> </td>
-                      <td class="w-2/10 h-3 centered"><span class="w-15 h-full bg-gray-500/50 rounded block"></span></td>
-                      <td class="w-1/10 h-3 centered gap-2"><span class="size-4 bg-gray-500/50 rounded block"></span><span class="size-4 bg-gray-500/50 rounded block"></span></td>
-                    </tr>
-                    <tr class="flex justify-between items-center gap-5 animate-pulse px-1.5 md:px-2 h-14 rounded-lg">
-                      <td class="w-1/10 h-3 centered"><span class="size-4 bg-gray-500/50 rounded block"></span></td>
-                      <td class="w-4/10 h-3 centered"><span class="w-50 h-full bg-gray-500/50 rounded-lg block"></span></td>
-                      <td class="w-2/10 h-3 centered"><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span> </td>
-                      <td class="w-2/10 h-3 centered"><span class="w-15 h-full bg-gray-500/50 rounded block"></span></td>
-                      <td class="w-1/10 h-3 centered gap-2"><span class="size-4 bg-gray-500/50 rounded block"></span><span class="size-4 bg-gray-500/50 rounded block"></span></td>
-                    </tr>
-                    <tr class="flex justify-between items-center gap-5 animate-pulse px-1.5 md:px-2 h-14 rounded-lg">
-                      <td class="w-1/10 h-3 centered"><span class="size-4 bg-gray-500/50 rounded block"></span></td>
-                      <td class="w-4/10 h-3 centered"><span class="w-50 h-full bg-gray-500/50 rounded-lg block"></span></td>
-                      <td class="w-2/10 h-3 centered"><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span> </td>
-                      <td class="w-2/10 h-3 centered"><span class="w-15 h-full bg-gray-500/50 rounded block"></span></td>
-                      <td class="w-1/10 h-3 centered gap-2"><span class="size-4 bg-gray-500/50 rounded block"></span><span class="size-4 bg-gray-500/50 rounded block"></span></td>
-                    </tr>
- 
-                 
-                </tbody>
-               
-            </table>
+        <div class="bg-[var(--box-color)] rounded-lg p-2 lg:p-3 my-4">
+           <div class="overflow-x-auto">
+             <table class=" text-xs xl:text-sm w-full min-w-[530px] max-w-8xl overflow-x-auto ">
+                 <thead class="">
+                     <tr class="flex p-1.5 md:p-3">
+                         <td class="text-center w-1/10"><input id="check-all" class="accent-[var(--active-color)] cursor-pointer md:size-4 " type="checkbox"></td>
+                         <td class="text-center w-4/10">وظیفه</td>
+                         <td class="text-center w-2/10">اختصاص داده شده به</td>
+                         <td class="text-center w-2/10">وضعیت</td>
+                         <td class="text-center w-1/10">عملیات</td>
+                     </tr>
+                 </thead>
+                 <tbody  id="users-container" class=" divide-y-1 divide-gray-500/50 border-y border-gray-500/50 flex flex-col w-full">
+                   <!-- data loaded from js  -->
+                    <!-- start loading animated section  -->
+                     <tr class="flex justify-between items-center gap-5 animate-pulse px-1.5 md:px-2 h-14 rounded-lg">
+                       <td class="w-1/10 h-3 centered"><span class="size-4 bg-gray-500/50 rounded block"></span></td>
+                       <td class="w-4/10 h-3 centered"><span class="w-50 h-full bg-gray-500/50 rounded-lg block"></span></td>
+                       <td class="w-2/10 h-3 centered"><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span> </td>
+                       <td class="w-2/10 h-3 centered"><span class="w-15 h-full bg-gray-500/50 rounded block"></span></td>
+                       <td class="w-1/10 h-3 centered gap-2"><span class="size-4 bg-gray-500/50 rounded block"></span><span class="size-4 bg-gray-500/50 rounded block"></span></td>
+                     </tr>
+                     <tr class="flex justify-between items-center gap-5 animate-pulse px-1.5 md:px-2 h-14 rounded-lg">
+                       <td class="w-1/10 h-3 centered"><span class="size-4 bg-gray-500/50 rounded block"></span></td>
+                       <td class="w-4/10 h-3 centered"><span class="w-50 h-full bg-gray-500/50 rounded-lg block"></span></td>
+                       <td class="w-2/10 h-3 centered"><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span> </td>
+                       <td class="w-2/10 h-3 centered"><span class="w-15 h-full bg-gray-500/50 rounded block"></span></td>
+                       <td class="w-1/10 h-3 centered gap-2"><span class="size-4 bg-gray-500/50 rounded block"></span><span class="size-4 bg-gray-500/50 rounded block"></span></td>
+                     </tr>
+                     <tr class="flex justify-between items-center gap-5 animate-pulse px-1.5 md:px-2 h-14 rounded-lg">
+                       <td class="w-1/10 h-3 centered"><span class="size-4 bg-gray-500/50 rounded block"></span></td>
+                       <td class="w-4/10 h-3 centered"><span class="w-50 h-full bg-gray-500/50 rounded-lg block"></span></td>
+                       <td class="w-2/10 h-3 centered"><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span> </td>
+                       <td class="w-2/10 h-3 centered"><span class="w-15 h-full bg-gray-500/50 rounded block"></span></td>
+                       <td class="w-1/10 h-3 centered gap-2"><span class="size-4 bg-gray-500/50 rounded block"></span><span class="size-4 bg-gray-500/50 rounded block"></span></td>
+                     </tr>
+                     <tr class="flex justify-between items-center gap-5 animate-pulse px-1.5 md:px-2 h-14 rounded-lg">
+                       <td class="w-1/10 h-3 centered"><span class="size-4 bg-gray-500/50 rounded block"></span></td>
+                       <td class="w-4/10 h-3 centered"><span class="w-50 h-full bg-gray-500/50 rounded-lg block"></span></td>
+                       <td class="w-2/10 h-3 centered"><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span> </td>
+                       <td class="w-2/10 h-3 centered"><span class="w-15 h-full bg-gray-500/50 rounded block"></span></td>
+                       <td class="w-1/10 h-3 centered gap-2"><span class="size-4 bg-gray-500/50 rounded block"></span><span class="size-4 bg-gray-500/50 rounded block"></span></td>
+                     </tr>
+                     <tr class="flex justify-between items-center gap-5 animate-pulse px-1.5 md:px-2 h-14 rounded-lg">
+                       <td class="w-1/10 h-3 centered"><span class="size-4 bg-gray-500/50 rounded block"></span></td>
+                       <td class="w-4/10 h-3 centered"><span class="w-50 h-full bg-gray-500/50 rounded-lg block"></span></td>
+                       <td class="w-2/10 h-3 centered"><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span><span class="size-7 -mr-2 bg-gray-500/50 rounded-full block"></span> </td>
+                       <td class="w-2/10 h-3 centered"><span class="w-15 h-full bg-gray-500/50 rounded block"></span></td>
+                       <td class="w-1/10 h-3 centered gap-2"><span class="size-4 bg-gray-500/50 rounded block"></span><span class="size-4 bg-gray-500/50 rounded block"></span></td>
+                     </tr>
+                     <!-- finish loading animated section  -->
+                 </tbody>
+             </table>
+           </div>
             <div class="flex justify-between font-[dana-num] text-sm p-4 lg:pt-6">
                 <span><span id="total-todos-count" class="font-[dana-num]">0</span> کار </span>
                 <div id="todos-pagination" class="flex items-center gap-1.5 text-xs">
@@ -465,9 +468,8 @@
                   <button type="button" class="three size-7 centered rounded border border-gray-500/20 hover:bg-gray-500/30 cursor-pointer">3</button>
                   <button type="button" class="next size-7 centered rounded border border-gray-500/20 hover:bg-gray-500/30 cursor-pointer"><i class="fa-solid fa-arrow-up pointer-events-none -rotate-90"></i></button>
                 </div>
-              </div>
+            </div>
         </div>
-
         <!-- finish totdos list section  -->
        </section>
     </main>
