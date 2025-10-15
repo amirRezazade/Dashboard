@@ -57,7 +57,7 @@ function addShoppingCardItems(){
                         </a>
                         <div dir="ltr" class="flex flex-col truncate">
                           <a href="product-details.html?id=${item.id}" class="text-sm ">${item.title}</a>
-                          <span>${Math.ceil(item.price)} $ </span>
+                          <span>${item.price.toFixed(1)} $ </span>
                         </div>
                       </div>
                       <div class="flex items-center gap-2">
@@ -65,7 +65,7 @@ function addShoppingCardItems(){
                         <span class="">${item.quantity}</span>
                         <button onclick="changeQuantity(${item.id} , 'mines')" type="button" class="size-7 centered cursor-pointer rounded-full border border-gray-500/50">-</button>
                       </div>
-                      <span class="font-bold total-price">${Math.ceil(item.price * item.quantity)} $ </span>
+                      <span class="font-bold total-price">${(item.price * item.quantity).toFixed(1)} $ </span>
                       <button type="button" class=" rounded-full cursor-pointer size-7 centered text-red-600 text-sm" onclick="removeShoppingCardItem(${item.id})"><i class="fa-solid fa-xmark"></i></button>
                   </li>
         `
@@ -108,7 +108,7 @@ function changeShoppingCartTotalPrice(){
    card.forEach(item=>{
     total += item.price * item.quantity
    })
-   document.querySelector('#shopping-card-total-price').textContent=Math.ceil(total) + ' $'
+   document.querySelector('#shopping-card-total-price').textContent=total.toFixed(2) + ' $'
    
 
 }

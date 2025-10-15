@@ -40,7 +40,7 @@ async function addToShoppingCard(id){
   if(list.indexOf(id)== -1){
   list.push(id)
   addToLocal('shoppingCardIds' ,list)
-  let getItem = await fetch(`https://dummyjson.com/products/${id}?select=title,price,id,thumbnail`)
+  let getItem = await fetch(`https://dummyjson.com/products/${id}?select=title,price,id,thumbnail,stock,discountPercentage`)
   let item = await getItem.json()
   item.quantity= 1;  
   let itemList = getToLocal('shoppingCardItems') 

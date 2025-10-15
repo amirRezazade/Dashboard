@@ -7,19 +7,18 @@ import {
 } from "./funcs.js";
 
 window.deletItem = deletItem
-// window.plusQuantity = plusQuantity
-// window.minesQuantity = minesQuantity
+window.quantityControl = quantityControl
 
 const itemsWrapper = document.querySelector('#items-wrapper')
-
+const itemsCountWrapper = document.querySelector('#item-count')
+const navShoppingCart = document.querySelector('#shopping-card-container')
 addItems()
 function addItems(){
   let items =  getToLocal('shoppingCardItems')
-  console.log(items);
-  
+  itemsWrapper.innerHTML=''
   items.forEach(item => {
       itemsWrapper.innerHTML+=`
-         <li data-id="${item.id}" class="flex flex-col divide-y divide-gray-500/50 text-xs sm:text-sm bg-[var(--box-color)] rounded-lg">
+         <li data-id="${item.id}" class="flex flex-col divide-y divide-gray-500/50 text-xs sm:text-sm bg-[var(--box-color)] rounded-lg transition-opacity duration-500">
                     <div class="flex flex-wrap gap-y-3 items-start justify-between  p-3  font-[dana-num]">
                        <div  class="w-full flex items-stretch justify-between xs:justify-start gap-2 xs:w-[50%]">
                          <a href="product-details.html?id=${item.id}" class="size-19 sm:size-22 shrink-0 rounded-lg p-2 bg-[var(--bg-color)]">
@@ -28,9 +27,9 @@ function addItems(){
                          <div class=" flex flex-col gap-2 xs:gap-3 justify-center items-end text-left xs:text-center xs:items-start">
                             <a href="product-details.html?id=${item.id}" class="text-sm md:text-base">${item.title}</a>
                             <div class="flex border  border-gray-500/40 divide-x divide-gray-500/40 rounded-lg overflow-hidden">
-                                <button type="button" class="h-8 w-9 text-center bg-[var(--bg-color)] minus material-shadow cursor-pointer" onclick="plusQuantity(this)">–</button>
-                                <span  class=" h-8 w-9 centered bg-[var(--bg-color)] plus material-shadow">${item.quantity}</span>
-                                <button type="button" class="h-8 w-9 text-center bg-[var(--bg-color)] plus material-shadow cursor-pointer" onclick="minesQuantity(this)">+</button>
+                                <button type="button" class="h-8 w-9 text-center bg-[var(--bg-color)] minus cursor-pointer"  onclick="quantityControl(this)">–</button>
+                                <span  class=" h-8 w-9 centered bg-[var(--bg-color)] plus">${item.quantity}</span>
+                                <button type="button" class="h-8 w-9 text-center bg-[var(--bg-color)] plus cursor-pointer"  onclick="quantityControl(this)">+</button>
                             </div>
                          </div>
                        </div>
@@ -40,18 +39,90 @@ function addItems(){
                     </div>
                     <div class="flex justify-between items-center px-3 py-2">
                         <button type="button" class="cursor-pointer py-1.5 px-2 transition-colors hover:bg-red-600 hover:text-white rounded-lg" onclick="deletItem(this)"><i class="fas fa-trash text-xs pointer-events-none"></i> حذف محصول</button>
-                        <div class="flex items-center gap-2 "><span class="opacity-80">مجموع: </span> <span class="text-sm sm:text-base font-[dana-num]">${(item.price * item.quantity).toFixed(2)} $</span></div>
+                        <div class="flex items-center gap-2 "><span class="opacity-80">مجموع: </span> <span class="text-sm sm:text-base font-[dana-num] total-price">${(item.price * item.quantity).toFixed(2)} $</span></div>
                     </div>
                 </li>
       `
-    
+      itemsCountWrapper.textContent=`(${items.length} مورد)`
   });
   
 }
 
 function deletItem(elem){
+    showSwal(
+    "حذف از سبد خرید",
+    "آیا میخواهید این محصول را از سبد خرید خود حذف کنید؟",
+    "warning",
+    true,
+    "حذف"
+  ).then((data) => {
+    if (data.isConfirmed) {
   let li = elem.closest("li");
   let id = li.dataset.id;
+  let shoppingCartItems = getToLocal('shoppingCardItems')
+  let shoppingCardIds = getToLocal('shoppingCardIds')
+  let itemsIndex = shoppingCartItems.findIndex((e) => e.id == id)
+  let idsndex = shoppingCardIds.findIndex((e) => e.id == id)
+  shoppingCartItems.splice(itemsIndex , 1)
+  shoppingCardIds.splice(idsndex , 1)
+  addToLocal('shoppingCardItems' , shoppingCartItems)
+  addToLocal('shoppingCardIds' , shoppingCardIds)
+  li.classList.add("opacity-0");
+  setTimeout(() => li.remove(), 500);
+  itemsCountWrapper.textContent=`(${getToLocal('shoppingCardIds').length} مورد)`
+    }
+  })
   
   
 }
+// function plusQuantity(elem){
+//   let li = elem.closest("li");
+//   let id = li.dataset.id;
+//   let shoppingCartItems = getToLocal('shoppingCardItems')
+//   let itemsIndex = shoppingCartItems.findIndex((e) => e.id == id)
+//   let item = shoppingCartItems[itemsIndex]
+//   if(item.quantity < item.stock){
+//     shoppingCartItems[itemsIndex].quantity = shoppingCartItems[itemsIndex].quantity + 1
+//     addToLocal('shoppingCardItems' , shoppingCartItems)
+//     elem.previousElementSibling.textContent = shoppingCartItems[itemsIndex].quantity
+//     li.querySelector('.total-price').textContent = `${(item.price * item.quantity).toFixed(2)} $`
+//   }    
+// }
+// function minesQuantity(elem){
+//   let li = elem.closest("li");
+//   let id = li.dataset.id;
+//   let shoppingCartItems = getToLocal('shoppingCardItems')
+//   let itemsIndex = shoppingCartItems.findIndex((e) => e.id == id)
+//   let item = shoppingCartItems[itemsIndex]
+//   if(item.quantity > 1){
+//     shoppingCartItems[itemsIndex].quantity = shoppingCartItems[itemsIndex].quantity - 1
+//     addToLocal('shoppingCardItems' , shoppingCartItems)
+//     elem.nextElementSibling.textContent = shoppingCartItems[itemsIndex].quantity
+//     li.querySelector('.total-price').textContent = `${(item.price * item.quantity).toFixed(2)} $`
+//   }      
+// }
+function quantityControl(elem){
+  let li = elem.closest("li");
+  let id = li.dataset.id;
+  let shoppingCartItems = getToLocal('shoppingCardItems')
+  let itemsIndex = shoppingCartItems.findIndex((e) => e.id == id)
+  let item = shoppingCartItems[itemsIndex]
+    
+    if(elem.classList.contains('minus') && item.quantity > 1){
+      console.log(3);
+    shoppingCartItems[itemsIndex].quantity = shoppingCartItems[itemsIndex].quantity - 1
+    elem.nextElementSibling.textContent = shoppingCartItems[itemsIndex].quantity
+    }
+    if(elem.classList.contains('plus') && item.quantity < item.stock){
+    shoppingCartItems[itemsIndex].quantity = shoppingCartItems[itemsIndex].quantity + 1
+    elem.previousElementSibling.textContent = shoppingCartItems[itemsIndex].quantity
+    }
+    addToLocal('shoppingCardItems' , shoppingCartItems)
+    li.querySelector('.total-price').textContent = `${(item.price * item.quantity).toFixed(2)} $`
+  
+}
+
+navShoppingCart.addEventListener('click' , e=>{
+  if(e.target.nodeName === 'BUTTON') addItems() 
+  
+})
