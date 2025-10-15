@@ -28,7 +28,7 @@ async function getShoppingCardItems(){
    let ids =  getToLocal('shoppingCardIds')  
   const products = await Promise.all(
     ids.map(id =>        
-      fetch(`https://dummyjson.com/products/${id}?select=title,price,id,thumbnail`).then(res => res.json())
+      fetch(`https://dummyjson.com/products/${id}?select=title,price,id,thumbnail,stock,discountPercentage`).then(res => res.json())
     )
   );
     const shoppingCardItems = products.map(product => ({
