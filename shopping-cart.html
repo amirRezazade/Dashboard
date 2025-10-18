@@ -386,8 +386,8 @@
         </ul>
     </aside>
     <main class="px-3 xs:px-4 py-4 transition-all duration-500 bg-[var(--bg-color)] md:ms-60">
-      <h2 class="text-lg sm:text-xl lg:text-2xl my-2 sm:my-3 font-extrabold ">لیست وظایف</h2>
-       <section class="grid grid-cols-12 ">
+      <h2 class="text-lg sm:text-xl lg:text-2xl my-2 sm:my-3 font-extrabold ">سبد خرید</h2>
+       <section class="grid grid-cols-12 gap-3">
          <!-- start product items section  -->
          <div class="col-span-12 lg:col-span-8">
             <div class="flex items-center justify-between ">
@@ -395,12 +395,48 @@
                 <a href="products.html" class="py-1.5 px-3 text-sm text-white rounded-sm bg-[var(--active-color)]/80 hover:bg-[var(--active-color)]">به خرید ادامه دهید</a>
             </div>
             <ul id="items-wrapper" class="flex flex-col gap-3 my-3">
-             
+               <!-- data loaded from JS  -->
             </ul>
          </div>
          <!-- finish product items section  -->
          <!-- start total info section  -->
-         <div class="col-span-12 lg:col-span-4"></div>
+         <div class="col-span-12 lg:col-span-4 ">
+           <div class="sticky top-25">
+             <div class=" bg-[var(--box-color)] rounded-lg  text-xs sm:text-sm ">
+            <span class="p-3 block text-sm sm:text-base ">خلاصه سفارش</span>
+            <div class="px-3 sm:p-3">
+              <label for="discount-code" class="cursor-pointer">کد تخفیف دارید؟</label>
+              <input class="w-full p-2 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 my-1 bg-[var(--bg-color)] " id="discount-code" placeholder="کد تخفیف را وارد کنید...">
+              <button type="button" class="cursor-pointer px-6 py-1.5 rounded-sm text-white bg-[var(--active-color)]/80 hover:bg-[var(--active-color)] transition-colors mt-2">اعمال</button>
+            </div>
+            <div class="p-3 border-y border-dashed border-gray-500/50 mt-3">
+              <div class="flex justify-between items-center p-2.5 hover:bg-gray-500/20 rounded transition-colors ">
+                <span >مجموع فرعی:</span>
+                <span id="cart-price" class="font-[dana-num]">-- $</span>
+              </div>
+              <div class="flex justify-between items-center p-2.5 hover:bg-gray-500/20 rounded transition-colors ">
+                <span >تخفیف:</span>
+                <span id="cart-discount" class="font-[dana-num]">-- $</span>
+              </div>
+              <div class="flex justify-between items-center p-2.5 hover:bg-gray-500/20 rounded transition-colors ">
+                <span >هزینه حمل و نقل <span class="font-[dana-num] opacity-85">(5%)</span>:</span>
+                <span id="cart-Transportation" class="font-[dana-num]">-- $</span>
+              </div>
+              <div class="flex justify-between items-center p-2.5 hover:bg-gray-500/20 rounded transition-colors ">
+                <span >مالیات تخمینی <span class="font-[dana-num] opacity-85">(9%)</span>:</span>
+                <span id="cart-taxes" class="font-[dana-num]">-- $</span>
+              </div>
+              <div class="flex justify-between items-center p-2.5 bg-gray-500/20 rounded font-extrabold">
+                <span >مجموع (USD):</span>
+                <span id="cart-total" class="font-[dana-num] text-base">-- $</span>
+              </div>
+            </div>
+            <div class="flex ">
+              <button type="button" class=" grow py-3 m-3 cursor-pointer rounded-sm bg-[var(--active-color)]/80 hover:bg-[var(--active-color)] transition-colors text-white ">تسویه حساب <i class="fas fa-coins"></i></button>
+            </div>
+          </div>
+           </div>
+         </div>
          <!-- finish total info section  -->
        </section>
     </main>

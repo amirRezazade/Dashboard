@@ -45,7 +45,7 @@ function addItems(){
       `
       itemsCountWrapper.textContent=`(${items.length} مورد)`
   });
-  
+  cartTotal()
 }
 
 function deletItem(elem){
@@ -70,37 +70,13 @@ function deletItem(elem){
   li.classList.add("opacity-0");
   setTimeout(() => li.remove(), 500);
   itemsCountWrapper.textContent=`(${getToLocal('shoppingCardIds').length} مورد)`
+  cartTotal()
     }
   })
   
   
 }
-// function plusQuantity(elem){
-//   let li = elem.closest("li");
-//   let id = li.dataset.id;
-//   let shoppingCartItems = getToLocal('shoppingCardItems')
-//   let itemsIndex = shoppingCartItems.findIndex((e) => e.id == id)
-//   let item = shoppingCartItems[itemsIndex]
-//   if(item.quantity < item.stock){
-//     shoppingCartItems[itemsIndex].quantity = shoppingCartItems[itemsIndex].quantity + 1
-//     addToLocal('shoppingCardItems' , shoppingCartItems)
-//     elem.previousElementSibling.textContent = shoppingCartItems[itemsIndex].quantity
-//     li.querySelector('.total-price').textContent = `${(item.price * item.quantity).toFixed(2)} $`
-//   }    
-// }
-// function minesQuantity(elem){
-//   let li = elem.closest("li");
-//   let id = li.dataset.id;
-//   let shoppingCartItems = getToLocal('shoppingCardItems')
-//   let itemsIndex = shoppingCartItems.findIndex((e) => e.id == id)
-//   let item = shoppingCartItems[itemsIndex]
-//   if(item.quantity > 1){
-//     shoppingCartItems[itemsIndex].quantity = shoppingCartItems[itemsIndex].quantity - 1
-//     addToLocal('shoppingCardItems' , shoppingCartItems)
-//     elem.nextElementSibling.textContent = shoppingCartItems[itemsIndex].quantity
-//     li.querySelector('.total-price').textContent = `${(item.price * item.quantity).toFixed(2)} $`
-//   }      
-// }
+
 function quantityControl(elem){
   let li = elem.closest("li");
   let id = li.dataset.id;
@@ -119,6 +95,31 @@ function quantityControl(elem){
     }
     addToLocal('shoppingCardItems' , shoppingCartItems)
     li.querySelector('.total-price').textContent = `${(item.price * item.quantity).toFixed(2)} $`
+    cartTotal()
+  
+}
+function cartTotal(){
+  let cart = getToLocal('shoppingCardItems')
+  let price=0
+  let totalDiscount = 0
+  cart.forEach(item=>{
+   let t  = item.price * item.quantity
+   price += t
+
+   let discountPerItem = (item.discountPercentage * item.price) /100
+   let totalItemDiscount = discountPerItem * item.quantity
+   totalDiscount += totalItemDiscount
+  })    
+
+  let tax = (price* 0.09).toFixed(2)
+  let Transportation = (price* 0.05).toFixed(2)
+  let cartTotal = Number(price) + Number(tax) + Number(Transportation)
+  document.querySelector('#cart-price').textContent = `${price.toFixed(2)} $`
+  document.querySelector('#cart-discount').textContent = `${totalDiscount.toFixed(2)} $`
+  document.querySelector('#cart-Transportation').textContent = `${Transportation} $`
+  document.querySelector('#cart-taxes').textContent = `${tax} $`
+  document.querySelector('#cart-total').textContent = `${cartTotal.toFixed(2)} $`
+
   
 }
 
