@@ -10,16 +10,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"/>
     <title>Dashboard</title>
     <style>
-  input::-webkit-outer-spin-button,
-  input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-  input[type="number"] {
-    -moz-appearance: textfield;
-  }
-</style>
-
+     
+    </style>
   </head>
   <body class="font-[dana-regular] overflow-x-hidden bg-[var(--bg-color)] text-[var(--text-color)] text-color">
     <nav class="bg-[var(--box-color)] flex items-center justify-between sticky top-0 z-50">
@@ -387,10 +379,63 @@
           </li>
         </ul>
     </aside>
-    <main class="px-3 xs:px-4 py-4 transition-all duration-500 bg-[var(--bg-color)] md:ms-60">
-      <h2 id="page-title" class="text-lg sm:text-xl lg:text-2xl my-3 font-extrabold ">ویرایش  کاربر</h2>
-      <section class="grid grid-cols-12 gap-3  text-sm ">
-      
+    <main class=" transition-all duration-500 bg-[var(--bg-color)] md:ms-60">
+      <section class="">
+         <div class="h-90 md:h-100 bg-cover bg-[url(../images/profile-bg.jpg)] relative">
+          <!-- start photo overlay section  -->
+          <div class="p-3 sm:p-5 absolute w-full h-full top-0 left-0 bg-gradient-to-r from-[#6674a1b5] to-[#465ca5e2] ">
+            <div class="flex items-stretch gap-5">
+              <div class="size-19 sm:size-22 rounded-full overflow-hidden border-4 border-[var(--bg-color)] bg-[var(--bg-color)]"><img class="size-full" src="images/profile (1).png" alt=""></div>
+              <div class="flex flex-col justify-evenly text-white text-xs sm:text-sm ">
+                <span id="name" class="font-extrabold text-base sm:text-lg md:text-xl">amirRezazade</span>
+                <span id="role" class="font-extralight text-white/70">admin</span>
+                <span class="font-extralight text-white/70"><i class="fas fa-location-dot"></i><span id="address">کالیفرنیا، ایالات متحده آمریکا</span></span>
+              </div>
+            </div>
+            <p class="text-xs sm:text-sm lg:text-[15px] text-white/70 max-w-2xl m-2 sm:m-4 lg:m-6 leading-7">سلام من آنا آدام هستم، به همین سادگی خواهد بود. در واقع، آن را غربی خواهد بود. برای یک فرد انگلیسی، این مانند زبان انگلیسی ساده به نظر می رسد، همانطور که یکی از دوستان شکاکم کمبریجی به من گفت که زبان های اروپایی چه چیزی غربی هستند، زبان های اروپایی اعضای یک خانواده هستند.</p>
+            <div id="tab-btns" class="flex items-center gap-1 xs:gap-2 text-xs sm:text-sm text-white m-2 sm:m-4">
+              <button type="button" class="profile-tab before:!w-full">پروفایل</button>
+              <button type="button" class="profile-tab">امنیت</button>
+              <button type="button" class="profile-tab">اعلان ها</button>
+              <button type="button" class="profile-tab">صورت حساب</button>
+            </div> 
+             <!-- start tab container section  -->
+             <div id="tab-container" class="mt-7 ">
+                <div id="profile" class="p-3 lg:p-5 rounded-lg text-xs sm:text-sm bg-[var(--box-color)]">
+                  <h3 class="md:text-lg font-bold mb-3.5 sm:mb-4">پروفایل</h3>
+                  <div class=" flex flex-wrap items-center justify-between gap-3">
+                      <div class="grow min-w-[200px] xs:max-w-[400px]">
+                        <label class="cursor-pointer" for="first-name">نام *</label>
+                        <input class="w-full p-2 sm:p-3 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 my-1 bg-[var(--bg-color)]" required="" minlength="3" maxlength="20" type="text" id="first-name" placeholder="نام خود را وارد کنید...">
+                      </div>
+                      <div class="grow min-w-[200px] xs:max-w-[400px]">
+                        <label class="cursor-pointer" for="last-name">نام خانوادگی *</label>
+                        <input class="w-full p-2 sm:p-3 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 my-1 bg-[var(--bg-color)]" required="" minlength="3" maxlength="30" type="text" id="last-name" placeholder="نام خانوادگی خود را وارد کنید...">
+                      </div>
+                      <div class="grow min-w-[200px] xs:max-w-[400px]">
+                        <label class="cursor-pointer" for="user-name">نام کاربری *</label>
+                        <input class="w-full p-2 sm:p-3 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 my-1 bg-[var(--bg-color)]" required="" minlength="3" maxlength="30" type="text" id="user-name" placeholder="نام کاربری خود را وارد کنید...">
+                      </div>
+                    </div>
+                    <div class="flex flex-wrap xs:flex-nowrap items-center justify-start gap-3 my-3">
+                      <div class="grow xs:max-w-[400px]">
+                        <label class="cursor-pointer" for="user-email">ایمیل *</label>
+                        <input class="w-full p-2 sm:p-3 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 my-1 bg-[var(--bg-color)]" required="" minlength="3" maxlength="30" type="email" id="user-email" placeholder="ایمیل خود را وارد کنید...">
+                      </div>
+                      <div class="grow xs:max-w-[400px]">
+                        <label class="cursor-pointer" for="user-phone">شماره تماس *</label>
+                        <input dir="rtl" class="w-full p-2 sm:p-3 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 my-1 bg-[var(--bg-color)]" required="" minlength="3" maxlength="30" type="tel" id="user-phone" placeholder="شماره تماس خود را وارد کنید...">
+                      </div>
+                    </div>
+                   
+                </div>
+             </div>
+             <!-- finish tab container section  -->
+
+          </div>
+          <!-- finish photo overlay section  -->
+         </div>
+         
       </section>
     </main>
 
