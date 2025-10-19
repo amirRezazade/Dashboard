@@ -25,11 +25,8 @@
     let user = {
         firstName : 'Amir',
         lastName : 'Rezazade',
-        age : 22,
-        gender : 'male',
-        email : 'amirrezazadeh.job@gmail.com',
+        userName : 'amirrezazadeh.job@gmail.com',
         password : 'amir-1382',
-        phone : '+81 965-431-3024',
     }
     window.localStorage.setItem('user' , JSON.stringify(user))
     window.location.href= 'index.html'
@@ -47,6 +44,4 @@
         })
 
                 
-        particlesJS.load('particles-js', 'particlesjs-config.json', function() {
-  console.log('callback - particles.js config loaded');
-});
+        particlesJS.load('particles-js', 'particlesjs-config.json', function() {});

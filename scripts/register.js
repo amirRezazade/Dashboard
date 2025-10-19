@@ -2,21 +2,17 @@
  let nameInput = document.querySelector('#user-name')
  let passwordInput = document.querySelector('#password')
  let showDemoLink = document.querySelector('#show-demo')
- loginBtn.addEventListener('click' , (e)=>{
+ loginBtn.addEventListener('click' , (e)=>{    
   if(nameInput.checkValidity() && passwordInput.checkValidity()){
     e.preventDefault()
-     Swal.fire({
-    title: 'کاربر یافت نشد!',
-    text: 'نام کاربری یا رمز عبور اشتباه است. لطفاً دوباره تلاش کنید یا ثبت‌ نام کنید.',
-    icon: 'error',
-    showCancelButton: true,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
-    confirmButtonText: 'ثبت نام',
-    cancelButtonText: "تصحیح",
-  }).then(data=>{
-    if(data.isConfirmed) window.location.href= 'register.html'
-  })
+   let user = {
+        firstName : document.querySelector('#first-name').value.trim(),
+        lastName :  document.querySelector('#last-name').value.trim(),
+        userName :  document.querySelector('#user-name').value.trim(),
+        password :  document.querySelector('#password').value.trim(),
+    }
+    window.localStorage.setItem('user' , JSON.stringify(user))
+    window.location.href= 'index.html'
     
   }
   
@@ -25,11 +21,8 @@
     let user = {
         firstName : 'Amir',
         lastName : 'Rezazade',
-        age : 22,
-        gender : 'male',
-        email : 'amirrezazadeh.job@gmail.com',
+        userName : 'amirrezazadeh.job@gmail.com',
         password : 'amir-1382',
-        phone : '+81 965-431-3024',
     }
     window.localStorage.setItem('user' , JSON.stringify(user))
     window.location.href= 'index.html'
@@ -47,6 +40,4 @@
         })
 
                 
-        particlesJS.load('particles-js', 'particlesjs-config.json', function() {
-  console.log('callback - particles.js config loaded');
-});
+ particlesJS.load('particles-js', 'particlesjs-config.json', function() {});

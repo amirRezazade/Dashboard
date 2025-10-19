@@ -406,6 +406,9 @@
   .mt-4 {
     margin-top: calc(var(--spacing) * 4);
   }
+  .mt-5 {
+    margin-top: calc(var(--spacing) * 5);
+  }
   .mt-6 {
     margin-top: calc(var(--spacing) * 6);
   }
@@ -1584,6 +1587,12 @@
   }
   .text-\[\#0ca593\] {
     color: #0ca593;
+  }
+  .text-\[var\(\)\] {
+    color: var();
+  }
+  .text-\[var\(--active\)\] {
+    color: var(--active);
   }
   .text-\[var\(--active-color\)\] {
     color: var(--active-color);
