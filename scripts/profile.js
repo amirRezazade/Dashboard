@@ -57,6 +57,11 @@ tabBtns.addEventListener("click", (e) => {
       .querySelectorAll("button")
       .forEach((elem) => elem.classList.remove("before:!w-full"));
     e.target.classList.add("before:!w-full");
+    tabWrapper.querySelectorAll('.tab-content').forEach(el=> {
+      el.classList.add('hidden')
+      
+    })
+    tabWrapper.querySelector(`#${e.target.dataset.tab}`).classList.remove('hidden')
   }
 });
 
@@ -66,7 +71,20 @@ window.addEventListener("DOMContentLoaded",()=>{
   changeTextAreaMaxLength()
 } );
 
-function setValues() {
+document.querySelectorAll('#password-show').forEach(elem=>{
+  elem.addEventListener('click' , e=>{
+    if(e.target.previousElementSibling.type==='text'){
+                e.target.previousElementSibling.type='password'
+                e.target.innerHTML='<i class="fas fa-eye"></i>'
+            }else{
+                e.target.previousElementSibling.type='text'
+                e.target.innerHTML='<i class="fas fa-eye-slash"></i>'
+            }
+        })
+ })
+
+
+ function setValues() {
   let user = getToLocal("user");
  document.querySelector('#name').textContent = user.firstName +' ' + user.lastName
  document.querySelector('#role').textContent = user.role ? 'مدیر' : 'ادمین'
