@@ -15,15 +15,18 @@
 
     <title>Document</title>
   </head>
-  <body class="bg-[var(--bg-color)] h-screen centered"></body>
-
+  <body class=" h-screen centered"></body>
+  <input type="file" id="imageInput" accept="image/*" />
+  <img
+    id="preview"
+    class="w-32 h-32 object-cover mt-2 rounded-lg"
+    alt="preview"
+  />
 
   <script>
-fetch('https://dummyjson.com/products?limit=10&skip=0')
-.then(res => res.json())
-.then(res=> {
-console.log(res);
+    const input = document.getElementById("imageInput");
+    const preview = document.getElementById("preview");
 
-});
+  
   </script>
 </html>

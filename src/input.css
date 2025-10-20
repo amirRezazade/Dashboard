@@ -94,6 +94,7 @@ i{
 .swal2-validation-message {
   background-color: var(--bg-color) !important;
   color: var(--text-color) !important;
+  background-image: url();
 }
 .my-toast {
   background-color: var(--box-color) !important;

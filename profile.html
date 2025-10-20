@@ -10,7 +10,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"/>
     <title>Dashboard</title>
     <style>
-     
+     input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield; /* برای فایرفاکس */
+}
     </style>
   </head>
   <body class="font-[dana-regular] overflow-x-hidden bg-[var(--bg-color)] text-[var(--text-color)] text-color">
@@ -381,15 +388,23 @@
     </aside>
     <main class=" transition-all duration-500 bg-[var(--bg-color)] md:ms-60">
       <section class="">
-         <div class="h-90 md:h-100 bg-cover bg-[url(../images/profile-bg.jpg)] relative">
+         <div id="bg-photo" class="h-90 md:h-100 bg-cover bg-[url(../images/profile-bg.jpg)] relative">
           <!-- start photo overlay section  -->
           <div class="p-3 sm:p-5 absolute w-full h-full top-0 left-0 bg-gradient-to-r from-[#6674a1b5] to-[#465ca5e2] ">
-            <div class="flex items-stretch gap-5">
-              <div class="size-19 sm:size-22 rounded-full overflow-hidden border-4 border-[var(--bg-color)] bg-[var(--bg-color)]"><img class="size-full" src="images/profile (1).png" alt=""></div>
+            <div class="flex flex-wrap-reverse xs:flex-nowrap items-stretch gap-x-2 sm:gap-5">
+              <div class="shrink-0 relative size-19 sm:size-22 rounded-full  border-4 border-[var(--bg-color)] bg-[var(--bg-color)]">
+                <img id="user-profile-photo" class="size-full rounded-full" src="images/profile (1).png" alt="">
+                <label for="profile-photo-input" class="absolute -bottom-1.5 -left-1.5 cursor-pointer p-0.5 rounded-sm text-white"><i class="fas fa-camera text-lg"></i></label>
+                <input class="hidden" type="file" id="profile-photo-input" accept="image/*" />
+              </div>
               <div class="flex flex-col justify-evenly text-white text-xs sm:text-sm ">
                 <span id="name" class="font-extrabold text-base sm:text-lg md:text-xl">amirRezazade</span>
                 <span id="role" class="font-extralight text-white/70">admin</span>
                 <span class="font-extralight text-white/70"><i class="fas fa-location-dot"></i><span id="address">کالیفرنیا، ایالات متحده آمریکا</span></span>
+              </div>
+              <div class="ms-auto md:me-8 self-center">
+                <label for="bg-photo-input" class="cursor-pointer p-0.5 py-1 xs:py-1.5 px-1.5 sm:px-2.5 text-nowrap bg-black/50 hover:bg-black rounded-sm text-white text-xs sm:text-sm "><i class="hidden fas fa-image align-center "></i> تغییر جلد</label>
+                <input class="hidden" type="file"  id="bg-photo-input" accept="image/*" />
               </div>
             </div>
             <p class="text-xs sm:text-sm lg:text-[15px] text-white/70 max-w-2xl m-2 sm:m-4 lg:m-6 leading-7">سلام من آنا آدام هستم، به همین سادگی خواهد بود. در واقع، آن را غربی خواهد بود. برای یک فرد انگلیسی، این مانند زبان انگلیسی ساده به نظر می رسد، همانطور که یکی از دوستان شکاکم کمبریجی به من گفت که زبان های اروپایی چه چیزی غربی هستند، زبان های اروپایی اعضای یک خانواده هستند.</p>
@@ -400,34 +415,77 @@
               <button type="button" class="profile-tab">صورت حساب</button>
             </div> 
              <!-- start tab container section  -->
-             <div id="tab-container" class="mt-7 ">
+             <div id="tab-container" class="mt-7 pb-5">
                 <div id="profile" class="p-3 lg:p-5 rounded-lg text-xs sm:text-sm bg-[var(--box-color)]">
                   <h3 class="md:text-lg font-bold mb-3.5 sm:mb-4">پروفایل</h3>
-                  <div class=" flex flex-wrap items-center justify-between gap-3">
-                      <div class="grow min-w-[200px] xs:max-w-[400px]">
-                        <label class="cursor-pointer" for="first-name">نام *</label>
+                  <div class=" grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center justify-between gap-3">
+                      <div class="">
+                        <label class="cursor-pointer" for="first-name">نام </label>
                         <input class="w-full p-2 sm:p-3 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 my-1 bg-[var(--bg-color)]" required="" minlength="3" maxlength="20" type="text" id="first-name" placeholder="نام خود را وارد کنید...">
                       </div>
-                      <div class="grow min-w-[200px] xs:max-w-[400px]">
-                        <label class="cursor-pointer" for="last-name">نام خانوادگی *</label>
+                      <div class="">
+                        <label class="cursor-pointer" for="last-name">نام خانوادگی </label>
                         <input class="w-full p-2 sm:p-3 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 my-1 bg-[var(--bg-color)]" required="" minlength="3" maxlength="30" type="text" id="last-name" placeholder="نام خانوادگی خود را وارد کنید...">
                       </div>
-                      <div class="grow min-w-[200px] xs:max-w-[400px]">
-                        <label class="cursor-pointer" for="user-name">نام کاربری *</label>
+                      <div class="">
+                        <label class="cursor-pointer" for="user-name">نام کاربری </label>
                         <input class="w-full p-2 sm:p-3 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 my-1 bg-[var(--bg-color)]" required="" minlength="3" maxlength="30" type="text" id="user-name" placeholder="نام کاربری خود را وارد کنید...">
                       </div>
-                    </div>
-                    <div class="flex flex-wrap xs:flex-nowrap items-center justify-start gap-3 my-3">
-                      <div class="grow xs:max-w-[400px]">
-                        <label class="cursor-pointer" for="user-email">ایمیل *</label>
-                        <input class="w-full p-2 sm:p-3 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 my-1 bg-[var(--bg-color)]" required="" minlength="3" maxlength="30" type="email" id="user-email" placeholder="ایمیل خود را وارد کنید...">
+                       <div class="">
+                        <label class="cursor-pointer" for="user-email">ایمیل </label>
+                        <input class="w-full p-2 sm:p-3 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 my-1 bg-[var(--bg-color)]"  minlength="5" maxlength="30" type="email" id="user-email" placeholder="ایمیل خود را وارد کنید...">
                       </div>
-                      <div class="grow xs:max-w-[400px]">
-                        <label class="cursor-pointer" for="user-phone">شماره تماس *</label>
-                        <input dir="rtl" class="w-full p-2 sm:p-3 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 my-1 bg-[var(--bg-color)]" required="" minlength="3" maxlength="30" type="tel" id="user-phone" placeholder="شماره تماس خود را وارد کنید...">
+                      <div class="">
+                        <label class="cursor-pointer" for="user-phone">شماره تماس </label>
+                        <input dir="rtl" class="w-full p-2 sm:p-3 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 my-1 bg-[var(--bg-color)]"  minlength="8" maxlength="11" type="tel" id="user-phone" placeholder="شماره تماس خود را وارد کنید...">
                       </div>
-                    </div>
-                   
+                      <div class="">
+                        <label class="cursor-pointer" for="user-age">سن </label>
+                        <input dir="rtl" class="w-full p-2 sm:p-3 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 my-1 bg-[var(--bg-color)] "  min="15" max="120" maxlength="2"  type="number" id="user-age" placeholder="سن خود را وارد کنید...">
+                      </div>
+                  </div>
+                  <h3 class="md:text-lg font-bold my-3.5 sm:my-4">آدرس</h3>
+
+                  <div class="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center justify-between gap-3">
+                  <div class="w-full">
+                    <span class="cursor-pointer">کشور </span>
+                    <select id="user-country" class="w-full p-2 my-1 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0  bg-[var(--bg-color)]">
+                      <option value="all" selected="">انتخاب</option>
+                      <option value="Iran">ایران</option>
+                      <option value="United States">ایالات متحده</option>
+                      <option value="United Kingdom">انگلستان</option>
+                      <option value="Canada">کانادا</option>
+                      <option value="Germany">آلمان</option>
+                      <option value="France">فرانسه</option>
+                      <option value="Italy">ایتالیا</option>
+                      <option value="Spain">اسپانیا</option>
+                      <option value="Japan">ژاپن</option>
+                      <option value="China">چین</option>
+                      <option value="India">هند</option>
+                      <option value="Brazil">برزیل</option>
+                      <option value="Russia">روسیه</option>
+                      <option value="Australia">استرالیا</option>
+                      <option value="South Korea">کره جنوبی</option>
+                    </select>
+                  </div>
+                  <div class="w-full">
+                    <label class="cursor-pointer" for="user-city">شهر</label>
+                    <input class="w-full p-2.5 my-1 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 bg-[var(--bg-color)]" maxlength="30" type="text" id="user-city" placeholder="شهر خود را وارد کنید...">
+                  </div>
+                  <div class="w-full">
+                    <label class="cursor-pointer" for="user-postalCode">کد پستی</label>
+                    <input class="w-full p-2.5 my-1 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 bg-[var(--bg-color)]" maxlength="30" type="text" id="user-postalCode" placeholder="کد پستی خود را وارد کنید...">
+                  </div>
+                  <div class="w-full xl:col-start-1 xs:col-span-2 ">
+                    <label class="cursor-pointer" for="user-address">نشانی</label>
+                    <input class="w-full p-2.5 my-1 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 bg-[var(--bg-color)]" maxlength="50" type="text" id="user-address" placeholder="آدرس خود را وارد کنید...">
+                  </div>
+                </div>
+                <div class="my-3">
+                  <label class="cursor-pointer" for="user-about-me">درباره من (<span>300</span> کارکتر)</label> 
+                  <textarea name="" id="user-about-me" placeholder="بیوگرافی خود را وارد کنید." class="block min-h-40 max-h-70 w-full leading-6 rounded-md bg-[var(--bg-color)] my-1.5 border border-gray-500/50 outline-0 p-2.5 sm:p-3.5" maxlength="300"></textarea>
+                </div>
+                <button type="button" class="ms-auto block px-7 py-2 cursor-pointer rounded-sm bg-[var(--active-color)]/80 hover:bg-[var(--active-color)] transition-colors text-white"> ذخیره تغیرات</button>
                 </div>
              </div>
              <!-- finish tab container section  -->
