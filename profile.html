@@ -417,16 +417,17 @@ input[type=number] {
                <button type="button" data-tab="profile" class="tab-btn before:!w-full">پروفایل</button>
                <button type="button" data-tab="security" class="tab-btn">امنیت</button>
                <button type="button" data-tab="notif" class="tab-btn">اعلان ها</button>
-               <button type="button" data-tab="test" class="tab-btn">صورت حساب</button>
+               <button type="button" data-tab="bank" class="tab-btn">صورت حساب</button>
              </div> 
              
            </div>
            <!-- start tab container section  -->
-           <div id="tab-container" class="  pb-5 ">
+           <div id="tab-container" class=" pb-5 ">
             <!-- start profile tab section  -->
-            <div id="profile" class="tab-content p-3 lg:p-5 rounded-lg text-xs sm:text-sm bg-[var(--box-color)] hidden">
-              <h3 class="md:text-lg font-bold mb-3.5 sm:mb-4">پروفایل</h3>
-              <div class=" grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center justify-between gap-3">
+            <div id="profile" class="tab-content grid grid-cols-12 gap-3  text-xs sm:text-sm ">
+              <div class="col-span-12 sm:col-span-6 xl:col-span-4 p-3 lg:p-5 rounded-lg bg-[var(--box-color)] ">
+                <h3 class="md:text-lg font-bold mb-3.5 sm:mb-4">پایه</h3>
+                <div>
                   <div class="">
                     <label class="cursor-pointer" for="first-name">نام </label>
                     <input class="w-full p-2 sm:p-3 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 my-1 bg-[var(--bg-color)]" required="" minlength="3" maxlength="20" type="text" id="first-name" placeholder="نام خود را وارد کنید...">
@@ -436,46 +437,53 @@ input[type=number] {
                     <input class="w-full p-2 sm:p-3 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 my-1 bg-[var(--bg-color)]" required="" minlength="3" maxlength="30" type="text" id="last-name" placeholder="نام خانوادگی خود را وارد کنید...">
                   </div>
                   <div class="">
-                    <label class="cursor-pointer" for="user-name">نام کاربری </label>
-                    <input class="w-full p-2 sm:p-3 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 my-1 bg-[var(--bg-color)]" required="" minlength="3" maxlength="30" type="text" id="user-name" placeholder="نام کاربری خود را وارد کنید...">
-                  </div>
-                   <div class="">
-                    <label class="cursor-pointer" for="user-email">ایمیل </label>
-                    <input class="w-full p-2 sm:p-3 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 my-1 bg-[var(--bg-color)]"  minlength="5" maxlength="30" type="email" id="user-email" placeholder="ایمیل خود را وارد کنید...">
-                  </div>
-                  <div class="">
-                    <label class="cursor-pointer" for="user-phone">شماره تماس </label>
-                    <input dir="rtl" class="w-full p-2 sm:p-3 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 my-1 bg-[var(--bg-color)]"  minlength="8" maxlength="11" type="tel" id="user-phone" placeholder="شماره تماس خود را وارد کنید...">
-                  </div>
-                  <div class="">
                     <label class="cursor-pointer" for="user-age">سن </label>
                     <input dir="rtl" class="w-full p-2 sm:p-3 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 my-1 bg-[var(--bg-color)] "  min="15" max="120" maxlength="2"  type="number" id="user-age" placeholder="سن خود را وارد کنید...">
                   </div>
+
+                </div>
               </div>
-              <h3 class="md:text-lg font-bold my-3.5 sm:my-4">آدرس</h3>
-   
-              <div class="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center justify-between gap-3">
-              <div class="w-full">
-                <span class="cursor-pointer">کشور </span>
-                <select id="user-country" class="w-full p-2 my-1 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0  bg-[var(--bg-color)]">
-                  <option value="all" selected="">انتخاب</option>
-                  <option value="Iran">ایران</option>
-                  <option value="United States">ایالات متحده</option>
-                  <option value="United Kingdom">انگلستان</option>
-                  <option value="Canada">کانادا</option>
-                  <option value="Germany">آلمان</option>
-                  <option value="France">فرانسه</option>
-                  <option value="Italy">ایتالیا</option>
-                  <option value="Spain">اسپانیا</option>
-                  <option value="Japan">ژاپن</option>
-                  <option value="China">چین</option>
-                  <option value="India">هند</option>
-                  <option value="Brazil">برزیل</option>
-                  <option value="Russia">روسیه</option>
-                  <option value="Australia">استرالیا</option>
-                  <option value="South Korea">کره جنوبی</option>
-                </select>
+              <div class="col-span-12 sm:col-span-6 xl:col-span-4 p-3 lg:p-5 rounded-lg bg-[var(--box-color)] ">
+                <h3 class="md:text-lg font-bold mb-3.5 sm:mb-4">پایه</h3>
+                <div>
+                  <div class="">
+                      <label class="cursor-pointer" for="user-name">نام کاربری </label>
+                      <input class="w-full p-2 sm:p-3 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 my-1 bg-[var(--bg-color)]" required="" minlength="3" maxlength="30" type="text" id="user-name" placeholder="نام کاربری خود را وارد کنید...">
+                  </div>
+                  <div class="">
+                      <label class="cursor-pointer" for="user-email">ایمیل </label>
+                      <input class="w-full p-2 sm:p-3 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 my-1 bg-[var(--bg-color)]"  minlength="5" maxlength="30" type="email" id="user-email" placeholder="ایمیل خود را وارد کنید...">
+                  </div>
+                  <div class="">
+                      <label class="cursor-pointer" for="user-phone">شماره تماس </label>
+                      <input dir="rtl" class="w-full p-2 sm:p-3 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 my-1 bg-[var(--bg-color)]"  minlength="8" maxlength="11" type="tel" id="user-phone" placeholder="شماره تماس خود را وارد کنید...">
+                  </div>
+                </div>
               </div>
+              <div class="col-span-12 md:col-span-8 lg:col-span-4 p-3 xl:p-5 rounded-lg bg-[var(--box-color)] ">
+                <h3 class="md:text-lg font-bold mb-3.5 sm:mb-4">آدرس</h3>
+                <div>
+                  <div class="w-full">
+                   <span class="cursor-pointer">کشور </span>
+                   <select id="user-country" class="w-full p-2 my-1 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0  bg-[var(--bg-color)]">
+                      <option value="all" selected="">انتخاب</option>
+                      <option value="Iran">ایران</option>
+                      <option value="United States">ایالات متحده</option>
+                      <option value="United Kingdom">انگلستان</option>
+                      <option value="Canada">کانادا</option>
+                      <option value="Germany">آلمان</option>
+                      <option value="France">فرانسه</option>
+                      <option value="Italy">ایتالیا</option>
+                      <option value="Spain">اسپانیا</option>
+                      <option value="Japan">ژاپن</option>
+                      <option value="China">چین</option>
+                      <option value="India">هند</option>
+                      <option value="Brazil">برزیل</option>
+                      <option value="Russia">روسیه</option>
+                      <option value="Australia">استرالیا</option>
+                      <option value="South Korea">کره جنوبی</option>
+                   </select>
+                 </div>
               <div class="w-full">
                 <label class="cursor-pointer" for="user-city">شهر</label>
                 <input class="w-full p-2.5 my-1 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 bg-[var(--bg-color)]" maxlength="30" type="text" id="user-city" placeholder="شهر خود را وارد کنید...">
@@ -484,16 +492,15 @@ input[type=number] {
                 <label class="cursor-pointer" for="user-postalCode">کد پستی</label>
                 <input class="w-full p-2.5 my-1 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 bg-[var(--bg-color)]" maxlength="30" type="text" id="user-postalCode" placeholder="کد پستی خود را وارد کنید...">
               </div>
-              <div class="w-full xl:col-start-1 xs:col-span-2 ">
-                <label class="cursor-pointer" for="user-address">نشانی</label>
-                <input class="w-full p-2.5 my-1 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 bg-[var(--bg-color)]" maxlength="50" type="text" id="user-address" placeholder="آدرس خود را وارد کنید...">
+                </div>
               </div>
-            </div>
-            <div class="my-3">
-              <label class="cursor-pointer" for="user-about-me">درباره من (<span>300</span> کاراکتر)</label> 
+
+            <div class="col-span-12 lg:col-span-8 xl:col-span-8 p-3  rounded-lg bg-[var(--box-color)] ">
+              <h3 class="md:text-lg font-bold mb-3">درباره من</h3>
+              <label class="cursor-pointer" for="user-about-me">توضیحات <span class="text-xs">(300 کاراکتر )</span></label> 
               <textarea name="" id="user-about-me" placeholder="بیوگرافی خود را وارد کنید." class="block min-h-40 max-h-70 w-full leading-6 rounded-md bg-[var(--bg-color)] my-1.5 border border-gray-500/50 outline-0 p-2.5 sm:p-3.5" maxlength="300"></textarea>
+              <button type="button" class="submit-btns ms-auto block px-7 py-2 mt-2 cursor-pointer rounded-sm bg-[var(--active-color)]/80 hover:bg-[var(--active-color)] transition-colors text-white"> ذخیره تغیرات</button>
             </div>
-            <button type="button" class="submit-btns ms-auto block px-7 py-2 cursor-pointer rounded-sm bg-[var(--active-color)]/80 hover:bg-[var(--active-color)] transition-colors text-white"> ذخیره تغیرات</button>
             </div>
             <!-- finsih profile tab section  -->
             <!-- start security tab section  -->
@@ -583,7 +590,7 @@ input[type=number] {
             </div>
             <!-- finish security tab section  -->
              <!-- start notif section  -->
-            <div id="notif" class="tab-content grid grid-cols-12 items-start gap-3 ">
+            <div id="notif" class="tab-content grid grid-cols-12 items-start gap-3  hidden">
               <div class="col-span-12  lg:col-span-7 xl:col-span-8 p-3 lg:p-5 rounded-lg text-xs sm:text-sm bg-[var(--box-color)]">
                 <h3 class="text-base md:text-lg font-bold mb-1">اعلان‌ها</h3>
                 <div class="divide-y divide-gray-500/60">
@@ -684,6 +691,85 @@ input[type=number] {
               </div>
             </div>
              <!-- finish notif section  -->
+              <!-- start bank section  -->
+            <div id="bank" class="tab-content grid grid-cols-12 items-start gap-3 hidden">
+              <div class="col-span-12  lg:col-span-5 xl:col-span-4 p-3 lg:p-5 rounded-lg text-xs sm:text-sm lg:text-xs xl:text-sm bg-[var(--box-color)]">
+                <h3 class="text-base md:text-lg font-bold mb-1">کارت های بانکی</h3>
+                <div class="divide-y divide-gray-500/50">
+                  <div class="flex items-center justify-between gap-2.5 py-2 sm:py-3.5">
+                    <div><img src="images/visa-img.png" alt=""></div>
+                    <div class="flex flex-col gap-2 me-auto">
+                      <span class="font-extrabold text-nowrap">Carolyn Perkins •••• 0392</span>
+                      <span>تاریخ انقضا اسفند 2025</span>
+                    </div>
+                    <div class="flex items-center">
+                      <button type="button" class="p-1 rounded-md cursor-pointer text-red-500 transition-colors"><i class="fas fa-trash xs:text-base lg:text-sm xl:text-base"></i></button>
+                      <button type="button" class="p-1 rounded-md cursor-pointer text-blue-500 transition-colors"><i class="fas fa-edit xs:text-base lg:text-sm xl:text-base"></i></button>
+                    </div>
+                  </div>
+                  <div class="flex items-center justify-between gap-2.5 py-2 sm:py-3.5">
+                    <div><img src="images/img-9.png" alt=""></div>
+                    <div class="flex flex-col gap-2 me-auto">
+                      <span class="font-extrabold text-nowrap">Carolyn Perkins •••• 8461</span>
+                      <span>تاریخ انقضا شهریور 2025</span>
+                    </div>
+                    <div class="flex items-center ">
+                      <button type="button" class="p-1  rounded-md cursor-pointer text-red-500 transition-colors"><i class="fas fa-trash xs:text-base lg:text-sm xl:text-base"></i></button>
+                      <button type="button" class="p-1  rounded-md cursor-pointer text-blue-500 transition-colors"><i class="fas fa-edit xs:text-base lg:text-sm xl:text-base"></i></button>
+                    </div>
+                  </div>
+                </div>
+                <button type="button" class="text-xs m-3 hover:text-blue-500 cursor-pointer transition-colors font-bold"><i class="fas fa-plus"></i> افزودن روش پرداخت</button>
+              </div>
+              <div class="col-span-12  lg:col-span-7 xl:col-span-8 p-3 lg:p-5 rounded-lg text-xs sm:text-sm bg-[var(--box-color)]">
+                <h3 class="text-base md:text-lg font-bold mb-1">تاریخچه تراکنش‌ها</h3>
+                <div class="overflow-auto">
+                  <table class="w-full min-w-[560px] text-xs xl:text-sm">
+                    <thead>
+                      <tr class="py-3 sm:py-4 flex justify-between gap-1">
+                        <td class="w-1/6 text-center">ارجاع</td>
+                        <td class="w-2/6 text-center">محصول</td>
+                        <td class="w-1/6 text-center">وضعیت</td>
+                        <td class="w-1/6 text-center">تاریخ</td>
+                        <td class="w-1/6 text-center">مبلغ</td>
+                      </tr>
+                    </thead>
+                    <tbody class="divide-y-1 divide-gray-500/50 border-t border-gray-500/50 ">
+                      <tr class="py-3.5 sm:py-4 transition-colors hover:bg-gray-500/20 flex justify-between gap-1 ">
+                        <td class="w-1/6 text-center font-[dana-num]" >#36223</td>
+                        <td class="w-2/6 text-center" >پک پریمیوم آزمایشی</td>
+                        <td class="w-1/6 text-center" ><span class="size-2.5 rounded-full bg-amber-500 inline-block align-sub mx-2  animate-pulse"></span>در انتظار</td>
+                        <td class="w-1/6 text-center font-[dana-num]" >1400/09/19</td>
+                        <td class="w-1/6 text-center font-[dana-num]">40 $</td>
+                      </tr>
+                      <tr class="py-3.5 sm:py-4 transition-colors hover:bg-gray-500/20 flex justify-between gap-1 ">
+                        <td class="w-1/6 text-center font-[dana-num]" >#34283</td>
+                        <td class="w-2/6 text-center" >اشتراک پایه تابلو کسب‌وکار	</td>
+                        <td class="w-1/6 text-center" ><span class="size-2.5 rounded-full bg-green-500 inline-block align-sub mx-2  animate-pulse"></span>پرداخت شده</td>
+                        <td class="w-1/6 text-center font-[dana-num]" >1400/08/22</td>
+                        <td class="w-1/6 text-center font-[dana-num]">59.5 $</td>
+                      </tr>
+                      <tr class="py-3.5 sm:py-4 transition-colors hover:bg-gray-500/20 flex justify-between gap-1 ">
+                        <td class="w-1/6 text-center font-[dana-num]" >#32234</td>
+                        <td class="w-2/6 text-center" >اشتراک پایه تابلو کسب‌وکار	</td>
+                        <td class="w-1/6 text-center" ><span class="size-2.5 rounded-full bg-green-500 inline-block align-sub mx-2  animate-pulse"></span>پرداخت شده</td>
+                        <td class="w-1/6 text-center font-[dana-num]" >1400/07/21</td>
+                        <td class="w-1/6 text-center font-[dana-num]">200 $</td>
+                      </tr>
+                      <tr class="py-3.5 sm:py-4 transition-colors hover:bg-gray-500/20 flex justify-between gap-1 ">
+                        <td class="w-1/6 text-center font-[dana-num]" >#31354</td>
+                        <td class="w-2/6 text-center" >اشتراک پایه تابلو کسب‌وکار	</td>
+                        <td class="w-1/6 text-center" ><span class="size-2.5 rounded-full bg-green-500 inline-block align-sub mx-2  animate-pulse"></span>پرداخت شده</td>
+                        <td class="w-1/6 text-center font-[dana-num]" >1400/06/22</td>
+                        <td class="w-1/6 text-center font-[dana-num]">69 $</td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+              <!-- finish bank section  -->
           </div>
            <!-- finish tab container section  -->
 

@@ -19,7 +19,6 @@ const age = document.querySelector("#user-age");
 const country = document.querySelector("#user-country");
 const city = document.querySelector("#user-city");
 const postalCode = document.querySelector("#user-postalCode");
-const address = document.querySelector("#user-address");
 const aboutMe = document.querySelector("#user-about-me");
 
 const tabBtns = document.querySelector("#tab-btns");
@@ -102,13 +101,12 @@ document.querySelectorAll('#password-show').forEach(elem=>{
   country.value= user.address.country || ''
   city.value= user.address.city || ''
   postalCode.value= user.address.postalCode || ''
-  address.value= user.address.address || ''
   aboutMe.value= user.bio || ''
 }
 
 function changeTextAreaMaxLength() {
-  aboutMe.previousElementSibling.firstElementChild.textContent =
-    300 - aboutMe.value.length;
+  aboutMe.previousElementSibling.firstElementChild.textContent =`(${300 - aboutMe.value.length} کاراکتر)`
+    
   if (aboutMe.value.length >= 300) aboutMe.style.borderColor = "red";
   else aboutMe.style.borderColor = "";
 }
