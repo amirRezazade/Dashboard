@@ -6,22 +6,31 @@
     <link href="src/output.css" rel="stylesheet" />
 
     <style>
-      .filepond--item {
-        display: inline-block;
-        width: 150px;
-        height: 150px;
+      body{
+        /* background: ; */
+        background: url('images/profile-bg.jpg');
+        /* background: ; */
+        /* background-color: red; */
+        position: relative;
+        background-blend-mode: overlay;
+        background-size: cover;
+        /* bg-gradient-to-r from-[#] to-[] */
+      }
+      body::before{
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background: linear-gradient(to left  ,#0034dfb5 , #465ca5e2) !important;
       }
     </style>
 
     <title>Document</title>
   </head>
   <body class=" h-screen centered"></body>
-  <input type="file" id="imageInput" accept="image/*" />
-  <img
-    id="preview"
-    class="w-32 h-32 object-cover mt-2 rounded-lg"
-    alt="preview"
-  />
+ 
 
   <script>
     const input = document.getElementById("imageInput");

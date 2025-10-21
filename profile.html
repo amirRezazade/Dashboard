@@ -18,6 +18,10 @@ input::-webkit-outer-spin-button {
 input[type=number] {
   -moz-appearance: textfield; /* برای فایرفاکس */
 }
+.background{
+          /* background: url('images/profile-bg.jpg') , linear-gradient(to left  ,#0034dfb5 , #465ca5e2) !important ; */
+
+}
     </style>
   </head>
   <body class="font-[dana-regular] overflow-x-hidden bg-[var(--bg-color)] text-[var(--text-color)] text-color">
@@ -387,200 +391,304 @@ input[type=number] {
         </ul>
     </aside>
     <main class=" transition-all duration-500 bg-[var(--bg-color)] md:ms-60">
-      <section class="">
-         <div id="bg-photo" class="h-90 md:h-100 bg-cover bg-[url(../images/profile-bg.jpg)] relative">
-          <!-- start photo overlay section  -->
-          <div class="p-3 sm:p-5 absolute w-full h-full top-0 left-0 bg-gradient-to-r from-[#6674a1b5] to-[#465ca5e2] ">
-            <div class="flex flex-wrap-reverse xs:flex-nowrap items-stretch gap-x-2 sm:gap-5">
-              <div class="shrink-0 relative size-19 sm:size-22 rounded-full  border-4 border-[var(--bg-color)] bg-[var(--bg-color)]">
-                <img id="user-profile-photo" class="size-full rounded-full" src="images/profile (1).png" alt="">
-                <label for="profile-photo-input" class="absolute -bottom-1.5 -left-1.5 cursor-pointer p-0.5 rounded-sm text-gray-300"><i class="fas fa-camera text-lg"></i></label>
-                <input class="hidden" type="file" id="profile-photo-input" accept="image/*" />
+      <section class="relative">
+         <div id="bg-photo" class=" w-full h-90 md:h-100 bg-cover bg-[url('../images/profile-bg.jpg')] !-z-0 absolute before:absolute before:size-full before:top-0 before:left-0 before:bg-gradient-to-r before:from-[#6674a1c6] before:to-[#405189de]"></div>
+        <!-- start content  section  -->
+         <div class="px-3 sm:px-5 bg-transparent relative !z-20">
+           <div class="p-3 sm:p-5 ">
+             <div class="flex flex-wrap-reverse xs:flex-nowrap items-stretch gap-x-2 sm:gap-5">
+               <div class="shrink-0 relative size-19 sm:size-22 rounded-full  border-4 border-[var(--bg-color)] bg-[var(--bg-color)]">
+                 <img id="user-profile-photo" class="size-full rounded-full" src="images/profile (1).png" alt="">
+                 <label for="profile-photo-input" class="absolute -bottom-1.5 -left-1.5 cursor-pointer p-0.5 rounded-sm text-gray-300"><i class="fas fa-camera text-lg"></i></label>
+                 <input class="hidden" type="file" id="profile-photo-input" accept="image/*" />
+               </div>
+               <div class="flex flex-col justify-evenly text-white text-xs sm:text-sm ">
+                 <span id="name" class="font-extrabold text-base sm:text-lg md:text-xl">amirRezazade</span>
+                 <span id="role" class="font-extralight text-white/70">admin</span>
+                 <span class="font-extralight text-white/70"><i class="fas fa-location-dot"></i><span id="address">کالیفرنیا، ایالات متحده آمریکا</span></span>
+               </div>
+               <div class="ms-auto md:me-8 self-center">
+                 <label for="bg-photo-input" class="cursor-pointer p-0.5 py-1 xs:py-1.5 px-1.5 sm:px-2.5 text-nowrap bg-black/50 hover:bg-black rounded-sm text-white text-xs sm:text-sm "><i class="hidden fas fa-image align-center "></i> تغییر جلد</label>
+                 <input class="hidden" type="file"  id="bg-photo-input" accept="image/*" />
+               </div>
+             </div>
+             <p class="text-xs sm:text-sm lg:text-[15px] text-white/70 max-w-2xl m-2 sm:m-4 lg:m-6 leading-7">سلام من آنا آدام هستم، به همین سادگی خواهد بود. در واقع، آن را غربی خواهد بود. برای یک فرد انگلیسی، این مانند زبان انگلیسی ساده به نظر می رسد، همانطور که یکی از دوستان شکاکم کمبریجی به من گفت که زبان های اروپایی چه چیزی غربی هستند، زبان های اروپایی اعضای یک خانواده هستند.</p>
+             <div id="tab-btns" class="flex items-center gap-1 xs:gap-2 text-xs sm:text-sm text-white m-2 sm:m-4">
+               <button type="button" data-tab="profile" class="tab-btn before:!w-full">پروفایل</button>
+               <button type="button" data-tab="security" class="tab-btn">امنیت</button>
+               <button type="button" data-tab="notif" class="tab-btn">اعلان ها</button>
+               <button type="button" data-tab="test" class="tab-btn">صورت حساب</button>
+             </div> 
+             
+           </div>
+           <!-- start tab container section  -->
+           <div id="tab-container" class="  pb-5 ">
+            <!-- start profile tab section  -->
+            <div id="profile" class="tab-content p-3 lg:p-5 rounded-lg text-xs sm:text-sm bg-[var(--box-color)] hidden">
+              <h3 class="md:text-lg font-bold mb-3.5 sm:mb-4">پروفایل</h3>
+              <div class=" grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center justify-between gap-3">
+                  <div class="">
+                    <label class="cursor-pointer" for="first-name">نام </label>
+                    <input class="w-full p-2 sm:p-3 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 my-1 bg-[var(--bg-color)]" required="" minlength="3" maxlength="20" type="text" id="first-name" placeholder="نام خود را وارد کنید...">
+                  </div>
+                  <div class="">
+                    <label class="cursor-pointer" for="last-name">نام خانوادگی </label>
+                    <input class="w-full p-2 sm:p-3 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 my-1 bg-[var(--bg-color)]" required="" minlength="3" maxlength="30" type="text" id="last-name" placeholder="نام خانوادگی خود را وارد کنید...">
+                  </div>
+                  <div class="">
+                    <label class="cursor-pointer" for="user-name">نام کاربری </label>
+                    <input class="w-full p-2 sm:p-3 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 my-1 bg-[var(--bg-color)]" required="" minlength="3" maxlength="30" type="text" id="user-name" placeholder="نام کاربری خود را وارد کنید...">
+                  </div>
+                   <div class="">
+                    <label class="cursor-pointer" for="user-email">ایمیل </label>
+                    <input class="w-full p-2 sm:p-3 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 my-1 bg-[var(--bg-color)]"  minlength="5" maxlength="30" type="email" id="user-email" placeholder="ایمیل خود را وارد کنید...">
+                  </div>
+                  <div class="">
+                    <label class="cursor-pointer" for="user-phone">شماره تماس </label>
+                    <input dir="rtl" class="w-full p-2 sm:p-3 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 my-1 bg-[var(--bg-color)]"  minlength="8" maxlength="11" type="tel" id="user-phone" placeholder="شماره تماس خود را وارد کنید...">
+                  </div>
+                  <div class="">
+                    <label class="cursor-pointer" for="user-age">سن </label>
+                    <input dir="rtl" class="w-full p-2 sm:p-3 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 my-1 bg-[var(--bg-color)] "  min="15" max="120" maxlength="2"  type="number" id="user-age" placeholder="سن خود را وارد کنید...">
+                  </div>
               </div>
-              <div class="flex flex-col justify-evenly text-white text-xs sm:text-sm ">
-                <span id="name" class="font-extrabold text-base sm:text-lg md:text-xl">amirRezazade</span>
-                <span id="role" class="font-extralight text-white/70">admin</span>
-                <span class="font-extralight text-white/70"><i class="fas fa-location-dot"></i><span id="address">کالیفرنیا، ایالات متحده آمریکا</span></span>
+              <h3 class="md:text-lg font-bold my-3.5 sm:my-4">آدرس</h3>
+   
+              <div class="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center justify-between gap-3">
+              <div class="w-full">
+                <span class="cursor-pointer">کشور </span>
+                <select id="user-country" class="w-full p-2 my-1 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0  bg-[var(--bg-color)]">
+                  <option value="all" selected="">انتخاب</option>
+                  <option value="Iran">ایران</option>
+                  <option value="United States">ایالات متحده</option>
+                  <option value="United Kingdom">انگلستان</option>
+                  <option value="Canada">کانادا</option>
+                  <option value="Germany">آلمان</option>
+                  <option value="France">فرانسه</option>
+                  <option value="Italy">ایتالیا</option>
+                  <option value="Spain">اسپانیا</option>
+                  <option value="Japan">ژاپن</option>
+                  <option value="China">چین</option>
+                  <option value="India">هند</option>
+                  <option value="Brazil">برزیل</option>
+                  <option value="Russia">روسیه</option>
+                  <option value="Australia">استرالیا</option>
+                  <option value="South Korea">کره جنوبی</option>
+                </select>
               </div>
-              <div class="ms-auto md:me-8 self-center">
-                <label for="bg-photo-input" class="cursor-pointer p-0.5 py-1 xs:py-1.5 px-1.5 sm:px-2.5 text-nowrap bg-black/50 hover:bg-black rounded-sm text-white text-xs sm:text-sm "><i class="hidden fas fa-image align-center "></i> تغییر جلد</label>
-                <input class="hidden" type="file"  id="bg-photo-input" accept="image/*" />
+              <div class="w-full">
+                <label class="cursor-pointer" for="user-city">شهر</label>
+                <input class="w-full p-2.5 my-1 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 bg-[var(--bg-color)]" maxlength="30" type="text" id="user-city" placeholder="شهر خود را وارد کنید...">
+              </div>
+              <div class="w-full">
+                <label class="cursor-pointer" for="user-postalCode">کد پستی</label>
+                <input class="w-full p-2.5 my-1 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 bg-[var(--bg-color)]" maxlength="30" type="text" id="user-postalCode" placeholder="کد پستی خود را وارد کنید...">
+              </div>
+              <div class="w-full xl:col-start-1 xs:col-span-2 ">
+                <label class="cursor-pointer" for="user-address">نشانی</label>
+                <input class="w-full p-2.5 my-1 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 bg-[var(--bg-color)]" maxlength="50" type="text" id="user-address" placeholder="آدرس خود را وارد کنید...">
               </div>
             </div>
-            <p class="text-xs sm:text-sm lg:text-[15px] text-white/70 max-w-2xl m-2 sm:m-4 lg:m-6 leading-7">سلام من آنا آدام هستم، به همین سادگی خواهد بود. در واقع، آن را غربی خواهد بود. برای یک فرد انگلیسی، این مانند زبان انگلیسی ساده به نظر می رسد، همانطور که یکی از دوستان شکاکم کمبریجی به من گفت که زبان های اروپایی چه چیزی غربی هستند، زبان های اروپایی اعضای یک خانواده هستند.</p>
-            <div id="tab-btns" class="flex items-center gap-1 xs:gap-2 text-xs sm:text-sm text-white m-2 sm:m-4">
-              <button type="button" data-tab="profile" class="tab-btn before:!w-full">پروفایل</button>
-              <button type="button" data-tab="security" class="tab-btn">امنیت</button>
-              <button type="button" data-tab="notif" class="tab-btn">اعلان ها</button>
-              <button type="button" data-tab="test" class="tab-btn">صورت حساب</button>
-            </div> 
-             <!-- start tab container section  -->
-             <div id="tab-container" class="mt-7 pb-5">
-              <!-- start profile tab section  -->
-              <div id="profile" class="tab-content p-3 lg:p-5 rounded-lg text-xs sm:text-sm bg-[var(--box-color)] ">
-                <h3 class="md:text-lg font-bold mb-3.5 sm:mb-4">پروفایل</h3>
-                <div class=" grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center justify-between gap-3">
-                    <div class="">
-                      <label class="cursor-pointer" for="first-name">نام </label>
-                      <input class="w-full p-2 sm:p-3 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 my-1 bg-[var(--bg-color)]" required="" minlength="3" maxlength="20" type="text" id="first-name" placeholder="نام خود را وارد کنید...">
-                    </div>
-                    <div class="">
-                      <label class="cursor-pointer" for="last-name">نام خانوادگی </label>
-                      <input class="w-full p-2 sm:p-3 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 my-1 bg-[var(--bg-color)]" required="" minlength="3" maxlength="30" type="text" id="last-name" placeholder="نام خانوادگی خود را وارد کنید...">
-                    </div>
-                    <div class="">
-                      <label class="cursor-pointer" for="user-name">نام کاربری </label>
-                      <input class="w-full p-2 sm:p-3 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 my-1 bg-[var(--bg-color)]" required="" minlength="3" maxlength="30" type="text" id="user-name" placeholder="نام کاربری خود را وارد کنید...">
-                    </div>
-                     <div class="">
-                      <label class="cursor-pointer" for="user-email">ایمیل </label>
-                      <input class="w-full p-2 sm:p-3 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 my-1 bg-[var(--bg-color)]"  minlength="5" maxlength="30" type="email" id="user-email" placeholder="ایمیل خود را وارد کنید...">
-                    </div>
-                    <div class="">
-                      <label class="cursor-pointer" for="user-phone">شماره تماس </label>
-                      <input dir="rtl" class="w-full p-2 sm:p-3 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 my-1 bg-[var(--bg-color)]"  minlength="8" maxlength="11" type="tel" id="user-phone" placeholder="شماره تماس خود را وارد کنید...">
-                    </div>
-                    <div class="">
-                      <label class="cursor-pointer" for="user-age">سن </label>
-                      <input dir="rtl" class="w-full p-2 sm:p-3 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 my-1 bg-[var(--bg-color)] "  min="15" max="120" maxlength="2"  type="number" id="user-age" placeholder="سن خود را وارد کنید...">
-                    </div>
-                </div>
-                <h3 class="md:text-lg font-bold my-3.5 sm:my-4">آدرس</h3>
-
-                <div class="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center justify-between gap-3">
-                <div class="w-full">
-                  <span class="cursor-pointer">کشور </span>
-                  <select id="user-country" class="w-full p-2 my-1 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0  bg-[var(--bg-color)]">
-                    <option value="all" selected="">انتخاب</option>
-                    <option value="Iran">ایران</option>
-                    <option value="United States">ایالات متحده</option>
-                    <option value="United Kingdom">انگلستان</option>
-                    <option value="Canada">کانادا</option>
-                    <option value="Germany">آلمان</option>
-                    <option value="France">فرانسه</option>
-                    <option value="Italy">ایتالیا</option>
-                    <option value="Spain">اسپانیا</option>
-                    <option value="Japan">ژاپن</option>
-                    <option value="China">چین</option>
-                    <option value="India">هند</option>
-                    <option value="Brazil">برزیل</option>
-                    <option value="Russia">روسیه</option>
-                    <option value="Australia">استرالیا</option>
-                    <option value="South Korea">کره جنوبی</option>
-                  </select>
-                </div>
-                <div class="w-full">
-                  <label class="cursor-pointer" for="user-city">شهر</label>
-                  <input class="w-full p-2.5 my-1 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 bg-[var(--bg-color)]" maxlength="30" type="text" id="user-city" placeholder="شهر خود را وارد کنید...">
-                </div>
-                <div class="w-full">
-                  <label class="cursor-pointer" for="user-postalCode">کد پستی</label>
-                  <input class="w-full p-2.5 my-1 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 bg-[var(--bg-color)]" maxlength="30" type="text" id="user-postalCode" placeholder="کد پستی خود را وارد کنید...">
-                </div>
-                <div class="w-full xl:col-start-1 xs:col-span-2 ">
-                  <label class="cursor-pointer" for="user-address">نشانی</label>
-                  <input class="w-full p-2.5 my-1 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 bg-[var(--bg-color)]" maxlength="50" type="text" id="user-address" placeholder="آدرس خود را وارد کنید...">
-                </div>
-              </div>
-              <div class="my-3">
-                <label class="cursor-pointer" for="user-about-me">درباره من (<span>300</span> کارکتر)</label> 
-                <textarea name="" id="user-about-me" placeholder="بیوگرافی خود را وارد کنید." class="block min-h-40 max-h-70 w-full leading-6 rounded-md bg-[var(--bg-color)] my-1.5 border border-gray-500/50 outline-0 p-2.5 sm:p-3.5" maxlength="300"></textarea>
-              </div>
-              <button type="button" class="submit-btns ms-auto block px-7 py-2 cursor-pointer rounded-sm bg-[var(--active-color)]/80 hover:bg-[var(--active-color)] transition-colors text-white"> ذخیره تغیرات</button>
-              </div>
-              <!-- finsih profile tab section  -->
-              <!-- start security tab section  -->
-              <div id="security" class="tab-content grid grid-cols-12 gap-3 hidden">
-                <div class="col-span-12 lg:col-span-4 p-3 lg:p-5 rounded-lg text-xs sm:text-sm bg-[var(--box-color)]">
-                  <div class="mb-3.5 sm:mb-4">
-                    <h3 class="text-base md:text-lg font-bold mb-1">رمز عبور</h3>
-                    <p class="text-xs ">به یاد داشته باشید، رمز عبور شما کلید دیجیتالی حساب شماست. آن را امن و محفوظ نگه دارید!</p>
-                  </div>
-                  <div>
-                      <label class="cursor-pointer" for="user-password">رمز عبور فعلی</label>
-                      <div class="flex items-center bg-[var(--bg-color)] my-1 rounded-md border border-transparent focus-within:border-[var(--active-color)] overflow-hidden">
-                        <input class="w-full p-2.5 outline-0  " required minlength="3" maxlength="15" type="password" id="user-password" placeholder="رمز عبور فعلی خود را وارد کنید...">
-                        <button type="button" id="password-show" class="w-10 text-center py-2.5 cursor-pointer text-xs"><i class="fas fa-eye "></i></button>
-                      </div>               
-                  </div>
-                  <div class="my-3 ">
-                      <label class="cursor-pointer" for="user-new-password">رمز عبور جدید</label>
-                      <div class="flex items-center bg-[var(--bg-color)] my-1 rounded-md border border-transparent focus-within:border-[var(--active-color)] overflow-hidden">
-                        <input class="w-full p-2.5 outline-0  " required minlength="3" maxlength="15" type="password" id="user-new-password" placeholder="رمز عبور جدید خود را وارد کنید...">
-                        <button type="button" id="password-show" class="w-10 text-center py-2.5 cursor-pointer text-xs"><i class="fas fa-eye "></i></button>
-                      </div>               
-                  </div>
-                  <div>
-                      <label class="cursor-pointer" for="user-new-password-confirm">تایید رمز عبور جدید</label>
-                      <div class="flex items-center bg-[var(--bg-color)] my-1 rounded-md border border-transparent focus-within:border-[var(--active-color)] overflow-hidden">
-                        <input class="w-full p-2.5 outline-0  " required minlength="3" maxlength="15" type="password" id="user-new-password-confirm" placeholder="رمز عبور جدید خود را وارد کنید...">
-                        <button type="button" id="password-show" class="w-10 text-center py-2.5 cursor-pointer text-xs"><i class="fas fa-eye "></i></button>
-                      </div>               
-                  </div>
-                  <a href="#" class="underline text-[var(--active-color)] mt-2 block">رمز عبور را فراموش کرده اید؟</a>
-                   <button type="button" class="submit-btns ms-auto block px-7 py-2 cursor-pointer rounded-sm bg-[var(--active-color)]/80 hover:bg-[var(--active-color)] transition-colors text-white"> ذخیره تغیرات</button>
-                </div>
-                <div class="col-span-12 lg:col-span-8 p-3 lg:p-5 rounded-lg text-xs sm:text-sm bg-[var(--box-color)]">
-                  <div class="mb-3.5 sm:mb-4">
-                    <h3 class="text-base md:text-lg font-bold mb-1">تأیید دو مرحله‌ای</h3>
-                    <p class="text-xs ">حساب شما برای هکرها ارزشمند است. تأیید دو مرحله‌ای را فعال کنید تا حساب خود را ایمن کنید!</p>
-                  </div>
-                  <div class="divide-y divide-gray-500/70 ">
-                    <div class="flex items-center justify-between py-3 sm:py-5 lg:py-4 gap-3 sm:gap-5">
-                      <div class="size-8 xs:size-10 shrink-0 rounded-full overflow-hidden "><img class="object-cover" src="images/email.png" alt="google"></div>
-                      <div class="me-auto ">
-                        <span class="font-bold text-sm sm:text-base">تأیید پیامک</span>
-                        <p class="text-xs sm:text-sm">کد تایید به شماره تلفن شما ارسال میشود.</p>
-                      </div>
-                      <div>
-                        <input type="checkbox" id="sms" checked class="hidden peer">
-                        <label for="sms" type="button" class="w-18 py-2 xs:w-25  inline-block text-center cursor-pointer rounded-xl border-3 font-bold hover:border-blue-500 border-gray-500 peer-checked:text-white peer-checked:bg-blue-500 peer-checked:border-blue-500" onclick="textContent==='فعال سازی' ? textContent='فعال' : textContent='فعال سازی'">فعال </label>
-                      </div>
-                    </div>
-                    <div class="flex items-center justify-between py-3 sm:py-5 lg:py-4 gap-3 sm:gap-5">
-                      <div class="size-8 xs:size-10 shrink-0 rounded-full overflow-hidden "><img class="object-cover" src="images/google.png" alt="google"></div>
-                      <div class="me-auto ">
-                        <span class="font-bold text-sm sm:text-base">Google Authenticator</span>
-                        <p class="text-xs sm:text-sm">با استفاده از اپلیکیشن Google Authenticator کدهای حساس به زمان برای ورود امن تولید می‌شود.</p>
-                      </div>
-                      <div>
-                        <input type="checkbox" id="google" class="hidden peer">
-                        <label for="google" type="button" class="w-18 py-2 xs:w-25  inline-block text-center cursor-pointer rounded-xl border-3 font-bold hover:border-blue-500 border-gray-500 peer-checked:text-white peer-checked:bg-blue-500 peer-checked:border-blue-500" onclick="textContent==='فعال سازی' ? textContent='فعال' : textContent='فعال سازی'">فعال سازی</label>
-                      </div>
-                    </div>
-                    <div class="flex items-center justify-between py-3 sm:py-5 lg:py-4 gap-3 sm:gap-5">
-                      <div class="size-8 xs:size-10 shrink-0 rounded-full overflow-hidden "><img class="object-cover" src="images/gmail.png" alt="google"></div>
-                      <div class="me-auto ">
-                        <span class="font-bold text-sm sm:text-base">تأیید ایمیل</span>
-                        <p class="text-xs sm:text-sm">کدهای یکتایی که برای تأیید ورود به ایمیل شما ارسال می‌شود.</p>
-                      </div>
-                      <div>
-                        <input type="checkbox" id="gmail" checked class="hidden peer">
-                        <label for="gmail" type="button" class="w-18 py-2 xs:w-25  inline-block text-center cursor-pointer rounded-xl border-3 font-bold hover:border-blue-500 border-gray-500 peer-checked:text-white peer-checked:bg-blue-500 peer-checked:border-blue-500" onclick="textContent==='فعال سازی' ? textContent='فعال' : textContent='فعال سازی'">فعال </label>
-                      </div>
-                    </div>
-                    <div class="flex items-center justify-between py-3 sm:py-5 lg:py-4 gap-3 sm:gap-5">
-                      <div class="size-8 xs:size-10 shrink-0 rounded-full overflow-hidden "><img class="object-cover" src="images/okta.png" alt="google"></div>
-                      <div class="me-auto ">
-                        <span class="font-bold text-sm sm:text-base">Okta Verify</span>
-                        <p class="text-xs sm:text-sm">دریافت اعلان‌های فشاری از اپلیکیشن Okta Verify روی گوشی شما برای تأیید سریع ورود.</p>
-                      </div>
-                      <div>
-                        <input type="checkbox" id="okta" class="hidden peer">
-                        <label for="okta" type="button" class="w-18 py-2 xs:w-25  inline-block text-center cursor-pointer rounded-xl border-3 font-bold hover:border-blue-500 border-gray-500 peer-checked:text-white peer-checked:bg-blue-500 peer-checked:border-blue-500" onclick="textContent==='فعال سازی' ? textContent='فعال' : textContent='فعال سازی'">فعال سازی</label>
-                      </div>
-                    </div>
-                   
-                  </div>
-                </div>
-              </div>
-              <!-- finish security tab section  -->
+            <div class="my-3">
+              <label class="cursor-pointer" for="user-about-me">درباره من (<span>300</span> کاراکتر)</label> 
+              <textarea name="" id="user-about-me" placeholder="بیوگرافی خود را وارد کنید." class="block min-h-40 max-h-70 w-full leading-6 rounded-md bg-[var(--bg-color)] my-1.5 border border-gray-500/50 outline-0 p-2.5 sm:p-3.5" maxlength="300"></textarea>
             </div>
-             <!-- finish tab container section  -->
-
+            <button type="button" class="submit-btns ms-auto block px-7 py-2 cursor-pointer rounded-sm bg-[var(--active-color)]/80 hover:bg-[var(--active-color)] transition-colors text-white"> ذخیره تغیرات</button>
+            </div>
+            <!-- finsih profile tab section  -->
+            <!-- start security tab section  -->
+            <div id="security" class="tab-content grid grid-cols-12 gap-3 hidden">
+              <div class="col-span-12 lg:col-span-4 p-3 lg:p-5 rounded-lg text-xs sm:text-sm bg-[var(--box-color)]">
+                <div class="mb-3.5 sm:mb-4">
+                  <h3 class="text-base md:text-lg font-bold mb-1">رمز عبور</h3>
+                  <p class="text-xs ">به یاد داشته باشید، رمز عبور شما کلید دیجیتالی حساب شماست. آن را امن و محفوظ نگه دارید!</p>
+                </div>
+                <div>
+                    <label class="cursor-pointer" for="user-password">رمز عبور فعلی</label>
+                    <div class="flex items-center bg-[var(--bg-color)] my-1 rounded-md border border-transparent focus-within:border-[var(--active-color)] overflow-hidden">
+                      <input class="w-full p-2.5 outline-0  " required minlength="3" maxlength="15" type="password" id="user-password" placeholder="رمز عبور فعلی خود را وارد کنید...">
+                      <button type="button" id="password-show" class="w-10 text-center py-2.5 cursor-pointer text-xs"><i class="fas fa-eye "></i></button>
+                    </div>               
+                </div>
+                <div class="my-3 ">
+                    <label class="cursor-pointer" for="user-new-password">رمز عبور جدید</label>
+                    <div class="flex items-center bg-[var(--bg-color)] my-1 rounded-md border border-transparent focus-within:border-[var(--active-color)] overflow-hidden">
+                      <input class="w-full p-2.5 outline-0  " required minlength="3" maxlength="15" type="password" id="user-new-password" placeholder="رمز عبور جدید خود را وارد کنید...">
+                      <button type="button" id="password-show" class="w-10 text-center py-2.5 cursor-pointer text-xs"><i class="fas fa-eye "></i></button>
+                    </div>               
+                </div>
+                <div>
+                    <label class="cursor-pointer" for="user-new-password-confirm">تایید رمز عبور جدید</label>
+                    <div class="flex items-center bg-[var(--bg-color)] my-1 rounded-md border border-transparent focus-within:border-[var(--active-color)] overflow-hidden">
+                      <input class="w-full p-2.5 outline-0  " required minlength="3" maxlength="15" type="password" id="user-new-password-confirm" placeholder="رمز عبور جدید خود را وارد کنید...">
+                      <button type="button" id="password-show" class="w-10 text-center py-2.5 cursor-pointer text-xs"><i class="fas fa-eye "></i></button>
+                    </div>               
+                </div>
+                <a href="#" class="underline text-[var(--active-color)] mt-2 block">رمز عبور را فراموش کرده اید؟</a>
+                 <button type="button" class="submit-btns ms-auto block px-7 py-2 cursor-pointer rounded-sm bg-[var(--active-color)]/80 hover:bg-[var(--active-color)] transition-colors text-white"> ذخیره تغیرات</button>
+              </div>
+              <div class="col-span-12 lg:col-span-8 p-3 lg:p-5 rounded-lg text-xs sm:text-sm bg-[var(--box-color)]">
+                <div class="mb-3.5 sm:mb-4">
+                  <h3 class="text-base md:text-lg font-bold mb-1">تأیید دو مرحله‌ای</h3>
+                  <p class="text-xs ">حساب شما برای هکرها ارزشمند است. تأیید دو مرحله‌ای را فعال کنید تا حساب خود را ایمن کنید!</p>
+                </div>
+                <div class="divide-y divide-gray-500/70 ">
+                  <div class="flex items-center justify-between py-3 sm:py-5 lg:py-4 gap-3 sm:gap-5">
+                    <div class="size-8 xs:size-10 shrink-0 rounded-full overflow-hidden "><img class="object-cover" src="images/email.png" alt="google"></div>
+                    <div class="me-auto ">
+                      <span class="font-bold text-sm sm:text-base">تأیید پیامک</span>
+                      <p class="text-xs sm:text-sm">کد تایید به شماره تلفن شما ارسال میشود.</p>
+                    </div>
+                    <div>
+                      <input type="checkbox" id="sms" checked class="hidden peer">
+                      <label for="sms" type="button" class="w-18 py-2 xs:w-25  inline-block text-center cursor-pointer rounded-xl border-3 font-bold hover:border-blue-500 border-gray-500 peer-checked:text-white peer-checked:bg-blue-500 peer-checked:border-blue-500" onclick="textContent==='فعال سازی' ? textContent='فعال' : textContent='فعال سازی'">فعال </label>
+                    </div>
+                  </div>
+                  <div class="flex items-center justify-between py-3 sm:py-5 lg:py-4 gap-3 sm:gap-5">
+                    <div class="size-8 xs:size-10 shrink-0 rounded-full overflow-hidden "><img class="object-cover" src="images/google.png" alt="google"></div>
+                    <div class="me-auto ">
+                      <span class="font-bold text-sm sm:text-base">Google Authenticator</span>
+                      <p class="text-xs sm:text-sm">با استفاده از اپلیکیشن Google Authenticator کدهای حساس به زمان برای ورود امن تولید می‌شود.</p>
+                    </div>
+                    <div>
+                      <input type="checkbox" id="google" class="hidden peer">
+                      <label for="google" type="button" class="w-18 py-2 xs:w-25  inline-block text-center cursor-pointer rounded-xl border-3 font-bold hover:border-blue-500 border-gray-500 peer-checked:text-white peer-checked:bg-blue-500 peer-checked:border-blue-500" onclick="textContent==='فعال سازی' ? textContent='فعال' : textContent='فعال سازی'">فعال سازی</label>
+                    </div>
+                  </div>
+                  <div class="flex items-center justify-between py-3 sm:py-5 lg:py-4 gap-3 sm:gap-5">
+                    <div class="size-8 xs:size-10 shrink-0 rounded-full overflow-hidden "><img class="object-cover" src="images/gmail.png" alt="google"></div>
+                    <div class="me-auto ">
+                      <span class="font-bold text-sm sm:text-base">تأیید ایمیل</span>
+                      <p class="text-xs sm:text-sm">کدهای یکتایی که برای تأیید ورود به ایمیل شما ارسال می‌شود.</p>
+                    </div>
+                    <div>
+                      <input type="checkbox" id="gmail" checked class="hidden peer">
+                      <label for="gmail" type="button" class="w-18 py-2 xs:w-25  inline-block text-center cursor-pointer rounded-xl border-3 font-bold hover:border-blue-500 border-gray-500 peer-checked:text-white peer-checked:bg-blue-500 peer-checked:border-blue-500" onclick="textContent==='فعال سازی' ? textContent='فعال' : textContent='فعال سازی'">فعال </label>
+                    </div>
+                  </div>
+                  <div class="flex items-center justify-between py-3 sm:py-5 lg:py-4 gap-3 sm:gap-5">
+                    <div class="size-8 xs:size-10 shrink-0 rounded-full overflow-hidden "><img class="object-cover" src="images/okta.png" alt="google"></div>
+                    <div class="me-auto ">
+                      <span class="font-bold text-sm sm:text-base">Okta Verify</span>
+                      <p class="text-xs sm:text-sm">دریافت اعلان‌های فشاری از اپلیکیشن Okta Verify روی گوشی شما برای تأیید سریع ورود.</p>
+                    </div>
+                    <div>
+                      <input type="checkbox" id="okta" class="hidden peer">
+                      <label for="okta" type="button" class="w-18 py-2 xs:w-25  inline-block text-center cursor-pointer rounded-xl border-3 font-bold hover:border-blue-500 border-gray-500 peer-checked:text-white peer-checked:bg-blue-500 peer-checked:border-blue-500" onclick="textContent==='فعال سازی' ? textContent='فعال' : textContent='فعال سازی'">فعال سازی</label>
+                    </div>
+                  </div>
+                 
+                </div>
+              </div>
+            </div>
+            <!-- finish security tab section  -->
+             <!-- start notif section  -->
+            <div id="notif" class="tab-content grid grid-cols-12 items-start gap-3 ">
+              <div class="col-span-12  lg:col-span-7 xl:col-span-8 p-3 lg:p-5 rounded-lg text-xs sm:text-sm bg-[var(--box-color)]">
+                <h3 class="text-base md:text-lg font-bold mb-1">اعلان‌ها</h3>
+                <div class="divide-y divide-gray-500/60">
+                  <div class="flex justify-between items-center gap-2.5 py-3 ">
+                    <label for="email-1" class="cursor-pointer">
+                      <h3 class="text-sm sm:text-base font-extrabold mb-1 md:mb-2">فعال‌سازی اعلان‌های دسکتاپ</h3>
+                      <p class="text-xs md:text-sm">تصمیم بگیرید که آیا می‌خواهید برای پیام‌ها و به‌روزرسانی‌های جدید اعلان دریافت کنید</p>
+                    </label>
+                    <div>
+                      <input type="checkbox" id="email-1" class="peer hidden">
+                      <label for="email-1" class="w-11 h-6 rounded-full bg-gray-500/60 cursor-pointer peer-checked:bg-blue-500 transition-colors inline-block relative before:absolute before:size-5 before:top-0.5 before:left-0.5 before:bg-white before:rounded-full peer-checked:before:translate-x-1/1 before:transition-transform"></label>
+                    </div>
+                  </div>
+                  <div class="flex justify-between items-center gap-2.5 py-3 ">
+                    <label for="email-2" class="cursor-pointer">
+                      <h3 class="text-sm sm:text-base font-extrabold mb-1 md:mb-2">فعال‌سازی نشان اعلان‌های خوانده‌نشده</h3>
+                      <p class="text-xs md:text-sm">نشانگر قرمز بر روی آیکون اعلان نمایش داده شود وقتی پیام خوانده‌نشده دارید</p>
+                    </label>
+                    <div>
+                      <input type="checkbox" checked id="email-2" class="peer hidden">
+                      <label for="email-2" class="w-11 h-6 rounded-full bg-gray-500/60 cursor-pointer peer-checked:bg-blue-500 transition-colors inline-block relative before:absolute before:size-5 before:top-0.5 before:left-0.5 before:bg-white before:rounded-full peer-checked:before:translate-x-1/1 before:transition-transform"></label>
+                    </div>
+                  </div>
+                  <div class="pt-3">
+                    <h3 class="text-base md:text-lg font-bold  mb-3.5 sm:mb-4">فعال‌سازی نشان اعلان‌های خوانده‌نشده</h3>
+                    <div>
+                      <div class="flex items-center text-xs sm:text-sm">
+                        <input type="radio" id="radio1" class=" peer hidden" name="email3">
+                        <label for="radio1" class="cursor-pointer size-5 rounded-full shrink-0 border-2 border-gray-500/80 hover:border-blue-500 transition-colors peer-checked:border-blue-500 peer-checked:bg-blue-500 relative before:absolute before: before:size-2 before:rounded-full before:top-0 before:left-0 before:translate-1/2 peer-checked:before:bg-white before:transition-colors"></label>
+                        <span class="ms-3.5 me-1.5"><i class="fas fa-comments"></i></span>
+                        <label for="radio1" class="cursor-pointer ">
+                          <h3 class="text-sm sm:text-base font-extrabold mb-1 ">همه پیام‌های جدید</h3>
+                          <p class="text-xs md:text-sm">برای هر پیام جدید به کانال اعلان بفرست</p>
+                        </label>
+                      </div>
+                      <div class="flex items-center text-xs sm:text-sm my-3">
+                        <input type="radio" checked id="radio2" class=" peer hidden" name="email3">
+                        <label for="radio2" class="cursor-pointer size-5 rounded-full shrink-0 border-2 border-gray-500/80 hover:border-blue-500 transition-colors peer-checked:border-blue-500 peer-checked:bg-blue-500 relative before:absolute before: before:size-2 before:rounded-full before:top-0 before:left-0 before:translate-1/2 peer-checked:before:bg-white before:transition-colors"></label>
+                        <span class="ms-3.5 me-1.5"><i class="fas fa-comments"></i></span>
+                        <label for="radio2" class="cursor-pointer ">
+                          <h3 class="text-sm sm:text-base font-extrabold mb-1 ">فقط منشن‌ها</h3>
+                          <p class="text-xs md:text-sm">فقط زمانی در کانال هشدار بده که کسی من رو در پیامی منشن کنه</p>
+                        </label>
+                      </div>
+                      <div class="flex items-center text-xs sm:text-sm">
+                        <input type="radio" id="radio3" class=" peer hidden" name="email3">
+                        <label for="radio3" class="cursor-pointer size-5 rounded-full shrink-0 border-2 border-gray-500/80 hover:border-blue-500 transition-colors peer-checked:border-blue-500 peer-checked:bg-blue-500 relative before:absolute before: before:size-2 before:rounded-full before:top-0 before:left-0 before:translate-1/2 peer-checked:before:bg-white before:transition-colors"></label>
+                        <span class="ms-3.5 me-1.5"><i class="fas fa-comments"></i></span>
+                        <label for="radio3" class="cursor-pointer ">
+                          <h3 class="text-sm sm:text-base font-extrabold mb-1 ">هیچ‌چیز</h3>
+                          <p class="text-xs md:text-sm">هیچ اعلانی به من نده</p>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+   
+              <div class="col-span-12  lg:col-span-5 xl:col-span-4 p-3 lg:p-5 rounded-lg text-xs sm:text-sm bg-[var(--box-color)]">
+                <div class="mb-3.5 sm:mb-4">
+                  <h3 class="text-base md:text-lg font-bold mb-1">اعلان‌های ایمیلی</h3>
+                  <p class="text-xs ">Substance می‌تواند برای هر پیام مستقیم جدید برای شما ایمیل ارسال کند</p>
+                </div>
+                <div class="flex flex-col lg:pt-3 gap-4 lg:gap-6">
+                  <div class="flex items-center gap-4">
+                    <input type="checkbox" id="notif-4" class="peer hidden">
+                    <label for="notif-4" class="size-5 shrink-0 rounded-sm border-2 border-gray-500/60 hover:border-blue-500 transition-colors cursor-pointer peer-checked:bg-blue-500 peer-checked:border-blue-500 text-white/0 centered peer-checked:text-white"><i class="fas fa-check text-[11px] "></i></label>
+                    <label for="notif-4" class="cursor-pointer">
+                      <h3 class="text-sm sm:text-base font-extrabold mb-1">اخبار و به‌روزرسانی‌ها</h3>
+                      <p>اخبار جدید درباره محصول و به‌روزرسانی ویژگی‌ها</p>
+                    </label>
+                  </div>
+                  <div class="flex items-center gap-4">
+                    <input type="checkbox" id="notif-5" class="peer hidden">
+                    <label for="notif-5" class="size-5 shrink-0 rounded-sm border-2 border-gray-500/60 hover:border-blue-500 transition-colors cursor-pointer peer-checked:bg-blue-500 peer-checked:border-blue-500 text-white/0 centered peer-checked:text-white"><i class="fas fa-check text-[11px] "></i></label>
+                    <label for="notif-5" class="cursor-pointer">
+                      <h3 class="text-sm sm:text-base font-extrabold mb-1">نکات و آموزش‌ها</h3>
+                      <p>نکات و ترفندهایی برای افزایش کارایی و بهره‌وری</p>
+                    </label>
+                  </div>
+                  <div class="flex items-center gap-4">
+                    <input type="checkbox" checked id="notif-6" class="peer hidden">
+                    <label for="notif-6" class="size-5 shrink-0 rounded-sm border-2 border-gray-500/60 hover:border-blue-500 transition-colors cursor-pointer peer-checked:bg-blue-500 peer-checked:border-blue-500 text-white/0 centered peer-checked:text-white"><i class="fas fa-check text-[11px] "></i></label>
+                    <label for="notif-6" class="cursor-pointer">
+                      <h3 class="text-sm sm:text-base font-extrabold mb-1">پیشنهادها و تخفیف‌ها</h3>
+                      <p>اطلاع‌رسانی درباره قیمت محصول و آخرین تخفیف‌ها</p>
+                    </label>
+                  </div>
+                  <div class="flex items-center gap-4">
+                    <input type="checkbox" checked id="notif-7" class="peer hidden">
+                    <label for="notif-7" class="size-5 shrink-0 rounded-sm border-2 border-gray-500/60 hover:border-blue-500 transition-colors cursor-pointer peer-checked:bg-blue-500 peer-checked:border-blue-500 text-white/0 centered peer-checked:text-white"><i class="fas fa-check text-[11px] "></i></label>
+                    <label for="notif-7" class="cursor-pointer">
+                      <h3 class="text-sm sm:text-base font-extrabold mb-1">یادآوری پیگیری</h3>
+                      <p>دریافت اعلان برای تمام یادآوری‌های ایجاد شده</p>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+             <!-- finish notif section  -->
           </div>
-          <!-- finish photo overlay section  -->
+           <!-- finish tab container section  -->
+
          </div>
+        <!-- finish content section  -->
          
       </section>
     </main>

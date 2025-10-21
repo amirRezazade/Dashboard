@@ -64,6 +64,9 @@ html::selection {
 i{
   pointer-events: none
 }
+label {
+  user-select: none
+}
 .centered {
   @apply flex justify-center items-center;
 }
