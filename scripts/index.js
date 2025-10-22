@@ -9,6 +9,7 @@ window.addEventListener("DOMContentLoaded", () => {
   if (!getToLocal("top-products")) getTopProducts().then(addTopProducts());
   else addTopProducts();
   getAndAddOrders();
+  document.querySelector('#user-name').textContent= getToLocal('user').firstName 
 });
 let date = new Date();
 dateElem.textContent = `${date.getFullYear()}/${
@@ -17,7 +18,7 @@ dateElem.textContent = `${date.getFullYear()}/${
 
 setInterval(() => {
   let time = new Date();
-  timeElem.textContent = time.getHours() + ":" + time.getSeconds();
+  timeElem.textContent = time.getHours() + ":"+ time.getMinutes() + ":" + time.getSeconds();
 }, 1000);
 
 // start total chart section
@@ -255,8 +256,8 @@ function addTopProducts(page = 1) {
         <tr class="transition-colors hover:bg-gray-500/20 p-1.5 xs:p-3 flex justify-between items-center">
           <td class="w-2/6">
             <div class="flex items-center gap-1.5">
-              <span class="size-12 rounded-lg shrink-0 bg-gray-500/20"><img src="${product.thumbnail}" class="object-cover" alt="product"></span>
-              <a href="product.html?id=${product.id}" dir="ltr" class="truncate">${product.title}</a>
+              <a href="product-details.html?id=${product.id}" class="size-12 rounded-lg shrink-0 bg-gray-500/20"><img src="${product.thumbnail}" class="object-cover" alt="product"></a>
+              <a href="product-details.html?id=${product.id}" dir="ltr" class="truncate">${product.title}</a>
             </div>
           </td>
           <td class="w-1/6 text-center">$${product.price}</td>
@@ -371,3 +372,16 @@ document
       pagination(1, topProductPagination);
     }
   });
+
+
+  document.querySelector('#totalChartBtns').addEventListener('click' , e=>{
+    if(e.target.nodeName==='BUTTON'){
+      document.querySelectorAll('#totalChartBtns button').forEach(btn=>{
+        btn.classList.remove('!bg-[var(--active-color)]' , 'text-white')
+        if(btn==e.target){
+          btn.classList.add('!bg-[var(--active-color)]' , 'text-white')
+
+        }
+      })
+    }
+  })

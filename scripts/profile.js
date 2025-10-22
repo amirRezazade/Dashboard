@@ -8,6 +8,7 @@ import {
 
 window.changePassword = changePassword;
 window.changeProfile = changeProfile;
+
 const userImg = document.querySelector("#user-profile-photo");
 const userImgInput = document.querySelector("#profile-photo-input");
 const bgImg = document.querySelector("#bg-photo");
@@ -22,7 +23,6 @@ const country = document.querySelector("#user-country");
 const city = document.querySelector("#user-city");
 const postalCode = document.querySelector("#user-postalCode");
 const aboutMe = document.querySelector("#user-about-me");
-
 const tabBtns = document.querySelector("#tab-btns");
 const tabWrapper = document.querySelector("#tab-container");
 

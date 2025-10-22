@@ -23,8 +23,8 @@
  })
  showDemoLink.addEventListener('click' , ()=>{
     let user = {
-        firstName : 'Amir',
-        lastName : 'Rezazade',
+        firstName : 'امیر',
+        lastName : 'رضازاده',
         userName : 'amir-account',
         email : 'amirrezazadeh.job@gmail.com',
         password : 'amir-1382',
@@ -34,7 +34,6 @@
           country : 'Iran' ,
           city : 'Tabriz',
           postalCode : 11111111111,
-          address : 'آذر بایجان شرقی تبریز'
         },
         bio: 'سلام من آنا آدام هستم، به همین سادگی خواهد بود. در واقع، آن را غربی خواهد بود. برای یک فرد انگلیسی، این مانند زبان انگلیسی ساده به نظر می رسد، همانطور که یکی از دوستان شکاکم کمبریجی به من گفت که زبان های اروپایی چه چیزی غربی هستند، زبان های اروپایی اعضای یک خانواده هستند.',
         password : 'Amir-1382' , 
