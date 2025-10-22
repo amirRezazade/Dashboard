@@ -60,6 +60,7 @@
 html::selection {
   background-color: var(--active-color);
   color: white;
+  opacity: 100;
 }
 i {
   pointer-events: none;
@@ -75,6 +76,15 @@ label {
 }
 .sidebar-toggle + main {
   @apply md:ms-15;
+}
+.sidebar-toggle ul li a span:last-child{
+  /* display: none */
+}
+aside ul li{
+  @apply pe-3 ps-2
+}
+aside ul li a{
+  @apply flex gap-3 items-center  py-2 px-4 rounded-lg transition-colors hover:bg-gray-500/40  hover:text-white
 }
 .show {
   @apply opacity-100 visible;
