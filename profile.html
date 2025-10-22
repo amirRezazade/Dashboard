@@ -412,7 +412,7 @@ input[type=number] {
                  <input class="hidden" type="file"  id="bg-photo-input" accept="image/*" />
                </div>
              </div>
-             <p class="text-xs sm:text-sm lg:text-[15px] text-white/70 max-w-2xl m-2 sm:m-4 lg:m-6 leading-7">سلام من آنا آدام هستم، به همین سادگی خواهد بود. در واقع، آن را غربی خواهد بود. برای یک فرد انگلیسی، این مانند زبان انگلیسی ساده به نظر می رسد، همانطور که یکی از دوستان شکاکم کمبریجی به من گفت که زبان های اروپایی چه چیزی غربی هستند، زبان های اروپایی اعضای یک خانواده هستند.</p>
+             <p id="bio" class="text-xs sm:text-sm lg:text-[15px] text-white/70 max-w-2xl m-2 sm:m-4 lg:m-6 leading-7"></p>
              <div id="tab-btns" class="flex items-center gap-1 xs:gap-2 text-xs sm:text-sm text-white m-2 sm:m-4">
                <button type="button" data-tab="profile" class="tab-btn before:!w-full">پروفایل</button>
                <button type="button" data-tab="security" class="tab-btn">امنیت</button>
@@ -422,18 +422,18 @@ input[type=number] {
              
            </div>
            <!-- start tab container section  -->
-           <div id="tab-container" class=" pb-5 ">
+           <div id="tab-container" class="relative mb-5 overflow-hidden ">
             <!-- start profile tab section  -->
-            <div id="profile" class="tab-content grid grid-cols-12 gap-3  text-xs sm:text-sm ">
+            <div id="profile" class="tab-panel grid grid-cols-12 gap-3  text-xs sm:text-sm active-panel">
               <div class="col-span-12 sm:col-span-6 xl:col-span-4 p-3 lg:p-5 rounded-lg bg-[var(--box-color)] ">
-                <h3 class="md:text-lg font-bold mb-3.5 sm:mb-4">پایه</h3>
+                <h3 class="md:text-lg font-bold mb-3.5 sm:mb-4">شخصی</h3>
                 <div>
                   <div class="">
-                    <label class="cursor-pointer" for="first-name">نام </label>
+                    <label class="cursor-pointer" for="first-name">نام * </label>
                     <input class="w-full p-2 sm:p-3 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 my-1 bg-[var(--bg-color)]" required="" minlength="3" maxlength="20" type="text" id="first-name" placeholder="نام خود را وارد کنید...">
                   </div>
                   <div class="">
-                    <label class="cursor-pointer" for="last-name">نام خانوادگی </label>
+                    <label class="cursor-pointer" for="last-name">نام خانوادگی * </label>
                     <input class="w-full p-2 sm:p-3 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 my-1 bg-[var(--bg-color)]" required="" minlength="3" maxlength="30" type="text" id="last-name" placeholder="نام خانوادگی خود را وارد کنید...">
                   </div>
                   <div class="">
@@ -444,11 +444,11 @@ input[type=number] {
                 </div>
               </div>
               <div class="col-span-12 sm:col-span-6 xl:col-span-4 p-3 lg:p-5 rounded-lg bg-[var(--box-color)] ">
-                <h3 class="md:text-lg font-bold mb-3.5 sm:mb-4">پایه</h3>
+                <h3 class="md:text-lg font-bold mb-3.5 sm:mb-4">حساب</h3>
                 <div>
                   <div class="">
-                      <label class="cursor-pointer" for="user-name">نام کاربری </label>
-                      <input class="w-full p-2 sm:p-3 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 my-1 bg-[var(--bg-color)]" required="" minlength="3" maxlength="30" type="text" id="user-name" placeholder="نام کاربری خود را وارد کنید...">
+                      <label class="cursor-pointer" for="user-name">نام کاربری * </label>
+                      <input class="w-full p-2 sm:p-3 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 my-1 bg-[var(--bg-color)]" required="" minlength="4" maxlength="30" type="text" id="user-name" placeholder="نام کاربری خود را وارد کنید...">
                   </div>
                   <div class="">
                       <label class="cursor-pointer" for="user-email">ایمیل </label>
@@ -499,12 +499,12 @@ input[type=number] {
               <h3 class="md:text-lg font-bold mb-3">درباره من</h3>
               <label class="cursor-pointer" for="user-about-me">توضیحات <span class="text-xs">(300 کاراکتر )</span></label> 
               <textarea name="" id="user-about-me" placeholder="بیوگرافی خود را وارد کنید." class="block min-h-40 max-h-70 w-full leading-6 rounded-md bg-[var(--bg-color)] my-1.5 border border-gray-500/50 outline-0 p-2.5 sm:p-3.5" maxlength="300"></textarea>
-              <button type="button" class="submit-btns ms-auto block px-7 py-2 mt-2 cursor-pointer rounded-sm bg-[var(--active-color)]/80 hover:bg-[var(--active-color)] transition-colors text-white"> ذخیره تغیرات</button>
+              <button type="button" class="submit-btns ms-auto block px-7 py-2 mt-2 cursor-pointer rounded-sm bg-[var(--active-color)]/80 hover:bg-[var(--active-color)] transition-colors text-white" onclick="changeProfile()"> ذخیره تغیرات</button>
             </div>
             </div>
             <!-- finsih profile tab section  -->
             <!-- start security tab section  -->
-            <div id="security" class="tab-content grid grid-cols-12 gap-3 hidden">
+            <div id="security" class="tab-panel grid grid-cols-12 gap-3 ">
               <div class="col-span-12 lg:col-span-4 p-3 lg:p-5 rounded-lg text-xs sm:text-sm bg-[var(--box-color)]">
                 <div class="mb-3.5 sm:mb-4">
                   <h3 class="text-base md:text-lg font-bold mb-1">رمز عبور</h3>
@@ -513,26 +513,26 @@ input[type=number] {
                 <div>
                     <label class="cursor-pointer" for="user-password">رمز عبور فعلی</label>
                     <div class="flex items-center bg-[var(--bg-color)] my-1 rounded-md border border-transparent focus-within:border-[var(--active-color)] overflow-hidden">
-                      <input class="w-full p-2.5 outline-0  " required minlength="3" maxlength="15" type="password" id="user-password" placeholder="رمز عبور فعلی خود را وارد کنید...">
+                      <input class="w-full p-2.5 outline-0  " required minlength="6" maxlength="15" type="password" id="user-password" placeholder="رمز عبور فعلی خود را وارد کنید...">
                       <button type="button" id="password-show" class="w-10 text-center py-2.5 cursor-pointer text-xs"><i class="fas fa-eye "></i></button>
                     </div>               
                 </div>
                 <div class="my-3 ">
                     <label class="cursor-pointer" for="user-new-password">رمز عبور جدید</label>
                     <div class="flex items-center bg-[var(--bg-color)] my-1 rounded-md border border-transparent focus-within:border-[var(--active-color)] overflow-hidden">
-                      <input class="w-full p-2.5 outline-0  " required minlength="3" maxlength="15" type="password" id="user-new-password" placeholder="رمز عبور جدید خود را وارد کنید...">
+                      <input class="w-full p-2.5 outline-0  " required minlength="6" maxlength="15" type="password" id="user-new-password" placeholder="رمز عبور جدید خود را وارد کنید...">
                       <button type="button" id="password-show" class="w-10 text-center py-2.5 cursor-pointer text-xs"><i class="fas fa-eye "></i></button>
                     </div>               
                 </div>
                 <div>
                     <label class="cursor-pointer" for="user-new-password-confirm">تایید رمز عبور جدید</label>
                     <div class="flex items-center bg-[var(--bg-color)] my-1 rounded-md border border-transparent focus-within:border-[var(--active-color)] overflow-hidden">
-                      <input class="w-full p-2.5 outline-0  " required minlength="3" maxlength="15" type="password" id="user-new-password-confirm" placeholder="رمز عبور جدید خود را وارد کنید...">
+                      <input class="w-full p-2.5 outline-0  " required minlength="6" maxlength="15" type="password" id="user-new-password-confirm" placeholder="رمز عبور جدید خود را تایید کنید...">
                       <button type="button" id="password-show" class="w-10 text-center py-2.5 cursor-pointer text-xs"><i class="fas fa-eye "></i></button>
                     </div>               
                 </div>
                 <a href="#" class="underline text-[var(--active-color)] mt-2 block">رمز عبور را فراموش کرده اید؟</a>
-                 <button type="button" class="submit-btns ms-auto block px-7 py-2 cursor-pointer rounded-sm bg-[var(--active-color)]/80 hover:bg-[var(--active-color)] transition-colors text-white"> ذخیره تغیرات</button>
+                 <button type="button" class="submit-btns ms-auto block px-7 py-2 cursor-pointer rounded-sm bg-[var(--active-color)]/80 hover:bg-[var(--active-color)] transition-colors text-white" onclick="changePassword()">بروز رسانی رمز</button>
               </div>
               <div class="col-span-12 lg:col-span-8 p-3 lg:p-5 rounded-lg text-xs sm:text-sm bg-[var(--box-color)]">
                 <div class="mb-3.5 sm:mb-4">
@@ -590,7 +590,7 @@ input[type=number] {
             </div>
             <!-- finish security tab section  -->
              <!-- start notif section  -->
-            <div id="notif" class="tab-content grid grid-cols-12 items-start gap-3  hidden">
+            <div id="notif" class="tab-panel grid grid-cols-12 items-start gap-3  ">
               <div class="col-span-12  lg:col-span-7 xl:col-span-8 p-3 lg:p-5 rounded-lg text-xs sm:text-sm bg-[var(--box-color)]">
                 <h3 class="text-base md:text-lg font-bold mb-1">اعلان‌ها</h3>
                 <div class="divide-y divide-gray-500/60">
@@ -692,7 +692,7 @@ input[type=number] {
             </div>
              <!-- finish notif section  -->
               <!-- start bank section  -->
-            <div id="bank" class="tab-content grid grid-cols-12 items-start gap-3 hidden">
+            <div id="bank" class="tab-panel grid grid-cols-12 items-start gap-3 ">
               <div class="col-span-12  lg:col-span-5 xl:col-span-4 p-3 lg:p-5 rounded-lg text-xs sm:text-sm lg:text-xs xl:text-sm bg-[var(--box-color)]">
                 <h3 class="text-base md:text-lg font-bold mb-1">کارت های بانکی</h3>
                 <div class="divide-y divide-gray-500/50">

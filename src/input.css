@@ -61,11 +61,11 @@ html::selection {
   background-color: var(--active-color);
   color: white;
 }
-i{
-  pointer-events: none
+i {
+  pointer-events: none;
 }
 label {
-  user-select: none
+  user-select: none;
 }
 .centered {
   @apply flex justify-center items-center;
@@ -82,14 +82,25 @@ label {
 .active-page {
   @apply bg-[var(--active-color)] text-white;
 }
-.active-tab{
-  @apply border-b-2 border-[var(--active-color)] text-[var(--active-color)]
+.active-tab {
+  @apply border-b-2 border-[var(--active-color)] text-[var(--active-color)];
 }
- .tab-btn{
- @apply py-1.5 px-3 xs:px-4 text-nowrap rounded-sm cursor-pointer relative overflow-hidden  before:content-[''] before:absolute before:left-0 before:top-0 before:h-full before:w-0 hover:before:w-full hover:before:right-0 before:transition-all before:duration-500 before:bg-white/20;
+.tab-btn {
+  @apply py-1.5 px-3 xs:px-4 text-nowrap rounded-sm cursor-pointer relative overflow-hidden  before:content-[''] before:absolute before:left-0 before:top-0 before:h-full before:w-0 hover:before:w-full hover:before:right-0 before:transition-all before:duration-500 before:bg-white/20;
 }
 
-
+.tab-panel {
+  opacity: 0;
+  visibility: hidden;
+  transition: all .8s ease;
+  width: 100%;
+}
+.active-panel {
+  position: absolute;
+  top: 0;
+  opacity: 1;
+  visibility: visible;
+}
 /* start sweet alert 2 custom styles  */
 .swal2-popup {
   background-color: var(--box-color) !important;
@@ -150,13 +161,13 @@ label {
   display: none !important;
 }
 /* finish CKE editor custom style  */
- /* start drop zone style  */
+/* start drop zone style  */
 .dropzone {
   background-color: var(--bg-color) !important;
   border: 2px dashed #9ca1ab !important;
   color: var(--text-color) !important;
 }
-.dropzone:hover{
+.dropzone:hover {
   border: 2px dashed var(--active-color) !important;
 }
 .dropzone .dz-image-preview {
@@ -182,4 +193,4 @@ label {
 .dz-progress {
   display: none !important;
 }
- /* finish drop zone style  */
+/* finish drop zone style  */
