@@ -83,9 +83,18 @@ label {
 .nav-btn{
  @apply p-1 md:p-2 cursor-pointer text-base lg:text-lg
 }
-/* .nav-btn {
-  @apply md:!text-2xl
-} */
+::-webkit-scrollbar{
+ 	background-color: #ffffff00;
+  width: 9px ;
+  border-radius: 15px;
+}
+::-webkit-scrollbar-thumb{
+  background-color: gray;
+  border-radius: 12px;
+}
+::-webkit-scrollbar-thumb:hover{
+  background-color: rgb(176, 174, 174);
+}
 aside ul li{
   @apply pe-3 ps-2
 }

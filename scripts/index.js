@@ -9,7 +9,7 @@ window.addEventListener("DOMContentLoaded", () => {
   if (!getToLocal("top-products")) getTopProducts().then(addTopProducts());
   else addTopProducts();
   getAndAddOrders();
-  document.querySelector('#user-name').textContent= getToLocal('user').firstName 
+  document.querySelector('#user-name').textContent= getToLocal('user')  ? getToLocal('user').firstName : 'امیر'
 });
 let date = new Date();
 dateElem.textContent = `${date.getFullYear()}/${
