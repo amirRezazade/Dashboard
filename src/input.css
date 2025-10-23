@@ -45,7 +45,7 @@
   --bg-color: #ffffff;
   --box-color: #eeeef0;
   --text-color: #212529;
-  --active-color: #0ca593;
+  --active-color: #0caf60;
 }
 .dark {
   /* --bg-color: #0e0f0f; */
@@ -80,6 +80,12 @@ label {
 .sidebar-toggle ul li a span:last-child{
   /* display: none */
 }
+.nav-btn{
+ @apply p-1 md:p-2 cursor-pointer text-base lg:text-lg
+}
+/* .nav-btn {
+  @apply md:!text-2xl
+} */
 aside ul li{
   @apply pe-3 ps-2
 }

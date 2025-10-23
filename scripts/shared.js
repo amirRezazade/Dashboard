@@ -3,6 +3,31 @@
 let shoppingCardIds = []
 let shoppingCardItems = JSON.parse(localStorage.getItem('shoppingCardItems'))
 
+let user = getToLocal('user')
+  document.querySelectorAll('#nav-user-image').forEach(elem=> elem.src = user.image ? user.image : 'images/profile (1).png')
+  document.querySelector('#nav-user-first-name').textContent= user.firstName 
+  document.querySelector('#nav-user-role').textContent= user.role === 'moderator' ? 'مدیر': 'ادمین'
+  document.querySelector('#nav-user-full-name').textContent= user.firstName +  user.lastName
+  document.querySelector('#nav-user-email').textContent= user.email
+  
+document.querySelector('#logout-btn').addEventListener('click' , logout)
+
+function logout(){
+    return Swal.fire({
+    title: 'خروج از سیستم',
+    text: 'آیا میخواهید از سیستم خارج شوید؟',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: 'خروج',
+    cancelButtonText: "انصراف",
+  }).then(data=>{    
+    if(data.isConfirmed){
+      window.location.href='logout.html'
+    }
+  })
+}
 if(!getToLocal('shoppingCardIds')){
     shoppingCardIds=[1,2,3,4,5]
     addToLocal('shoppingCardIds' , shoppingCardIds)
@@ -11,7 +36,7 @@ if(!getToLocal('shoppingCardIds')){
  window.addEventListener('DOMContentLoaded' ,()=>{
   if(!getToLocal('shoppingCardItems')) getShoppingCardItems()
   if(getToLocal('dark')==false) toggleDarkMode()
-  changeActiveColor(getToLocal('active-color') || '#0ca593')
+  changeActiveColor(getToLocal('active-color') || '#0caf60')
   getAndAddNavTodoList()
   
 
