@@ -209,35 +209,48 @@ let sidebar = document.querySelector("aside");
 sidebar.addEventListener("click", (e) => {
   if (e.target == sidebar) sidebar.classList.remove("sidebar-toggle");
 });
-function toggleSidebar() {
-  sidebar.classList.toggle("sidebar-toggle");
-}
-let sidebarItems = sidebar.querySelectorAll(".btn");
+
+let sidebarItems = sidebar.querySelectorAll(".sidebar-btn");
 let sidebarItemContents = sidebar.querySelectorAll(".aside-item-content");
 sidebarItems.forEach((elem) => {
   elem.addEventListener("click", (e) => {
-    if (elem == e.target) {
-      console.log(33);
-
-      if (elem.parentElement.getBoundingClientRect().height > 50) elem.style.height = "44px";
-      else elem.parentElement.style.height = elem.parentElement.scrollHeight + "px";
+    if (e.target.closest(".sidebar-btn")) {
+      let li = elem.closest("li");
+      if (li.classList.contains("open")) li.classList.remove("open");
+      else {
+        li.classList.add("open");
+        sidebar.classList.add("sidebar-toggle");
+      }
+      sidebarItems.forEach((item) => {
+        if (item !== elem) item.closest("li").classList.remove("open");
+      });
     }
   });
 });
 
+function toggleSidebar() {
+  if (sidebar.classList.contains("sidebar-toggle")) {
+    sidebar.classList.remove("sidebar-toggle");
+    sidebarItems.forEach((elem) => {
+      elem.closest("li").classList.remove("open");
+    });
+  } else {
+    sidebar.classList.add("sidebar-toggle");
+  }
+}
 // finish sidebar section
 
 // start todo cart
 async function getAndAddNavTodoList() {
   let res = await fetch("https://dummyjson.com/todos");
   let response = await res.json();
-  let todos = response.todos.splice(1, 8);
+  let todos = response.todos.splice(1, 4);
   todos.forEach((todo) => {
     document.querySelector("#nav-todo-list-container").innerHTML += `
       <li data-id="${todo.id}" class="flex items-center justify-between transition-colors  hover:bg-gray-400/30 px-2 py-3">
          <div class="flex items-center gap-2 max-w-3/4">
                <span class="p-0.5 size-8 text-sm centered shrink-0 rounded-full bg-[var(--active-color)]/50">
-              <i class="fa-solid fa-exclamation"></i>
+              <i class="fa-solid fa-clipboard-check"></i>
              </span>
              <div dir="ltr" class="  text-sm flex flex-col truncate ${todo.completed === true ? "line-through" : ""} me-auto ms-2 ">
                <span class="truncate">${todo.todo}</span>

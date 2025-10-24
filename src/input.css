@@ -86,14 +86,20 @@ label {
   @apply md:!ms-50  lg:!ms-60;
 }
 aside ul li {
-  @apply pe-3 ps-2 overflow-hidden h-[44px] transition-all duration-500;
+  @apply pe-3 ps-2 overflow-hidden max-h-[44px] transition-all duration-500;
+}
+aside ul li.open {
+  max-height: 250px !important;
+}
+aside ul li.open span:last-child {
+  transform: rotate(-90deg) !important;
 }
 .sidebar-toggle ul li .aside-item {
   @apply !max-w-full !gap-3.5;
 }
-/* .sidebar-toggle ul li .aside-item-content > li > a {
+.sidebar-toggle ul li .aside-item-content > li > a {
   @apply !ms-0;
-} */
+}
 aside ul li .aside-item {
   @apply flex gap-x-6 items-center !text-nowrap md:!max-w-[39px] py-2 px-2 rounded-lg transition-all hover:bg-gray-300/80 dark:hover:bg-gray-500/40 hover:text-black dark:hover:text-white;
 }
@@ -104,13 +110,19 @@ aside ul li .aside-item {
 .aside-item-content > li > a {
   @apply py-3 ps-8  text-nowrap block rounded-lg transition-all hover:bg-gray-300/80 dark:hover:bg-gray-500/40 hover:text-black dark:hover:text-white relative before:absolute before:w-2 before:h-[1px] before:bg-gray-500/80 before:top-1/2 before:right-3 before:-translate-y-1/2 hover:before:bg-black dark:hover:before:bg-white before:transition-colors;
 }
+.sidebar-btn {
+  @apply cursor-pointer;
+}
 /* finish sidebar style  */
 
 .nav-btn {
   @apply p-1 md:p-2 cursor-pointer text-base lg:text-lg;
 }
+.nav-item-content {
+  @apply opacity-0 invisible transition-[translate,opacity,visibility] duration-400 bg-[var(--box-color)] fixed top-13 xs:top-15 sm:top-16 md:top-20 cursor-auto border border-gray-500/50 rounded-lg overflow-hidden h-auto;
+}
 .show {
-  @apply opacity-100 visible;
+  @apply opacity-100 translate-x-0 visible;
 }
 .active-page {
   @apply bg-[var(--active-color)] text-white;
