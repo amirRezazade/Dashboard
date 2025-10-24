@@ -1,8 +1,7 @@
 let shoppingCardIds = [];
 let shoppingCardItems = JSON.parse(localStorage.getItem("shoppingCardItems"));
 
-
-// set user infos to navbar 
+// set user infos to navbar
 let user = getToLocal("user");
 if (user) {
   console.log(user);
@@ -21,7 +20,6 @@ if (user) {
 
 document.querySelector("#logout-btn").addEventListener("click", logout);
 
-
 if (!getToLocal("shoppingCardIds")) {
   shoppingCardIds = [153, 194, 85];
   addToLocal("shoppingCardIds", shoppingCardIds);
@@ -35,8 +33,7 @@ window.addEventListener("DOMContentLoaded", () => {
   getAndAddNavTodoList();
 });
 
-
-// start theme control 
+// start theme control
 const activeColorOptions = document.querySelector("#active-color-options");
 activeColorOptions.addEventListener("click", (e) => {
   if (e.target.nodeName == "BUTTON") {
@@ -58,14 +55,13 @@ function toggleDarkMode() {
   if (document.documentElement.classList.contains("dark")) addToLocal("dark", true);
   else addToLocal("dark", false);
 }
-// finish theme control 
-// start shopping cart section 
-
+// finish theme control
 const navItems = document.querySelectorAll(".nav-item");
 const navItemsContents = document.querySelectorAll(".nav-item .nav-item-content");
 navItems.forEach((item) => {
   item.addEventListener("click", (e) => {
     if (e.target.classList.contains("nav-item")) {
+      console.log(item.querySelector(".nav-item-content"));
       e.target.querySelector(".nav-item-content").classList.toggle("show");
       navItemsContents.forEach((elem) => {
         if (e.target.querySelector(".nav-item-content") != elem) elem.classList.remove("show");
@@ -76,6 +72,7 @@ navItems.forEach((item) => {
 window.addEventListener("click", (e) => {
   if (!e.target.closest(".nav-item") && !e.target.closest(".swal2-container")) navItemsContents.forEach((elem) => elem.classList.remove("show"));
 });
+// start shopping cart section
 
 async function getShoppingCardItems() {
   let ids = getToLocal("shoppingCardIds");
@@ -105,7 +102,7 @@ function addShoppingCardItems() {
                         </a>
                         <div dir="ltr" class="flex flex-col truncate">
                           <a href="product-details.html?id=${item.id}" class="text-sm truncate">${item.title}</a>
-                          <span class="text-right">${item.price.toFixed(1)} $</span>
+                          <span class="text-right">${item.price.toFixed(2)} $</span>
                         </div>
                       </div>
                       <div class="flex items-center gap-2 text-[11px]">
@@ -113,7 +110,7 @@ function addShoppingCardItems() {
                         <span class="text-sm">${item.quantity}</span>
                         <button onclick="changeQuantity(this , 'mines')" type="button" class="size-7 centered cursor-pointer rounded-xl border border-gray-500/50"><i class="fas fa-minus "></i></button>
                       </div>
-                      <span class="font-bold total-price hidden xs:inline-block">${(item.price * item.quantity).toFixed(1)} $ </span>
+                      <span class="font-bold total-price hidden xs:inline-block">${(item.price * item.quantity).toFixed(2)} $ </span>
                       <button type="button" class=" rounded-full cursor-pointer size-7 centered text-red-600 text-sm" onclick="removeShoppingCardItem(this)"><i class="fa-solid fa-xmark"></i></button>
                   </li>
         `;
@@ -150,7 +147,7 @@ function removeShoppingCardItem(elem) {
         li.remove();
       }, 350);
       updateShoppingCardLength();
-      changeShoppingCartTotalPrice()
+      changeShoppingCartTotalPrice();
       if (ids.length == 0) emptyShoppingCard();
       Swal.fire({
         toast: true,
@@ -171,29 +168,29 @@ function removeShoppingCardItem(elem) {
     }
   });
 }
-function changeQuantity(elem , text) {
+function changeQuantity(elem, text) {
   let card = getToLocal("shoppingCardItems");
-  let li = elem.closest('li')
-  let id = li.dataset.id
-  
+  let li = elem.closest("li");
+  let id = li.dataset.id;
+
   let index = card.findIndex((item) => item.id == id);
   if (text == "plus" && card[index].quantity < card[index].stock) {
     card[index].quantity++;
-    elem.nextElementSibling.textContent =  card[index].quantity
+    elem.nextElementSibling.textContent = card[index].quantity;
   }
   if (text == "mines" && card[index].quantity !== 1) {
     card[index].quantity--;
-    elem.previousElementSibling.textContent =  card[index].quantity
-  }  
+    elem.previousElementSibling.textContent = card[index].quantity;
+  }
   addToLocal("shoppingCardItems", card);
-  changeShoppingCartTotalPrice()
+  changeShoppingCartTotalPrice();
 }
 function changeShoppingCartTotalPrice() {
   let total = 0;
   let card = getToLocal("shoppingCardItems");
   card.forEach((item) => {
     total += item.price * item.quantity;
-  });  
+  });
   document.querySelector("#shopping-card-total-price").textContent = total.toFixed(2) + " $";
 }
 function emptyShoppingCard() {
@@ -206,8 +203,8 @@ function updateShoppingCardLength() {
   document.querySelector("#shopping-card-length").textContent = `${length}مورد`;
 }
 
-// finish shopping cart section 
-// start sidebar section 
+// finish shopping cart section
+// start sidebar section
 let sidebar = document.querySelector("aside");
 sidebar.addEventListener("click", (e) => {
   if (e.target == sidebar) sidebar.classList.remove("sidebar-toggle");
@@ -215,14 +212,22 @@ sidebar.addEventListener("click", (e) => {
 function toggleSidebar() {
   sidebar.classList.toggle("sidebar-toggle");
 }
+let sidebarItems = sidebar.querySelectorAll(".btn");
+let sidebarItemContents = sidebar.querySelectorAll(".aside-item-content");
+sidebarItems.forEach((elem) => {
+  elem.addEventListener("click", (e) => {
+    if (elem == e.target) {
+      console.log(33);
 
+      if (elem.parentElement.getBoundingClientRect().height > 50) elem.style.height = "44px";
+      else elem.parentElement.style.height = elem.parentElement.scrollHeight + "px";
+    }
+  });
+});
 
-// finish sidebar section 
+// finish sidebar section
 
-
-
-
-// start todo cart 
+// start todo cart
 async function getAndAddNavTodoList() {
   let res = await fetch("https://dummyjson.com/todos");
   let response = await res.json();
@@ -283,8 +288,7 @@ function removeTodoItem(elem) {
   });
 }
 
-// finish todo cart 
-
+// finish todo cart
 
 function toggleFullscreen() {
   const elem = document.documentElement;

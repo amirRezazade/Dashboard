@@ -5,25 +5,19 @@
   font-family: dana-regular;
   font-style: normal;
   font-weight: normal;
-  src: url("../fonts/woff2/Dana-Regular.woff2") format("woff2"),
-    /* FF39+,Chrome36+, Opera24+*/ url("../fonts/woff/Dana-Regular.woff")
-      format("woff"); /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+  src: url("../fonts/woff2/Dana-Regular.woff2") format("woff2"), /* FF39+,Chrome36+, Opera24+*/ url("../fonts/woff/Dana-Regular.woff") format("woff"); /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
 }
 @font-face {
   font-family: dana-bold;
   font-style: normal;
   font-weight: 600;
-  src: url("../fonts/woff2/Dana-DemiBold.woff2") format("woff2"),
-    /* FF39+,Chrome36+, Opera24+*/ url("../fonts/woff/Dana-DemiBold.woff")
-      format("woff"); /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+  src: url("../fonts/woff2/Dana-DemiBold.woff2") format("woff2"), /* FF39+,Chrome36+, Opera24+*/ url("../fonts/woff/Dana-DemiBold.woff") format("woff"); /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
 }
 @font-face {
   font-family: dana-num;
   font-style: normal;
   font-weight: 600;
-  src: url("../fonts/woff2/DanaFaNum-Medium.woff2") format("woff2"),
-    /* FF39+,Chrome36+, Opera24+*/ url("../fonts/woff/DanaFaNum-Medium.woff")
-      format("woff"); /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+  src: url("../fonts/woff2/DanaFaNum-Medium.woff2") format("woff2"), /* FF39+,Chrome36+, Opera24+*/ url("../fonts/woff/DanaFaNum-Medium.woff") format("woff"); /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
 }
 
 @theme {
@@ -39,28 +33,39 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 * {
-  @apply placeholder:text-gray-400;
+  @apply placeholder:text-gray-500;
 }
 :root {
-  --bg-color: #ffffff;
-  --box-color: #eeeef0;
-  --text-color: #212529;
+  --box-color: #eaeaea;
+  --bg-color: #f9fafc;
+  --text-color: #4b4b4b;
   --active-color: #0caf60;
 }
 .dark {
-  /* --bg-color: #0e0f0f; */
-  /* --bg-color: #262d36; */
   --bg-color: #0a0a0a;
-  /* --box-color: #2e3842; */
-  --box-color: #262626;
-  /* --box-color: #262828; */
+
+  /* --box-color: #262626; */
+  --box-color: #262828;
+  /* --box-color: #212529; */
+
   --text-color: #ced4da;
-  /* --active-color: #0ca593; */
 }
 html::selection {
   background-color: var(--active-color);
   color: white;
   opacity: 100;
+}
+::-webkit-scrollbar {
+  background-color: #ffffff00;
+  width: 9px;
+  border-radius: 15px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: gray;
+  border-radius: 12px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(176, 174, 174);
 }
 i {
   pointer-events: none;
@@ -71,35 +76,38 @@ label {
 .centered {
   @apply flex justify-center items-center;
 }
+
+/* start sidebar style  */
+
 .sidebar-toggle {
-  @apply translate-x-0 md:max-w-[58px];
+  @apply translate-x-0 md:!max-w-50 lg:!max-w-60;
 }
 .sidebar-toggle + main {
-  @apply md:ms-15;
+  @apply md:!ms-50  lg:!ms-60;
 }
-.sidebar-toggle ul li a span:last-child{
-  /* display: none */
+aside ul li {
+  @apply pe-3 ps-2 overflow-hidden h-[44px] transition-all duration-500;
 }
-.nav-btn{
- @apply p-1 md:p-2 cursor-pointer text-base lg:text-lg
+.sidebar-toggle ul li .aside-item {
+  @apply !max-w-full !gap-3.5;
 }
-::-webkit-scrollbar{
- 	background-color: #ffffff00;
-  width: 9px ;
-  border-radius: 15px;
+/* .sidebar-toggle ul li .aside-item-content > li > a {
+  @apply !ms-0;
+} */
+aside ul li .aside-item {
+  @apply flex gap-x-6 items-center !text-nowrap md:!max-w-[39px] py-2 px-2 rounded-lg transition-all hover:bg-gray-300/80 dark:hover:bg-gray-500/40 hover:text-black dark:hover:text-white;
 }
-::-webkit-scrollbar-thumb{
-  background-color: gray;
-  border-radius: 12px;
+.aside-item-content {
+  @apply grow w-full h-auto top-1/1 text-xs;
 }
-::-webkit-scrollbar-thumb:hover{
-  background-color: rgb(176, 174, 174);
+
+.aside-item-content > li > a {
+  @apply py-3 ps-8  text-nowrap block rounded-lg transition-all hover:bg-gray-300/80 dark:hover:bg-gray-500/40 hover:text-black dark:hover:text-white relative before:absolute before:w-2 before:h-[1px] before:bg-gray-500/80 before:top-1/2 before:right-3 before:-translate-y-1/2 hover:before:bg-black dark:hover:before:bg-white before:transition-colors;
 }
-aside ul li{
-  @apply pe-3 ps-2
-}
-aside ul li a{
-  @apply flex gap-3 items-center  py-2 px-4 rounded-lg transition-colors hover:bg-gray-500/40  hover:text-white
+/* finish sidebar style  */
+
+.nav-btn {
+  @apply p-1 md:p-2 cursor-pointer text-base lg:text-lg;
 }
 .show {
   @apply opacity-100 visible;
@@ -114,10 +122,11 @@ aside ul li a{
   @apply py-1.5 px-3 xs:px-4 text-nowrap rounded-sm cursor-pointer relative overflow-hidden  before:content-[''] before:absolute before:left-0 before:top-0 before:h-full before:w-0 hover:before:w-full hover:before:right-0 before:transition-all before:duration-500 before:bg-white/20;
 }
 
+/* start profile page style  */
 .tab-panel {
   opacity: 0;
   visibility: hidden;
-  transition: all .8s ease;
+  transition: all 0.8s ease;
   width: 100%;
 }
 .active-panel {
@@ -126,6 +135,7 @@ aside ul li a{
   opacity: 1;
   visibility: visible;
 }
+/* finish profile page style  */
 /* start sweet alert 2 custom styles  */
 .swal2-popup {
   background-color: var(--box-color) !important;

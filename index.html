@@ -12,7 +12,8 @@
   </head>
   <body class="font-[dana-regular] overflow-x-hidden bg-[var(--bg-color)] text-[var(--text-color)] text-color">
     <nav class="bg-[var(--box-color)] flex items-center justify-between sticky top-0 z-50">
-      <div class="flex items-center xs:gap-3 sm:justify-around bg-[var(--box-color)] py-2 xs:py-3 md:py-5 px-2 xs:px-3 lg:w-60">
+      <!-- start nav logo section  -->
+      <div class="flex items-center xs:gap-3 sm:justify-around bg-[var(--box-color)] py-2 xs:py-3 md:py-5 px-2 xs:px-3 md:w-50 lg:w-60">
         <a href="index.html" class="sm:max-w-25 md:w-auto lg:max-w-30">
           <img class="hidden object-cover sm:dark:inline-block" src="images/logo/logo-dark-full.webp" alt="logo" />
           <img class="hidden sm:inline-block object-cover dark:hidden" src="images/logo/logo-light-full.webp" alt="logo" />
@@ -23,6 +24,7 @@
           </svg>
         </button>
       </div>
+      <!-- finish nav logo section  -->
 
       <div class="grow flex justify-end lg:justify-between items-center gap-3 pe-4 xs:px-4">
         <!--start nav input  -->
@@ -31,7 +33,7 @@
             <input class="grow rounded-r border border-gray-500/50 lg:bg-transparent focus:border-[var(--active-color)]/70 bg-[var(--bg-color)] outline-0 px-2 lg:w-full lg:border-0" type="text" placeholder="جسجو..." />
             <span class="lg:hidden p-3 text-sm rounded-l flex justify-center items-center text-[var(--text-color)] bg-[var(--active-color)]"><i class="fa-solid fa-magnifying-glass text-[var(--text-color)]"></i></span>
           </div>
-          <button id="nav-search-icon" class="p-1 md:p-2 lg:me-1 lg:p-1 cursor-pointer text-base xl:text-lg">
+          <button class="p-1 md:p-2 lg:me-1 lg:p-1 cursor-pointer pointer-events-none lg:pointer-events-auto text-base xl:text-lg">
             <i class="fa-solid fa-magnifying-glass text-[var(--text-color)]"></i>
           </button>
         </div>
@@ -160,19 +162,35 @@
         <!-- finish nav items -->
       </div>
     </nav>
-    <aside class="h-screen w-screen md:max-w-60 overflow-x-hidden bg-black/30 md:bg-transparent translate-x-1/1 md:translate-x-0 fixed top-0 right-0 md:top-20 z-90 transition-all duration-500">
-      <ul class="shrink-0 w-50 xs:w-55 sm:w-60 h-full flex flex-col gap-2 pt-2 bg-[var(--box-color)] font-extrabold">
+    <aside class="h-screen w-screen md:max-w-[58px] overflow-x-hidden bg-black/30 md:bg-transparent translate-x-1/1 md:translate-x-0 fixed top-0 right-0 md:top-20 z-90 transition-all duration-500 sidebar-toggle">
+      <ul class="shrink-0 w-50 xs:w-55 sm:w-60 md:w-full h-full flex flex-col gap-2 pt-2 bg-[var(--box-color)] text-sm font-extrabold">
         <li class="">
-          <a href="#" class="text-[var(--active-color)]">
-            <span class="text-lg"><i class="fa-solid fa-dashboard"></i></span>
+          <a href="index.html" class="text-[var(--active-color)] aside-item">
+            <span class="text-lg"><i class="fa-solid fa-gauge-high"></i></span>
             <span>صفحه اصلی</span>
           </a>
         </li>
-        <li>
-          <a href="#" class="">
-            <span class="text-lg"><i class="fa-solid fa-tags"></i></span>
-            <span>محصولات</span>
-          </a>
+        <li class="">
+          <div href="#" class="relative flex flex-wrap">
+            <div class="aside-item w-full btn">
+              <span class="text-lg"><i class="fa-solid fa-tags"></i></span>
+              <span>محصولات</span>
+            </div>
+            <ul class="aside-item-content">
+              <li clas="">
+                <a href="products.html" class="">لیست محصولات</a>
+              </li>
+              <li clas="">
+                <a href="product-details.html" class="">جزئیات محصول</a>
+              </li>
+              <li clas="">
+                <a href="product-add.html" class="">افزودن محصول</a>
+              </li>
+              <li clas="">
+                <a href="product-add.html?id=115" class="">ویرایش محصول</a>
+              </li>
+            </ul>
+          </div>
         </li>
         <li>
           <a href="#" class="">
@@ -206,7 +224,7 @@
         </li>
       </ul>
     </aside>
-    <main class="px-3 xs:px-6 py-4 grow transition-all duration-500 bg-[var(--bg-color)] md:ms-60">
+    <main class="px-3 xs:px-6 py-4 grow transition-all duration-500 bg-[var(--bg-color)] md:ms-15">
       <div class="flex justify-between flex-col-reverse gap-2 lg:flex-row">
         <div class="flex flex-col">
           <p class="text-lg sm:text-xl lg:text-2xl 2xl:text-3xl font-extrabold sm:mb-1">خوش آمدید، <span id="user-name" class="font-[dana-bold] text-[var(--active-color)]"></span></p>
