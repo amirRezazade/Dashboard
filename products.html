@@ -4,522 +4,444 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="author" content="amirRezazade" />
-    <link rel="icon" type="image/x-icon" href="favicon.png">
+    <link rel="icon" type="image/png" href="images/logo/logo-dark-streamline.png" />
     <link href="src/output.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/nouislider@15.7.0/dist/nouislider.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"/>
-    <title>Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/nouislider@15.7.0/dist/nouislider.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <title>Dashboard || products</title>
 
     <style>
       .noUi-target {
-    background: #111;
-    border: none;
-    height: 3px; /* ← ارتفاع نوار اسلایدر */
-    border-radius: 3px;
-    border: none;
-  }
-  .noUi-base{
-    background-color: var(--text-color);
-    border-radius: 15px;
-    cursor: pointer;
-  }
-   .noUi-connect {  
-    background-color: var(--active-color) !important;
-  }
+        background: #111;
+        border: none;
+        height: 3px; /* ← ارتفاع نوار اسلایدر */
+        border-radius: 3px;
+        border: none;
+      }
+      .noUi-base {
+        background-color: var(--text-color);
+        border-radius: 15px;
+        cursor: pointer;
+      }
+      .noUi-connect {
+        background-color: var(--active-color) !important;
+      }
 
-   .noUi-handle {
-    background-color: var(--active-color) !important;
-    border: 1px solid var(--text-color) !important;
-    width: 16px !important;
-    height: 16px !important;
-    border-radius: 0;
-    transform: rotate(45deg); 
-    cursor: grab;
-    box-shadow: none;
-  }
+      .noUi-handle {
+        background-color: var(--active-color) !important;
+        border: 1px solid var(--text-color) !important;
+        width: 16px !important;
+        height: 16px !important;
+        border-radius: 0;
+        transform: rotate(45deg);
+        cursor: grab;
+        box-shadow: none;
+      }
 
-   .noUi-handle::before,
-   .noUi-handle::after {
-    display: none;
-  }
+      .noUi-handle::before,
+      .noUi-handle::after {
+        display: none;
+      }
     </style>
   </head>
   <body class="font-[dana-regular] overflow-x-hidden bg-[var(--bg-color)] text-[var(--text-color)] text-color">
     <nav class="bg-[var(--box-color)] flex items-center justify-between sticky top-0 z-50">
-      <div
-        class="flex items-center gap-0 xs:gap-3 md:gap-14 bg-[var(--active-color)] py-2 xs:py-3 md:py-5 px-2 xs:px-3 lg:w-60"
-      >
-        <a href="index.html" class="">
-          <img class="hidden xs:inline-block" src="images/logo/logo-light.png" alt="logo" />
+      <!-- start nav logo section  -->
+      <div class="flex items-center xs:gap-3 sm:justify-around bg-[var(--box-color)] py-2 xs:py-3 md:py-5 px-2 xs:px-3 md:w-50 lg:w-60">
+        <a href="index.html" class="sm:max-w-25 md:w-auto lg:max-w-30">
+          <img class="hidden object-cover sm:dark:inline-block" src="images/logo/logo-dark-full.webp" alt="logo" />
+          <img class="hidden sm:inline-block object-cover dark:hidden" src="images/logo/logo-light-full.webp" alt="logo" />
         </a>
-        <button
-          type="button" 
-          onclick="toggleSidebar()"
-          class="p-2 rounded-full cursor-pointer transition-colors duration-300 bg-[var(--bg-color)]/30 hover:bg-[var(--bg-color)]/50"
-        >
-          <svg
-            class="fill-white size-4 sm:size-5"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-            <g
-              id="SVGRepo_tracerCarrier"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            ></g>
-            <g id="SVGRepo_iconCarrier">
-              <path
-                opacity="0.34"
-                d="M5 10H7C9 10 10 9 10 7V5C10 3 9 2 7 2H5C3 2 2 3 2 5V7C2 9 3 10 5 10Z"
-                stroke="none"
-                stroke-width="1.5"
-                stroke-miterlimit="10"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              ></path>
-              <path
-                d="M17 10H19C21 10 22 9 22 7V5C22 3 21 2 19 2H17C15 2 14 3 14 5V7C14 9 15 10 17 10Z"
-                stroke="none"
-                stroke-width="1.5"
-                stroke-miterlimit="10"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              ></path>
-              <path
-                opacity="0.34"
-                d="M17 22H19C21 22 22 21 22 19V17C22 15 21 14 19 14H17C15 14 14 15 14 17V19C14 21 15 22 17 22Z"
-                stroke="none"
-                stroke-width="1.5"
-                stroke-miterlimit="10"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              ></path>
-              <path
-                d="M5 22H7C9 22 10 21 10 19V17C10 15 9 14 7 14H5C3 14 2 15 2 17V19C2 21 3 22 5 22Z"
-                stroke="none"
-                stroke-width="1.5"
-                stroke-miterlimit="10"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              ></path>
-            </g>
+        <button type="button" onclick="toggleSidebar()" class="p-2 rounded-full cursor-pointer transition-colors duration-300 dark:bg-gray-500/50">
+          <svg class="size-5 sm:size-6 fill-black dark:fill-white" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 48 48">
+            <path d="M38,14H6v-4c0-2.2,1.8-4,4-4h32v4C42,12.2,40.2,14,38,14z M42,24v-4H10c-2.2,0-4,1.8-4,4v4h32C40.2,28,42,26.2,42,24z M42,38v-4H10c-2.2,0-4,1.8-4,4v4h32C40.2,42,42,40.2,42,38z"></path>
           </svg>
         </button>
       </div>
+      <!-- finish nav logo section  -->
 
-      <div
-        class="grow flex justify-end lg:justify-between items-center gap-3 px-4"
-      >
+      <div class="grow flex justify-end lg:justify-between items-center gap-3 pe-4 xs:px-4">
         <!--start nav input  -->
-        <div
-          class="nav-item lg:grow relative lg:static flex items-center justify-center lg:justify-between md:gap-2 size-7 sm:size-9 lg:max-w-2/5 md:px-4 lg:py-5 border border-gray-500 rounded-full"
-        >
-        <div class="nav-item-content transition-opacity opacity-0 invisible flex items-stretch rounded-b bg-[var(--box-color)] fixed w-screen p-5 left-0 top-12 xs:w-[70vw] xs:top-16 xs:left-1/2 xs:-translate-x-1/2 sm:w-[50vw] md:top-20 lg:static lg:w-full lg:translate-x-0 lg:bg-transparent lg:p-0 lg:inline-block lg:opacity-100 lg:visible">
-
-          <input
-          class=" grow rounded-r border border-gray-500/50 lg:bg-transparent focus:border-[var(--active-color)]/70  bg-[var(--bg-color)]   outline-0 px-2 lg:w-full lg:border-0
-          type="text"
-          placeholder="جسجو..."
-          />
-          <span class="lg:hidden p-3 text-sm rounded-l flex justify-center items-center text-[var(--text-color)] bg-[var(--active-color)]"><i class="fa-solid fa-magnifying-glass text-[var(--text-color)]"></i></span>
-        </div>
-          <button
-            id="nav-search-icon"
-            class="cursor-pointer text-sm md:text-base centered"
-          >
-            <i
-              class="fa-solid fa-magnifying-glass text-[var(--text-color)]"
-            ></i>
+        <div class="nav-item lg:grow relative lg:static flex items-center justify-center lg:justify-between md:gap-2 lg:max-w-2/5 lg:p-1 lg:border border-gray-500/50 rounded-full">
+          <div class="nav-item-content -translate-x-2/1 flex items-stretch rounded-b fixed w-screen p-5 xs:w-[70vw] left-0 xs:left-20 sm:left-1/3 md:left-45 lg:!static sm:w-[50vw] lg:w-full lg:!border-0 lg:!opacity-100 lg:!visible lg:translate-x-0 lg:bg-transparent lg:p-0 lg:inline-block">
+            <input class="grow rounded-r border border-gray-500/50 lg:bg-transparent focus:border-[var(--active-color)]/70 bg-[var(--bg-color)] outline-0 px-2 lg:w-full lg:border-0" type="text" placeholder="جسجو..." />
+            <span class="lg:hidden p-3 text-sm rounded-l flex justify-center items-center text-[var(--text-color)] bg-[var(--active-color)]"><i class="fa-solid fa-magnifying-glass text-[var(--text-color)]"></i></span>
+          </div>
+          <button class="p-1 md:p-2 lg:me-1 lg:p-1 cursor-pointer pointer-events-none lg:pointer-events-auto text-base xl:text-lg">
+            <i class="fa-solid fa-magnifying-glass text-[var(--text-color)]"></i>
           </button>
         </div>
         <!--finish nav input  -->
         <!-- start nav items -->
-        <div
-          class="flex items-center justify-center gap-2.5 xs:gap-3.5 sm:gap-2 xl:gap-5"
-        >
-          <div class="flex items-center gap-2 relative cursor-pointer nav-item">
-            <img
-              width="20"
-              height="20"
-              src="images/language/iran-32.png"
-              alt=""
-            />
-            <span class="hidden sm:inline-block">فارسی</span>
-            <div
-              class="nav-item-content opacity-0 invisible transition-opacity absolute top-2/1 left-0 -translate-x-1/2 sm:-translate-x-0 border border-gray-500/50 rounded-2xl overflow-hidden w-32 max-h-100 bg-[var(--box-color)]"
-            >
+        <div class="flex items-center justify-center gap-2 xs:gap-3.5 sm:gap-2 xl:gap-5">
+          <button class="shrink-0 nav-item relative hidden xs:flex items-center gap-2 cursor-pointer">
+            <img class="size-6 pointer-events-none" src="images/language/iran-32.png" alt="" />
+            <span class="hidden sm:inline-block pointer-events-none">فارسی</span>
+            <div class="nav-item-content -translate-x-2/1 xs:left-50 md:left-90 lg:left-[350px] xl:left-[420px] w-32 max-h-100">
               <ul class="w-full flex flex-col divide-y-1 divide-gray-500/50">
                 <li class="transition-colors hover:bg-gray-400/30">
-                  <a
-                    href="#"
-                    class="w-auto flex flex-row items-center px-4 py-3 gap-3.5"
-                    ><img
-                      width="25"
-                      height="25"
-                      src="images/language/iran-32.png"
-                      alt=""
-                    />فارسی</a
-                  >
+                  <a href="javascript:void(0)" class="w-auto flex flex-row items-center px-4 py-3 gap-3.5"><img width="25" height="25" src="images/language/iran-32.png" alt="" />فارسی</a>
                 </li>
                 <li class="transition-colors hover:bg-gray-400/30">
-                  <a
-                    href="#"
-                    class="w-auto flex flex-row items-center px-4 py-3 gap-3.5"
-                    ><img
-                      width="25"
-                      height="25"
-                      src="images/language/united states-32.png"
-                      alt=""
-                    />انگلیسی</a
-                  >
+                  <a href="javascript:void(0)" class="w-auto flex flex-row items-center px-4 py-3 gap-3.5"><img width="25" height="25" src="images/language/united states-32.png" alt="" />انگلیسی</a>
                 </li>
                 <li class="transition-colors hover:bg-gray-400/30">
-                  <a
-                    href="#"
-                    class="w-auto flex flex-row items-center px-4 py-3 gap-3.5"
-                    ><img
-                      width="25"
-                      height="25"
-                      src="images/language/china-32.png"
-                      alt=""
-                    />چینی</a
-                  >
+                  <a href="javascript:void(0)" class="w-auto flex flex-row items-center px-4 py-3 gap-3.5"><img width="25" height="25" src="images/language/china-32.png" alt="" />چینی</a>
                 </li>
                 <li class="transition-colors hover:bg-gray-400/30">
-                  <a
-                    href="#"
-                    class="w-auto flex flex-row items-center px-4 py-3 gap-3.5"
-                    ><img
-                      width="25"
-                      height="25"
-                      src="images/language/united arab emirates-32.png"
-                      alt=""
-                    />عربی</a
-                  >
+                  <a href="javascript:void(0)" class="w-auto flex flex-row items-center px-4 py-3 gap-3.5"><img width="25" height="25" src="images/language/united arab emirates-32.png" alt="" />عربی</a>
                 </li>
               </ul>
             </div>
-          </div>
-          <div
-            class="size-7 sm:size-9 md:size-10 bg-[var(--bg-color)] centered border border-gray-500 cursor-pointer rounded-full text-sm md:text-base"
-            onclick="toggleDarkMode()"
-          >
-            <i class="fa-regular fa-moon"></i>
-          </div>
-          <div
-          onclick=" addShoppingCardItems()"
-            class="nav-item size-7 sm:size-9 md:size-10 relative bg-[var(--bg-color)] centered border border-gray-500 cursor-pointer rounded-full text-sm md:text-base"
-          >
+          </button>
+          <button class="nav-btn" onclick="toggleDarkMode()"><i class="fa-regular fa-moon"></i></button>
+          <button class="nav-btn nav-item relative">
             <i class="fa-solid fa-cart-shopping"></i>
-            <div
-              class="nav-item-content font-[dana-num] opacity-0 invisible transition-opacity cursor-auto flex flex-col absolute top-[150%]  left-[-470%] sm:-left-1/2 px-1 border border-gray-500/50 rounded-2xl overflow-hidden w-80 xs:w-90 sm:w-100 max-h-100 h-auto bg-[var(--box-color)]"
-            >
+            <div class="nav-item-content -translate-x-2/1 font-[dana-num] flex flex-col left-3 xs:left-20 md:left-40 lg:left-75 px-1 w-[90vw] xs:w-90 sm:w-100 max-h-100">
               <div class="flex justify-between items-center py-3 px-4">
-                <span class="font-extrabold">سبد خرید من</span>
-                <span
-                  id="shopping-card-length"
-                  class="px-1 rounded-md bg-[var(--active-color)]/30 text-[var(--active-color)] font-bold text-sm"
-                ></span>
+                <span class="font-extrabold">سبد خرید </span>
+                <span id="shopping-card-length" class="p-1 rounded-md bg-[var(--active-color)] text-white font-bold text-sm"></span>
               </div>
-              <ul
-                id="shopping-card-container"
-                class="flex flex-col h-auto grow overflow-y-auto border-y border-dashed border-gray-500/50"
-              >
+              <ul id="shopping-card-container" class="flex flex-col h-auto grow overflow-y-auto border-y border-dashed border-gray-500/50 text-xs sm:text-sm">
                 <!-- data loaded form js  -->
               </ul>
               <div class="flex justify-between flex-wrap py-3 px-4">
-                <span class="text-[var(--text-color)]/70 font-bold"
-                  >مجموع:</span
-                >
-                <span
-                  id="shopping-card-total-price"
-                  class="font-bold text-lg"
-                ></span>
-                <a
-                  href="#"
-                  class="w-full py-1.5 rounded mt-2 text-white font-bold bg-[var(--active-color)] text-center"
-                  >تسویه حساب</a
-                >
+                <span class="text-[var(--text-color)]/70 font-bold">مجموع:</span>
+                <span id="shopping-card-total-price" class="font-bold text-lg"></span>
+                <a href="shopping-cart.html" class="w-full py-1.5 rounded mt-2 text-white font-bold bg-[var(--active-color)] text-center">تسویه حساب</a>
               </div>
-              <div
-                id="empty-shopping-card"
-                class="grow hidden flex-col items-center gap-3 py-8"
-              >
-                <div
-                  class="size-20 centered text-3xl bg-[var(--active-color)]/20 rounded-full"
-                >
-                  <i class="fa-solid fa-cart-shopping"></i>
+              <div id="empty-shopping-card" class="grow hidden flex-col items-center gap-3 pb-8">
+                <div class="centered w-full">
+                  <img class="w-40 sm:w-55 aspect-square" src="images/empty-cart.svg" alt="" />
                 </div>
                 <span>سبد خرید شما خالی است!</span>
-                <a
-                  href="#"
-                  class="py-1.5 px-10 rounded text-white font-bold bg-[var(--active-color)] text-center"
-                  >اکنون خرید کنید</a
-                >
+                <a href="products.html" class="py-1.5 px-10 rounded text-white font-bold bg-[var(--active-color)] text-center">اکنون خرید کنید</a>
               </div>
             </div>
-          </div>
-          <div
-          onclick="toggleFullscreen()"
-            class="size-7 sm:size-9 md:size-10 bg-[var(--bg-color)] centered border border-gray-500 cursor-pointer rounded-full text-sm md:text-base"
-          >
-            <i class="fa-solid fa-expand"></i>
-          </div>
-          <div
-            class="nav-item relative size-7 sm:size-9 md:size-10 bg-[var(--bg-color)] centered border border-gray-500 cursor-pointer rounded-full text-sm md:text-base"
-          >
+          </button>
+          <button onclick="toggleFullscreen()" class="nav-btn"><i class="fa-solid fa-expand"></i></button>
+          <button class="nav-btn nav-item relative">
             <i class="fa-solid fa-clipboard-list"></i>
-            <div
-              class="nav-item-content opacity-0 invisible transition-opacity cursor-auto flex flex-col absolute top-[150%] left-[-140%] md:left-0 sm:-translate-x-0 px-1 border border-gray-500/50 rounded-2xl overflow-hidden w-80 sm:w-100 max-h-100 h-auto bg-[var(--box-color)]">
+            <div class="nav-item-content -translate-x-2/1 flex flex-col left-5 xs:left-15 md:left-35 lg:left-45 px-1 w-70 xs:w-80 sm:w-100 max-h-100">
               <div class="flex justify-between items-center py-3 px-4">
                 <span class="font-extrabold">لیست کارها</span>
+                <a href="todos.html" class="p-1 rounded-md bg-[var(--active-color)]/60 hover:bg-[var(--active-color)] text-white font-bold text-sm">مشاهده همه</a>
               </div>
-              <ul id="nav-todo-list-container"
-                class="flex flex-col h-auto grow overflow-y-auto border-y border-dashed border-gray-500/50"
-              >
-             <!-- data loaded from js  -->
+              <ul id="nav-todo-list-container" class="flex flex-col h-auto grow overflow-y-auto overflow-x-hidden border-y border-dashed border-gray-500/50">
+                <!-- data loaded from js  -->
               </ul>
               <div class="py-3 px-4 flex justify-center">
-                <a
-                  href="#"
-                  class="w-full py-1.5 rounded mt-2 text-white font-bold bg-[var(--active-color)] text-center"
-                  >مشاهده همه
-                </a>
+                <a href="todos.html" class="w-full py-1.5 rounded mt-2 text-white font-bold bg-[var(--active-color)] text-center">مشاهده همه </a>
               </div>
             </div>
-          </div>
-          <div
-            class="font-[dana-num] h-7 md:h-10 px-3 bg-[var(--active-color)] text-white font-bold hidden md:flex justify-center items-center cursor-auto  gap-1 border border-gray-500 rounded-full lg:text-lg"
-          >
+          </button>
+          <span class="font-[dana-num] h-7 md:h-10 px-3 bg-[var(--active-color)] text-white font-bold hidden md:flex justify-center items-center cursor-auto gap-1 rounded-full lg:text-lg">
             <i class="fa-solid fa-cloud-rain text-xs"></i>
             15°
-          </div>
-          <div class="nav-item relative flex items-center gap-2">
-              <div
-              class="size-9 md:size-10 bg-[#f39159] centered border border-gray-500 cursor-pointer rounded-full text-sm md:text-base"
-            >
-              <img
-                width="25"
-                height="25"
-                src="images/profile (1).png"
-                alt="profile-photo"
-              />
-              </div>
-              <div class="font-bold max-w-20 truncate hidden md:inline-block">
-              <span>امیر</span><br />
-              <span>
-                مدیر
-                <i class="fa-solid fa-angle-down text-sm"></i>
-              </span>
-              </div>
-              <div class="nav-item-content opacity-0 invisible transition-opacity cursor-auto  absolute top-[125%] xs:top-[130%] left-0  border border-gray-500/50 rounded-2xl overflow-hidden w-60 max-h-100 h-auto bg-[var(--box-color)] ">
-                <div class="flex items-center gap-2 p-2">
-                  <div class="p-1 bg-[var(--bg-color)] size-10 rounded-full overflow-hidden">
-                    <img class="object-cover" src="images/profile (1).png" alt="user-profile">
-                  </div>
-                  <div class="flex flex-col text-sm">
-                    <span>امیر رضازاده</span>
-                    <span>admin@gmail.com</span>
-                  </div>
+          </span>
+          <div class="nav-item relative flex items-center gap-2 cursor-pointer">
+            <div class="size-9 xs:size-10 md:size-11 overflow-hidden rounded-full text-sm md:text-base pointer-events-none">
+              <img id="nav-user-image" class="object-cover w-full h-full" src="" alt="profile-photo" />
+            </div>
+            <div class="font-bold w-10 truncate hidden md:inline-block pointer-events-none">
+              <span id="nav-user-first-name"></span><br />
+              <span id="nav-user-role"></span>
+            </div>
+            <div class="nav-item-content -translate-x-2/1 left-3 sm:left-5 w-65 max-h-100">
+              <div class="flex items-center gap-2 p-2">
+                <div class="p-1 shrink-0 bg-[var(--bg-color)] size-10 rounded-full overflow-hidden">
+                  <img id="nav-user-image" class="object-cover" src="images/profile (1).png" alt="user-profile" />
+                </div>
+                <div class="flex flex-col text-sm">
+                  <span id="nav-user-full-name"></span>
+                  <span id="nav-user-email" class="text-end truncate" dir="ltr"></span>
+                </div>
               </div>
               <ul class="flex flex-col text-sm border-t border-gray-500/50 border-dashed">
-
                 <li>
-                  <a href="#" class="flex gap-2 px-5 py-3 transition-colors hover:bg-gray-400/30">
-                    <span><i class="fa-solid fa-user"></i></span>
+                  <a href="profile.html" class="flex gap-2 px-5 py-3 transition-colors hover:bg-gray-500/50">
+                    <i class="fa-solid fa-user"></i>
                     پروفایل
                   </a>
                 </li>
                 <li>
-                  <a href="#" class="flex gap-2 px-5 py-3 transition-colors hover:bg-gray-400/30">
-                    <span><i class="fa-solid fa-envelope"></i></span>
-                    پیام ها
+                  <a href="shopping-cart.html" class="flex gap-2 px-5 py-3 transition-colors hover:bg-gray-500/50">
+                    <i class="fa-solid fa-shopping-cart"></i>
+                    سبد خرید
                   </a>
                 </li>
                 <li>
-                  <a href="#" class="flex gap-2 px-5 py-3 transition-colors hover:bg-gray-400/30">
-                    <span><i class="fa-solid fa-list-check"></i></span>
-                   لیست وظایف
+                  <a href="todos.html" class="flex gap-2 px-5 py-3 transition-colors hover:bg-gray-500/50">
+                    <i class="fa-solid fa-list-check"></i>
+                    وظایف
                   </a>
                 </li>
                 <li>
-                  <a href="#" class="flex gap-2 px-5 py-3 transition-colors hover:bg-gray-400/30 hover:text-red-500/80">
-                    <span><i class="fa-solid fa-right-from-bracket"></i></i></span>
-                  خروج
+                  <a id="logout-btn" href="javascript:void(0)" class="flex gap-2 px-5 py-3 transition-colors hover:bg-gray-500/50 hover:text-red-500">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    خروج
                   </a>
                 </li>
               </ul>
               <div id="active-color-options" class="flex justify-evenly border-t border-gray-500/50 py-3">
-                <button data-color="#0ca593" type="button" class="size-8 cursor-pointer rounded bg-[#0ca593]"></button>
-                <button data-color="#2a5fc1" type="button" class="size-8 cursor-pointer rounded bg-[#2a5fc1]"></button>
-                <button data-color="#5147a3" type="button" class="size-8 cursor-pointer rounded bg-[#5147a3]"></button>
-                <button data-color="#8833ff" type="button" class="size-8 cursor-pointer rounded bg-[#8833ff]"></button>
-                <button data-color="#795548" type="button" class="size-8 cursor-pointer rounded bg-[#795548]"></button>
+                <button data-color="#0caf60" type="button" class="size-8 cursor-pointer rounded bg-[#0caf60]"></button>
+                <button data-color="#2a85ff" type="button" class="size-8 cursor-pointer rounded bg-[#2a85ff]"></button>
+                <button data-color="#8c62ff" type="button" class="size-8 cursor-pointer rounded bg-[#8c62ff]"></button>
+                <button data-color="#ff6384" type="button" class="size-8 cursor-pointer rounded bg-[#ff6384]"></button>
+                <button data-color="#fb732c" type="button" class="size-8 cursor-pointer rounded bg-[#fb732c]"></button>
               </div>
-              </div>
+            </div>
           </div>
         </div>
         <!-- finish nav items -->
       </div>
     </nav>
-    <aside class=" h-screen w-screen  md:max-w-60 overflow-x-hidden bg-black/30 md:bg-transparent translate-x-1/1 md:translate-x-0 fixed top-0 right-0 md:top-20 z-90 transition-all duration-500">
-        <ul class="shrink-0 w-50 xs:w-55 sm:w-60 h-full flex flex-col gap-2 pt-2 bg-[var(--box-color)]">
-          <li>
-            <a href="#" class="flex gap-5 items-center py-2 px-4 hover:text-[var(--active-color)]">
-              <span class="text-lg"><i class="fa-solid fa-house"></i></span>
-              <span>صفحه اصلی</span>
-            </a>
-          </li>
-          <li>
-            <a href="#" class=" flex gap-5 items-center py-2 px-4 bg-[var(--active-color)] text-white">
+    <aside class="h-[100dvh] w-screen md:max-w-[58px] overflow-x-hidden bg-black/30 md:bg-transparent translate-x-1/1 md:translate-x-0 fixed top-0 right-0 md:top-20 z-90 transition-all duration-500">
+      <ul class="shrink-0 w-50 xs:w-55 sm:w-60 md:w-full h-full flex flex-col gap-2 pt-2 bg-[var(--box-color)] text-sm font-extrabold">
+        <li>
+          <a href="index.html" class="aside-item">
+            <span class="text-lg"><i class="fa-solid fa-gauge-high"></i></span>
+            <span>صفحه اصلی</span>
+          </a>
+        </li>
+        <li>
+          <div href="javascript:void(0)" class="flex flex-wrap">
+            <div class="aside-item w-full text-[var(--active-color)] sidebar-btn">
               <span class="text-lg"><i class="fa-solid fa-tags"></i></span>
               <span>محصولات</span>
-            </a>
-          </li>
-          <li>
-            <a href="#" class="flex gap-5 items-center py-2 px-4 hover:text-[var(--active-color)]">
+              <span class="ms-auto transition-transform duration-400"><i class="fa-solid fa-angle-left"></i></span>
+            </div>
+            <ul class="aside-item-content">
+              <li>
+                <a href="products.html" class="text-[var(--active-color)] before:!bg-[var(--active-color)]">لیست محصولات</a>
+              </li>
+              <li>
+                <a href="product-details.html">جزئیات محصول</a>
+              </li>
+              <li>
+                <a href="product-add.html">افزودن محصول</a>
+              </li>
+              <li>
+                <a href="product-add.html?id=115">ویرایش محصول</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li>
+          <div href="javascript:void(0)" class="flex flex-wrap">
+            <div class="aside-item w-full sidebar-btn">
               <span class="text-lg"><i class="fa-solid fa-users"></i></span>
-              <span>مشتریان</span>
-            </a>
-          </li>
-          <li>
-            <a href="#" class="flex gap-5 items-center py-2 px-4 hover:text-[var(--active-color)]">
-              <span class="text-lg"><i class="fa-solid fa-clipboard-list"></i></span>
-              <span>لیست وظایف</span>
-            </a>
-          </li>
-          <li>
-            <a href="#" class="flex gap-5 items-center py-2 px-4 hover:text-[var(--active-color)]">
-              <span class="text-lg"><i class="fa-solid fa-cart-shopping"></i></span>
-              <span>سبد خرید</span>
-            </a>
-          </li>
-          <li>
-            <a href="#" class="flex gap-5 items-center py-2 px-4 hover:text-[var(--active-color)]">
-              <span class="text-lg"><i class="fa-solid fa-message"></i></span>
-              <span>چت</span>
-            </a>
-          </li>
-          <li>
-            <a href="#" class="flex gap-5 items-center py-2 px-4 hover:text-[var(--active-color)]">
-              <span class="text-lg"><i class="fa-solid fa-user"></i></span>
-              <span>پروفایل</span>
-            </a>
-          </li>
-        </ul>
+              <span>مشتری ها</span>
+              <span class="ms-auto transition-transform duration-400 text-[var(--text-color)]"><i class="fa-solid fa-angle-left"></i></span>
+            </div>
+            <ul class="aside-item-content">
+              <li>
+                <a href="users.html">لیست مشتری ها</a>
+              </li>
+              <li>
+                <a href="user-details.html">جزئیات مشتری</a>
+              </li>
+              <li>
+                <a href="user-add.html">افزودن مشتری</a>
+              </li>
+              <li>
+                <a href="user-add.html?id=1">ویرایش مشتری</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li>
+          <a href="todos.html" class="aside-item">
+            <span class="text-lg"><i class="fa-solid fa-clipboard-list"></i></span>
+            <span>لیست وظایف</span>
+          </a>
+        </li>
+        <li>
+          <a href="shopping-cart.html" class="aside-item">
+            <span class="text-lg"><i class="fa-solid fa-cart-shopping"></i></span>
+            <span>سبد خرید</span>
+          </a>
+        </li>
+        <li>
+          <a href="profile.html" class="aside-item">
+            <span class="text-lg"><i class="fa-solid fa-user"></i></span>
+            <span>پروفایل</span>
+          </a>
+        </li>
+        <li>
+          <div href="javascript:void(0)" class="flex flex-wrap">
+            <div class="aside-item w-full sidebar-btn">
+              <span class="text-lg"><i class="fa-solid fa-key"></i></span>
+              <span>احراز هویت</span>
+              <span class="ms-auto transition-transform duration-400"><i class="fa-solid fa-angle-left"></i></span>
+            </div>
+            <ul class="aside-item-content">
+              <li>
+                <a href="login.html">ورود</a>
+              </li>
+              <li>
+                <a href="register.html">ثبت نام</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li>
+          <a href="javascript:void(0)" class="aside-item text-red-500" onclick="logout()">
+            <span class="text-lg"><i class="fa-solid fa-arrow-right-from-bracket"></i></span>
+            <span>خروج</span>
+          </a>
+        </li>
+      </ul>
     </aside>
-      <main class="px-3 xs:px-6 py-4  transition-all duration-500 bg-[var(--bg-color)] md:ms-60">
+    <main class="px-3 xs:px-6 py-4 transition-all duration-500 bg-[var(--bg-color)] md:ms-15">
+      <div class="flex justify-between items-center p-3 sm:p-5">
+        <h2 class="text-sm xl:text-lg sm:text-xl lg:text-2xl">لیست محصول ها</h2>
+        <a href="product-add.html" class="px-5 py-2 rounded-sm text-xs sm:text-sm bg-[#0caf60cf] hover:bg-[#0caf60] transition-colors text-white">+ افزودن محصول</a>
+      </div>
+      <!-- start filtering section  -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-11 items-center gap-4 xs:gap-7 sm:gap-y-7 lg:gap-x-8 xl:gap-x-3 bg-[var(--box-color)] rounded-lg p-3 sm:p-5 mb-4 text-xs md:text-sm">
+        <!-- start category select box section -->
+        <div class="xl:col-span-2 px-13 sm:px-0">
+          <select id="category-select-box" class="text-xs sm:text-sm border border-gray-500/50 outline-0 cursor-pointer w-full bg-[var(--bg-color)] p-2 md:p-3 rounded-lg">
+            <option selected value="all">همه</option>
+            <option value="beauty">زیبایی</option>
+            <option value="fragrances">عطرها</option>
+            <option value="furniture">مبلمان</option>
+            <option value="groceries">مواد غذایی</option>
+            <option value="home-decoration">دکوراسیون منزل</option>
+            <option value="kitchen-accessories">لوازم آشپزخانه</option>
+            <option value="laptops">لپ‌تاپ‌ها</option>
+            <option value="mens-shirts">پیراهن مردانه</option>
+            <option value="mens-shoes">کفش مردانه</option>
+            <option value="mens-watches">ساعت مردانه</option>
+            <option value="mobile-accessories">لوازم جانبی موبایل</option>
+            <option value="motorcycle">موتورسیکلت</option>
+            <option value="skin-care">مراقبت پوست</option>
+            <option value="smartphones">گوشی‌های هوشمند</option>
+            <option value="sports-accessories">لوازم ورزشی</option>
+          </select>
+        </div>
+        <!-- finish category select box section -->
+        <!-- start price range slider section  -->
+        <div class="xl:col-span-3 flex flex-wrap items-center font-[dana-num]">
+          <div class="w-full text-center">قیمت</div>
+          <span class="w-1/8 text-center text-nowrap">$ <span id="max-price"></span></span>
+          <div id="price-range-slider" class="grow mr-3 ml-7"></div>
+          <span class="w-1/8 text-nowrap">$ <span id="min-price"></span></span>
+        </div>
+        <!-- finish price range slider section  -->
+        <!-- start Discount range slider section  -->
+        <div class="xl:col-span-3 flex flex-wrap items-center font-[dana-num]">
+          <div class="w-full text-center">تخفیف</div>
+          <span class="w-1/8 text-center">%<span id="max-Discount"></span></span>
+          <div id="Discount-range-slider" class="grow ml-7"></div>
+          <span class="w-1/8">%<span id="min-Discount"></span></span>
+        </div>
+        <!-- finish Discount range slider section  -->
+        <!-- start rating range slider section  -->
+        <div class="xl:col-span-3 flex flex-wrap items-center font-[dana-num]">
+          <div class="w-full text-center">امتیاز</div>
+          <span id="max-point" class="w-1/8 text-center"></span>
+          <div id="point-range-slider" class="grow ml-7"></div>
+          <span id="min-point" class="w-1/8"></span>
+        </div>
+        <!-- finish rating range slider section  -->
 
-           <!-- start filtering section  -->
-        <div class=" grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-11 items-center gap-4 xs:gap-7 sm:gap-y-7 lg:gap-x-8 xl:gap-x-3 bg-[var(--box-color)] rounded-lg p-3 sm:p-5 mb-4  text-xs md:text-sm">
-                <!-- start category select box section -->
-          <div class="xl:col-span-2 px-13 sm:px-0">
-            <select  id="category-select-box" class="text-xs sm:text-sm  border border-gray-500/50  outline-0 cursor-pointer w-full bg-[var(--bg-color)] p-2 md:p-3 rounded-lg   ">
-               <option selected value="all">همه</option>
-               <option value="beauty">زیبایی</option>
-               <option value="fragrances">عطرها</option>
-               <option value="furniture">مبلمان</option>
-               <option value="groceries">مواد غذایی</option>
-               <option value="home-decoration">دکوراسیون منزل</option>
-               <option value="kitchen-accessories">لوازم آشپزخانه</option>
-               <option value="laptops">لپ‌تاپ‌ها</option>
-               <option value="mens-shirts">پیراهن مردانه</option>
-               <option value="mens-shoes">کفش مردانه</option>
-               <option value="mens-watches">ساعت مردانه</option>
-               <option value="mobile-accessories">لوازم جانبی موبایل</option>
-               <option value="motorcycle">موتورسیکلت</option>
-               <option value="skin-care">مراقبت پوست</option>
-               <option value="smartphones">گوشی‌های هوشمند</option>
-               <option value="sports-accessories">لوازم ورزشی</option>
-           </select>
-          </div>
-                 <!-- finish category select box section -->
-                 <!-- start price range slider section  -->
-          <div class="xl:col-span-3 flex flex-wrap  items-center font-[dana-num]">
-            <div class="w-full text-center">قیمت</div>
-             <span class="w-1/8 text-center text-nowrap">$ <span id="max-price" ></span></span>
-            <div id="price-range-slider" class="grow mr-3 ml-7"></div>
-             <span class="w-1/8 text-nowrap">$ <span id="min-price" ></span></span>
-          </div>
-                 <!-- finish price range slider section  -->
-                 <!-- start Discount range slider section  -->
-          <div class="xl:col-span-3 flex flex-wrap  items-center font-[dana-num]">
-            <div class="w-full text-center">تخفیف</div>
-            <span class="w-1/8 text-center">%<span id="max-Discount" ></span></span>
-            <div id="Discount-range-slider" class="grow ml-7"></div>
-              <span class="w-1/8">%<span id="min-Discount" ></span></span>
-          </div>
-                 <!-- finish Discount range slider section  -->
-                 <!-- start rating range slider section  -->
-          <div class="xl:col-span-3 flex flex-wrap  items-center font-[dana-num]">
-            <div class="w-full text-center">امتیاز</div>
-            <span id="max-point" class="w-1/8 text-center"></span>
-            <div id="point-range-slider" class="grow ml-7"></div>
-              <span id="min-point" class="w-1/8"></span>
-          </div>
-                 <!-- finish rating range slider section  -->
- 
-                 <!-- start search input section  -->
-          <div class="px-10  sm:col-span-1 sm:px-0 md:col-span-1 md:px-0 flex items-center gap-2  xl:col-span-4  rounded-lg">
-             <span class=" hidden xs:inline text-nowrap">جستجوی محصول:</span>
-             <input id="search-input" type="text" placeholder="جستجو..." class="bg-[var(--bg-color)] border rounded-lg border-gray-500/50 focus:border-[var(--active-color)] outline-0 grow p-3">
-          </div>
-                <!-- finish search input section  -->
-          </div>
-                   <!-- finish filtering section  -->
+        <!-- start search input section  -->
+        <div class="px-10 sm:col-span-1 sm:px-0 md:col-span-1 md:px-0 flex items-center gap-2 xl:col-span-4 rounded-lg">
+          <span class="hidden xs:inline text-nowrap">جستجوی محصول:</span>
+          <input id="search-input" type="text" placeholder="جستجو..." class="bg-[var(--bg-color)] border rounded-lg border-gray-500/50 focus:border-[var(--active-color)] outline-0 grow p-3" />
+        </div>
+        <!-- finish search input section  -->
+      </div>
+      <!-- finish filtering section  -->
 
-        <!-- start product list section  -->
-        <div class="bg-[var(--box-color)] rounded-lg p-1.5 sm:p-3 overflow-x-auto">
-          <div class="inline-flex items-center gap-1.5 w-70 xs:w-90 text-xs my-5 px-2.5">
-              <span class=" text-nowrap">مرتب سازی:</span>
-            <select id="sort-select-box" class="text-xs  sm:text-sm  border border-gray-500/50  outline-0 cursor-pointer w-full bg-[var(--bg-color)] px-2 md:px-3 py-1 rounded-lg   ">
-                 <option selected value="title">اسم</option>
-                 <option value="price">قیمت</option>
-                 <option value="discountPercentage">تخفیف</option>
-                 <option value="rating">امتیاز</option>
-                 <option value="stock">تعداد</option>
-             </select>
-            <select id="sorting-type" class="text-xs sm:text-sm w-30 border border-gray-500/50  outline-0 cursor-pointer bg-[var(--bg-color)] px-2 md:px-3 py-1 rounded-lg   ">
+      <!-- start product list section  -->
+      <div class="bg-[var(--box-color)] rounded-lg p-1.5 sm:p-3">
+        <div class="flex flex-col-reverse xs:flex-row justify-between items-center gap-y-3 gap-1.5 my-5 px-2.5">
+          <div class="flex items-center self-start gap-1.5 w-full max-w-100 text-xs px-2.5">
+            <span class="text-nowrap">مرتب سازی:</span>
+            <select id="sort-select-box" class="text-xs sm:text-sm border border-gray-500/50 outline-0 cursor-pointer w-full bg-[var(--bg-color)] px-2 md:px-3 py-1 rounded-lg">
+              <option selected value="title">اسم</option>
+              <option value="price">قیمت</option>
+              <option value="discountPercentage">تخفیف</option>
+              <option value="rating">امتیاز</option>
+              <option value="stock">تعداد</option>
+            </select>
+            <select id="sorting-type" class="text-xs sm:text-sm w-30 border border-gray-500/50 outline-0 cursor-pointer bg-[var(--bg-color)] px-2 md:px-3 py-1 rounded-lg">
               <option selected value="desc">نزولی</option>
               <option value="asc">صعودی</option>
             </select>
           </div>
-
-            <table class=" text-xs md:text-sm w-full min-w-[600px] ">
-                <thead class="">
-                    <tr class="flex p-1.5 md:p-3">
-                        <td class="text-center w-4/15">محصول</td>
-                        <td class="text-center w-2/15">دسته بندی</td>
-                        <td class="text-center w-2/15">قیمت</td>
-                        <td class="text-center w-2/15">تخفیف</td>
-                        <td class="text-center w-1/15">تعداد</td>
-                        <td class="text-center w-2/15">امتیاز</td>
-                        <td class="text-center w-2/15">عملیات</td>
-                    </tr>
-                </thead>
-                <tbody id="products-container" class="font-[dana-num] divide-y-1 divide-gray-500/50 border-y border-gray-500/50 flex flex-col w-full">
-                      <!-- data loaded from js  -->
-                       
-                </tbody>
-            </table>
-            <div class="flex justify-between font-[dana-num] text-sm p-4 lg:pt-6">
-                <span><span id="total-products-count" class="font-[dana-num]"></span> محصول </span>
-                <div id="products-pagination" class="flex items-center gap-1.5 text-xs">
-                  <button disabled="" type="button" class="prev size-7 centered rounded border border-gray-500/20 hover:bg-gray-500/30 cursor-pointer"><i class="fa-solid fa-arrow-up pointer-events-none rotate-90"></i></button>
-                  <button type="button" class="one size-7 active-page centered rounded border border-gray-500/20 hover:bg-gray-500/30 cursor-pointer">1</button>
-                  <button type="button" class="two size-7 centered rounded border border-gray-500/20 hover:bg-gray-500/30 cursor-pointer">2</button>
-                  <button type="button" class="three size-7 centered rounded border  border-gray-500/20 hover:bg-gray-500/30 cursor-pointer">3</button>
-                  <button type="button" class="next size-7 centered rounded border border-gray-500/20 hover:bg-gray-500/30 cursor-pointer"><i class="fa-solid fa-arrow-up pointer-events-none -rotate-90"></i></button>
-                </div>
+          <div class="w-full flex items-center justify-end text-xs sm:text-sm gap-3 text-white">
+            <div class="export-dropdown relative">
+              <button class="cursor-pointer w-full px-3 py-2 text-nowrap bg-[var(--active-color)]/80 hover:bg-[var(--active-color)] rounded-lg flex items-center justify-evenly text-center" onclick="nextElementSibling.classList.toggle('hidden')" type="button">
+                صادر کردن
+                <i class="fas fa-angle-down"></i>
+              </button>
+              <div class="export-dropdown-content border-y border-gray-500/50 rounded-lg overflow-hidden w-full absolute top-[105%] bg-[var(--bg-color)] z-10 hidden">
+                <ul class="divide-y divide-gray-500/50">
+                  <li>
+                    <a href="javascript:void(0)" onclick="exportTableToJSON('products-table')" class="px-4 py-2.5 hover:bg-gray-500/30 flex items-start justify-evenly">JSON <i class="fa-solid fa-download"></i></a>
+                  </li>
+                  <li>
+                    <a href="javascript:void(0)" onclick="exportTableToCSV('products-table')" class="px-4 py-2.5 hover:bg-gray-500/30 flex items-start justify-around">CSV <i class="fa-solid fa-download"></i></a>
+                  </li>
+                </ul>
               </div>
+            </div>
+            <label for="import-user" class="cursor-pointer px-3 py-2 text-nowrap rounded-lg bg-[#299cdb] hover:bg-[#3bb1f0] transition-colors flex items-center gap-1"> <i class="fa fa-file-import text-xs"></i>وارد کردن</label>
+            <input type="file" id="import-user" hidden="" accept=".json,application/json" />
+          </div>
         </div>
-        <!-- finish product list section  -->
-        
-      </main>
-      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-   <script src="https://cdn.jsdelivr.net/npm/nouislider@15.7.0/dist/nouislider.min.js"></script>
+        <div class="overflow-x-auto">
+          <table id="products-table" class="text-xs md:text-sm w-full min-w-[600px]">
+            <thead class="">
+              <tr class="flex p-1.5 md:p-3">
+                <th class="text-center w-4/15">محصول</th>
+                <th class="text-center w-2/15">دسته بندی</th>
+                <th class="text-center w-2/15">قیمت</th>
+                <th class="text-center w-2/15">تخفیف</th>
+                <th class="text-center w-1/15">تعداد</th>
+                <th class="text-center w-2/15">امتیاز</th>
+                <th class="text-center w-2/15">عملیات</th>
+              </tr>
+            </thead>
+            <tbody id="products-container" class="font-[dana-num] divide-y-1 divide-gray-500/50 border-y border-gray-500/50 flex flex-col w-full">
+              <!-- data loaded from js  -->
+            </tbody>
+          </table>
+        </div>
+        <div class="flex justify-between font-[dana-num] text-sm p-4 lg:pt-6">
+          <span><span id="total-products-count" class="font-[dana-num]"></span> محصول </span>
+          <div id="products-pagination" class="flex items-center gap-1.5 text-xs">
+            <button disabled="" type="button" class="prev size-7 centered rounded border border-gray-500/20 hover:bg-gray-500/30 cursor-pointer"><i class="fa-solid fa-arrow-up pointer-events-none rotate-90"></i></button>
+            <button type="button" class="one size-7 active-page centered rounded border border-gray-500/20 hover:bg-gray-500/30 cursor-pointer">1</button>
+            <button type="button" class="two size-7 centered rounded border border-gray-500/20 hover:bg-gray-500/30 cursor-pointer">2</button>
+            <button type="button" class="three size-7 centered rounded border border-gray-500/20 hover:bg-gray-500/30 cursor-pointer">3</button>
+            <button type="button" class="next size-7 centered rounded border border-gray-500/20 hover:bg-gray-500/30 cursor-pointer"><i class="fa-solid fa-arrow-up pointer-events-none -rotate-90"></i></button>
+          </div>
+        </div>
+      </div>
+      <!-- finish product list section  -->
+    </main>
+    <footer class="py-2 xs:py-3 border-t border-gray-500/50 flex items-center gap-1 justify-center">
+      <p class="text-xs">«طراحی و توسعه توسط امیر رضازاده — ۲۰۲۵»</p>
+      <a href="https://github.com/amirRezazade" target="-blank" class="fill-[var(--text-color)] px-2 py-1">
+        <svg fill="" width="25px" height="25px" viewBox="-2 -2 24 24" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin" class="jam jam-github">
+          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+          <g id="SVGRepo_iconCarrier">
+            <path
+              d="M18.88 1.099C18.147.366 17.265 0 16.233 0H3.746C2.714 0 1.832.366 1.099 1.099.366 1.832 0 2.714 0 3.746v12.487c0 1.032.366 1.914 1.099 2.647.733.733 1.615 1.099 2.647 1.099H6.66c.19 0 .333-.007.429-.02a.504.504 0 0 0 .286-.169c.095-.1.143-.245.143-.435l-.007-.885c-.004-.564-.006-1.01-.006-1.34l-.3.052c-.19.035-.43.05-.721.046a5.555 5.555 0 0 1-.904-.091 2.026 2.026 0 0 1-.872-.39 1.651 1.651 0 0 1-.572-.8l-.13-.3a3.25 3.25 0 0 0-.41-.663c-.186-.243-.375-.407-.566-.494l-.09-.065a.956.956 0 0 1-.17-.156.723.723 0 0 1-.117-.182c-.026-.061-.004-.111.065-.15.07-.04.195-.059.378-.059l.26.04c.173.034.388.138.643.311a2.1 2.1 0 0 1 .631.677c.2.355.44.626.722.813.282.186.566.28.852.28.286 0 .533-.022.742-.065a2.59 2.59 0 0 0 .585-.196c.078-.58.29-1.028.637-1.34a8.907 8.907 0 0 1-1.333-.234 5.314 5.314 0 0 1-1.223-.507 3.5 3.5 0 0 1-1.047-.872c-.277-.347-.505-.802-.683-1.365-.177-.564-.266-1.215-.266-1.952 0-1.049.342-1.942 1.027-2.68-.32-.788-.29-1.673.091-2.652.252-.079.625-.02 1.119.175.494.195.856.362 1.086.5.23.14.414.257.553.352a9.233 9.233 0 0 1 2.497-.338c.859 0 1.691.113 2.498.338l.494-.312a6.997 6.997 0 0 1 1.197-.572c.46-.174.81-.221 1.054-.143.39.98.424 1.864.103 2.653.685.737 1.028 1.63 1.028 2.68 0 .737-.089 1.39-.267 1.957-.177.568-.407 1.023-.689 1.366-.282.343-.633.63-1.053.865-.42.234-.828.403-1.223.507a8.9 8.9 0 0 1-1.333.235c.45.39.676 1.005.676 1.846v3.11c0 .147.021.266.065.357a.36.36 0 0 0 .208.189c.096.034.18.056.254.064.074.01.18.013.318.013h2.914c1.032 0 1.914-.366 2.647-1.099.732-.732 1.099-1.615 1.099-2.647V3.746c0-1.032-.367-1.914-1.1-2.647z"
+            ></path>
+          </g>
+        </svg>
+      </a>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/nouislider@15.7.0/dist/nouislider.min.js"></script>
     <script src="scripts/shared.js"></script>
     <script type="module" src="scripts/products.js"></script>
   </body>

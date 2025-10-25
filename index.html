@@ -3,12 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/png" href="images/logo/logo-dark-streamline.png" />
-    <link rel="stylesheet" href="assets/jquery-jvectormap.css" />
-    <link href="src/output.css" rel="stylesheet" />
-    <link rel="stylesheet" href="assets/all.min.css" />
-    <link rel="stylesheet" href="assets/webfonts/fa-brands-400.woff2" />
     <meta name="author" content="amirRezazade" />
+    <link rel="icon" type="image/png" href="images/logo/logo-dark-streamline.png" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jvectormap-next/jquery-jvectormap.css" />
+    <link href="src/output.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
     <title>Dashboard</title>
   </head>
   <body class="font-[dana-regular] overflow-x-hidden bg-[var(--bg-color)] text-[var(--text-color)] text-color">
@@ -47,16 +46,16 @@
             <div class="nav-item-content -translate-x-2/1 xs:left-50 md:left-90 lg:left-[350px] xl:left-[420px] w-32 max-h-100">
               <ul class="w-full flex flex-col divide-y-1 divide-gray-500/50">
                 <li class="transition-colors hover:bg-gray-400/30">
-                  <a href="#" class="w-auto flex flex-row items-center px-4 py-3 gap-3.5"><img width="25" height="25" src="images/language/iran-32.png" alt="" />فارسی</a>
+                  <a href="javascript:void(0)" class="w-auto flex flex-row items-center px-4 py-3 gap-3.5"><img width="25" height="25" src="images/language/iran-32.png" alt="" />فارسی</a>
                 </li>
                 <li class="transition-colors hover:bg-gray-400/30">
-                  <a href="#" class="w-auto flex flex-row items-center px-4 py-3 gap-3.5"><img width="25" height="25" src="images/language/united states-32.png" alt="" />انگلیسی</a>
+                  <a href="javascript:void(0)" class="w-auto flex flex-row items-center px-4 py-3 gap-3.5"><img width="25" height="25" src="images/language/united states-32.png" alt="" />انگلیسی</a>
                 </li>
                 <li class="transition-colors hover:bg-gray-400/30">
-                  <a href="#" class="w-auto flex flex-row items-center px-4 py-3 gap-3.5"><img width="25" height="25" src="images/language/china-32.png" alt="" />چینی</a>
+                  <a href="javascript:void(0)" class="w-auto flex flex-row items-center px-4 py-3 gap-3.5"><img width="25" height="25" src="images/language/china-32.png" alt="" />چینی</a>
                 </li>
                 <li class="transition-colors hover:bg-gray-400/30">
-                  <a href="#" class="w-auto flex flex-row items-center px-4 py-3 gap-3.5"><img width="25" height="25" src="images/language/united arab emirates-32.png" alt="" />عربی</a>
+                  <a href="javascript:void(0)" class="w-auto flex flex-row items-center px-4 py-3 gap-3.5"><img width="25" height="25" src="images/language/united arab emirates-32.png" alt="" />عربی</a>
                 </li>
               </ul>
             </div>
@@ -77,9 +76,9 @@
                 <span id="shopping-card-total-price" class="font-bold text-lg"></span>
                 <a href="shopping-cart.html" class="w-full py-1.5 rounded mt-2 text-white font-bold bg-[var(--active-color)] text-center">تسویه حساب</a>
               </div>
-              <div id="empty-shopping-card" class="grow hidden flex-col items-center gap-3 py-8">
-                <div class="size-20 centered text-3xl bg-[var(--active-color)]/20 rounded-full">
-                  <i class="fa-solid fa-cart-shopping"></i>
+              <div id="empty-shopping-card" class="grow hidden flex-col items-center gap-3 pb-8">
+                <div class="centered w-full">
+                  <img class="w-40 sm:w-55 aspect-square" src="images/empty-cart.svg" alt="" />
                 </div>
                 <span>سبد خرید شما خالی است!</span>
                 <a href="products.html" class="py-1.5 px-10 rounded text-white font-bold bg-[var(--active-color)] text-center">اکنون خرید کنید</a>
@@ -144,7 +143,7 @@
                   </a>
                 </li>
                 <li>
-                  <a id="logout-btn" href="#" class="flex gap-2 px-5 py-3 transition-colors hover:bg-gray-500/50 hover:text-red-500">
+                  <a id="logout-btn" href="javascript:void(0)" class="flex gap-2 px-5 py-3 transition-colors hover:bg-gray-500/50 hover:text-red-500">
                     <i class="fa-solid fa-right-from-bracket"></i>
                     خروج
                   </a>
@@ -171,8 +170,8 @@
             <span>صفحه اصلی</span>
           </a>
         </li>
-        <li class="">
-          <div href="#" class="flex flex-wrap">
+        <li>
+          <div href="javascript:void(0)" class="flex flex-wrap">
             <div class="aside-item w-full sidebar-btn">
               <span class="text-lg"><i class="fa-solid fa-tags"></i></span>
               <span>محصولات</span>
@@ -180,22 +179,22 @@
             </div>
             <ul class="aside-item-content">
               <li>
-                <a href="products.html" class="">لیست محصولات</a>
+                <a href="products.html">لیست محصولات</a>
               </li>
               <li>
-                <a href="product-details.html" class="">جزئیات محصول</a>
+                <a href="product-details.html">جزئیات محصول</a>
               </li>
               <li>
-                <a href="product-add.html" class="">افزودن محصول</a>
+                <a href="product-add.html">افزودن محصول</a>
               </li>
               <li>
-                <a href="product-add.html?id=115" class="">ویرایش محصول</a>
+                <a href="product-add.html?id=115">ویرایش محصول</a>
               </li>
             </ul>
           </div>
         </li>
-        <li class="">
-          <div href="#" class="flex flex-wrap">
+        <li>
+          <div href="javascript:void(0)" class="flex flex-wrap">
             <div class="aside-item w-full sidebar-btn">
               <span class="text-lg"><i class="fa-solid fa-users"></i></span>
               <span>مشتری ها</span>
@@ -203,16 +202,16 @@
             </div>
             <ul class="aside-item-content">
               <li>
-                <a href="users.html" class="">لیست مشتری ها</a>
+                <a href="users.html">لیست مشتری ها</a>
               </li>
               <li>
-                <a href="user-details.html" class="">جزئیات مشتری</a>
+                <a href="user-details.html">جزئیات مشتری</a>
               </li>
               <li>
-                <a href="user-add.html" class="">افزودن مشتری</a>
+                <a href="user-add.html">افزودن مشتری</a>
               </li>
               <li>
-                <a href="user-add.html?id=1" class="">ویرایش مشتری</a>
+                <a href="user-add.html?id=1">ویرایش مشتری</a>
               </li>
             </ul>
           </div>
@@ -235,8 +234,8 @@
             <span>پروفایل</span>
           </a>
         </li>
-        <li class="">
-          <div href="#" class="flex flex-wrap">
+        <li>
+          <div href="javascript:void(0)" class="flex flex-wrap">
             <div class="aside-item w-full sidebar-btn">
               <span class="text-lg"><i class="fa-solid fa-key"></i></span>
               <span>احراز هویت</span>
@@ -244,16 +243,16 @@
             </div>
             <ul class="aside-item-content">
               <li>
-                <a href="login.html" class="">ورود</a>
+                <a href="login.html">ورود</a>
               </li>
               <li>
-                <a href="register.html" class="">ثبت نام</a>
+                <a href="register.html">ثبت نام</a>
               </li>
             </ul>
           </div>
         </li>
         <li>
-          <a href="#" class="aside-item text-red-500" onclick="logout()">
+          <a href="javascript:void(0)" class="aside-item text-red-500" onclick="logout()">
             <span class="text-lg"><i class="fa-solid fa-arrow-right-from-bracket"></i></span>
             <span>خروج</span>
           </a>
@@ -329,7 +328,7 @@
           </div>
           <span class="font-[dana-num] font-extrabold text-xl xl:text-2xl mt-2">$559.25k</span>
           <div class="flex justify-between items-end">
-            <a href="" class="text-sm underline">مشاهده جزئیات</a>
+            <a href="javascript:void(0)" class="text-sm underline">مشاهده جزئیات</a>
             <span class="size-12 bg-[#0caf60]/20 rounded centered"><i class="fa-solid fa-dollar-sign border-2 rounded-full text-[#0caf60]"></i></span>
           </div>
         </div>
@@ -342,7 +341,7 @@
           </div>
           <span class="font-[dana-num] font-extrabold text-xl xl:text-2xl mt-2">6,894</span>
           <div class="flex justify-between items-end">
-            <a href="" class="text-sm underline">مشاهده سفارشات</a>
+            <a href="javascript:void(0)" class="text-sm underline">مشاهده سفارشات</a>
             <span class="size-12 bg-sky-500/20 rounded centered"><i class="fa-solid fa-bag-shopping text-lg text-sky-500"></i></span>
           </div>
         </div>
@@ -355,7 +354,7 @@
           </div>
           <span class="font-[dana-num] font-extrabold text-xl xl:text-2xl mt-2">6.4میلیون</span>
           <div class="flex justify-between items-end">
-            <a href="" class="text-sm underline">مشاهده مشتریان</a>
+            <a href="javascript:void(0)" class="text-sm underline">مشاهده مشتریان</a>
             <span class="size-12 bg-amber-500/20 rounded centered"><i class="fa-regular fa-circle-user text-xl text-amber-400"></i></span>
           </div>
         </div>
@@ -366,7 +365,7 @@
           </div>
           <span class="font-[dana-num] font-extrabold text-xl xl:text-2xl mt-2">$1500</span>
           <div class="flex justify-between items-end">
-            <a href="" class="text-sm underline">برداشت پول</a>
+            <a href="javascript:void(0)" class="text-sm underline">برداشت پول</a>
             <span class="size-12 bg-[#8c62ff]/20 rounded text-[#9f81ef] centered"><i class="fa-solid fa-wallet text-xl"></i></span>
           </div>
         </div>
@@ -385,10 +384,10 @@
               <div class="export-dropdown-content border-y border-gray-500/50 rounded-lg overflow-hidden w-full absolute top-[105%] bg-[var(--bg-color)] z-10 hidden">
                 <ul class="divide-y divide-gray-500/50">
                   <li>
-                    <a href="#" id="total-chart-json-elem" class="px-4 py-2.5 hover:bg-gray-500/30 flex items-start justify-evenly">JSON <i class="fa-solid fa-download"></i></a>
+                    <a href="javascript:void(0)" id="total-chart-json-elem" class="px-4 py-2.5 hover:bg-gray-500/30 flex items-start justify-evenly">JSON <i class="fa-solid fa-download"></i></a>
                   </li>
                   <li>
-                    <a href="#" id="total-chart-png-elem" class="px-4 py-2.5 hover:bg-gray-500/30 flex items-start justify-around">PNG <i class="fa-solid fa-download"></i></a>
+                    <a href="javascript:void(0)" id="total-chart-png-elem" class="px-4 py-2.5 hover:bg-gray-500/30 flex items-start justify-around">PNG <i class="fa-solid fa-download"></i></a>
                   </li>
                 </ul>
               </div>
@@ -435,19 +434,19 @@
             <div id="map" class="h-full w-full"></div>
           </div>
           <div class="flex flex-col gap-3 px-4">
-            <div class="">
+            <div>
               <div class="flex justify-between mb-2 text-sm"><span>ایران</span><span class="font-[dana-num]">45%</span></div>
               <div class="relative rounded-full h-2 bg-gray-700/50"><div class="absolute h-full rounded-full w-[45%] right-0 bg-[var(--active-color)]"></div></div>
             </div>
-            <div class="">
+            <div>
               <div class="flex justify-between mb-2 text-sm"><span>آمریکا</span><span class="font-[dana-num]">25%</span></div>
               <div class="relative rounded-full h-2 bg-gray-700/50"><div class="absolute h-full rounded-full w-[25%] right-0 bg-[var(--active-color)]"></div></div>
             </div>
-            <div class="">
+            <div>
               <div class="flex justify-between mb-2 text-sm"><span>چین</span><span class="font-[dana-num]">20%</span></div>
               <div class="relative rounded-full h-2 bg-gray-700/50"><div class="absolute h-full rounded-full w-[20%] right-0 bg-[var(--active-color)]"></div></div>
             </div>
-            <div class="">
+            <div>
               <div class="flex justify-between mb-2 text-sm"><span>فرانسه</span><span class="font-[dana-num]">10%</span></div>
               <div class="relative rounded-full h-2 bg-gray-700/50"><div class="absolute h-full rounded-full w-[10%] right-0 bg-[var(--active-color)]"></div></div>
             </div>
@@ -459,7 +458,7 @@
         <!-- start resent orders section  -->
         <div class="bg-[var(--box-color)] rounded-lg overflow-x-auto col-span-12">
           <div class="flex items-center justify-between max-w-[1400px] p-4">
-            <span class=""> سفارشات اخیر</span>
+            <span> سفارشات اخیر</span>
             <div class="export-dropdown relative text-xs sm:text-sm w-22 sm:w-30">
               <button class="cursor-pointer w-full text-white bg-[var(--active-color)]/80 hover:bg-[var(--active-color)] fo rounded-lg py-2 flex items-center justify-evenly text-center" onclick="nextElementSibling.classList.toggle('hidden')" type="button">
                 صادر کردن
@@ -468,10 +467,10 @@
               <div class="export-dropdown-content border-y border-gray-500/50 rounded-lg overflow-hidden w-full absolute top-[105%] bg-[var(--bg-color)] z-10 hidden">
                 <ul class="divide-y divide-gray-500/50">
                   <li>
-                    <a href="#" onclick="exportTableToJSON('resent-orders-table')" class="px-4 py-2.5 hover:bg-gray-500/30 flex items-start justify-evenly">JSON <i class="fa-solid fa-download"></i></a>
+                    <a href="javascript:void(0)" onclick="exportTableToJSON('resent-orders-table')" class="px-4 py-2.5 hover:bg-gray-500/30 flex items-start justify-evenly">JSON <i class="fa-solid fa-download"></i></a>
                   </li>
                   <li>
-                    <a href="#" onclick="exportTableToCSV('resent-orders-table')" class="px-4 py-2.5 hover:bg-gray-500/30 flex items-start justify-around">CSV <i class="fa-solid fa-download"></i></a>
+                    <a href="javascript:void(0)" onclick="exportTableToCSV('resent-orders-table')" class="px-4 py-2.5 hover:bg-gray-500/30 flex items-start justify-around">CSV <i class="fa-solid fa-download"></i></a>
                   </li>
                 </ul>
               </div>
@@ -520,16 +519,16 @@
               <div class="export-dropdown-content border-y border-gray-500/50 rounded-lg overflow-hidden w-full absolute top-[105%] bg-[var(--bg-color)] z-10 hidden">
                 <ul class="divide-y divide-gray-500/50">
                   <li>
-                    <a href="#" onclick="exportTableToJSON('top-product-table')" class="px-4 py-2.5 hover:bg-gray-500/30 flex items-start justify-evenly">JSON <i class="fa-solid fa-download"></i></a>
+                    <a href="javascript:void(0)" onclick="exportTableToJSON('top-product-table')" class="px-4 py-2.5 hover:bg-gray-500/30 flex items-start justify-evenly">JSON <i class="fa-solid fa-download"></i></a>
                   </li>
                   <li>
-                    <a href="#" onclick="exportTableToCSV('top-product-table')" class="px-4 py-2.5 hover:bg-gray-500/30 flex items-start justify-around">CSV <i class="fa-solid fa-download"></i></a>
+                    <a href="javascript:void(0)" onclick="exportTableToCSV('top-product-table')" class="px-4 py-2.5 hover:bg-gray-500/30 flex items-start justify-around">CSV <i class="fa-solid fa-download"></i></a>
                   </li>
                 </ul>
               </div>
             </div>
           </div>
-          <div class="">
+          <div>
             <table id="top-product-table" class="overflow-x-scroll min-w-80 w-full">
               <thead id="top-products-sorting-methods" class="w-full block p-1.5 xs:p-3">
                 <tr class="w-full flex justify-between text-[10px] sm:text-xs xl:text-sm select-none">
@@ -579,10 +578,10 @@
               <div class="export-dropdown-content border-y border-gray-500/50 rounded-lg overflow-hidden w-full absolute top-[105%] bg-[var(--bg-color)] z-10 hidden">
                 <ul class="divide-y divide-gray-500/50">
                   <li>
-                    <a href="#" id="top-category-json-elem" class="px-4 py-2.5 hover:bg-gray-500/30 flex items-start justify-evenly">JSON <i class="fa-solid fa-download"></i></a>
+                    <a href="javascript:void(0)" id="top-category-json-elem" class="px-4 py-2.5 hover:bg-gray-500/30 flex items-start justify-evenly">JSON <i class="fa-solid fa-download"></i></a>
                   </li>
                   <li>
-                    <a href="#" id="top-category-png-elem" class="px-4 py-2.5 hover:bg-gray-500/30 flex items-start justify-around">PNG <i class="fa-solid fa-download"></i></a>
+                    <a href="javascript:void(0)" id="top-category-png-elem" class="px-4 py-2.5 hover:bg-gray-500/30 flex items-start justify-around">PNG <i class="fa-solid fa-download"></i></a>
                   </li>
                 </ul>
               </div>

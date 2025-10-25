@@ -347,6 +347,19 @@ document.querySelector("#totalChartBtns").addEventListener("click", (e) => {
   }
 });
 
+document.querySelector("#total-chart-json-elem").addEventListener("click", () => {
+  exportChartJson(TotalChartCreate);
+});
+document.querySelector("#total-chart-png-elem").addEventListener("click", () => {
+  exportChartPng(document.getElementById("totalChart"));
+});
+document.querySelector("#top-category-json-elem").addEventListener("click", () => {
+  exportChartJson(CategoryChartCreate);
+});
+document.querySelector("#top-category-png-elem").addEventListener("click", () => {
+  exportChartPng(categoryChart);
+});
+
 function exportChartJson(chart) {
   const chartData = chart.data.datasets.map((ds) => ({
     label: ds.label,
@@ -369,16 +382,3 @@ function exportChartPng(chart) {
   a.download = `${chart.id}.png`;
   a.click();
 }
-
-document.querySelector("#total-chart-json-elem").addEventListener("click", () => {
-  exportChartJson(TotalChartCreate);
-});
-document.querySelector("#total-chart-png-elem").addEventListener("click", () => {
-  exportChartPng(document.getElementById("totalChart"));
-});
-document.querySelector("#top-category-json-elem").addEventListener("click", () => {
-  exportChartJson(CategoryChartCreate);
-});
-document.querySelector("#top-category-png-elem").addEventListener("click", () => {
-  exportChartPng(categoryChart);
-});

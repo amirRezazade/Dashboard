@@ -1,4 +1,4 @@
-import { addToLocal, getToLocal , showSwal , showTost , animatePulse } from "./funcs.js";
+import { showSwal, showTost, animatePulse } from "./funcs.js";
 window.removeProduct = removeProduct;
 window.editProduct = editProduct;
 const paginationElem = document.querySelector("#products-pagination");
@@ -42,8 +42,7 @@ async function searchProduct(key) {
 
 function addProduct(list, page = 1) {
   productsContainer.innerHTML = "";
-  if (list.length == 0)
-    productsContainer.innerHTML = `          <div class=" my-5 block h-[150px] md:h-[300px]  bg-[url('../images/product-not-found.png')]  bg-contain bg-center bg-no-repeat "></div>`;
+  if (list.length == 0) productsContainer.innerHTML = `<div class=" my-5 block h-auto max-h-[200px] sm:max-h-[350px] centered overflow-hidden"><img class="object-cover aspect-square max-w-sm sm:max-w-xl" src="images/item-notfound.png" alt="item-notfound"></div>`;
   if (list.length <= 10) paginationElem.style.display = "none";
   else paginationElem.style.display = "flex";
   document.querySelector("#total-products-count").textContent = list.length;
@@ -82,9 +81,7 @@ paginationElem.addEventListener("click", (e) => {
 function pagination(e) {
   if (e === 1) {
     page = 1;
-    paginationElem
-      .querySelectorAll("button")
-      .forEach((elem) => elem.classList.remove("active-page"));
+    paginationElem.querySelectorAll("button").forEach((elem) => elem.classList.remove("active-page"));
 
     paginationElem.querySelector(".prev").disabled = true;
     paginationElem.querySelector(".next").disabled = false;
@@ -95,9 +92,7 @@ function pagination(e) {
     paginationElem.querySelector(".three").textContent = page + 2;
     return "";
   }
-  paginationElem
-    .querySelectorAll("button")
-    .forEach((elem) => elem.classList.remove("active-page"));
+  paginationElem.querySelectorAll("button").forEach((elem) => elem.classList.remove("active-page"));
 
   if (e.target.classList.contains("prev") && page != 1) {
     page--;
@@ -194,10 +189,8 @@ noUiSlider.create(pointSlider, {
   },
 });
 pointSlider.noUiSlider.on("update", (values, handle) => {
-  if (handle === 0)
-    minPoint.textContent = values.innerText = parseFloat(values[0]).toFixed(1);
-  else
-    maxPoint.textContent = values.innerText = parseFloat(values[1]).toFixed(1);
+  if (handle === 0) minPoint.textContent = values.innerText = parseFloat(values[0]).toFixed(1);
+  else maxPoint.textContent = values.innerText = parseFloat(values[1]).toFixed(1);
 });
 
 pointSlider.noUiSlider.on("change", () => getFilterParams());
@@ -215,39 +208,21 @@ sortingType.addEventListener("change", () => getFilterParams());
 
 function getFilterParams() {
   productsContainer.innerHTML = animatePulse;
-  filteredProduct = allProduct.filter(
-    (p) =>
-      p.price > Number(minPrice.textContent) &&
-      p.price < Number(maxPrice.textContent) &&
-      p.rating > Number(minPoint.textContent) &&
-      p.rating < Number(maxPoint.textContent) &&
-      p.discountPercentage > Number(minDiscount.textContent) &&
-      p.discountPercentage < Number(maxDiscount.textContent)
-  );
+  filteredProduct = allProduct.filter((p) => p.price > Number(minPrice.textContent) && p.price < Number(maxPrice.textContent) && p.rating > Number(minPoint.textContent) && p.rating < Number(maxPoint.textContent) && p.discountPercentage > Number(minDiscount.textContent) && p.discountPercentage < Number(maxDiscount.textContent));
   if (categorySelectBox.value !== "all") {
-    filteredProduct = filteredProduct.filter(
-      (p) => p.category == categorySelectBox.value
-    );
+    filteredProduct = filteredProduct.filter((p) => p.category == categorySelectBox.value);
   }
   if (sortingSelectBox.value === "title") {
     if (sortingType.value === "asc") {
-      filteredProduct = filteredProduct.sort((a, b) =>
-        a.title.localeCompare(b.title)
-      );
+      filteredProduct = filteredProduct.sort((a, b) => a.title.localeCompare(b.title));
     } else {
-      filteredProduct = filteredProduct.sort((a, b) =>
-        b.title.localeCompare(a.title)
-      );
+      filteredProduct = filteredProduct.sort((a, b) => b.title.localeCompare(a.title));
     }
   } else {
     if (sortingType.value === "asc") {
-      filteredProduct = filteredProduct.sort(
-        (a, b) => a[sortingSelectBox.value] - b[sortingSelectBox.value]
-      );
+      filteredProduct = filteredProduct.sort((a, b) => a[sortingSelectBox.value] - b[sortingSelectBox.value]);
     } else {
-      filteredProduct = filteredProduct.sort(
-        (a, b) => b[sortingSelectBox.value] - a[sortingSelectBox.value]
-      );
+      filteredProduct = filteredProduct.sort((a, b) => b[sortingSelectBox.value] - a[sortingSelectBox.value]);
     }
   }
   itemCount = filteredProduct.length;
@@ -255,13 +230,7 @@ function getFilterParams() {
   pagination(1);
 }
 function removeProduct(id) {
-  showSwal(
-    " مطمئن هستید؟",
-    "آیا میخواهید این محصول را حذف کنید؟",
-    "warning",
-    true,
-    "بله"
-  ).then((result) => {
+  showSwal(" مطمئن هستید؟", "آیا میخواهید این محصول را حذف کنید؟", "warning", true, "بله").then((result) => {
     if (result.isConfirmed) {
       fetch(`https://dummyjson.com/products/${id}`, {
         method: "DELETE",
@@ -279,7 +248,6 @@ function removeProduct(id) {
   });
 }
 
-
 function editProduct(id) {
   let index = allProduct.findIndex((e) => e.id == id);
   Swal.fire({
@@ -288,78 +256,36 @@ function editProduct(id) {
         <form class="w-full max-w-xs mx-auto text-[var(--text-color)] text-xs flex flex-col">
       <span class="mb-1 sm:mb-2 text-start">دسته بندی</span>
       <select id="edit-category" class=" border border-gray-500/80 focus:border-[var(--active-color)] outline-0 cursor-pointer w-full bg-[var(--bg-color)] p-2 md:p-3 rounded-lg ">
-          <option ${
-            allProduct[index].category == "beauty" ? "selected" : ""
-          } value="beauty">زیبایی</option>
-          <option ${
-            allProduct[index].category == "fragrances" ? "selected" : ""
-          } value="fragrances">عطرها</option>
-          <option ${
-            allProduct[index].category == "furniture" ? "selected" : ""
-          } value="furniture">مبلمان</option>
-          <option ${
-            allProduct[index].category == "groceries" ? "selected" : ""
-          } value="groceries">مواد غذایی</option>
-          <option ${
-            allProduct[index].category == "home-decoration" ? "selected" : ""
-          } value="home-decoration">دکوراسیون منزل</option>
-          <option ${
-            allProduct[index].category == "kitchen-accessories"
-              ? "selected"
-              : ""
-          } value="kitchen-accessories">لوازم آشپزخانه</option>
-          <option ${
-            allProduct[index].category == "laptops" ? "selected" : ""
-          } value="laptops">لپ‌تاپ‌ها</option>
-          <option ${
-            allProduct[index].category == "mens-shirts" ? "selected" : ""
-          } value="mens-shirts">پیراهن مردانه</option>
-          <option ${
-            allProduct[index].category == "mens-shoes" ? "selected" : ""
-          } value="mens-shoes">کفش مردانه</option>
-          <option ${
-            allProduct[index].category == "mens-watches" ? "selected" : ""
-          } value="mens-watches">ساعت مردانه</option>
-          <option ${
-            allProduct[index].category == "mobile-accessories" ? "selected" : ""
-          } value="mobile-accessories">لوازم جانبی موبایل</option>
-          <option ${
-            allProduct[index].category == "motorcycle" ? "selected" : ""
-          } value="motorcycle">موتورسیکلت</option>
-          <option ${
-            allProduct[index].category == "skin-care" ? "selected" : ""
-          } value="skin-care">مراقبت پوست</option>
-          <option ${
-            allProduct[index].category == "smartphones" ? "selected" : ""
-          } value="smartphones">گوشی‌های هوشمند</option>
-          <option ${
-            allProduct[index].category == "sports-accessories" ? "selected" : ""
-          } value="sports-accessories">لوازم ورزشی</option>
+          <option ${allProduct[index].category == "beauty" ? "selected" : ""} value="beauty">زیبایی</option>
+          <option ${allProduct[index].category == "fragrances" ? "selected" : ""} value="fragrances">عطرها</option>
+          <option ${allProduct[index].category == "furniture" ? "selected" : ""} value="furniture">مبلمان</option>
+          <option ${allProduct[index].category == "groceries" ? "selected" : ""} value="groceries">مواد غذایی</option>
+          <option ${allProduct[index].category == "home-decoration" ? "selected" : ""} value="home-decoration">دکوراسیون منزل</option>
+          <option ${allProduct[index].category == "kitchen-accessories" ? "selected" : ""} value="kitchen-accessories">لوازم آشپزخانه</option>
+          <option ${allProduct[index].category == "laptops" ? "selected" : ""} value="laptops">لپ‌تاپ‌ها</option>
+          <option ${allProduct[index].category == "mens-shirts" ? "selected" : ""} value="mens-shirts">پیراهن مردانه</option>
+          <option ${allProduct[index].category == "mens-shoes" ? "selected" : ""} value="mens-shoes">کفش مردانه</option>
+          <option ${allProduct[index].category == "mens-watches" ? "selected" : ""} value="mens-watches">ساعت مردانه</option>
+          <option ${allProduct[index].category == "mobile-accessories" ? "selected" : ""} value="mobile-accessories">لوازم جانبی موبایل</option>
+          <option ${allProduct[index].category == "motorcycle" ? "selected" : ""} value="motorcycle">موتورسیکلت</option>
+          <option ${allProduct[index].category == "skin-care" ? "selected" : ""} value="skin-care">مراقبت پوست</option>
+          <option ${allProduct[index].category == "smartphones" ? "selected" : ""} value="smartphones">گوشی‌های هوشمند</option>
+          <option ${allProduct[index].category == "sports-accessories" ? "selected" : ""} value="sports-accessories">لوازم ورزشی</option>
       </select>
       <label class="mb-1 sm:mb-2 mt-2 sm:mt-4 cursor-pointer text-start" for="edit-name">اسم محصول:</label>
-      <input id="edit-name" type="text" required  class=" bg-[var(--bg-color)] p-3 outline-0 rounded-lg border border-gray-500/80 focus:border-[var(--active-color)]" value="${
-        allProduct[index].title
-      }">
+      <input id="edit-name" type="text" required  class=" bg-[var(--bg-color)] p-3 outline-0 rounded-lg border border-gray-500/80 focus:border-[var(--active-color)]" value="${allProduct[index].title}">
       <label class="mb-1 sm:mb-2 mt-2 sm:mt-4 cursor-pointer text-start" for="edit-price">قیمت:</label>
       <div class="flex items-center border border-gray-500/80 focus-within:border-[var(--active-color)] overflow-hidden  rounded-lg bg-[var(--bg-color)]">
-        <input id="edit-price" type="number" required pattern="[1-9][0-9]*" min="0.1" max="14999.98" class="grow p-2 outline-0  " placeholder="$ " value="${
-          allProduct[index].price
-        }">
+        <input id="edit-price" type="number" required pattern="[1-9][0-9]*" min="0.1" max="14999.98" class="grow p-2 outline-0  " placeholder="$ " value="${allProduct[index].price}">
         <span class="p-3 bg-[var(--box-color)]">$</span>
       </div>
       <span class="mb-1 sm:mb-2 mt-2 sm:mt-4  text-start">تخفیف</span>
       <div class="flex items-center gap-1 ">
-        <input id="edit-discount" type="range" min="0.1" step="0.1" max="98.9" class="grow accent-[var(--active-color)]" onInput="nextElementSibling.textContent=this.value + '%'" value="${allProduct[
-          index
-        ].discountPercentage.toFixed(1)}">
-        <span class="w-2/12">${allProduct[index].discountPercentage.toFixed(
-          1
-        )}%</span>
+        <input id="edit-discount" type="range" min="0.1" step="0.1" max="98.9" class="grow accent-[var(--active-color)]" onInput="nextElementSibling.textContent=this.value + '%'" value="${allProduct[index].discountPercentage.toFixed(1)}">
+        <span class="w-2/12">${allProduct[index].discountPercentage.toFixed(1)}%</span>
       </div>
       <label class="mb-1 sm:mb-2 mt-2 sm:mt-4 cursor-pointer text-start" for="edit-stock">تعداد:</label>
-      <input id="edit-stock" type="number" required pattern="[1-9][0-9]*" min="0" class=" bg-[var(--bg-color)] p-3 outline-0 border border-gray-500/80 focus:border-[var(--active-color)] rounded-lg " placeholder="تعداد " value="${
-        allProduct[index].stock
-      }">      
+      <input id="edit-stock" type="number" required pattern="[1-9][0-9]*" min="0" class=" bg-[var(--bg-color)] p-3 outline-0 border border-gray-500/80 focus:border-[var(--active-color)] rounded-lg " placeholder="تعداد " value="${allProduct[index].stock}">      
     </form>
     `,
     focusConfirm: false,
@@ -374,7 +300,7 @@ function editProduct(id) {
       const stock = +document.getElementById("edit-stock").value;
       const category = document.getElementById("edit-category").value;
 
-      if (!name || name.length < 3 ) {
+      if (!name || name.length < 3) {
         Swal.showValidationMessage("نام محصول باید بیشتر از 3 کارکتر باشد!");
         return false;
       }
@@ -391,32 +317,28 @@ function editProduct(id) {
     },
   }).then((result) => {
     if (result.isConfirmed) {
-      showSwal('مطمئن هستید؟', 'آیا میخواهید اطلاعات این محصول را تغییر دهید؟', 'warning', true, 'بله')
-      .then(res =>{
-        if(res.isConfirmed){
-     fetch(`https://dummyjson.com/products/${id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          category: result.value.category,
-          title: result.value.name,
-          price: result.value.price,
-          discountPercentage: result.value.discount,
-          stock:Math.floor(result.value.stock),
-        }),
-      })
-        .then((res) => res.json())
-        .then((res) => {
-          allProduct[index] = res;
-          getFilterParams();
-          showTost("success", "اطلاعات محصول با موفقیت بروزرسانی شد.");
-        })
-        .catch(() =>
-          showTost("error", "مشکلی پیش آمد دوباره امتحان کنید!")
-        );
+      showSwal("مطمئن هستید؟", "آیا میخواهید اطلاعات این محصول را تغییر دهید؟", "warning", true, "بله").then((res) => {
+        if (res.isConfirmed) {
+          fetch(`https://dummyjson.com/products/${id}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              category: result.value.category,
+              title: result.value.name,
+              price: result.value.price,
+              discountPercentage: result.value.discount,
+              stock: Math.floor(result.value.stock),
+            }),
+          })
+            .then((res) => res.json())
+            .then((res) => {
+              allProduct[index] = res;
+              getFilterParams();
+              showTost("success", "اطلاعات محصول با موفقیت بروزرسانی شد.");
+            })
+            .catch(() => showTost("error", "مشکلی پیش آمد دوباره امتحان کنید!"));
         }
-      })
-      
+      });
     }
   });
 }

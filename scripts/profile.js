@@ -1,10 +1,4 @@
-import {
-  addToLocal,
-  getToLocal,
-  showSwal,
-  showTost,
-  addToShoppingCard,
-} from "./funcs.js";
+import { addToLocal, getToLocal, showSwal, showTost } from "./funcs.js";
 
 window.changePassword = changePassword;
 window.changeProfile = changeProfile;
@@ -54,9 +48,7 @@ bgImgInput.addEventListener("change", () => {
 });
 tabBtns.addEventListener("click", (e) => {
   if (e.target.nodeName === "BUTTON") {
-    tabBtns
-      .querySelectorAll("button")
-      .forEach((elem) => elem.classList.remove("before:!w-full"));
+    tabBtns.querySelectorAll("button").forEach((elem) => elem.classList.remove("before:!w-full"));
     e.target.classList.add("before:!w-full");
 
     tabWrapper.querySelectorAll(".tab-panel").forEach((el) => {
@@ -89,18 +81,8 @@ document.querySelectorAll("#password-show").forEach((elem) => {
 });
 
 function changeProfile() {
-  if (
-    firstName.value.trim().length >= 3 &&
-    lastName.value.trim().length >= 3 &&
-    userName.value.trim().length >= 4
-  ) {
-    showSwal(
-      "تغییر اطلاعات ",
-      "آیا میخواهید اطلاعات خود را تغییر دهید؟",
-      "warning",
-      true,
-      "تغییر اطلاعات"
-    ).then((data) => {
+  if (firstName.value.trim().length >= 3 && lastName.value.trim().length >= 3 && userName.value.trim().length >= 4) {
+    showSwal("تغییر اطلاعات ", "آیا میخواهید اطلاعات خود را تغییر دهید؟", "warning", true, "تغییر اطلاعات").then((data) => {
       let user = getToLocal("user");
       if (data.isConfirmed) {
         user.firstName = firstName.value.trim();
@@ -120,24 +102,9 @@ function changeProfile() {
       }
     });
   }
-  if (userName.value.trim().length < 3)
-    showSwal(
-      "",
-      "نام کاربری باید حداقل 4 کاراکتر باشد!",
-      "error",
-      false,
-      "باشه"
-    );
-  if (lastName.value.trim().length < 3)
-    showSwal(
-      "",
-      "نام خانوادگی باید حداقل 3 کاراکتر باشد!",
-      "error",
-      false,
-      "باشه"
-    );
-  if (firstName.value.trim().length < 3)
-    showSwal("", "نام باید حداقل 3 کاراکتر باشد!", "error", false, "باشه");
+  if (userName.value.trim().length < 3) showSwal("", "نام کاربری باید حداقل 4 کاراکتر باشد!", "error", false, "باشه");
+  if (lastName.value.trim().length < 3) showSwal("", "نام خانوادگی باید حداقل 3 کاراکتر باشد!", "error", false, "باشه");
+  if (firstName.value.trim().length < 3) showSwal("", "نام باید حداقل 3 کاراکتر باشد!", "error", false, "باشه");
 }
 function changePassword() {
   let currentPassword = document.querySelector("#user-password");
@@ -148,21 +115,9 @@ function changePassword() {
     if (newPassword.value.trim().length >= 6) {
       if (newPassword.value.trim() === confirmNewPassword.value.trim()) {
         if (newPassword.value.trim() === user.password) {
-          showSwal(
-            "رمز عبور جدید نمیتواند با رمز عبور فعلی یکسان باشد.",
-            "",
-            "error",
-            false,
-            "باشه"
-          );
+          showSwal("رمز عبور جدید نمیتواند با رمز عبور فعلی یکسان باشد.", "", "error", false, "باشه");
         } else {
-          showSwal(
-            "تغییر رمز عبور",
-            "آیا میخواهید رمز عبور خود را تغییر دهید؟",
-            "warning",
-            true,
-            "تغییر رمز عبور"
-          ).then((data) => {
+          showSwal("تغییر رمز عبور", "آیا میخواهید رمز عبور خود را تغییر دهید؟", "warning", true, "تغییر رمز عبور").then((data) => {
             if (data.isConfirmed) {
               user.password = newPassword.value.trim();
               addToLocal("user", user);
@@ -173,37 +128,17 @@ function changePassword() {
             }
           });
         }
-      } else
-        showSwal(
-          "رمز عبور و تکرار آن یکسان نیستند.",
-          "",
-          "error",
-          false,
-          "باشه"
-        );
-    } else
-      showSwal(
-        "رمز عبور جدید باید حداقل 6 کاراکتر باشد!",
-        "",
-        "error",
-        false,
-        "باشه"
-      );
+      } else showSwal("رمز عبور و تکرار آن یکسان نیستند.", "", "error", false, "باشه");
+    } else showSwal("رمز عبور جدید باید حداقل 6 کاراکتر باشد!", "", "error", false, "باشه");
   }
-  if (
-    currentPassword.value.trim() &&
-    currentPassword.value.trim() !== user.password
-  )
-    showSwal("رمز عبور اشتباه است!", "", "error", false, "باشه");
+  if (currentPassword.value.trim() && currentPassword.value.trim() !== user.password) showSwal("رمز عبور اشتباه است!", "", "error", false, "باشه");
 }
 
 function setValues() {
   let user = getToLocal("user");
-  document.querySelector("#name").textContent =
-    user.firstName + " " + user.lastName;
+  document.querySelector("#name").textContent = user.firstName + " " + user.lastName;
   document.querySelector("#role").textContent = user.role ? "مدیر" : "ادمین";
-  document.querySelector("#address").textContent =
-    user.address.city + " - " + user.address.country;
+  document.querySelector("#address").textContent = user.address.city + " - " + user.address.country;
   document.querySelector("#bio").textContent = user.bio.trim();
 
   user.image ? (userImg.src = user.image) : "";
@@ -221,9 +156,7 @@ function setValues() {
 }
 
 function changeTextAreaMaxLength() {
-  aboutMe.previousElementSibling.firstElementChild.textContent = `(${
-    300 - aboutMe.value.length
-  } کاراکتر)`;
+  aboutMe.previousElementSibling.firstElementChild.textContent = `(${300 - aboutMe.value.length} کاراکتر)`;
 
   if (aboutMe.value.length >= 300) aboutMe.style.borderColor = "red";
   else aboutMe.style.borderColor = "";

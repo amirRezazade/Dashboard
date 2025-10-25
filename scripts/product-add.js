@@ -1,7 +1,4 @@
-import {
-  showSwal,
-  showTost,
-} from "./funcs.js";
+import { showSwal, showTost } from "./funcs.js";
 const urlParams = new URLSearchParams(window.location.search);
 const productId = urlParams.get("id");
 const name = document.querySelector("#name");
@@ -45,7 +42,13 @@ if (productId) {
   getItem();
   submitBtn.textContent = "ویرایش محصول";
   cancelBtn.textContent = "حذف محصول";
+  document.querySelector("#sidebar-edit-link").classList.add("text-[var(--active-color)]", "before:!bg-[var(--active-color)]");
+  document.querySelector("title").textContent = "Dashboard || edit-product";
+} else {
+  document.querySelector("#sidebar-add-link").classList.add("text-[var(--active-color)]", "before:!bg-[var(--active-color)]");
+  document.querySelector("title").textContent = "Dashboard || add-product";
 }
+
 async function getItem() {
   let res = await fetch(`https://dummyjson.com/products/${productId}`);
   let product = await res.json();
@@ -60,18 +63,12 @@ async function getItem() {
   price.value = product.price || "";
   stock.value = product.stock || 0;
   discount.value = product.discountPercentage || 0;
-  discount.nextElementSibling.textContent =
-    product.discountPercentage + "%" || 0 + "%";
+  discount.nextElementSibling.textContent = product.discountPercentage + "%" || 0 + "%";
   shipping.value = product.shippingInformation || "all";
   warranty.value = product.warrantyInformation || "No warranty";
   returnElem.value = product.returnPolicy || "No return policy";
   editorValue.setData(`${product.description}`) || "";
-  product.tags.forEach(
-    (tag) =>
-      (tagsContainer.innerHTML +=
-        ` <div class="flex items-center  divide-x divide-gray-300 bg-[var(--active-color)] text-white  text-xs overflow-hidden rounded-r-full"><span class="p-2">${tag}</span> <button type="button" class="p-2 cursor-pointer centered" onclick="parentElement.remove()">X</button></div>` ||
-        "")
-  );
+  product.tags.forEach((tag) => (tagsContainer.innerHTML += ` <div class="flex items-center  divide-x divide-gray-300 bg-[var(--active-color)] text-white  text-xs overflow-hidden rounded-r-full"><span class="p-2">${tag}</span> <button type="button" class="p-2 cursor-pointer centered" onclick="parentElement.remove()">X</button></div>` || ""));
 
   const thumbnailImage = {
     name: "product.jpg",
@@ -118,8 +115,7 @@ const gallery = new Dropzone("#product-gallery", {
   maxFiles: 5,
   maxFilesize: 1,
   acceptedFiles: "image/*",
-  dictDefaultMessage:
-    "📸 عکس های محصول را اینجا بکشید یا کلیک کنید برای انتخاب",
+  dictDefaultMessage: "📸 عکس های محصول را اینجا بکشید یا کلیک کنید برای انتخاب",
   addRemoveLinks: true,
   dictRemoveFile: "حذف تصویر",
   dictFileTooBig: "حجم تصویر زیاد است (حداکثر: {{maxFilesize}}MB)",
@@ -148,17 +144,11 @@ function formValidation() {
   let isValid = true;
   if (price.value.length == 0 || price.value < 1) {
     price.parentElement.nextElementSibling.classList.remove("hidden");
-    price.parentElement.classList.replace(
-      "border-transparent",
-      "border-red-700"
-    );
+    price.parentElement.classList.replace("border-transparent", "border-red-700");
     isValid = false;
   } else {
     price.parentElement.nextElementSibling.classList.add("hidden");
-    price.parentElement.classList.replace(
-      "border-red-700",
-      "border-transparent"
-    );
+    price.parentElement.classList.replace("border-red-700", "border-transparent");
   }
   requiredInputs.forEach((elem) => {
     if (!elem.checkValidity()) {
@@ -207,25 +197,13 @@ function formValidation() {
 cancelBtn.addEventListener("click", () => {
   if (productId) deleteProduct();
   else {
-    showSwal(
-      "انصراف",
-      "آیا مطمئن هستید که می‌خواهید انصراف دهید ؟ اطلاعات ذخیره نخواهند شد.",
-      "warning",
-      true,
-      "تایید"
-    ).then((e) => {
+    showSwal("انصراف", "آیا مطمئن هستید که می‌خواهید انصراف دهید ؟ اطلاعات ذخیره نخواهند شد.", "warning", true, "تایید").then((e) => {
       if (e.isConfirmed) window.location.href = "products.html";
     });
   }
 });
 function deleteProduct() {
-  showSwal(
-    "حذف محصول",
-    "آیا مطمئن هستید که می‌خواهید این محصول را حذف کنید؟ این عمل قابل بازگشت نیست.",
-    "warning",
-    true,
-    "تایید"
-  ).then((e) => {
+  showSwal("حذف محصول", "آیا مطمئن هستید که می‌خواهید این محصول را حذف کنید؟ این عمل قابل بازگشت نیست.", "warning", true, "تایید").then((e) => {
     if (e.isConfirmed) {
       fetch(`https://dummyjson.com/products/${productId}`, {
         method: "DELETE",
@@ -234,7 +212,7 @@ function deleteProduct() {
         .then(
           showTost("success", "محصول با موفقیت حذف شد!"),
           setTimeout(() => {
-            (window.location.href = "product-add.html")
+            window.location.href = "product-add.html";
           }, 1500)
         );
     }
@@ -242,22 +220,12 @@ function deleteProduct() {
 }
 
 function submitProduct() {
-  showSwal(
-    productId ? "ویرایش محصول" : "اضافه کردن محول",
-    productId
-      ? "آیا میخواهید مشخصات این محصول را تغییر دهید؟"
-      : "آیا میخواهید این محصول را اضافه کنید؟",
-    "warning",
-    true,
-    "تایید"
-  ).then((data) => {
+  showSwal(productId ? "ویرایش محصول" : "اضافه کردن محول", productId ? "آیا میخواهید مشخصات این محصول را تغییر دهید؟" : "آیا میخواهید این محصول را اضافه کنید؟", "warning", true, "تایید").then((data) => {
     if (data.isConfirmed) {
       let images = [];
       gallery.getAcceptedFiles().forEach((img) => images.push(img.url));
       let tags = [];
-      tagsContainer
-        .querySelectorAll("div span")
-        .forEach((elem) => tags.push(elem.textContent));
+      tagsContainer.querySelectorAll("div span").forEach((elem) => tags.push(elem.textContent));
 
       fetch(`https://dummyjson.com/products/${productId ? productId : "add"}`, {
         method: productId ? "PUT" : "POST",
@@ -286,9 +254,7 @@ function submitProduct() {
         }),
       })
         .then((res) => res.json())
-        .then(
-          showTost('success' , productId? "مشخصات محصول آپدیت شد!" :  "محصول اضافه شد!" )
-        )
+        .then(showTost("success", productId ? "مشخصات محصول آپدیت شد!" : "محصول اضافه شد!"))
         .catch((error) => {
           console.log(error);
           showTost("error", "مشکلی پیش آمد دوباره امتحان کنید!");
