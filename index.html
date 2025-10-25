@@ -4,9 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/png" href="images/logo/logo-dark-streamline.png" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jvectormap-next/jquery-jvectormap.css" />
+    <link rel="stylesheet" href="assets/jquery-jvectormap.css" />
     <link href="src/output.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="assets/all.min.css" />
+    <link rel="stylesheet" href="assets/webfonts/fa-brands-400.woff2" />
     <meta name="author" content="amirRezazade" />
     <title>Dashboard</title>
   </head>
@@ -105,13 +106,13 @@
             <i class="fa-solid fa-cloud-rain text-xs"></i>
             15°
           </span>
-          <div class="nav-item relative flex items-center gap-2">
-            <div class="size-9 xs:size-10 md:size-11 overflow-hidden cursor-pointer rounded-full text-sm md:text-base pointer-events-none">
+          <div class="nav-item relative flex items-center gap-2 cursor-pointer">
+            <div class="size-9 xs:size-10 md:size-11 overflow-hidden rounded-full text-sm md:text-base pointer-events-none">
               <img id="nav-user-image" class="object-cover w-full h-full" src="" alt="profile-photo" />
             </div>
             <div class="font-bold w-10 truncate hidden md:inline-block pointer-events-none">
               <span id="nav-user-first-name"></span><br />
-              <span id="nav-user-role"><i class="fa-solid fa-angle-down text-sm"></i> </span>
+              <span id="nav-user-role"></span>
             </div>
             <div class="nav-item-content -translate-x-2/1 left-3 sm:left-5 w-65 max-h-100">
               <div class="flex items-center gap-2 p-2">
@@ -311,7 +312,7 @@
               </g>
             </svg>
           </p>
-          <a href="product-add.html" class="flex items-center gap-1 font-[dana-regular] text-xs sm:text-sm p-1.5 xs:px-3 xs:py-2 rounded bg-[#0caf60]/80 hover:bg-[#0caf60] text-white transition-colors">
+          <a href="product-add.html" class="flex items-center gap-1 font-[dana-regular] text-xs sm:text-sm p-1.5 xs:px-3 xs:py-2 rounded bg-[var(--active-color)]/80 hover:bg-[var(--active-color)] text-white transition-colors">
             <span class="size-4 hidden xs:inline"><i class="fa-solid fa-plus"></i></span>
             افزودن محصول
           </a>
@@ -366,7 +367,7 @@
           <span class="font-[dana-num] font-extrabold text-xl xl:text-2xl mt-2">$1500</span>
           <div class="flex justify-between items-end">
             <a href="" class="text-sm underline">برداشت پول</a>
-            <span class="size-12 bg-violet-600/20 rounded centered"><i class="fa-solid fa-wallet text-xl text-violet-400"></i></span>
+            <span class="size-12 bg-[#8c62ff]/20 rounded text-[#9f81ef] centered"><i class="fa-solid fa-wallet text-xl"></i></span>
           </div>
         </div>
       </div>
@@ -374,6 +375,25 @@
       <div class="grid grid-cols-12 gap-4">
         <!-- start total chart section  -->
         <div class="col-span-12 lg:col-span-8 bg-[var(--box-color)] flex flex-col py-5 rounded-lg">
+          <div class="flex items-center justify-between p-4 pt-0">
+            <span>نمودار کلی</span>
+            <div class="export-dropdown relative text-xs sm:text-sm w-22 sm:w-30">
+              <button class="cursor-pointer w-full text-white bg-[var(--active-color)]/80 hover:bg-[var(--active-color)] fo rounded-lg py-2 flex items-center justify-evenly text-center" onclick="nextElementSibling.classList.toggle('hidden')" type="button">
+                صادر کردن
+                <i class="fas fa-angle-down"></i>
+              </button>
+              <div class="export-dropdown-content border-y border-gray-500/50 rounded-lg overflow-hidden w-full absolute top-[105%] bg-[var(--bg-color)] z-10 hidden">
+                <ul class="divide-y divide-gray-500/50">
+                  <li>
+                    <a href="#" id="total-chart-json-elem" class="px-4 py-2.5 hover:bg-gray-500/30 flex items-start justify-evenly">JSON <i class="fa-solid fa-download"></i></a>
+                  </li>
+                  <li>
+                    <a href="#" id="total-chart-png-elem" class="px-4 py-2.5 hover:bg-gray-500/30 flex items-start justify-around">PNG <i class="fa-solid fa-download"></i></a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
           <div class="flex justify-between px-3 sm:px-5 pb-5">
             <span>بازه زمانی</span>
             <div id="totalChartBtns" class="flex items-center gap-2 text-sm">
@@ -410,7 +430,6 @@
         <div class="col-span-12 lg:col-span-4 bg-[var(--box-color)] py-5 rounded-lg">
           <div class="flex justify-between items-center px-3 pb-4 lg:text-sm xl:text-base border-b border-gray-500/30">
             <span>فروش بر اساس مکان</span>
-            <a href="#" class="rounded px-2 py-1 bg-[#0caf60]/70 transition-colors hover:bg-[#0caf60] text-white text-sm">گزارش صادرات</a>
           </div>
           <div class="w-full h-75 px-3">
             <div id="map" class="h-full w-full"></div>
@@ -439,9 +458,27 @@
       <div class="grid grid-cols-12 gap-3 my-5">
         <!-- start resent orders section  -->
         <div class="bg-[var(--box-color)] rounded-lg overflow-x-auto col-span-12">
-          <span class="p-4 block"> سفارشات اخیر</span>
-          <div class="overflow-x-auto min-w-[610px] max-w-7xl mx-auto lg:px-8">
-            <table class="w-full">
+          <div class="flex items-center justify-between max-w-[1400px] p-4">
+            <span class=""> سفارشات اخیر</span>
+            <div class="export-dropdown relative text-xs sm:text-sm w-22 sm:w-30">
+              <button class="cursor-pointer w-full text-white bg-[var(--active-color)]/80 hover:bg-[var(--active-color)] fo rounded-lg py-2 flex items-center justify-evenly text-center" onclick="nextElementSibling.classList.toggle('hidden')" type="button">
+                صادر کردن
+                <i class="fas fa-angle-down"></i>
+              </button>
+              <div class="export-dropdown-content border-y border-gray-500/50 rounded-lg overflow-hidden w-full absolute top-[105%] bg-[var(--bg-color)] z-10 hidden">
+                <ul class="divide-y divide-gray-500/50">
+                  <li>
+                    <a href="#" onclick="exportTableToJSON('resent-orders-table')" class="px-4 py-2.5 hover:bg-gray-500/30 flex items-start justify-evenly">JSON <i class="fa-solid fa-download"></i></a>
+                  </li>
+                  <li>
+                    <a href="#" onclick="exportTableToCSV('resent-orders-table')" class="px-4 py-2.5 hover:bg-gray-500/30 flex items-start justify-around">CSV <i class="fa-solid fa-download"></i></a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="overflow-x-auto min-w-[610px] max-w-[1400px] mx-auto lg:px-8">
+            <table id="resent-orders-table" class="w-full">
               <thead class="w-full block p-1.5 xs:p-3">
                 <tr class="w-full flex justify-between text-[10px] sm:text-xs xl:text-sm select-none">
                   <th class="w-1/6">شناسه</th>
@@ -473,9 +510,27 @@
 
         <!-- start top product section  -->
         <div class="bg-[var(--box-color)] rounded-lg overflow-x-auto col-span-12 lg:col-span-7 xl:col-span-8">
-          <span class="p-4 block"> محبوب ترین محصولات</span>
+          <div class="flex items-center justify-between max-w-[1400px] p-4">
+            <span>محبوب ترین محصولات</span>
+            <div class="export-dropdown relative text-xs sm:text-sm w-22 sm:w-30">
+              <button class="cursor-pointer w-full text-white bg-[var(--active-color)]/80 hover:bg-[var(--active-color)] fo rounded-lg py-2 flex items-center justify-evenly text-center" onclick="nextElementSibling.classList.toggle('hidden')" type="button">
+                صادر کردن
+                <i class="fas fa-angle-down"></i>
+              </button>
+              <div class="export-dropdown-content border-y border-gray-500/50 rounded-lg overflow-hidden w-full absolute top-[105%] bg-[var(--bg-color)] z-10 hidden">
+                <ul class="divide-y divide-gray-500/50">
+                  <li>
+                    <a href="#" onclick="exportTableToJSON('top-product-table')" class="px-4 py-2.5 hover:bg-gray-500/30 flex items-start justify-evenly">JSON <i class="fa-solid fa-download"></i></a>
+                  </li>
+                  <li>
+                    <a href="#" onclick="exportTableToCSV('top-product-table')" class="px-4 py-2.5 hover:bg-gray-500/30 flex items-start justify-around">CSV <i class="fa-solid fa-download"></i></a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
           <div class="">
-            <table class="overflow-x-scroll min-w-80 w-full">
+            <table id="top-product-table" class="overflow-x-scroll min-w-80 w-full">
               <thead id="top-products-sorting-methods" class="w-full block p-1.5 xs:p-3">
                 <tr class="w-full flex justify-between text-[10px] sm:text-xs xl:text-sm select-none">
                   <th class="w-2/6 flex justify-center">
@@ -514,7 +569,25 @@
         <!-- finish top product section  -->
         <!-- start top category section -->
         <div class="bg-[var(--box-color)] col-span-12 lg:col-span-5 xl:col-span-4 flex flex-col rounded-lg p-4">
-          <span class="mb-4">محبوب ترین دسته ها</span>
+          <div class="flex items-center justify-between p-4 pt-0">
+            <span> محبوب ترین دسته ها</span>
+            <div class="export-dropdown relative text-xs sm:text-sm w-22 sm:w-30">
+              <button class="cursor-pointer w-full text-white bg-[var(--active-color)]/80 hover:bg-[var(--active-color)] fo rounded-lg py-2 flex items-center justify-evenly text-center" onclick="nextElementSibling.classList.toggle('hidden')" type="button">
+                صادر کردن
+                <i class="fas fa-angle-down"></i>
+              </button>
+              <div class="export-dropdown-content border-y border-gray-500/50 rounded-lg overflow-hidden w-full absolute top-[105%] bg-[var(--bg-color)] z-10 hidden">
+                <ul class="divide-y divide-gray-500/50">
+                  <li>
+                    <a href="#" id="top-category-json-elem" class="px-4 py-2.5 hover:bg-gray-500/30 flex items-start justify-evenly">JSON <i class="fa-solid fa-download"></i></a>
+                  </li>
+                  <li>
+                    <a href="#" id="top-category-png-elem" class="px-4 py-2.5 hover:bg-gray-500/30 flex items-start justify-around">PNG <i class="fa-solid fa-download"></i></a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
           <div class="text-gray-500 grow w-full sm:aspect-square sm:max-w-[450px] mx-auto 2xl:p-4">
             <canvas id="top-category" class="w-full h-full"></canvas>
           </div>
@@ -522,6 +595,20 @@
         <!-- finish top category section -->
       </div>
     </main>
+    <footer class="py-2 xs:py-3 border-t border-gray-500/50 flex items-center gap-1 justify-center">
+      <p class="text-xs">«طراحی و توسعه توسط امیر رضازاده — ۲۰۲۵»</p>
+      <a href="https://github.com/amirRezazade" target="-blank" class="fill-[var(--text-color)] px-2 py-1">
+        <svg fill="" width="25px" height="25px" viewBox="-2 -2 24 24" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin" class="jam jam-github">
+          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+          <g id="SVGRepo_iconCarrier">
+            <path
+              d="M18.88 1.099C18.147.366 17.265 0 16.233 0H3.746C2.714 0 1.832.366 1.099 1.099.366 1.832 0 2.714 0 3.746v12.487c0 1.032.366 1.914 1.099 2.647.733.733 1.615 1.099 2.647 1.099H6.66c.19 0 .333-.007.429-.02a.504.504 0 0 0 .286-.169c.095-.1.143-.245.143-.435l-.007-.885c-.004-.564-.006-1.01-.006-1.34l-.3.052c-.19.035-.43.05-.721.046a5.555 5.555 0 0 1-.904-.091 2.026 2.026 0 0 1-.872-.39 1.651 1.651 0 0 1-.572-.8l-.13-.3a3.25 3.25 0 0 0-.41-.663c-.186-.243-.375-.407-.566-.494l-.09-.065a.956.956 0 0 1-.17-.156.723.723 0 0 1-.117-.182c-.026-.061-.004-.111.065-.15.07-.04.195-.059.378-.059l.26.04c.173.034.388.138.643.311a2.1 2.1 0 0 1 .631.677c.2.355.44.626.722.813.282.186.566.28.852.28.286 0 .533-.022.742-.065a2.59 2.59 0 0 0 .585-.196c.078-.58.29-1.028.637-1.34a8.907 8.907 0 0 1-1.333-.234 5.314 5.314 0 0 1-1.223-.507 3.5 3.5 0 0 1-1.047-.872c-.277-.347-.505-.802-.683-1.365-.177-.564-.266-1.215-.266-1.952 0-1.049.342-1.942 1.027-2.68-.32-.788-.29-1.673.091-2.652.252-.079.625-.02 1.119.175.494.195.856.362 1.086.5.23.14.414.257.553.352a9.233 9.233 0 0 1 2.497-.338c.859 0 1.691.113 2.498.338l.494-.312a6.997 6.997 0 0 1 1.197-.572c.46-.174.81-.221 1.054-.143.39.98.424 1.864.103 2.653.685.737 1.028 1.63 1.028 2.68 0 .737-.089 1.39-.267 1.957-.177.568-.407 1.023-.689 1.366-.282.343-.633.63-1.053.865-.42.234-.828.403-1.223.507a8.9 8.9 0 0 1-1.333.235c.45.39.676 1.005.676 1.846v3.11c0 .147.021.266.065.357a.36.36 0 0 0 .208.189c.096.034.18.056.254.064.074.01.18.013.318.013h2.914c1.032 0 1.914-.366 2.647-1.099.732-.732 1.099-1.615 1.099-2.647V3.746c0-1.032-.367-1.914-1.1-2.647z"
+            ></path>
+          </g>
+        </svg>
+      </a>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

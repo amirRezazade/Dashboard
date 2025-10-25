@@ -5,37 +5,90 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="src/output.css" rel="stylesheet" />
 
-    <style>
-      body{
-        /* background: ; */
-        background: url('images/profile-bg.jpg');
-        /* background: ; */
-        /* background-color: red; */
-        position: relative;
-        background-blend-mode: overlay;
-        background-size: cover;
-        /* bg-gradient-to-r from-[#] to-[] */
-      }
-      body::before{
-        content: '';
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        background: linear-gradient(to left  ,#0034dfb5 , #465ca5e2) !important;
-      }
-    </style>
+    <style></style>
 
     <title>Document</title>
   </head>
-  <body class=" h-screen centered"></body>
- 
+  <body class="h-screen centered"></body>
+  <button onclick="captureTable()" class="bg-violet-600 hover:bg-violet-700 text-white px-4 py-2 rounded-lg">📤 خروجی CSV</button>
+  <div>
+    <button class="text-white bg-[var(--active-color)]/60 hover:bg-[var(--active-color)] fo rounded-lg text-sm px-5 py-2.5 text-center" type="button">
+      صادر کردن
+      <i class="fas fa-angle-down"></i>
+    </button>
+
+    <!-- Dropdown menu -->
+    <div id="dropdown" class="divide-y divide-gray-500/50 rounded-lg w-44">
+      <ul class="py-2 d">
+        <li>
+          <a href="#" class="block px-4 py-2 hover:bg-gray-500/50">Dashboard</a>
+        </li>
+        <li>
+          <a href="#" class="block px-4 py-2 hover:bg-gray-500/50">Dashboard</a>
+        </li>
+        <li>
+          <a href="#" class="block px-4 py-2 hover:bg-gray-500/50">Dashboard</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <a href="#" class="rounded px-2 py-1 bg-[#0caf60]/70 transition-colors hover:bg-[#0caf60] text-white text-sm">گزارش صادرات</a>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image-more/3.7.1/dom-to-image-more.min.js"></script>
 
   <script>
-    const input = document.getElementById("imageInput");
-    const preview = document.getElementById("preview");
+    function tableToCSV() {
+      const rows = document.querySelectorAll(`table tr`);
+      let csv = "\uFEFF";
 
-  
+      rows.forEach((row) => {
+        const cols = row.querySelectorAll("th, td");
+        const line = Array.from(cols)
+          .map((col) => col.innerText)
+          .join(",");
+        csv += line + "\n";
+      });
+
+      const blob = new Blob([csv], { type: "text/csv" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "table.csv";
+      a.click();
+    }
+    function exportDynamicTableToJSON() {
+      const table = document.querySelector("table");
+      const headers = Array.from(table.querySelectorAll("thead th")).map((th) => th.textContent.trim());
+      const rows = Array.from(table.querySelectorAll("tbody tr"));
+
+      const data = rows.map((row) => {
+        const cells = Array.from(row.querySelectorAll("td"));
+        const obj = {};
+        cells.forEach((cell, i) => {
+          obj[headers[i]] = cell.textContent.trim();
+        });
+        return obj;
+      });
+
+      const json = JSON.stringify(data, null, 2);
+      const blob = new Blob([json], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "table-data.json";
+      a.click();
+
+      URL.revokeObjectURL(url);
+    }
+    function captureTable() {
+      //  import domtoimage from 'dom-to-image-more';
+
+      domtoimage.toPng(document.querySelector("table")).then((dataUrl) => {
+        const a = document.createElement("a");
+        a.href = dataUrl;
+        a.download = "table.png";
+        a.click();
+      });
+    }
   </script>
 </html>

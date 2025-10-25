@@ -4,7 +4,6 @@ let shoppingCardItems = JSON.parse(localStorage.getItem("shoppingCardItems"));
 // set user infos to navbar
 let user = getToLocal("user");
 if (user) {
-  console.log(user);
   document.querySelectorAll("#nav-user-image").forEach((elem) => (elem.src = user.image || "images/profile (1).png"));
   document.querySelector("#nav-user-first-name").textContent = user.firstName || "امیر";
   document.querySelector("#nav-user-role").textContent = user.role === "moderator" ? "مدیر" : "ادمین";
@@ -61,7 +60,6 @@ const navItemsContents = document.querySelectorAll(".nav-item .nav-item-content"
 navItems.forEach((item) => {
   item.addEventListener("click", (e) => {
     if (e.target.classList.contains("nav-item")) {
-      console.log(item.querySelector(".nav-item-content"));
       e.target.querySelector(".nav-item-content").classList.toggle("show");
       navItemsContents.forEach((elem) => {
         if (e.target.querySelector(".nav-item-content") != elem) elem.classList.remove("show");
@@ -333,3 +331,51 @@ function logout() {
     }
   });
 }
+// start expott data section
+function exportTableToCSV(table) {
+  const rows = document.querySelectorAll(`#${table} tr`);
+  let csv = "\uFEFF";
+
+  rows.forEach((row) => {
+    const cols = row.querySelectorAll("th, td");
+    const line = Array.from(cols)
+      .map((col) => col.innerText)
+      .join(",");
+    csv += line + "\n";
+  });
+
+  const blob = new Blob([csv], { type: "text/csv" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "table.csv";
+  a.click();
+}
+function exportTableToJSON(tableId) {
+  const table = document.querySelector(`#${tableId}`);
+  const headers = Array.from(table.querySelectorAll("thead th")).map((th) => th.textContent.trim());
+  const rows = Array.from(table.querySelectorAll("tbody tr"));
+
+  const data = rows.map((row) => {
+    const cells = Array.from(row.querySelectorAll("td"));
+    const obj = {};
+    cells.forEach((cell, i) => {
+      obj[headers[i]] = cell.textContent.trim();
+    });
+    return obj;
+  });
+
+  const json = JSON.stringify(data, null, 2);
+  const blob = new Blob([json], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "table-data.json";
+  a.click();
+
+  URL.revokeObjectURL(url);
+}
+window.addEventListener("click", (e) => {
+  if (!e.target.closest(".export-dropdown")) document.querySelectorAll(".export-dropdown-content").forEach((elem) => elem.classList.add("hidden"));
+});
+// finish expott data section

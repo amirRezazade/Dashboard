@@ -85,6 +85,7 @@ label {
 .sidebar-toggle + main {
   @apply md:!ms-50  lg:!ms-60;
 }
+
 aside ul li {
   @apply pe-3 ps-2 overflow-hidden max-h-[44px] transition-all duration-500;
 }

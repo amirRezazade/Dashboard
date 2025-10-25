@@ -9,43 +9,28 @@ window.addEventListener("DOMContentLoaded", () => {
   if (!getToLocal("top-products")) getTopProducts().then(addTopProducts());
   else addTopProducts();
   getAndAddOrders();
-  document.querySelector('#user-name').textContent= getToLocal('user')  ? getToLocal('user').firstName : 'امیر'
+  document.querySelector("#user-name").textContent = getToLocal("user") ? getToLocal("user").firstName : "امیر";
 });
 let date = new Date();
-dateElem.textContent = `${date.getFullYear()}/${
-  date.getMonth() + 1
-}/${date.getDate()}`;
+dateElem.textContent = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
 
 setInterval(() => {
   let time = new Date();
-  timeElem.textContent = time.getHours() + ":"+ time.getMinutes() + ":" + time.getSeconds();
+  timeElem.textContent = time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds();
 }, 1000);
 
 // start total chart section
-const myTotalChart = new Chart(totalChart, {
+const TotalChartCreate = new Chart(totalChart, {
   type: "bar",
   data: {
-    labels: [
-      "Far",
-      "Ord",
-      "Kho",
-      "Tir",
-      "Mor",
-      "Sha",
-      "Meh",
-      "Aba",
-      "Azr",
-      "Dey",
-      "Bah",
-      "Esf",
-    ],
+    labels: ["Far", "Ord", "Kho", "Tir", "Mor", "Sha", "Meh", "Aba", "Azr", "Dey", "Bah", "Esf"],
 
     datasets: [
       {
         label: "درآمد(میلیون)",
         data: [5, 10, 5, 8, 8, 14, 20, 22, 15, 18, 22, 25],
-        backgroundColor: "#1dbba5ab",
-        hoverBackgroundColor: "#0ab39c",
+        backgroundColor: "#138c51",
+        hoverBackgroundColor: "#14ac63",
         barPercentage: 0.6,
         categoryPercentage: 0.6,
         maxBarThickness: 50,
@@ -131,9 +116,10 @@ const myTotalChart = new Chart(totalChart, {
     },
   },
 });
+
 // finish total chart section
 // start category chart section
-const myCategoryChart = new Chart(categoryChart, {
+const CategoryChartCreate = new Chart(categoryChart, {
   type: "doughnut",
   data: {
     labels: ["زیبایی", "گوشی‌های هوشمند", "عطرها", "سایر"],
@@ -173,10 +159,7 @@ const myCategoryChart = new Chart(categoryChart, {
           size: 14,
         },
         formatter: (value, myCategoryChart) => {
-          let sum = myCategoryChart.chart.data.datasets[0].data.reduce(
-            (a, b) => a + b,
-            0
-          );
+          let sum = myCategoryChart.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
           let percentage = ((value * 100) / sum).toFixed(1) + "%";
           return percentage;
         },
@@ -209,9 +192,7 @@ $("#map").vectorMap({
 //   finish world map
 
 async function getTopProducts() {
-  let res = await fetch(
-    "https://dummyjson.com/products?sortBy=rating&order=desc&limit=30&skip=30&select=title,price,rating,thumbnail,stock,id,discountPercentage"
-  );
+  let res = await fetch("https://dummyjson.com/products?sortBy=rating&order=desc&limit=30&skip=30&select=title,price,rating,thumbnail,stock,id,discountPercentage");
   let response = await res.json();
   let products = response.products;
   localStorage.setItem("top-products", JSON.stringify(products));
@@ -230,17 +211,9 @@ async function getAndAddOrders(page = 1) {
                     <td class="w-1/6 text-center">${order.phone}</td>
                     <td class="w-1/6 text-center">${order.address}</td>
                     <td class="w-1/6 text-center">${order.paymentType}</td>
-                    <td class="w-1/6 flex items-center justify-center gap-1 sm:gap-2.5"><span class="size-2.5 rounded-full ${
-                      order.status == "تکمیل شد" ? "inline-block" : "hidden"
-                    } bg-green-500 animate-pulse"></span>
-                    <span class="size-2.5 rounded-full ${
-                      order.status == "لغو شد" ? "inline-block" : "hidden"
-                    } bg-red-500 animate-pulse"></span>
-                    <span class="size-2.5 rounded-full ${
-                      order.status == "در حال پردازش"
-                        ? "inline-block"
-                        : "hidden"
-                    } bg-amber-500 animate-pulse"></span>${order.status}</td>
+                    <td class="w-1/6 flex items-center justify-center gap-1 sm:gap-2.5"><span class="size-2.5 rounded-full ${order.status == "تکمیل شد" ? "inline-block" : "hidden"} bg-green-500 animate-pulse"></span>
+                    <span class="size-2.5 rounded-full ${order.status == "لغو شد" ? "inline-block" : "hidden"} bg-red-500 animate-pulse"></span>
+                    <span class="size-2.5 rounded-full ${order.status == "در حال پردازش" ? "inline-block" : "hidden"} bg-amber-500 animate-pulse"></span>${order.status}</td>
                   </tr>
     `;
   });
@@ -289,9 +262,7 @@ function pagination(e, elem) {
   if (elem == topProductPagination) page = topProductPage;
 
   if (e == 1) {
-    elem
-      .querySelectorAll("button")
-      .forEach((elem) => elem.classList.remove("active-page"));
+    elem.querySelectorAll("button").forEach((elem) => elem.classList.remove("active-page"));
     elem.querySelector(".prev").disabled = true;
     elem.querySelector(".next").disabled = false;
     elem.querySelector(".one").textContent = 1;
@@ -302,9 +273,7 @@ function pagination(e, elem) {
   }
 
   if (e.target.nodeName == "BUTTON") {
-    elem
-      .querySelectorAll("button")
-      .forEach((elem) => elem.classList.remove("active-page"));
+    elem.querySelectorAll("button").forEach((elem) => elem.classList.remove("active-page"));
     if (e.target.classList.contains("prev") && page != 1) {
       page--;
     }
@@ -351,37 +320,65 @@ function pagination(e, elem) {
 
 let isDescending = false;
 
-document
-  .querySelector("#top-products-sorting-methods")
-  .addEventListener("click", (e) => {
-    let products = [...getToLocal("top-products")];
-    if (e.target.nodeName == "BUTTON") {
-      products.sort((a, b) => {
-        if (e.target.dataset.sort == "title") {
-          return isDescending
-            ? b.title.localeCompare(a.title)
-            : a.title.localeCompare(b.title);
-        }
-        return isDescending
-          ? b[e.target.dataset.sort] - a[e.target.dataset.sort]
-          : a[e.target.dataset.sort] - b[e.target.dataset.sort];
-      });
-      addToLocal("top-products", products);
-      isDescending = !isDescending;
-      addTopProducts(1);
-      pagination(1, topProductPagination);
-    }
-  });
+document.querySelector("#top-products-sorting-methods").addEventListener("click", (e) => {
+  let products = [...getToLocal("top-products")];
+  if (e.target.nodeName == "BUTTON") {
+    products.sort((a, b) => {
+      if (e.target.dataset.sort == "title") {
+        return isDescending ? b.title.localeCompare(a.title) : a.title.localeCompare(b.title);
+      }
+      return isDescending ? b[e.target.dataset.sort] - a[e.target.dataset.sort] : a[e.target.dataset.sort] - b[e.target.dataset.sort];
+    });
+    addToLocal("top-products", products);
+    isDescending = !isDescending;
+    addTopProducts(1);
+    pagination(1, topProductPagination);
+  }
+});
 
+document.querySelector("#totalChartBtns").addEventListener("click", (e) => {
+  if (e.target.nodeName === "BUTTON") {
+    document.querySelectorAll("#totalChartBtns button").forEach((btn) => {
+      btn.classList.remove("!bg-[var(--active-color)]", "text-white");
+      if (btn == e.target) {
+        btn.classList.add("!bg-[var(--active-color)]", "text-white");
+      }
+    });
+  }
+});
 
-  document.querySelector('#totalChartBtns').addEventListener('click' , e=>{
-    if(e.target.nodeName==='BUTTON'){
-      document.querySelectorAll('#totalChartBtns button').forEach(btn=>{
-        btn.classList.remove('!bg-[var(--active-color)]' , 'text-white')
-        if(btn==e.target){
-          btn.classList.add('!bg-[var(--active-color)]' , 'text-white')
+function exportChartJson(chart) {
+  const chartData = chart.data.datasets.map((ds) => ({
+    label: ds.label,
+    data: ds.data,
+  }));
+  const json = JSON.stringify(chartData, null, 2);
+  const blob = new Blob([json], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
 
-        }
-      })
-    }
-  })
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "chart-data.json";
+  a.click();
+}
+function exportChartPng(chart) {
+  const chartCanvas = chart;
+  const imageURL = chartCanvas.toDataURL("image/png");
+  const a = document.createElement("a");
+  a.href = imageURL;
+  a.download = `${chart.id}.png`;
+  a.click();
+}
+
+document.querySelector("#total-chart-json-elem").addEventListener("click", () => {
+  exportChartJson(TotalChartCreate);
+});
+document.querySelector("#total-chart-png-elem").addEventListener("click", () => {
+  exportChartPng(document.getElementById("totalChart"));
+});
+document.querySelector("#top-category-json-elem").addEventListener("click", () => {
+  exportChartJson(CategoryChartCreate);
+});
+document.querySelector("#top-category-png-elem").addEventListener("click", () => {
+  exportChartPng(categoryChart);
+});
