@@ -6,7 +6,7 @@ const totalChart = document.getElementById("totalChart").getContext("2d");
 const categoryChart = document.getElementById("top-category");
 
 window.addEventListener("DOMContentLoaded", () => {
-  if (!getToLocal("top-products")) getTopProducts().then(addTopProducts());
+  if (!getToLocal("top-products")) getTopProducts();
   else addTopProducts();
   getAndAddOrders();
   document.querySelector("#user-name").textContent = getToLocal("user") ? getToLocal("user").firstName : "امیر";
@@ -196,6 +196,7 @@ async function getTopProducts() {
   let response = await res.json();
   let products = response.products;
   localStorage.setItem("top-products", JSON.stringify(products));
+  addTopProducts();
 }
 async function getAndAddOrders(page = 1) {
   let res = await fetch("orders.json");

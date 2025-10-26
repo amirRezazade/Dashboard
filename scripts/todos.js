@@ -4,7 +4,7 @@ window.removeTodo = removeTodo;
 window.editTodo = editTodo;
 window.changeDeletTodosBtn = changeDeletTodosBtn;
 
-const todosWrapper = document.querySelector("tbody");
+const todosWrapper = document.querySelector("#todos-container");
 const checkAll = document.querySelector("#check-all");
 const paginationElem = document.querySelector("#todos-pagination");
 const deletTodosBtn = document.querySelector("#remove-todos");

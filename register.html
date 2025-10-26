@@ -1,60 +1,60 @@
 <!DOCTYPE html>
 <html lang="en" lang="fa" dir="rtl" class="dark">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" type="image/x-icon" href="favicon.png">
-        <meta name="author" content="amirRezazade" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="images/logo/logo-dark-streamline.png" />
+    <meta name="author" content="amirRezazade" />
     <link href="src/output.css" rel="stylesheet" />
-      <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"/>
-    <title>Dashboard</title>
-</head>
-<body class="font-[dana-regular] overflow-x-hidden bg-[var(--bg-color)] text-[var(--text-color)] ">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <title>Dashboard || register</title>
+  </head>
+  <body class="font-[dana-regular] overflow-x-hidden bg-[var(--bg-color)] text-[var(--text-color)]">
     <section class="">
-        <div  class="bg-[url('../images/auth-one-bg.jpg')] bg-cover bg-center relative h-100">
-            <div id="particles-js" class="absolute w-full h-full top-0 left-0 bg-gradient-to-l from-[#6674a1de] to-[#405189ea]">
-              <div class="absolute bottom-0 left-0 w-full opacity-100">  
-                <svg class="fill-[var(--bg-color)] stroke-[var(--bg-color)]" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1440 120">
-                    <path d="M 0,36 C 144,53.6 432,123.2 720,124 C 1008,124.8 1296,56.8 1440,40L1440 140L0 140z"></path>
-                </svg>
-             </div>
-            </div>
+      <div class="bg-[url('../images/auth-one-bg.jpg')] bg-cover bg-center relative h-100">
+        <div id="particles-js" class="absolute w-full h-full top-0 left-0 bg-gradient-to-l from-[#6674a1de] to-[#405189ea]">
+          <div class="absolute bottom-0 left-0 w-full opacity-100">
+            <svg class="fill-[var(--bg-color)] stroke-[var(--bg-color)]" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1440 120">
+              <path d="M 0,36 C 144,53.6 432,123.2 720,124 C 1008,124.8 1296,56.8 1440,40L1440 140L0 140z"></path>
+            </svg>
+          </div>
         </div>
-        <div class="fixed top-1/2 left-1/2 w-full max-w-[450px] -translate-1/2 text-center">
-            <div class="flex flex-col gap-1.5"><span class="text-white font-extrabold text-4xl">velzon</span><span>الگوی مدیریت برتر و داشبورد</span></div>
-            <div class="p-3 mx-3 sm:p-5 rounded-lg bg-[var(--box-color)] mt-6 text-xs xs:text-sm text-start">
-                <h2 class="text-lg md:text-xl text-center">ثبت نام</h2>
-                <form class=" mt-2">
-                   <div class="w-full">
-                      <label class="cursor-pointer" for="first-name">نام *</label>
-                      <input class="w-full p-2.5 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 my-1 bg-[var(--bg-color)]" required minlength="3" maxlength="25" type="text" id="first-name" placeholder="نام خود را وارد کنید...">
-                   </div>
-                   <div class="w-full mt-2">
-                      <label class="cursor-pointer" for="last-name">نام خانوادگی *</label>
-                      <input class="w-full p-2.5 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 my-1 bg-[var(--bg-color)]" required minlength="3" maxlength="30" type="text" id="last-name" placeholder="نام خانوادگی خود را وارد کنید...">
-                   </div>
-                   <div class="w-full mt-2">
-                      <label class="cursor-pointer" for="user-name">نام کاربری *</label>
-                      <input class="w-full p-2.5 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 my-1 bg-[var(--bg-color)]" required minlength="3" maxlength="30" type="text" id="user-name" placeholder="نام کاربری خود را وارد کنید...">
-                   </div>
-                   <div class="w-full mt-2">
-                      <label class="cursor-pointer" for="password">رمز عبور  *</label>
-                      <div class="flex items-center bg-[var(--bg-color)] my-1 rounded-md border border-transparent focus-within:border-[var(--active-color)] overflow-hidden">
-                          <input class="w-full p-2.5 outline-0  " required minlength="6" maxlength="30" type="password" id="password" placeholder="رمز عبور خود را وارد کنید...">
-                          <button type="button" id="password-show" class="w-10 text-center py-2.5 cursor-pointer text-xs"><i class="fas fa-eye "></i></button>
-                      </div>
-                   </div>
-                    <div class="text-xs mt-2">با ثبت نام در Velzon با <a href="#" class="underline text-[var(--active-color)]"> شرایط استفاده </a> موافقت می کنید</div>
-                   <button id="login-btn" type="submit" class="py-1.5 mt-4 sm:py-2.5 w-full cursor-pointer rounded-sm bg-[var(--active-color)]/80 hover:bg-[var(--active-color)] transition-colors text-white">ثبت نام</button>
-                   <div class="text-xs mt-2"><span>از قبل حساب کاربری دارید؟</span><a href="login.html" class="underline ">وارد شوید</a></div>
-                </form>
-                <div class="text-center mt-4 text-base"><a href="#" id="show-demo" class="underline text-[var(--active-color)]">مشاهده دمو به عنوان مدیر سایت</a></div>
+      </div>
+      <div class="fixed top-1/2 left-1/2 w-full max-w-[450px] -translate-1/2 text-center">
+        <div class="flex flex-col items-center justify-center"><img class="w-30 md:w-40" src="images/logo/logo-dark-full.webp" alt="logo-dark" /><span class="text-white font-extrabold mt-2 text-base sm:text-lg">خوش آمدید!</span><span>لطفاً اطلاعات ورود خود را وارد کنید!</span></div>
+        <div class="p-3 mx-3 sm:p-5 rounded-lg bg-[var(--box-color)] mt-6 text-xs xs:text-sm text-start">
+          <h2 class="text-lg md:text-xl text-center">ثبت نام</h2>
+          <form class="mt-2">
+            <div class="w-full">
+              <label class="cursor-pointer" for="first-name">نام *</label>
+              <input class="w-full p-2.5 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 my-1 bg-[var(--bg-color)]" required minlength="3" maxlength="25" type="text" id="first-name" placeholder="نام خود را وارد کنید..." />
             </div>
+            <div class="w-full mt-2">
+              <label class="cursor-pointer" for="last-name">نام خانوادگی *</label>
+              <input class="w-full p-2.5 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 my-1 bg-[var(--bg-color)]" required minlength="3" maxlength="30" type="text" id="last-name" placeholder="نام خانوادگی خود را وارد کنید..." />
+            </div>
+            <div class="w-full mt-2">
+              <label class="cursor-pointer" for="user-name">نام کاربری *</label>
+              <input class="w-full p-2.5 rounded-md border border-transparent focus:border-[var(--active-color)] outline-0 my-1 bg-[var(--bg-color)]" required minlength="3" maxlength="30" type="text" id="user-name" placeholder="نام کاربری خود را وارد کنید..." />
+            </div>
+            <div class="w-full mt-2">
+              <label class="cursor-pointer" for="password">رمز عبور *</label>
+              <div class="flex items-center bg-[var(--bg-color)] my-1 rounded-md border border-transparent focus-within:border-[var(--active-color)] overflow-hidden">
+                <input class="w-full p-2.5 outline-0" required minlength="6" maxlength="30" type="password" id="password" placeholder="رمز عبور خود را وارد کنید..." />
+                <button type="button" id="password-show" class="w-10 text-center py-2.5 cursor-pointer text-xs"><i class="fas fa-eye"></i></button>
+              </div>
+            </div>
+            <div class="text-xs mt-2">با ثبت نام در Ecme با <a href="javascript:void(0)" class="underline text-[var(--active-color)]"> شرایط استفاده </a> موافقت می کنید</div>
+            <button id="login-btn" type="submit" class="py-1.5 mt-4 sm:py-2.5 w-full cursor-pointer rounded-sm bg-[var(--active-color)]/80 hover:bg-[var(--active-color)] transition-colors text-white">ثبت نام</button>
+            <div class="text-xs mt-2"><span>از قبل حساب کاربری دارید؟</span><a href="login.html" class="underline">وارد شوید</a></div>
+          </form>
+          <div class="text-center mt-4 text-base"><a href="javascript:void(0)" id="show-demo" class="underline text-[var(--active-color)]">مشاهده دمو به عنوان مدیر سایت</a></div>
         </div>
+      </div>
     </section>
 
     <script src="assets/particles.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="scripts/register.js"></script>
-</body>
+  </body>
 </html>

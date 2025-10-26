@@ -259,11 +259,14 @@
       </ul>
     </aside>
     <main class="px-3 xs:px-4 py-4 transition-all duration-500 bg-[var(--bg-color)] md:ms-15">
-      <h2 class="text-lg sm:text-xl lg:text-2xl my-2 sm:my-3 font-extrabold">لیست وظایف</h2>
+      <div class="flex justify-between items-center p-3 sm:p-5">
+        <h2 class="text-lg sm:text-xl lg:text-2xl">لیست مشتری ها</h2>
+        <button id="add-todo-btn" class="text-nowrap px-5 lg:px-8 py-1.5 text-white rounded-sm bg-[var(--active-color)]/80 transition-colors hover:bg-[var(--active-color)] cursor-pointer">افزودن کار <i class="fas fa-add text-xs"></i></button>
+      </div>
       <section class="">
         <!-- start totdos filtering section  -->
         <div class="bg-[var(--box-color)] rounded-lg p-2.5 lg:p-3 xl:px-10">
-          <div class="w-full flex items-end flex-wrap sm:flex-nowrap justify-between gap-y-3.5 gap-x-3">
+          <div class="w-full flex items-end flex-wrap-reverse sm:flex-nowrap justify-between gap-y-3.5 gap-x-3">
             <div class="w-full md:max-w-1/2 flex gap-2 sm:gap-4 md:gap-1.5 lg:gap-4 text-xs lg:text-sm">
               <div class="flex flex-col lg:flex-row w-2/3 lg:items-center gap-2 xs:gap-2">
                 <label for="search" class="text-nowrap">جستجوی وظایف</label>
@@ -278,9 +281,25 @@
                 </select>
               </div>
             </div>
-            <div class="w-full md:w-auto flex justify-end items-center gap-3 lg:gap-4 text-xs lg:text-sm">
-              <button id="remove-todos" class="opacity-0 invisible transition-all text-nowrap px-3 lg:px-5 py-1.5 text-white rounded-sm bg-red-500/70 hover:bg-red-500/90 cursor-pointer">حذف کارها <i class="fas fa-trash text-xs"></i></button>
-              <button id="add-todo-btn" class="text-nowrap px-5 lg:px-8 py-1.5 text-white rounded-sm bg-[var(--active-color)]/80 transition-colors hover:bg-[var(--active-color)] cursor-pointer">افزودن کار <i class="fas fa-add text-xs"></i></button>
+            <div class="w-full flex items-center justify-end text-xs sm:text-sm gap-3">
+              <button id="remove-todos" class="opacity-0 invisible transition-all text-nowrap px-3 py-2 text-white rounded-lg bg-red-500/70 hover:bg-red-500/90 cursor-pointer">حذف کارها <i class="fas fa-trash text-xs"></i></button>
+
+              <div class="export-dropdown relative">
+                <button class="cursor-pointer text-white w-full px-3 py-2 text-nowrap bg-[var(--active-color)]/80 hover:bg-[var(--active-color)] rounded-lg flex items-center justify-evenly text-center" onclick="nextElementSibling.classList.toggle('hidden')" type="button">
+                  صادر کردن
+                  <i class="fas fa-angle-down"></i>
+                </button>
+                <div class="export-dropdown-content border-y border-gray-500/50 rounded-lg overflow-hidden w-full absolute top-[105%] bg-[var(--bg-color)] z-10 hidden">
+                  <ul class="divide-y divide-gray-500/50">
+                    <li>
+                      <a href="javascript:void(0)" onclick="exportTableToJSON('todos-table')" class="px-4 py-2.5 hover:bg-gray-500/30 flex items-start justify-evenly">JSON <i class="fa-solid fa-download"></i></a>
+                    </li>
+                    <li>
+                      <a href="javascript:void(0)" onclick="exportTableToCSV('todos-table')" class="px-4 py-2.5 hover:bg-gray-500/30 flex items-start justify-around">CSV <i class="fa-solid fa-download"></i></a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -288,17 +307,17 @@
         <!-- start totdos list section  -->
         <div class="bg-[var(--box-color)] rounded-lg p-2 lg:p-3 my-4">
           <div class="overflow-x-auto">
-            <table class="text-xs xl:text-sm w-full min-w-[530px] max-w-8xl overflow-x-auto">
+            <table id="todos-table" class="text-xs xl:text-sm w-full min-w-[530px] max-w-8xl overflow-x-auto">
               <thead class="">
                 <tr class="flex p-1.5 md:p-3">
-                  <td class="text-center w-1/10"><input id="check-all" class="accent-[var(--active-color)] cursor-pointer md:size-4" type="checkbox" /></td>
-                  <td class="text-center w-4/10">وظیفه</td>
-                  <td class="text-center w-2/10">اختصاص داده شده به</td>
-                  <td class="text-center w-2/10">وضعیت</td>
-                  <td class="text-center w-1/10">عملیات</td>
+                  <th class="text-center w-1/10"><input id="check-all" class="accent-[var(--active-color)] cursor-pointer md:size-4" type="checkbox" /></th>
+                  <th class="text-center w-4/10">وظیفه</th>
+                  <th class="text-center w-2/10">اختصاص داده شده به</th>
+                  <th class="text-center w-2/10">وضعیت</th>
+                  <th class="text-center w-1/10">عملیات</th>
                 </tr>
               </thead>
-              <tbody id="users-container" class="divide-y-1 divide-gray-500/50 border-y border-gray-500/50 flex flex-col w-full">
+              <tbody id="todos-container" class="divide-y-1 divide-gray-500/50 border-y border-gray-500/50 flex flex-col w-full">
                 <!-- data loaded from js  -->
                 <!-- start loading animated section  -->
                 <tr class="flex justify-between items-center gap-5 animate-pulse px-1.5 md:px-2 h-14 rounded-lg">

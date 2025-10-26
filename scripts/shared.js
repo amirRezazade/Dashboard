@@ -1,3 +1,16 @@
+if (getToLocal("firstLoginShown") == false) {
+  Swal.fire({
+    title: `👋 خوش اومدی ${getToLocal("user").firstName}!`,
+    text: "به داشبورد جدیدت خوش اومدی 🌟",
+    icon: "success",
+    showCancelButton: false,
+    confirmButtonColor: "#3085d6",
+    confirmButtonText: "بزن بریم 🚀",
+  }).then(() => {
+    addToLocal("firstLoginShown", true);
+  });
+}
+
 let shoppingCardIds = [];
 let shoppingCardItems = JSON.parse(localStorage.getItem("shoppingCardItems"));
 
@@ -15,6 +28,16 @@ if (user) {
   document.querySelector("#nav-user-role").textContent = "مدیر";
   document.querySelector("#nav-user-full-name").textContent = "امیر رضازاده";
   document.querySelector("#nav-user-email").textContent = "amirrezazadeh.job@gmail.com";
+  Swal.fire({
+    title: "دسترسی محدود!",
+    text: "برای ادامه لطفاً وارد حساب کاربری خود شوید.",
+    icon: "warning",
+    showCancelButton: false,
+    confirmButtonColor: "#3085d6",
+    confirmButtonText: "ورود",
+  }).then(() => {
+    window.location.href = "login.html";
+  });
 }
 
 document.querySelector("#logout-btn").addEventListener("click", logout);
@@ -26,9 +49,9 @@ if (!getToLocal("shoppingCardIds")) {
 
 window.addEventListener("DOMContentLoaded", () => {
   if (!getToLocal("shoppingCardItems")) getShoppingCardItems();
+  else addShoppingCardItems();
   if (getToLocal("dark") == false) toggleDarkMode();
   changeActiveColor(getToLocal("active-color") || "#0caf60");
-  addShoppingCardItems();
   getAndAddNavTodoList();
 });
 
@@ -81,6 +104,7 @@ async function getShoppingCardItems() {
   }));
 
   addToLocal("shoppingCardItems", shoppingCardItems);
+  addShoppingCardItems();
 }
 function addShoppingCardItems() {
   let products = getToLocal("shoppingCardItems");
@@ -327,6 +351,7 @@ function logout() {
     cancelButtonText: "انصراف",
   }).then((data) => {
     if (data.isConfirmed) {
+      localStorage.removeItem("user");
       window.location.href = "logout.html";
     }
   });
