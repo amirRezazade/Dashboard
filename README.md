@@ -1,6 +1,6 @@
 # وب‌سایت نمونه کار: Ecme
 
-![Preview](images/demo.PNG)
+![Preview](images/demo.png)
 
 این وبسایت یک داشبورد فروشگاهی میباشد که با استفاده از api ( DummyJSON ) و به عنوان نمونه کار طراحی شده.
 

@@ -30,16 +30,18 @@ if (user) {
   document.querySelector("#nav-user-role").textContent = "مدیر";
   document.querySelector("#nav-user-full-name").textContent = "امیر رضازاده";
   document.querySelector("#nav-user-email").textContent = "amirrezazadeh.job@gmail.com";
-  Swal.fire({
-    title: "دسترسی محدود!",
-    text: "برای ادامه لطفاً وارد حساب کاربری خود شوید.",
-    icon: "warning",
-    showCancelButton: false,
-    confirmButtonColor: "#3085d6",
-    confirmButtonText: "ورود",
-  }).then(() => {
-    window.location.href = "login.html";
-  });
+  setTimeout(() => {
+    Swal.fire({
+      title: "دسترسی محدود!",
+      text: "برای ادامه لطفاً وارد حساب کاربری خود شوید.",
+      icon: "warning",
+      showCancelButton: false,
+      confirmButtonColor: "#3085d6",
+      confirmButtonText: "ورود",
+    }).then(() => {
+      window.location.href = "login.html";
+    });
+  }, 2000);
 }
 
 document.querySelector("#logout-btn").addEventListener("click", logout);
