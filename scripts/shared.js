@@ -1,14 +1,16 @@
 if (getToLocal("firstLoginShown") == false) {
-  Swal.fire({
-    title: `👋 خوش اومدی ${getToLocal("user").firstName}!`,
-    text: "به داشبورد جدیدت خوش اومدی 🌟",
-    icon: "success",
-    showCancelButton: false,
-    confirmButtonColor: "#3085d6",
-    confirmButtonText: "بزن بریم 🚀",
-  }).then(() => {
-    addToLocal("firstLoginShown", true);
-  });
+  setTimeout(() => {
+    Swal.fire({
+      title: `👋 خوش اومدی ${getToLocal("user").firstName}!`,
+      text: "به داشبورد جدیدت خوش اومدی 🌟",
+      icon: "success",
+      showCancelButton: false,
+      confirmButtonColor: "#3085d6",
+      confirmButtonText: "بزن بریم 🚀",
+    }).then(() => {
+      addToLocal("firstLoginShown", true);
+    });
+  }, 3000);
 }
 
 let shoppingCardIds = [];

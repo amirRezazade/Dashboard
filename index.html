@@ -10,7 +10,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
     <title>Dashboard</title>
   </head>
-  <body class="font-[dana-regular] overflow-x-hidden bg-[var(--bg-color)] text-[var(--text-color)] text-color">
+  <body class="font-[dana-regular] overflow-x-hidden bg-[var(--bg-color)] text-[var(--text-color)] text-color max-h-[100dvh] overflow-y-hidden">
+    <div dir="ltr" id="loader" class="flex flex-col items-center justify-center min-h-[100dvh] fixed top-0 left-0 w-screen bg-[var(--bg-color)] !z-200 transition-[opacity,visibility]">
+      <dotlottie-player src="images/loading-animation.lottie" background="transparent" speed="1" class="size-50 xs:size-65 md:size-80 lg:size-90 xl:size-100" loop autoplay> </dotlottie-player>
+      <p class="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-mono text-violet-500 font-extrabold">LOADIN...</p>
+    </div>
     <nav class="bg-[var(--box-color)] flex items-center justify-between sticky top-0 z-50">
       <!-- start nav logo section  -->
       <div class="flex items-center xs:gap-3 sm:justify-around bg-[var(--box-color)] py-2 xs:py-3 md:py-5 px-2 xs:px-3 md:w-50 lg:w-60">
@@ -476,23 +480,25 @@
               </div>
             </div>
           </div>
-          <div class="overflow-x-auto min-w-[610px] max-w-[1400px] mx-auto lg:px-8">
-            <table id="resent-orders-table" class="w-full">
-              <thead class="w-full block p-1.5 xs:p-3">
-                <tr class="w-full flex justify-between text-[10px] sm:text-xs xl:text-sm select-none">
-                  <th class="w-1/6">شناسه</th>
-                  <th class="w-1/6">تاریخ</th>
-                  <th class="w-1/6">نام مشتری</th>
-                  <th class="w-1/6">شماره تلفن</th>
-                  <th class="w-1/6">آدرس</th>
-                  <th class="w-1/6">نوع پرداخت</th>
-                  <th class="w-1/6">وضعیت</th>
-                </tr>
-              </thead>
-              <tbody id="resent-orders-container" class="font-[dana-num] text-xs xl:text-sm divide-y border-y divide-gray-500/50 border-gray-500/50 flex flex-col">
-                <!-- data loaded from JS  -->
-              </tbody>
-            </table>
+          <div class="lg:px-8">
+            <div class="overflow-x-auto mx-auto">
+              <table id="resent-orders-table" class="w-full min-w-[610px] max-w-[1400px]">
+                <thead class="w-full block p-1.5 xs:p-3">
+                  <tr class="w-full flex justify-between text-[10px] sm:text-xs xl:text-sm select-none">
+                    <th class="w-1/6">شناسه</th>
+                    <th class="w-1/6">تاریخ</th>
+                    <th class="w-1/6">نام مشتری</th>
+                    <th class="w-1/6">شماره تلفن</th>
+                    <th class="w-1/6">آدرس</th>
+                    <th class="w-1/6">نوع پرداخت</th>
+                    <th class="w-1/6">وضعیت</th>
+                  </tr>
+                </thead>
+                <tbody id="resent-orders-container" class="font-[dana-num] text-xs xl:text-sm divide-y border-y divide-gray-500/50 border-gray-500/50 flex flex-col">
+                  <!-- data loaded from JS  -->
+                </tbody>
+              </table>
+            </div>
             <div class="flex justify-between font-[dana-num] text-sm p-4 lg:pt-6">
               <span>صفحه بندی</span>
               <div id="resent-orders-pagination" class="flex items-center gap-1.5 text-xs">
@@ -609,6 +615,7 @@
       </a>
     </footer>
 
+    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jvectormap-next/jquery-jvectormap.min.js"></script>

@@ -6,6 +6,12 @@ const totalChart = document.getElementById("totalChart").getContext("2d");
 const categoryChart = document.getElementById("top-category");
 
 window.addEventListener("DOMContentLoaded", () => {
+  setTimeout(() => {
+    const loader = document.querySelector("#loader");
+    loader.classList.add("opacity-0", "invisible");
+    loader.remove();
+    document.body.classList.remove("max-h-[100dvh]", "overflow-y-hidden");
+  }, 2000);
   if (!getToLocal("top-products")) getTopProducts();
   else addTopProducts();
   getAndAddOrders();
