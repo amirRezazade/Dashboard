@@ -53,7 +53,6 @@ if (!getToLocal("shoppingCardIds")) {
 
 window.addEventListener("DOMContentLoaded", () => {
   if (!getToLocal("shoppingCardItems")) getShoppingCardItems();
-  else addShoppingCardItems();
   if (getToLocal("dark") == false) toggleDarkMode();
   changeActiveColor(getToLocal("active-color") || "#0caf60");
   getAndAddNavTodoList();
@@ -108,8 +107,9 @@ async function getShoppingCardItems() {
   }));
 
   addToLocal("shoppingCardItems", shoppingCardItems);
-  addShoppingCardItems();
 }
+document.querySelector("#shopping-card-container").closest("button").addEventListener("click", addShoppingCardItems);
+
 function addShoppingCardItems() {
   let products = getToLocal("shoppingCardItems");
   updateShoppingCardLength();

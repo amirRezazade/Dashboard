@@ -12,7 +12,10 @@ const userDeletBtn = document.querySelector("#user-delet-btn");
 let isHaveCart = false;
 
 document.querySelector("#user-edit-btn").href = `user-add.html?id=${userId}`;
-window.addEventListener("DOMContentLoaded", getUser);
+window.addEventListener("DOMContentLoaded", () => {
+  getUser();
+  isHaveCart ? "" : addCard();
+});
 
 async function getUser() {
   let res = await fetch(`https://dummyjson.com/users/${userId || 1}`);
@@ -66,6 +69,7 @@ function addInfos(data) {
                     </div>
                 </div>
 `;
+  document.querySelector(".tab-wrapper").style.height = infoWrapper.offsetHeight + "px";
 }
 
 async function addCard() {
@@ -125,17 +129,18 @@ async function addCard() {
   }
 }
 cardBtn.addEventListener("click", () => {
-  isHaveCart ? "" : addCard();
-  infoBtn.classList.remove("active-tab");
-  cardBtn.classList.add("active-tab");
-  infoWrapper.classList.add("hidden");
-  cardWrapper.classList.remove("hidden");
+  infoBtn.classList.remove("before:!w-full");
+  cardBtn.classList.add("before:!w-full");
+  infoWrapper.classList.remove("active-panel");
+  cardWrapper.classList.add("active-panel");
+  document.querySelector(".tab-wrapper").style.height = cardWrapper.offsetHeight + "px";
 });
 infoBtn.addEventListener("click", () => {
-  cardBtn.classList.remove("active-tab");
-  infoBtn.classList.add("active-tab");
-  cardWrapper.classList.add("hidden");
-  infoWrapper.classList.remove("hidden");
+  cardBtn.classList.remove("before:!w-full");
+  infoBtn.classList.add("before:!w-full");
+  cardWrapper.classList.remove("active-panel");
+  infoWrapper.classList.add("active-panel");
+  document.querySelector(".tab-wrapper").style.height = infoWrapper.offsetHeight + "px";
 });
 
 userDeletBtn.addEventListener("click", () => {
